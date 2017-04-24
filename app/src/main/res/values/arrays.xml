@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="week_array">
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+        <item>星期日</item>
+    </array>
+
+    <array name="news_title">
+        <item>要闻</item>
+        <item>科技</item>
+        <item>体育</item>
+        <item>健康</item>
+        <item>轻松一刻</item>
+        <item>军事</item>
+        <item>旅游</item>
+    </array>
+
+    <array name="splash_background">
+        <item>file:///android_asset/splash_01.jpg</item>
+        <item>file:///android_asset/splash_02.jpg</item>
+        <item>file:///android_asset/splash_03.jpg</item>
+        <item>file:///android_asset/splash_04.jpg</item>
+    </array>
+</resources>

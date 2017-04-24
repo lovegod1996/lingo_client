@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/compare_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <RelativeLayout
+            android:id="@+id/re_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+                <ImageView
+                    android:id="@+id/compare"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+android:layout_marginTop="5dp"
+                    android:layout_centerInParent="true"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/tv2"/>
+            <ImageView
+                android:id="@+id/compare_back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                 android:layout_centerVertical="true"
+                android:src="@mipmap/turn_no_left"
+                android:layout_alignParentLeft="true"/>
+            </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/re_1"
+            android:id="@+id/re_2">
+
+            <TextView
+                android:id="@+id/compare_goodname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:padding="5dp"
+                android:text="索尼55英寸 4K网络LED液晶电视"
+                android:textSize="14dp" />
+        </RelativeLayout>
+        <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+            android:layout_below="@id/re_2"
+        android:background="@color/bg_Gray0"/>
+    </RelativeLayout>
+   <ListView
+       android:id="@+id/compare_listview"
+       android:layout_below="@id/compare_title"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:scrollbars="none"
+       android:background="#ffffff"></ListView>
+
+</RelativeLayout>

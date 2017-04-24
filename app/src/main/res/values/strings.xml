@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NewBuy</string>
+    <string name="content_to_request_permission">保证应用正常运行，请授予必要权限！</string>
+    <string name="attention">提示</string>
+    <string name="ok">好的~</string>
+
+    <string name="tips_net_error">网络不给力\n点击屏幕继续加载</string>
+    <string name="tips_content_empty">空空如野</string>
+    <string name="loading_busy">努力加载中...</string>
+
+</resources>

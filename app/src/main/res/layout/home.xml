@@ -1,0 +1,170 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   
+    android:orientation="vertical" >
+
+    <!-- 头部导航 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_first_top"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+
+        <LinearLayout
+            android:id="@+id/ll_city"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+           android:layout_marginLeft="20dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dip"
+                android:text="O2O"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <!-- 头部右边 -->
+        <LinearLayout
+            android:id="@+id/l1"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical" >
+
+          <Button
+              android:id="@+id/city_name"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="城市名"
+              android:textColor="#ffffff"
+              android:background="#00000000"
+              android:drawableRight="@mipmap/location_city"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:layout_weight="0.42"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+           <!--  <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#25b6ed" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.SearchView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/yuan_jiao"
+                ></android.support.v7.widget.SearchView>
+        </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#edecec" />
+
+
+            <GridView
+                android:id="@+id/gridView_separate"
+                android:layout_width="match_parent"
+                android:background="#ffffff"
+                android:layout_height="190dp"
+
+                android:divider="#ffffff"
+                android:horizontalSpacing="3dp"
+                android:numColumns="4"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="3dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="5dp"
+                android:background="#edecec" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                   android:textSize="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="精选好店"
+                    android:textColor="@color/tv_Black" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/bg_Gray" />
+
+            <ListView
+                android:id="@+id/suggest_shop"
+                android:layout_width="fill_parent"
+                android:layout_height="500dp"
+                android:background="#ffffff"
+                android:verticalSpacing="3dp" />
+        </LinearLayout>
+    </ScrollView>
+
+ <!--   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical" >
+        <View
+            android:id="@+id/menu_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/bg_Gray"
+            />
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/foot_menu" />
+    </LinearLayout>-->
+</LinearLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#e9735e</color>
+    <color name="colorPrimaryDark">#d4d3d3</color>
+    <color name="colorAccent">#fcc5b2</color>
+    <!-- 灰色 -->
+    <color name="bg_Gray">#CCCCCC</color>
+    <color name="bg_Gray2">#e2e2e2</color>
+    <color name="bg_Gray3">#515151</color>
+    <color name="bg_Gray0">#737272</color>
+    <!-- 黑色 -->
+    <color name="tv_Black">#000000</color>
+    <color name="tv_yellow">#f4d257</color>
+    <color name="tv_cheng">#fd7302</color>
+    <color name="tv_cheng2">#fa9441</color>
+    <!--白色-->
+    <color name="tv_white">#ffffff</color>
+
+
+    <color name="base_back_FFFAFAFA">#FFFAFAFA</color>
+    <color name="nav_bg_ed25c6db">#ed25c6db</color>
+    <color name="white_FFFFFF">#FFFFFF</color>
+    <color name="brown_8D6E63">#8D6E63</color>
+    <color name="blue_2196F3">#2196F3</color>
+    <color name="grey_607D8B">#607D8B</color>
+    <color name="grey_adbec0">#7d847b</color>
+    <color name="grey_text_5d5c5c">#5d5c5c</color>
+    <color name="grey_text_d1d1d1">#d1d1d1</color>
+    <color name="orange_F57C00">#F57C00</color>
+    <color name="indicator_selected_607D8B">#607D8B</color>
+    <color name="indicator_unselected_607D8B">#607D8B</color>
+    <color name="transparent_00ffffff">#00ffffff</color>
+    <color name="transparent_3cffffff">#3cffffff</color>
+    <color name="black_000000">#000000</color>
+    <color name="black_414040">#414040</color>
+    <color name="trans_toolbar_7c424141">#7c706f6f</color>
+    <color name="trans_title_1b2a2a2f">#432a2a2f</color>
+    <color name="color3F3F3F">#3F3F3F</color>
+    <color name="color3A3A3A">#3A3A3A</color>
+    <color name="color868686">#868686</color>
+    <color name="black_trans">#6f1d1d1d</color>
+    <color name="green_4ad3a7">#4ad3a7</color>
+    <color name="table_indicator">#cfd8dc</color>
+
+
+    <color name="ececec">#ececec</color>
+    <color name="_3c3c3c">#3c3c3c</color>
+</resources>

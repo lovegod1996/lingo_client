@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 
 
-
 /**
  * *****************************************
  * Created by thinking on 2017/3/20.
@@ -64,17 +63,16 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     RelativeLayout li_title;
 
 
-
     TextView tv_good_detail_cate;//产品参数
     /*对话框*/
     Dialog parameterDialog;
-ListView dialog_listview;
-    final String[] parameter_name = new String[] { "包装尺寸 ",
+    ListView dialog_listview;
+    final String[] parameter_name = new String[]{"包装尺寸 ",
             "品牌", "屏幕尺寸", "分辨率", "背光灯类型",
-            "类型","商品名称","整机功率","对比度","互联网电视","重量","操作系统","USB支持视频格式" };
-    final String[] parameter = new String[] { "1335*829*196MM",
+            "类型", "商品名称", "整机功率", "对比度", "互联网电视", "重量", "操作系统", "USB支持视频格式"};
+    final String[] parameter = new String[]{"1335*829*196MM",
             "Sony/索尼", "55INC",
-            "3840*2160", "LED", "LED液晶电视机","KD-55X6000D","195W","500:1","是","16.8KG(不含底座)","Linux","MPEG1/MPEG2PS/MPEG2TS/AVCHD/MP4Part10/MP4Part2/AVI/MOV/WMV/MKV/RMVB/WEBM/3GPP" };
+            "3840*2160", "LED", "LED液晶电视机", "KD-55X6000D", "195W", "500:1", "是", "16.8KG(不含底座)", "Linux", "MPEG1/MPEG2PS/MPEG2TS/AVCHD/MP4Part10/MP4Part2/AVI/MOV/WMV/MKV/RMVB/WEBM/3GPP"};
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,18 +90,17 @@ ListView dialog_listview;
         viewPager.requestFocus();
 
 
-
         //透明状态栏
-        StatusBarUtil.setTranslucent(this,110);
+        StatusBarUtil.setTranslucent(this, 110);
 
         addcart = (Button) findViewById(R.id.addcart);
         compare = (Button) findViewById(R.id.compare);
         shop = (Button) findViewById(R.id.shop);
         turnback = (ImageView) findViewById(R.id.turnback);
-        li_title=(RelativeLayout)findViewById(R.id.li_title);
+        li_title = (RelativeLayout) findViewById(R.id.li_title);
 
 
-        tv_good_detail_cate=(TextView)findViewById(R.id.tv_good_detail_cate);
+        tv_good_detail_cate = (TextView) findViewById(R.id.tv_good_detail_cate);
         //对话框
         parameterDialog = new Dialog(this, R.style.map_dialog);
         LinearLayout root = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.layout_parameter_dialog, null);
@@ -120,7 +117,7 @@ ListView dialog_listview;
         }
         // 声明适配器，并将其绑定到ListView控件
         SimpleAdapter simpleAdapter = new SimpleAdapter(this, listItem1,
-                R.layout.dialog_listview_item, new String[] { "ParameterName","Parameter" }, new int[] { R.id.parameeter_name,R.id.parameeter});
+                R.layout.dialog_listview_item, new String[]{"ParameterName", "Parameter"}, new int[]{R.id.parameeter_name, R.id.parameeter});
         dialog_listview.setAdapter(simpleAdapter);
 
         parameterDialog.setCanceledOnTouchOutside(true);//点击外部使对话框消失
@@ -146,22 +143,16 @@ ListView dialog_listview;
         });
 
 
-
-
-
         image_details_listview = (ListView) findViewById(R.id.image_details_listview);
-        int[] resImags = {R.mipmap.tu1,  R.mipmap.tu2, R.mipmap.tu3, R.mipmap.tu4, R.mipmap.tu5, R.mipmap.tu6,};
+        int[] resImags = {R.mipmap.tu1, R.mipmap.tu2, R.mipmap.tu3, R.mipmap.tu4, R.mipmap.tu5, R.mipmap.tu6,};
         ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String, Object>>();
         for (int i = 0; i < resImags.length; i++) {
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("ItemImage", resImags[i]);
             listItem.add(map);
         }
-        SimpleAdapter mSimpleAdapter = new SimpleAdapter(this, listItem, R.layout.good_listview_item, new String[] {"ItemImage"}, new int[]{R.id.item_image});
+        SimpleAdapter mSimpleAdapter = new SimpleAdapter(this, listItem, R.layout.good_listview_item, new String[]{"ItemImage"}, new int[]{R.id.item_image});
         image_details_listview.setAdapter(mSimpleAdapter);
-
-
-
 
 
         MaterialIndicator indicator = (MaterialIndicator) findViewById(R.id.indicator);
@@ -180,7 +171,7 @@ ListView dialog_listview;
     }
 
     //对话框的点击事件
-    private View.OnClickListener dialoglistener=new View.OnClickListener(){
+    private View.OnClickListener dialoglistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
@@ -192,7 +183,6 @@ ListView dialog_listview;
             }
         }
     };
-
 
 
     private void initlistener() {
@@ -215,7 +205,7 @@ ListView dialog_listview;
         compare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2=new Intent(GoodActivity.this,CompareActivity.class);
+                Intent intent2 = new Intent(GoodActivity.this, CompareActivity.class);
                 startActivity(intent2);
             }
         });
@@ -252,7 +242,7 @@ ListView dialog_listview;
      * viewpager适配器
      */
     private class MyPagerAdapter extends PagerAdapter {
-        public int[] drawables = {R.mipmap.tutu2,R.mipmap.tutu1, R.mipmap.tutu3, R.mipmap.tutu4};
+        public int[] drawables = {R.mipmap.tutu2, R.mipmap.tutu1, R.mipmap.tutu3, R.mipmap.tutu4};
 
         @Override
         public int getCount() {

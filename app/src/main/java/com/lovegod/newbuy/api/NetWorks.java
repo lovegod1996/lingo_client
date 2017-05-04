@@ -3,6 +3,7 @@ package com.lovegod.newbuy.api;
 import com.lovegod.newbuy.bean.BaseBean;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Shop;
+import com.lovegod.newbuy.service.Ble;
 import com.lovegod.newbuy.utils.retrofitRxjava.RetrofitUtils;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class NetWorks extends RetrofitUtils {
 
     protected static final ShopApi shopApi = getRetrofit().create(ShopApi.class);
 
+    protected static final BleApi bleApi=getRetrofit().create(BleApi.class);
 
     public static void getAllshop(BaseObserver<List<Shop>> shopObservable) {
         setSubscribe(shopApi.getAllShop(), shopObservable);
@@ -28,6 +30,14 @@ public class NetWorks extends RetrofitUtils {
 
     public static void findGoodByMac(String mac,BaseObserver<Commodity> shopObservable) {
         setSubscribe(shopApi.findGoodByMac(mac), shopObservable);
+    }
+
+    public static void findShopAllBle(String mac, BaseObserver<List<Ble>> bleObervable){
+        setSubscribe(bleApi.getShopAllBle(mac),bleObervable);
+    }
+
+    public static void getPushCommodity(String mac,Double x,Double y, BaseObserver<Commodity> comObervable){
+        setSubscribe(bleApi.getPushCommodity(mac,x,y),comObervable);
     }
     /**
      * 插入观察者

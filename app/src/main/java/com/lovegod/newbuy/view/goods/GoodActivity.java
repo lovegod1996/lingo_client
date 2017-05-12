@@ -24,6 +24,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.lovegod.newbuy.R;
+import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.view.ShopActivity;
 import com.lovegod.newbuy.view.utils.GradationScrollView;
 import com.lovegod.newbuy.view.utils.MaterialIndicator;
@@ -33,6 +34,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 /**
@@ -62,6 +66,12 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     ListView image_details_listview;
     RelativeLayout li_title;
 
+    @BindView(R.id.goodsname)
+    TextView goodsName;
+    @BindView(R.id.goodsprice)
+    TextView goodsPrice;
+    @BindView(R.id.goodsalvo)
+    TextView goodsalevo;
 
     TextView tv_good_detail_cate;//产品参数
     /*对话框*/
@@ -78,7 +88,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         super.onCreate(savedInstanceState);
         StatusBarUtil.setImgTransparent(this);
         setContentView(R.layout.good_information);
-
+        ButterKnife.bind(this);
 
         scrollView = (GradationScrollView) findViewById(R.id.scrollview_good);
         textView = (TextView) findViewById(R.id.textview_good);
@@ -89,6 +99,11 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         viewPager.setFocusableInTouchMode(true);
         viewPager.requestFocus();
 
+        Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+
+        goodsName.setText(commodity.getProductname());
+        goodsPrice.setText(commodity.getPrice() + "");
+        goodsalevo.setText(commodity.getSalesvolu() + "人购买");
 
         //透明状态栏
         StatusBarUtil.setTranslucent(this, 110);

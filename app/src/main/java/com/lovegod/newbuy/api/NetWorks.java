@@ -23,6 +23,8 @@ public class NetWorks extends RetrofitUtils {
 
     protected static final BleApi bleApi=getRetrofit().create(BleApi.class);
 
+    protected  static final GoodsApi goodsApi=getRetrofit().create(GoodsApi.class);
+
     public static void getAllshop(BaseObserver<List<Shop>> shopObservable) {
         setSubscribe(shopApi.getAllShop(), shopObservable);
         System.out.println();
@@ -36,9 +38,14 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(bleApi.getShopAllBle(mac),bleObervable);
     }
 
-    public static void getPushCommodity(String mac,Double x,Double y, BaseObserver<Commodity> comObervable){
-        setSubscribe(bleApi.getPushCommodity(mac,x,y),comObervable);
+    public static void getPushCommodity(String mac,Double x,Double y,Integer uid, BaseObserver<Commodity> comObervable){
+        setSubscribe(bleApi.getPushCommodity(mac,x,y,uid),comObervable);
     }
+
+    public static void findOntCommodity(Integer id,BaseObserver<Commodity> commodityBaseObserver){
+        setSubscribe(goodsApi.findCommotity(id),commodityBaseObserver);
+    }
+
     /**
      * 插入观察者
      *

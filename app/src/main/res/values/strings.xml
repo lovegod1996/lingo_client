@@ -8,4 +8,6 @@
     <string name="tips_content_empty">空空如野</string>
     <string name="loading_busy">努力加载中...</string>
 
+    <string name="encode_qrcode">生成二维码</string>
+    <string name="dencode_qrcode">扫描二维码</string>
 </resources>

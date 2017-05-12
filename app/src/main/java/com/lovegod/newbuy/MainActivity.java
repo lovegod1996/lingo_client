@@ -33,6 +33,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity {
 
     private static Timer timer = new Timer(true);
+    public static final int REQUEST_CODE = 0;
     @BindView(R.id.container)
     CoordinatorLayout coordinatorLayout;
     @BindView(R.id.ly_foot_home)
@@ -63,6 +64,7 @@ public class MainActivity extends BaseActivity {
     ImageView me_image;
 
 
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,21 +82,21 @@ public class MainActivity extends BaseActivity {
         /**
          * 权限请求返回
          */
-        PermissionCall permissionCall=new PermissionCall() {
+        PermissionCall permissionCall = new PermissionCall() {
             @Override
             public void requestSuccess() {
-                showSnackBar(coordinatorLayout,"已授予权限", Snackbar.LENGTH_SHORT);
+                showSnackBar(coordinatorLayout, "已授予权限", Snackbar.LENGTH_SHORT);
             }
 
             @Override
             public void refused() {
-                showSnackBar(coordinatorLayout,"授予失败", Snackbar.LENGTH_SHORT);
+                showSnackBar(coordinatorLayout, "授予失败", Snackbar.LENGTH_SHORT);
             }
         };
-        String[] permissions=new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION};
-       if(!checkPermissionGranted(permissions)){
-           requestRunTimePermissions(permissions,permissionCall);
-       }
+        String[] permissions = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
+        if (!checkPermissionGranted(permissions)) {
+            requestRunTimePermissions(permissions, permissionCall);
+        }
         //检查蓝牙
         BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
 
@@ -111,7 +113,6 @@ public class MainActivity extends BaseActivity {
         timer.schedule(timerTask, 0, 30 * 1000);
 
         initView();
-
         ly_foot_home.performClick();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Home_Activity fg1 = new Home_Activity();
@@ -119,14 +120,17 @@ public class MainActivity extends BaseActivity {
         ft.commit();
     }
 
+
+
+
     private void initView() {
         foot_home.setTextColor(getResources().getColor(R.color.colorPrimary));
 
-        Commodity commodity= (Commodity) getIntent().getSerializableExtra("commodity");
-        if(commodity!=null){
-            Bundle bundle=new Bundle();
-            bundle.putSerializable("commodity",commodity);
-            Intent intent=new Intent(this,GoodActivity.class);
+        Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+        if (commodity != null) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("commodity", commodity);
+            Intent intent = new Intent(this, GoodActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         }

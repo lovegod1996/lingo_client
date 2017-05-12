@@ -38,6 +38,7 @@ public class BlutoothReceiver extends BroadcastReceiver {
         final BlutoothCus blutoothCus = (BlutoothCus) intent.getSerializableExtra("device");
         BlutoothCus blutoothCus1 = (BlutoothCus) SpUtils.getObject(context, "ble");
 
+
         Point point = (Point) intent.getSerializableExtra("point");
 
         if (blutoothCus1 != null) {
@@ -50,7 +51,7 @@ public class BlutoothReceiver extends BroadcastReceiver {
                         Log.v("推送蓝牙", blutoothCus.getAddress());
                         Log.v("推送坐标", point.getX() + " " + point.getY());
 
-                        NetWorks.getPushCommodity(blutoothCus.getAddress(), point.getX(), point.getY(), new BaseObserver<Commodity>() {
+                        NetWorks.getPushCommodity(blutoothCus.getAddress(), point.getX(), point.getY(),1, new BaseObserver<Commodity>() {
                             @Override
                             public void onHandleSuccess(final Commodity commodity) {
                                 //设置点击通知栏的动作为启动另外一个广播
@@ -111,7 +112,7 @@ public class BlutoothReceiver extends BroadcastReceiver {
                     Log.v("推送蓝牙", blutoothCus.getAddress());
                     Log.v("推送坐标", point.getX() + " " + point.getY());
 
-                    NetWorks.getPushCommodity(blutoothCus.getAddress(), point.getX(), point.getY(), new BaseObserver<Commodity>() {
+                    NetWorks.getPushCommodity(blutoothCus.getAddress(), point.getX(), point.getY(),1, new BaseObserver<Commodity>() {
                         @Override
                         public void onHandleSuccess(final Commodity commodity) {
                             //设置点击通知栏的动作为启动另外一个广播
@@ -171,7 +172,7 @@ public class BlutoothReceiver extends BroadcastReceiver {
                 Log.v("推送蓝牙", blutoothCus.getAddress());
                 Log.v("推送坐标", point.getX() + " " + point.getY());
 
-                NetWorks.getPushCommodity(blutoothCus.getAddress(), point.getX(), point.getY(), new BaseObserver<Commodity>() {
+                NetWorks.getPushCommodity(blutoothCus.getAddress(), point.getX(), point.getY(),1, new BaseObserver<Commodity>() {
                     @Override
                     public void onHandleSuccess(final Commodity commodity) {
                         //设置点击通知栏的动作为启动另外一个广播

@@ -15,8 +15,9 @@ public abstract class RetrofitUtils {
 
     //服务器路径
 //     private static final String API_SERVER = "http://115.159.198.204:8080/lingou";
-  private static final String API_SERVER = "http://192.168.191.1:8080/lingou";
-//    private static final String API_SERVER = "http://192.168.155.1:8080/lingou";
+//  private static final String API_SERVER = "http://192.168.191.1:8080/lingou";
+    private static final String API_SERVER = "http://118.89.171.150:8081/newbuyapi";
+
     private static Retrofit mRetrofit;
     private static OkHttpClient mOkHttpClient;
 

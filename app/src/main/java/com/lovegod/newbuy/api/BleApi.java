@@ -8,6 +8,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -23,10 +24,10 @@ public interface BleApi {
     String CACHE_CONTROL_NETWORK = "max-age=0";
 
 
-    @GET("api/findShopAllBleBymac")
-    Observable<BaseBean<List<Ble>>> getShopAllBle(@Query("mac") String mac);
+    @GET("/bles/mac/{mac}")
+    Observable<BaseBean<List<Ble>>> getShopAllBle(@Path("mac") String mac);
 
-    @GET("api/findShopAllBleBymac")
-    Observable<BaseBean<Commodity>> getPushCommodity(@Query("mac") String mac,@Query("x") Double x,@Query("y") Double y);
+    @GET("/positionpush")
+    Observable<BaseBean<Commodity>> getPushCommodity(@Query("mac") String mac,@Query("x") Double x,@Query("y") Double y,@Query("uid") Integer uid);
 
 }

@@ -36,6 +36,10 @@
         <activity android:name=".view.goods.GoodActivity"></activity>
         <activity android:name=".view.goods.CompareActivity"></activity>
         <activity android:name=".view.welcome.WelcomeGuideActivity"></activity>
+        <activity android:name=".view.Shop2Activity" />
+        <activity
+            android:name="com.google.zxing.activity.CaptureActivity"
+            android:theme="@style/MyAppTheme"/>
 
         <service android:name=".service.BluetoothService"></service>
 

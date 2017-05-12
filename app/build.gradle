@@ -65,4 +65,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     //二维码扫描
     compile 'com.google.zxing:core:3.3.0'
+
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.5'
 }

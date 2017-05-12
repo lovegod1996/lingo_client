@@ -90,7 +90,7 @@ public class ShopActivity extends ExpandableListActivity implements GradationScr
         ivBanner = (ImageView) findViewById(R.id.iv_banner);
 
         shop_name = (TextView) findViewById(R.id.shop_name);
-        shop_name.setText(shop.getSname());
+        shop_name.setText(shop.getShopname());
         shop_dizhi = (TextView) findViewById(R.id.shop_dizhi);
         shop_dizhi.setText(shop.getSaddress());
         valuation = (RatingBar) findViewById(R.id.valuation);

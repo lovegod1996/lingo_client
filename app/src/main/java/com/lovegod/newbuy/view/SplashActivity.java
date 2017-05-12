@@ -50,7 +50,7 @@ public class SplashActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN , WindowManager.LayoutParams. FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         //隐藏ActionBar
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         ButterKnife.bind(this);
         String[] images = getResources().getStringArray(R.array.splash_background);

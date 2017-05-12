@@ -26,7 +26,7 @@ public interface ShopApi {
     String CACHE_CONTROL_NETWORK = "max-age=0";
 
 //    @Headers("Cache-Control: public," + CACHE_CONTROL_CACHE)
-    @GET("api/allShop")
+    @GET("shops/top")
     Observable<BaseBean<List<Shop>>> getAllShop();
 
     @POST("api/goodBymac")

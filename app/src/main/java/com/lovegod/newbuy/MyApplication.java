@@ -20,7 +20,7 @@ public class MyApplication extends Application {
     public static List<BlutoothCus> blutoothCusList = new ArrayList<>();
     public static MyApplication instance;
     // 存储应用锁打开的Activity，方便退出应用的时候回收
-    private List<Activity> mList = new LinkedList<Activity>();
+    public static List<Activity> mList = new LinkedList<Activity>();
 
     @Override
     public void onCreate() {

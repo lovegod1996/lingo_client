@@ -70,7 +70,7 @@ public void bindData(Context context,List<Shop> shops){
                 .centerCrop()
                 .placeholder(R.mipmap.ic_launcher)
                 .into(viewHoler.imageView);
-        viewHoler.textView1.setText(shop.getSname());
+        viewHoler.textView1.setText(shop.getShopname());
         viewHoler.textView2.setText(shop.getSaddress());
 
         return  convertView;

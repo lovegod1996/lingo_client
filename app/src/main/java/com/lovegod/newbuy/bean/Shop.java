@@ -9,106 +9,144 @@ import java.io.Serializable;
 public class Shop implements Serializable{
 
     /**
-     * code : 0
-     * data : [{"latitude":65.4512,"logo":"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png","longgitude":34.87954,"saddress":"河南省郑州市龙湖镇商业街3号","sid":1,"slevel":4.5,"sname":"家用电器城","stel":"15537593903"}]
-     * message : success
+     * sid : 2
+     * shopname : 小米家电
+     * saddress : 郑州市龙湖中工
+     * stel : 15537593903
+     * slevel : 5
+     * longgitude : 52.23
+     * latitude : 32.56
+     * type : 电器
+     * salesvo : 6000
+     * subscrib : 经营小米电器
+     * logo : https://img20.360buyimg.com/popshop/jfs/t2365/311/2902780631/4872/72b8e3d8/56fe1ec7N0c3302e2.jpg
+     * showpic : https://img20.360buyimg.com/popshop/jfs/t2365/311/2902780631/4872/72b8e3d8/56fe1ec7N0c3302e2.jpg
      */
 
-        /**
-         * latitude : 65.4512
-         * logo : https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png
-         * longgitude : 34.87954
-         * saddress : 河南省郑州市龙湖镇商业街3号
-         * sid : 1
-         * slevel : 4.5
-         * sname : 家用电器城
-         * stel : 15537593903
-         */
+    private int sid;
+    private String shopname;
+    private String saddress;
+    private String stel;
+    private int slevel;
+    private double longgitude;
+    private double latitude;
+    private String type;
+    private int salesvo;
+    private String subscrib;
+    private String logo;
+    private String showpic;
 
-        private double latitude;
-        private String logo;
-        private double longgitude;
-        private String saddress;
-        private int sid;
-        private double slevel;
-        private String sname;
-        private String stel;
+    public int getSid() {
+        return sid;
+    }
 
-        public double getLatitude() {
-            return latitude;
-        }
+    public void setSid(int sid) {
+        this.sid = sid;
+    }
 
-        public void setLatitude(double latitude) {
-            this.latitude = latitude;
-        }
+    public String getShopname() {
+        return shopname;
+    }
 
-        public String getLogo() {
-            return logo;
-        }
+    public void setShopname(String shopname) {
+        this.shopname = shopname;
+    }
 
-        public void setLogo(String logo) {
-            this.logo = logo;
-        }
+    public String getSaddress() {
+        return saddress;
+    }
 
-        public double getLonggitude() {
-            return longgitude;
-        }
+    public void setSaddress(String saddress) {
+        this.saddress = saddress;
+    }
 
-        public void setLonggitude(double longgitude) {
-            this.longgitude = longgitude;
-        }
+    public String getStel() {
+        return stel;
+    }
 
-        public String getSaddress() {
-            return saddress;
-        }
+    public void setStel(String stel) {
+        this.stel = stel;
+    }
 
-        public void setSaddress(String saddress) {
-            this.saddress = saddress;
-        }
+    public int getSlevel() {
+        return slevel;
+    }
 
-        public int getSid() {
-            return sid;
-        }
+    public void setSlevel(int slevel) {
+        this.slevel = slevel;
+    }
 
-        public void setSid(int sid) {
-            this.sid = sid;
-        }
+    public double getLonggitude() {
+        return longgitude;
+    }
 
-        public double getSlevel() {
-            return slevel;
-        }
+    public void setLonggitude(double longgitude) {
+        this.longgitude = longgitude;
+    }
 
-        public void setSlevel(double slevel) {
-            this.slevel = slevel;
-        }
+    public double getLatitude() {
+        return latitude;
+    }
 
-        public String getSname() {
-            return sname;
-        }
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
 
-        public void setSname(String sname) {
-            this.sname = sname;
-        }
+    public String getType() {
+        return type;
+    }
 
-        public String getStel() {
-            return stel;
-        }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-        public void setStel(String stel) {
-            this.stel = stel;
-        }
+    public int getSalesvo() {
+        return salesvo;
+    }
+
+    public void setSalesvo(int salesvo) {
+        this.salesvo = salesvo;
+    }
+
+    public String getSubscrib() {
+        return subscrib;
+    }
+
+    public void setSubscrib(String subscrib) {
+        this.subscrib = subscrib;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getShowpic() {
+        return showpic;
+    }
+
+    public void setShowpic(String showpic) {
+        this.showpic = showpic;
+    }
 
     @Override
     public String toString() {
         return "Shop{" +
-                "latitude=" + latitude +
-                ", logo='" + logo + '\'' +
-                ", longgitude=" + longgitude +
+                "sid=" + sid +
+                ", shopname='" + shopname + '\'' +
                 ", saddress='" + saddress + '\'' +
-                ", sid=" + sid +
-                ", slevel=" + slevel +
-                ", sname='" + sname + '\'' +
                 ", stel='" + stel + '\'' +
+                ", slevel=" + slevel +
+                ", longgitude=" + longgitude +
+                ", latitude=" + latitude +
+                ", type='" + type + '\'' +
+                ", salesvo=" + salesvo +
+                ", subscrib='" + subscrib + '\'' +
+                ", logo='" + logo + '\'' +
+                ", showpic='" + showpic + '\'' +
                 '}';
     }
 }

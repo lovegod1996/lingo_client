@@ -13,8 +13,13 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.lovegod.newbuy.api.BaseObserver;
+import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.receiver.BlutoothReceiver;
+import com.lovegod.newbuy.utils.system.ComputeUtil;
+import com.lovegod.newbuy.utils.system.Point;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +30,7 @@ import static com.lovegod.newbuy.MyApplication.blutoothCusList;
 /**
  * Created by 123 on 2017/4/2.
  * 自定义蓝牙服务
+ * 距离单位：米
  */
 
 public class BluetoothService extends Service {
@@ -98,7 +104,7 @@ public class BluetoothService extends Service {
         return blutoothCus1;
     }
 
-    //获取两个时间的时间差
+    //获取两个时间的时间差 秒
     public static int calLastedTime(Date startDate, Date endDate) {
         long a = endDate.getTime();
         long b = startDate.getTime();
@@ -112,27 +118,73 @@ public class BluetoothService extends Service {
 
         if (blutoothCusList.size() > 0) {
 
-            Iterator<BlutoothCus> blutoothCusIterator = blutoothCusList.iterator();
-            while (blutoothCusIterator.hasNext()) {
-                BlutoothCus blutoothCus = blutoothCusIterator.next();
-                int time = calLastedTime(blutoothCus.getDate(), new Date());
-                if (time > 50) {
-                    blutoothCusIterator.remove();
+            final Iterator<BlutoothCus> blutoothCusIterator = blutoothCusList.iterator();
+
+            //查询最新的位置信息
+            NetWorks.findShopAllBle(blutoothCusList.get(blutoothCusList.size() - 1).getAddress(), new BaseObserver<List<Ble>>() {
+                @Override
+                public void onHandleSuccess(List<Ble> bles) {
+                    if (bles.size() > 0) {
+                        //修改list元素数据
+                        while (blutoothCusIterator.hasNext()) {
+                            BlutoothCus blutoothCus = blutoothCusIterator.next();
+                            boolean rem = true;
+                            for (int i = 0; i < bles.size(); i++) {
+                                if (blutoothCus.getAddress().equals(bles.get(i).getMacaddress())) {
+                                    rem = false;
+                                }
+                            }
+                            if (rem) {
+                                blutoothCusIterator.remove();
+                            } else {
+                                int time = calLastedTime(blutoothCus.getDate(), new Date());
+                                if (time > 100) {    //秒
+                                    blutoothCusIterator.remove();
+                                }
+                            }
+                        }
+                        //修改返回坐标值
+                        for (BlutoothCus blutoothCus : blutoothCusList) {
+                            for (Ble ble : bles) {
+                                if (blutoothCus.getAddress().equals(ble.getMacaddress())) {
+                                    blutoothCus.setX(ble.getX());
+                                    blutoothCus.setY(ble.getY());
+                                }
+                            }
+                        }
+                    }
                 }
-            }
+            });
+
+            Collections.reverse(blutoothCusList);//倒序
+
 
             BlutoothCus blutoothDevi = getHightDevice(blutoothCusList);
             BlutoothCus lowDevice = getLowDevice(blutoothDevi, blutoothCusList);
-            int longtime=0;
+            int longtime = 0;
             try {
                 longtime = calLastedTime(lowDevice.getDate(), blutoothDevi.getDate());
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            if (longtime > 6) {
+            if (longtime > 20) {  //秒
+                Point a=new Point();
+                Point b=new Point();
+                Point c=new Point();
+
+                a.setX(blutoothCusList.get(0).getX());
+                a.setY(blutoothCusList.get(0).getY());
+                b.setX(blutoothCusList.get(1).getX());
+                b.setY(blutoothCusList.get(1).getY());
+                c.setX(blutoothCusList.get(2).getX());
+                c.setY(blutoothCusList.get(2).getY());
+
+                Point tPoint = ComputeUtil.getTPoint(a, b, c, blutoothCusList.get(0).getDistance(), blutoothCusList.get(1).getDistance(), blutoothCusList.get(2).getDistance());
+
                 Intent intentRec = new Intent(this, BlutoothReceiver.class);
                 intentRec.putExtra("device", blutoothDevi);
+                intentRec.putExtra("point", tPoint);
                 sendBroadcast(intentRec);
 //                AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
 //                //读者可以修改此处的Minutes从而改变提醒间隔时间
@@ -173,59 +225,24 @@ public class BluetoothService extends Service {
         @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
         @Override
         public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
+
             BlutoothCus blutoothcus = new BlutoothCus();
             blutoothcus.setAddress(device.getAddress());
             blutoothcus.setBondState(device.getBondState());
             blutoothcus.setName(device.getName());
             blutoothcus.setType(device.getType());
+            try {
+                blutoothcus.setDistance(getDistence(rssi));
+                Log.v("扫描设备：", device.toString() + " " + rssi+"距离： "+blutoothcus.getDistance());
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.v("扫描设备：", device.toString() + " " + rssi);
+            }
             blutoothcus.setRssi(rssi);
             blutoothcus.setDate(new Date());
-            Log.v("扫描设备：", device.toString() + " " + rssi);
+
             blutoothCusList.add(blutoothcus);
-//            try {
-//                Thread.sleep(500);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            if(blutoothCusList.size()==0){
-//                BlutoothCus blutoothcus = new BlutoothCus();
-//                blutoothcus.setAddress(device.getAddress());
-//                blutoothcus.setBondState(device.getBondState());
-//                blutoothcus.setName(device.getName());
-//                blutoothcus.setType(device.getType());
-//                blutoothcus.setRssi(rssi);
-//                blutoothcus.setDate(new Date());
-//                Log.v("扫描设备：", device.toString() + " " + rssi);
-//                blutoothCusList.add(blutoothcus);
-//            }else{
-//                boolean state=true;
-//                for (int i=0;i<blutoothCusList.size();i++){
-//                    if(device.getAddress().equals(blutoothCusList.get(i).getAddress())){
-//                        blutoothCusList.get(i).setRssi(rssi);
-//                        state=false;
-//                    }
-//                }
-//                if(state){
-//                    BlutoothCus blutoothcus = new BlutoothCus();
-//                    blutoothcus.setAddress(device.getAddress());
-//                    blutoothcus.setBondState(device.getBondState());
-//                    blutoothcus.setName(device.getName());
-//                    blutoothcus.setType(device.getType());
-//                    blutoothcus.setRssi(rssi);
-//                    Log.v("扫描设备：", device.toString() + " " + rssi);
-//                    blutoothCusList.add(blutoothcus);
-//                }
-//            }
-//            if(!blutoothCusList.contains(device)) {
-//                BlutoothCus blutoothcus = new BlutoothCus();
-//                blutoothcus.setAddress(device.getAddress());
-//                blutoothcus.setBondState(device.getBondState());
-//                blutoothcus.setName(device.getName());
-//                blutoothcus.setType(device.getType());
-//                blutoothcus.setRssi(rssi);
-//                Log.v("扫描设备：", device.toString() + " " + rssi);
-//                blutoothCusList.add(blutoothcus);
-//            }
+
         }
     };
 
@@ -236,5 +253,28 @@ public class BluetoothService extends Service {
         mBluetoothAdapter.stopLeScan(mLeScanCallback);
     }
 
+
+    /**
+     * 根据阈值计算距离
+     *
+     * @param rssi
+     * @return 米距离
+     * @throws Exception
+     */
+    public Double getDistence(int rssi) throws Exception {
+//    uint8 A = 59;
+//    float n = 3.0;
+//
+//    int iRssi = abs(rssi);
+//    float power = (iRssi-A)/(10*n);
+//    return pow(10, power);
+        int A = 59;  //距离一米时的阈值
+        float n = 3;  //n：传播因子，与温度、湿度等环境相关。
+
+        int abs = Math.abs(rssi);
+        float v = (abs - A) / (10 * n);
+        return Math.pow(10, v);
+
+    }
 
 }

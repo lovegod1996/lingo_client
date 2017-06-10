@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="85dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/imageview_cate_good"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/entity_shop01"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/cate_good_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#0a090a"
+            android:textSize="15dp" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/shop_money0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:text="￥"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15dp" />
+    <TextView
+        android:id="@+id/cate_good_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15dp" />
+</LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

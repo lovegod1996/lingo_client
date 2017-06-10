@@ -2,9 +2,13 @@ package com.lovegod.newbuy.api;
 
 import com.lovegod.newbuy.bean.BaseBean;
 import com.lovegod.newbuy.bean.Commodity;
+import com.lovegod.newbuy.bean.Goods;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
@@ -23,4 +27,9 @@ public interface GoodsApi {
     @GET("goods/{id}")
     Observable<BaseBean<Commodity>> findCommotity(@Path("id") Integer id);
 
+    @GET("goods/shop/{sid}")
+    Observable<BaseBean<List<Commodity>>>getIDshopgoods(@Path("sid")Integer sid);
+
+    /*@GET("goods/{id}")
+    Observable<BaseBean<Commodity>>getCidGood(@Path("id")Integer id);*/
 }

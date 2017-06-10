@@ -10,9 +10,15 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewStub;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,8 +27,11 @@ import android.widget.Toast;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.service.BluetoothService;
 import com.lovegod.newbuy.view.BaseActivity;
+import com.lovegod.newbuy.view.carts.CartActivity;
 import com.lovegod.newbuy.view.fragment.Home_Activity;
 import com.lovegod.newbuy.view.goods.GoodActivity;
+import com.lovegod.newbuy.view.sorts.SortActivity;
+import com.lovegod.newbuy.view.utils.BottomNavigationViewHelper;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,38 +39,25 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.lovegod.newbuy.R.id.foot_home;
+import static com.lovegod.newbuy.R.id.ly_foot_cart;
+import static com.lovegod.newbuy.R.id.ly_foot_history;
+import static com.lovegod.newbuy.R.id.ly_foot_home;
+import static com.lovegod.newbuy.R.id.ly_foot_me;
+
 public class MainActivity extends BaseActivity {
 
     private static Timer timer = new Timer(true);
     public static final int REQUEST_CODE = 0;
     @BindView(R.id.container)
     CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.ly_foot_home)
-    LinearLayout ly_foot_home;
-    @BindView(R.id.ly_foot_history)
-    LinearLayout ly_foot_history;
-    @BindView(R.id.ly_foot_cart)
-    LinearLayout ly_foot_cart;
-    @BindView(R.id.ly_foot_me)
-    LinearLayout ly_foot_me;
 
-    @BindView(R.id.foot_home)
-    TextView foot_home;
-    @BindView(R.id.foot_history)
-    TextView foot_history;
-    @BindView(R.id.foot_cart)
-    TextView foot_cart;
-    @BindView(R.id.foot_me)
-    TextView foot_me;
 
-    @BindView(R.id.home_image)
-    ImageView home_image;
-    @BindView(R.id.history_image)
-    ImageView history_image;
-    @BindView(R.id.cart_image)
-    ImageView cart_image;
-    @BindView(R.id.me_image)
-    ImageView me_image;
+    @BindView(R.id.navigation)
+    BottomNavigationView navigation;
+    @BindView(R.id.content)
+    FrameLayout content;
+
 
 
 
@@ -69,7 +65,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
         MyApplication.getInstance().addActivity(this);
         ButterKnife.bind(this);
 
@@ -113,18 +109,58 @@ public class MainActivity extends BaseActivity {
         timer.schedule(timerTask, 0, 30 * 1000);
 
         initView();
-        ly_foot_home.performClick();
+
+
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Home_Activity fg1 = new Home_Activity();
-        ft.add(R.id.fl, fg1);
+        ft.add(R.id.content, fg1);
         ft.commit();
+        BottomNavigationViewHelper.disableShiftMode(navigation);
+
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
     }
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+
+                //    replaceFragment(mHome_Activity);
+                    return true;
+                case R.id.navigation_sort:
+                  /*  if (null == mMinTaoFragment) {
+                        mMinTaoFragment = new Mintaofragment();
+                    }
+                    replaceFragment(mMinTaoFragment);*/
+                    Intent intent1 = new Intent(MainActivity.this,SortActivity.class);
+                    startActivity(intent1);
+                    return true;
+                case R.id.navigation_history:
+
+                    return true;
+                case R.id.navigation_cart:
+                    Intent intent3 = new Intent(MainActivity.this, CartActivity.class);
+                    startActivity(intent3);
+
+                    return true;
+                case R.id.navigation_me:
+
+                    return true;
+            }
+            return false;
+        }
+    };
+
+
 
 
 
 
     private void initView() {
-        foot_home.setTextColor(getResources().getColor(R.color.colorPrimary));
+       // foot_home.setTextColor(getResources().getColor(R.color.colorPrimary));
 
         Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
         if (commodity != null) {
@@ -155,10 +191,7 @@ public class MainActivity extends BaseActivity {
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
             exitTime = System.currentTimeMillis();
         } else {
-//            finish();
-//
-//            System.exit(0);
-//            android.os.Process.killProcess(android.os.Process.myPid());
+
             MyApplication.getInstance().exit();
             System.exit(0);
         }

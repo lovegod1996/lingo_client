@@ -17,6 +17,9 @@
     <uses-feature android:name="android.hardware.camera"/>        <!-- 使用照相机权限 -->
     <uses-feature android:name="android.hardware.camera.autofocus"/>   <!-- 自动聚焦权限 -->
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -37,6 +40,9 @@
         <activity android:name=".view.goods.CompareActivity"></activity>
         <activity android:name=".view.welcome.WelcomeGuideActivity"></activity>
         <activity android:name=".view.Shop2Activity" />
+        <activity android:name=".view.carts.CartActivity"></activity>
+        <activity android:name=".view.sorts.SortActivity"></activity>
+        <activity android:name=".view.sorts.CategoryGoodsActivity"></activity>
         <activity
             android:name="com.google.zxing.activity.CaptureActivity"
             android:theme="@style/MyAppTheme"/>

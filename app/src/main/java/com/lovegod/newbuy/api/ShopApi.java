@@ -2,6 +2,7 @@ package com.lovegod.newbuy.api;
 
 import com.lovegod.newbuy.bean.BaseBean;
 import com.lovegod.newbuy.bean.Commodity;
+import com.lovegod.newbuy.bean.Goods;
 import com.lovegod.newbuy.bean.Shop;
 
 import java.util.List;
@@ -9,7 +10,10 @@ import java.util.List;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
+
+import static android.R.attr.id;
 
 
 /**
@@ -28,6 +32,9 @@ public interface ShopApi {
 //    @Headers("Cache-Control: public," + CACHE_CONTROL_CACHE)
     @GET("shops/top")
     Observable<BaseBean<List<Shop>>> getAllShop();
+
+    @GET("shops/{sid}")
+    Observable<BaseBean<Shop>>getIDshop(@Path("sid") Integer sid);
 
     @POST("api/goodBymac")
     Observable<BaseBean<Commodity>> findGoodByMac(@Query("mac")String mac);

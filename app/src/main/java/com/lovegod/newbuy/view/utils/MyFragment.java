@@ -19,6 +19,8 @@
 
 package com.lovegod.newbuy.view.utils;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,14 +30,27 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
+import com.lovegod.newbuy.MyApplication;
 import com.lovegod.newbuy.R;
+import com.lovegod.newbuy.api.BaseObserver;
+import com.lovegod.newbuy.api.NetWorks;
+import com.lovegod.newbuy.bean.Commodity;
+import com.lovegod.newbuy.bean.Goods;
+import com.lovegod.newbuy.bean.Shop;
+import com.lovegod.newbuy.view.Shop2Activity;
+import com.lovegod.newbuy.view.goods.GoodActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * Created by Monkey on 2015/6/29.
  */
-public class MyFragment extends Fragment implements MyRecyclerViewAdapter.OnItemClickListener, MyStaggeredViewAdapter.OnItemClickListener {
+public class MyFragment extends Fragment{
 
   private View mView;
  // private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -51,6 +66,7 @@ public class MyFragment extends Fragment implements MyRecyclerViewAdapter.OnItem
 
   private static final int SPAN_COUNT = 2;
   private int flag = 0;
+  private List<Commodity> goodslist=new ArrayList<>();
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
@@ -60,7 +76,6 @@ public class MyFragment extends Fragment implements MyRecyclerViewAdapter.OnItem
 
   @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
-
 
     mRecyclerView = (RecyclerView) mView.findViewById(R.id.id_recyclerview);
 
@@ -72,14 +87,6 @@ public class MyFragment extends Fragment implements MyRecyclerViewAdapter.OnItem
   private void configRecyclerView() {
 
     switch (flag) {
-     /* case LIST_SORT:
-        mLayoutManager =
-            new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        break;
-      case LIST_ALL:
-        mLayoutManager =
-            new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        break;*/
       case LIST_SORT:
         mLayoutManager =
             new GridLayoutManager(getActivity(), SPAN_COUNT, GridLayoutManager.VERTICAL, false);
@@ -95,45 +102,41 @@ public class MyFragment extends Fragment implements MyRecyclerViewAdapter.OnItem
     }
 
     if (flag != LIST_DISCOUNT) {
-      mRecyclerViewAdapter = new MyRecyclerViewAdapter(getActivity());
-      mRecyclerViewAdapter.setOnItemClickListener(this);
-      mRecyclerView.setAdapter(mRecyclerViewAdapter);
-    } else {
+
+       Shop shopp=(Shop)getActivity().getIntent().getSerializableExtra("shop");
+        NetWorks.getIDshopgoods(shopp.getSid(), new BaseObserver<List<Commodity>>() {
+            @Override
+            public void onHandleSuccess(final List<Commodity> goodses) {
+
+                goodslist=goodses;
+                mRecyclerViewAdapter = new MyRecyclerViewAdapter(getActivity(),goodslist);
+                mRecyclerView.setAdapter(mRecyclerViewAdapter);
+              mRecyclerViewAdapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
+                  @Override
+                  public void onItemClick(View view, int position) {
+                      Intent intent = new Intent(getActivity(), GoodActivity.class);
+                      Bundle bundle = new Bundle();
+                      bundle.putSerializable("commodity",goodses.get(position));
+                      intent.putExtras(bundle);
+                      startActivity(intent);
+                  }
+
+                  @Override
+                  public void onItemLongClick(View view, int position) {
+
+                  }
+              });
+                mRecyclerViewAdapter.notifyDataSetChanged();
+            }
+        });
+
+    }
+    else {
       mStaggeredAdapter = new MyStaggeredViewAdapter(getActivity());
-      mStaggeredAdapter.setOnItemClickListener(this);
       mRecyclerView.setAdapter(mStaggeredAdapter);
-      /*  mRecyclerViewAdapter = new MyRecyclerViewAdapter(getActivity());
-        mRecyclerViewAdapter.setOnItemClickListener(this);
-        mRecyclerView.setAdapter(mRecyclerViewAdapter);*/
     }
 
     mRecyclerView.setLayoutManager(mLayoutManager);
   }
 
-  /*@Override public void onRefresh() {
-
-    // 刷新时模拟数据的变化
-    new Handler().postDelayed(new Runnable() {
-      @Override public void run() {
-        mSwipeRefreshLayout.setRefreshing(false);
-        int temp = (int) (Math.random() * 10);
-        if (flag != STAGGERED_GRID) {
-          mRecyclerViewAdapter.mDatas.add(0, "new" + temp);
-          mRecyclerViewAdapter.notifyDataSetChanged();
-        } else {
-          mStaggeredAdapter.mDatas.add(0, "new" + temp);
-          mStaggeredAdapter.mHeights.add(0, (int) (Math.random() * 300) + 200);
-          mStaggeredAdapter.notifyDataSetChanged();
-        }
-      }
-    }, 1000);
-  }*/
-
-  @Override public void onItemClick(View view, int position) {
-   // SnackbarUtil.show(mRecyclerView, getString(R.string.item_clicked), 0);
-  }
-
-  @Override public void onItemLongClick(View view, int position) {
-  //  SnackbarUtil.show(mRecyclerView, getString(R.string.item_longclicked), 0);
-  }
 }

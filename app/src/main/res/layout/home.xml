@@ -188,36 +188,20 @@
                     android:textSize="15dp" />
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/suggest_shop"
-                android:layout_width="fill_parent"
-                android:layout_height="600dp"
-                android:background="#ffffff"
-                android:verticalSpacing="3dp" />
-
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.5dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/bg_Gray" />
+                android:background="#edecec" />
+
+            <com.lovegod.newbuy.view.utils.NoScrollListView
+                android:id="@+id/suggest_shop"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:verticalSpacing="3dp"></com.lovegod.newbuy.view.utils.NoScrollListView>
 
         </LinearLayout>
     </ScrollView>
-
-    <!--   <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="50dp"
-           android:orientation="vertical" >
-           <View
-               android:id="@+id/menu_line"
-               android:layout_width="match_parent"
-               android:layout_height="0.5dp"
-               android:background="@color/bg_Gray"
-               />
-           <include
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               layout="@layout/foot_menu" />
-       </LinearLayout>-->
 
 </LinearLayout>

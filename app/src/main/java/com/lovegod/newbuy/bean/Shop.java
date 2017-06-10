@@ -27,7 +27,7 @@ public class Shop implements Serializable{
     private String shopname;
     private String saddress;
     private String stel;
-    private int slevel;
+    private double slevel;
     private double longgitude;
     private double latitude;
     private String type;
@@ -68,11 +68,11 @@ public class Shop implements Serializable{
         this.stel = stel;
     }
 
-    public int getSlevel() {
+    public double getSlevel() {
         return slevel;
     }
 
-    public void setSlevel(int slevel) {
+    public void setSlevel(double slevel) {
         this.slevel = slevel;
     }
 

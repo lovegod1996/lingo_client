@@ -2,11 +2,14 @@ package com.lovegod.newbuy.view.goods;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.util.Printer;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -22,21 +26,36 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.lovegod.newbuy.R;
+import com.lovegod.newbuy.api.BaseObserver;
+import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Commodity;
+import com.lovegod.newbuy.bean.Shop;
+import com.lovegod.newbuy.bean.ShopCartBean;
+import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.ShopActivity;
 import com.lovegod.newbuy.view.utils.GradationScrollView;
 import com.lovegod.newbuy.view.utils.MaterialIndicator;
+import com.lovegod.newbuy.view.utils.MyRecyclerViewAdapter;
+import com.lovegod.newbuy.view.utils.NoScrollListView;
 import com.lovegod.newbuy.view.utils.StatusBarUtil;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static android.os.Build.VERSION_CODES.N;
 
 
 /**
@@ -57,12 +76,14 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     private ViewPager viewPager;
 //    LinearLayout text_bg;
 
+    NoScrollListView imagelist;
 
     FrameLayout flg;
     Button addcart;//加入购物车
     Button compare;//比较
     Button shop;//店铺
     ImageView turnback;
+    ImageView keep;
     ListView image_details_listview;
     RelativeLayout li_title;
 
@@ -72,6 +93,14 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     TextView goodsPrice;
     @BindView(R.id.goodsalvo)
     TextView goodsalevo;
+@BindView(R.id.if_online_store)
+    TextView if_online_store;
+    @BindView(R.id.store_name)
+    TextView store_name;
+    @BindView(R.id.store_location)
+    TextView store_location;
+    @BindView(R.id.store_month_number)
+    TextView store_month_number;
 
     TextView tv_good_detail_cate;//产品参数
     /*对话框*/
@@ -83,6 +112,12 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     final String[] parameter = new String[]{"1335*829*196MM",
             "Sony/索尼", "55INC",
             "3840*2160", "LED", "LED液晶电视机", "KD-55X6000D", "195W", "500:1", "是", "16.8KG(不含底座)", "Linux", "MPEG1/MPEG2PS/MPEG2TS/AVCHD/MP4Part10/MP4Part2/AVI/MOV/WMV/MKV/RMVB/WEBM/3GPP"};
+
+    //  private  ShopCartBean a1;
+    private List<Commodity> goodslist = new ArrayList<>();
+    private List<ShopCartBean> shopCartBeen = new ArrayList<>();
+    private String[] imgUrlArr;
+    private List<ImageView> imgList;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,12 +134,12 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         viewPager.setFocusableInTouchMode(true);
         viewPager.requestFocus();
 
-        Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+        final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
 
         goodsName.setText(commodity.getProductname());
         goodsPrice.setText(commodity.getPrice() + "");
         goodsalevo.setText(commodity.getSalesvolu() + "人购买");
-
+        textView.setText(commodity.getProductname());
         //透明状态栏
         StatusBarUtil.setTranslucent(this, 110);
 
@@ -113,9 +148,21 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         shop = (Button) findViewById(R.id.shop);
         turnback = (ImageView) findViewById(R.id.turnback);
         li_title = (RelativeLayout) findViewById(R.id.li_title);
+        keep = (ImageView) findViewById(R.id.keep);
 
 
         tv_good_detail_cate = (TextView) findViewById(R.id.tv_good_detail_cate);
+
+        NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>() {
+            @Override
+            public void onHandleSuccess(Shop shop) {
+                store_name.setText(shop.getShopname());
+                store_location.setText(shop.getSaddress());
+                store_name.setText(shop.getShopname());
+
+            }
+        });
+
         //对话框
         parameterDialog = new Dialog(this, R.style.map_dialog);
         LinearLayout root = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.layout_parameter_dialog, null);
@@ -156,20 +203,12 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                 parameterDialog.show();
             }
         });
-
-
+        final String[] a = commodity.getDetailshow().split(";");
+/**
+ * 商品详情listview
+ */
         image_details_listview = (ListView) findViewById(R.id.image_details_listview);
-        int[] resImags = {R.mipmap.tu1, R.mipmap.tu2, R.mipmap.tu3, R.mipmap.tu4, R.mipmap.tu5, R.mipmap.tu6,};
-        ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String, Object>>();
-        for (int i = 0; i < resImags.length; i++) {
-            HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put("ItemImage", resImags[i]);
-            listItem.add(map);
-        }
-        SimpleAdapter mSimpleAdapter = new SimpleAdapter(this, listItem, R.layout.good_listview_item, new String[]{"ItemImage"}, new int[]{R.id.item_image});
-        image_details_listview.setAdapter(mSimpleAdapter);
-
-
+        image_details_listview.setAdapter(new ImageListAdapter(GoodActivity.this, a));
         MaterialIndicator indicator = (MaterialIndicator) findViewById(R.id.indicator);
         viewPager.setAdapter(new MyPagerAdapter());
         viewPager.addOnPageChangeListener(indicator);
@@ -182,6 +221,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         indicator.setAdapter(viewPager.getAdapter());
         initlistener();
         initListeners();
+
+
 
     }
 
@@ -201,7 +242,6 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
 
     private void initlistener() {
-        turnback = (ImageView) findViewById(R.id.turnback);
 
         turnback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,10 +250,39 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             }
         });
 
+        keep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                keep.setImageResource(R.mipmap.keeped);
+            }
+        });
+
         addcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+                NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>() {
+                    @Override
+                    public void onHandleSuccess(Shop shop) {
+                        Map<String, Object> addcartMap = new HashMap<String, Object>();
+                        addcartMap.put("uid", 1);
+                        addcartMap.put("sid", commodity.getSid());
+                        addcartMap.put("cid", commodity.getCid());
+                        addcartMap.put("commodity_pic", commodity.getLogo());
+                        addcartMap.put("commodity_name", commodity.getProductname());
+                        addcartMap.put("price", commodity.getPrice());
+                        addcartMap.put("commodity_select", "55寸");
+                        addcartMap.put("amount", 1);
+                        addcartMap.put("shopname", shop.getShopname());
+                        NetWorks.postAddcart(addcartMap, new BaseObserver<ShopCartBean>() {
+                            @Override
+                            public void onHandleSuccess(ShopCartBean shopCartBean) {
+                                Toast toast = Toast.makeText(getApplicationContext(), "宝贝已添加到购物车", Toast.LENGTH_LONG);
+                                toast.show();
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -225,43 +294,39 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             }
         });
 
+
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GoodActivity.this, ShopActivity.class);
-                startActivity(intent);
+                final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+                NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>() {
+                    @Override
+                    public void onHandleSuccess(Shop shop) {
+                        Intent intent = new Intent(GoodActivity.this, Shop2Activity.class);
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("shop",shop);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                });
+
             }
         });
 
     }
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-//    public Action getIndexApiAction() {
-//        Thing object = new Thing.Builder()
-//                .setName("Good Page") // TODO: Define a title for the content shown.
-//                // TODO: Make sure this auto-generated URL is correct.
-//                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-//                .build();
-//        return new Action.Builder(Action.TYPE_VIEW)
-//                .setObject(object)
-//                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-//                .build();
-//    }
-
 
 
     /*//**
      * viewpager适配器
      */
     private class MyPagerAdapter extends PagerAdapter {
-        public int[] drawables = {R.mipmap.tutu2, R.mipmap.tutu1, R.mipmap.tutu3, R.mipmap.tutu4};
+        Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+        String[] a = commodity.getDetailshow().split(";");
+        String[] only4 = Arrays.copyOfRange(a, 0, 4);
 
         @Override
         public int getCount() {
-            return 4;
+            return only4.length;
         }
 
         @Override
@@ -272,7 +337,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             ImageView view = new ImageView(container.getContext());
-            view.setImageResource(drawables[position]);
+            Glide.with(GoodActivity.this).load(only4[position]).into(view);
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
             container.addView(view);
             return view;
@@ -304,7 +369,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
 
     /**
-     * 滑动监听
+     * 滑动监听,设置标题栏
      *
      * @param scrollView
      * @param x
@@ -325,8 +390,44 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             li_title.setBackgroundColor(Color.argb((int) alpha, 144, 151, 166));
         } else {    //滑动到banner下面设置普通颜色
             li_title.setBackgroundColor(Color.argb((int) 255, 255, 255, 255));
-            textView.setTextColor(Color.argb((int) 255, 144, 151, 166));
+
+            textView.setTextColor(Color.argb((int) 255, 0, 0, 0));
         }
 
     }
+
+    /**
+     * listview 图片ImageListAdapter
+     */
+    class ImageListAdapter extends ArrayAdapter {
+        private Context context;
+        private LayoutInflater inflater;
+
+        private String[] imageUrls;
+
+        public ImageListAdapter(Context context, String[] imageUrls) {
+            super(context, R.layout.good_listview_item, imageUrls);
+
+            this.context = context;
+            this.imageUrls = imageUrls;
+
+            inflater = LayoutInflater.from(context);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (null == convertView) {
+                convertView = inflater.inflate(R.layout.good_listview_item, parent, false);
+            }
+
+            Glide.with(context)
+                    .load(imageUrls[position])
+                    .into((ImageView) convertView);
+
+            return convertView;
+        }
+
+    }
+
 }
+

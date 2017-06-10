@@ -2,6 +2,7 @@ package com.lovegod.newbuy.view;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,15 +15,21 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.lovegod.newbuy.R;
+import com.lovegod.newbuy.bean.Shop;
+import com.lovegod.newbuy.view.fragment.Home_Activity;
 import com.lovegod.newbuy.view.utils.MyFragment;
 import com.lovegod.newbuy.view.utils.MyViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static android.support.design.widget.TabLayout.MODE_FIXED;
+import static com.lovegod.newbuy.R.id.shop;
 
 
 /**
@@ -62,6 +69,8 @@ LinearLayout linearlayout_location;
         setContentView(R.layout.shop_info);
 
 
+       final Shop shopdd=(Shop)getIntent().getSerializableExtra("shop");
+
         shop_tops = (RelativeLayout) findViewById(R.id.shop_tops);
         textview = (TextView) findViewById(R.id.textview);
         shop_name = (TextView) findViewById(R.id.shop_name);
@@ -77,10 +86,19 @@ LinearLayout linearlayout_location;
         //   shop_tablayout = (TableLayout) findViewById(R.id.shop_tablayout);
         shop_viewpage = (ViewPager) findViewById(R.id.shop_viewpage);
 
-        textview.setText("wodeqoeo");
+        textview.setText(shopdd.getShopname());
+        //使用Glide加载图片
+        Glide.with(this)
+                .load(shopdd.getLogo())
+                .error(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.ic_launcher)
+                .into(shop_image);
+        shop_name.setText(shopdd.getShopname());
+        shop_location.setText(shopdd.getSaddress());
+        shop_valuation.setRating((float) shopdd.getSlevel());
+
 
         mtablayout = (TabLayout) findViewById(R.id.shop_tablayout);
-
         shop_viewpage = (ViewPager) findViewById(R.id.shop_viewpage);
 
         /* 返回键*/
@@ -109,6 +127,9 @@ LinearLayout linearlayout_location;
             @Override
             public void onClick(View v) {
                 //导航
+                Toast toast=Toast.makeText(getApplicationContext(), "默认的Toast", Toast.LENGTH_SHORT);
+
+               toast.show();
             }
         });
          /* 电话*/
@@ -116,8 +137,9 @@ LinearLayout linearlayout_location;
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
+
                 intent.setAction("android.intent.action.DIAL");
-                intent.setData(Uri.parse("tel:18838150659"));
+                intent.setData(Uri.parse("tel:"+shopdd.getStel()));
                 startActivity(intent);
             }
         });
@@ -180,4 +202,5 @@ LinearLayout linearlayout_location;
     public void onClick(View v) {
 
     }
+
 }

@@ -1,21 +1,31 @@
 package com.lovegod.newbuy.view.fragment;
 
 import android.Manifest;
+
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Criteria;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SearchView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,13 +54,18 @@ import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.goods.GoodActivity;
+import com.lovegod.newbuy.view.welcome.PositioningActivity;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static android.os.Build.VERSION_CODES.N;
 import static com.lovegod.newbuy.MainActivity.REQUEST_CODE;
 
 
@@ -94,7 +109,7 @@ public class Home_Activity extends Fragment {
     GridView gridView;
     ListView listView;
     Button scan_code_btn;
-    Button city_name;
+    static Button city_name;
     public SearchView searchview;
     private SliderLayout mSliderLayout;
     private PagerIndicator indicator;
@@ -105,50 +120,68 @@ public class Home_Activity extends Fragment {
     boolean run = true;
     Thread thread;
 
+    private static Geocoder geocoder;//此对象能通过经纬度来获取相应的城市等信息
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.home, container, false);
         listView = (ListView) view.findViewById(R.id.suggest_shop);
         gridView = (GridView) view.findViewById(R.id.gridView_separate);
         scan_code_btn = (Button) view.findViewById(R.id.scan_code_btn);
-        city_name = (Button)view.findViewById(R.id.city_name);
-        searchview = (SearchView)view.findViewById(R.id.searchview);
+        city_name = (Button) view.findViewById(R.id.city_name);
+
+
+        searchview = (SearchView) view.findViewById(R.id.searchview);
         //容器
         mSliderLayout = (SliderLayout) view.findViewById(R.id.slider);
         //指示器，那些小点
-        indicator= (PagerIndicator) view.findViewById(R.id.custom_indicator);
+        indicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
         initSlider();
 //        thread = new Thread(new MyThread());
 //        thread.start();
-//        NetWorks.getAllshop(new BaseObserver<List<Shop>>() {
-//            @Override
-//            public void onHandleSuccess(List<Shop> shops) {
-//                shopList = shops;
-////                run=false;
-////                thread.interrupt();
-//            }
-//        });
-        Log.e("网络访问时长", time + "");
         homeImageListAdapter = new HomeImageListAdapter();
-        MyAsyncTask myAsyncTask = new MyAsyncTask();
-        myAsyncTask.execute(time);
+        NetWorks.getAllshop(new BaseObserver<List<Shop>>() {
+            @Override
+            public void onHandleSuccess(List<Shop> shops) {
+                shopList = shops;
+                homeImageListAdapter.bindData(MyApplication.getInstance().getApplicationContext(), shops);
+                listView.setAdapter(homeImageListAdapter);
+                homeImageListAdapter.notifyDataSetChanged();
+            }
+        });
+        Log.e("网络访问时长", time + "");
+
+//        MyAsyncTask myAsyncTask = new MyAsyncTask();
+//        myAsyncTask.execute(time);
 
         AdapterView.OnItemClickListener listclickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Shop shopdd = shopList.get(position);
-                Intent intent = new Intent(getActivity(), Shop2Activity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("shop", shopdd);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                NetWorks.getIDshop(shopList.get(position).getSid(), new BaseObserver<Shop>() {
+                    @Override
+                    public void onHandleSuccess(Shop shops) {
+                        if (shops != null) {
+                            Intent intent = new Intent(getActivity(), Shop2Activity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("shop", shops);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    }
+
+                });
+
+
             }
         };
         listView.setOnItemClickListener(listclickListener);
         initGridView();
         return view;
     }
+
+
 
     class MyThread implements Runnable {
 
@@ -290,7 +323,7 @@ public class Home_Activity extends Fragment {
             String scanResult = bundle.getString("result");
             Integer cid=Integer.parseInt(scanResult);
 
-            NetWorks.findOntCommodity(cid, new BaseObserver<Commodity>() {
+            NetWorks.findCommodity(cid, new BaseObserver<Commodity>() {
                 @Override
                 public void onHandleSuccess(Commodity commodity) {
                     if (commodity != null) {
@@ -411,12 +444,10 @@ public class Home_Activity extends Fragment {
             }
             return shopList;
         }
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
-
         @Override
         protected void onPostExecute(List<Shop> shops) {
             super.onPostExecute(shops);
@@ -424,10 +455,10 @@ public class Home_Activity extends Fragment {
             listView.setAdapter(homeImageListAdapter);
             homeImageListAdapter.notifyDataSetChanged();
         }
-
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
         }
     }
+
 }

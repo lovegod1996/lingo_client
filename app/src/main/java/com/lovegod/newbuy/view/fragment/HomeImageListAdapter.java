@@ -65,11 +65,11 @@ public void bindData(Context context,List<Shop> shops){
         //使用Glide加载图片
         Glide.with(context)
                 .load(shop.getLogo())
-                .error(R.mipmap.ic_launcher)
+                .error(R.mipmap.shop_bg_1)
                 .fitCenter()
-                .centerCrop()
-                .placeholder(R.mipmap.ic_launcher)
+              //  .placeholder(R.mipmap.shop_bg_1)
                 .into(viewHoler.imageView);
+
         viewHoler.textView1.setText(shop.getShopname());
         viewHoler.textView2.setText(shop.getSaddress());
 

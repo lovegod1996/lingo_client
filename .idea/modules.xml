@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/NewBuy.iml" filepath="$PROJECT_DIR$/NewBuy.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/lingo_client2.iml" filepath="$PROJECT_DIR$/lingo_client2.iml" />
     </modules>

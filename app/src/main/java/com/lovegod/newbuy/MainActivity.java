@@ -14,17 +14,17 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.telephony.TelephonyManager;
+import android.telephony.cdma.CdmaCellLocation;
+import android.telephony.gsm.GsmCellLocation;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewStub;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.lovegod.newbuy.bean.Commodity;
+import com.lovegod.newbuy.bean.Location;
 import com.lovegod.newbuy.service.BluetoothService;
 import com.lovegod.newbuy.view.BaseActivity;
 import com.lovegod.newbuy.view.carts.CartActivity;
@@ -33,17 +33,17 @@ import com.lovegod.newbuy.view.goods.GoodActivity;
 import com.lovegod.newbuy.view.sorts.SortActivity;
 import com.lovegod.newbuy.view.utils.BottomNavigationViewHelper;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.lovegod.newbuy.R.id.foot_home;
-import static com.lovegod.newbuy.R.id.ly_foot_cart;
-import static com.lovegod.newbuy.R.id.ly_foot_history;
-import static com.lovegod.newbuy.R.id.ly_foot_home;
-import static com.lovegod.newbuy.R.id.ly_foot_me;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MainActivity extends BaseActivity {
 
@@ -58,8 +58,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.content)
     FrameLayout content;
 
-
-
+    private final OkHttpClient client = new OkHttpClient();
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
@@ -68,7 +67,6 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main2);
         MyApplication.getInstance().addActivity(this);
         ButterKnife.bind(this);
-
         // 检查当前手机是否支持ble 蓝牙,如果不支持退出程序
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, "不支持蓝牙", Toast.LENGTH_SHORT).show();
@@ -89,7 +87,7 @@ public class MainActivity extends BaseActivity {
                 showSnackBar(coordinatorLayout, "授予失败", Snackbar.LENGTH_SHORT);
             }
         };
-        String[] permissions = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
+        String[] permissions = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION };
         if (!checkPermissionGranted(permissions)) {
             requestRunTimePermissions(permissions, permissionCall);
         }
@@ -120,6 +118,57 @@ public class MainActivity extends BaseActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }
+
+    /**
+     * 添加基站定位
+     */
+    private void init() {
+
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        String operator = telephonyManager.getNetworkOperator();
+        String mcc = operator.substring(0, 3);
+        String mnc = operator.substring(3);
+        int cid=0;
+        int lac=0;
+        if(telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA){
+            CdmaCellLocation cdmaCellLocation = (CdmaCellLocation)
+                    telephonyManager.getCellLocation();
+             cid = cdmaCellLocation.getBaseStationId(); //获取cdma基站识别标号 BID
+             lac = cdmaCellLocation.getNetworkId(); //获取cdma网络编号NID
+           int sid = cdmaCellLocation.getSystemId(); //用谷歌API的话cdma网络的mnc要用这个getSystemId()取得→SID
+        }else{
+            GsmCellLocation gsmCellLocation = (GsmCellLocation) telephonyManager.getCellLocation();
+             cid = gsmCellLocation.getCid(); //获取gsm基站识别标号
+             lac = gsmCellLocation.getLac(); //获取gsm网络编号
+        }
+        RequestBody formBody = new FormBody.Builder()
+                .add("coord", "gcj02")
+                .add("output","json")
+                .add("mcc",mcc)
+                .add("mnc",mnc)
+                .add("lac",lac+"")
+                .add("ci",cid+"")
+                .build();
+        Request request = new Request.Builder()
+                .url("https://en.wikipedia.org/w/index.php")
+                .post(formBody)
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            String result=response.body().toString();
+            Gson gson=new Gson();
+            Location location = gson.fromJson(result, Location.class);
+
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -128,14 +177,14 @@ public class MainActivity extends BaseActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
 
-                //    replaceFragment(mHome_Activity);
+                    //    replaceFragment(mHome_Activity);
                     return true;
                 case R.id.navigation_sort:
                   /*  if (null == mMinTaoFragment) {
                         mMinTaoFragment = new Mintaofragment();
                     }
                     replaceFragment(mMinTaoFragment);*/
-                    Intent intent1 = new Intent(MainActivity.this,SortActivity.class);
+                    Intent intent1 = new Intent(MainActivity.this, SortActivity.class);
                     startActivity(intent1);
                     return true;
                 case R.id.navigation_history:
@@ -155,12 +204,8 @@ public class MainActivity extends BaseActivity {
     };
 
 
-
-
-
-
     private void initView() {
-       // foot_home.setTextColor(getResources().getColor(R.color.colorPrimary));
+        // foot_home.setTextColor(getResources().getColor(R.color.colorPrimary));
 
         Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
         if (commodity != null) {

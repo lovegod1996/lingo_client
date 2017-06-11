@@ -2,6 +2,8 @@ package com.lovegod.newbuy.utils.system;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import java.util.List;
@@ -33,4 +35,16 @@ public class SystemUtils {
                 String.format("the %s is not running, isAppAlive return false", packageName));
         return false;
     }
+
+    public static boolean checkPermissionGranted(Context context,String... permissions) {
+        boolean result = true;
+        for (String p : permissions) {
+            if (ActivityCompat.checkSelfPermission(context, p) != PackageManager.PERMISSION_GRANTED) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
 }

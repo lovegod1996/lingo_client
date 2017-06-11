@@ -1,7 +1,6 @@
 package com.lovegod.newbuy.view.fragment;
 
 import android.Manifest;
-
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -10,22 +9,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SearchView;
-
+import android.telephony.TelephonyManager;
+import android.telephony.cdma.CdmaCellLocation;
+import android.telephony.gsm.GsmCellLocation;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,27 +42,30 @@ import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.google.gson.Gson;
 import com.google.zxing.activity.CaptureActivity;
 import com.lovegod.newbuy.MyApplication;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Commodity;
+import com.lovegod.newbuy.bean.Location;
 import com.lovegod.newbuy.bean.Shop;
+import com.lovegod.newbuy.utils.system.SystemUtils;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.goods.GoodActivity;
-import com.lovegod.newbuy.view.welcome.PositioningActivity;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 import static android.app.Activity.RESULT_OK;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static android.os.Build.VERSION_CODES.N;
 import static com.lovegod.newbuy.MainActivity.REQUEST_CODE;
 
 
@@ -122,6 +122,22 @@ public class Home_Activity extends Fragment {
 
     private static Geocoder geocoder;//此对象能通过经纬度来获取相应的城市等信息
 
+    private final OkHttpClient client = new OkHttpClient();
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    Location location = (Location) msg.getData().getSerializable("location");
+                    city_name.setText(location.getAddress().substring(3, 6));
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -151,6 +167,13 @@ public class Home_Activity extends Fragment {
             }
         });
         Log.e("网络访问时长", time + "");
+        String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION};
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || SystemUtils.checkPermissionGranted(getActivity(), permissions)) {
+            init();
+        }else{
+            requestPermissions(permissions, 1);
+        }
+
 
 //        MyAsyncTask myAsyncTask = new MyAsyncTask();
 //        myAsyncTask.execute(time);
@@ -181,7 +204,66 @@ public class Home_Activity extends Fragment {
         return view;
     }
 
+    /**
+     * 添加基站定位
+     */
+    private void init() {
 
+        TelephonyManager telephonyManager = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        String operator = telephonyManager.getNetworkOperator();
+        String mcc = operator.substring(0, 3);
+        String mnc = operator.substring(3);
+        int cid = 0;
+        int lac = 0;
+        if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
+            CdmaCellLocation cdmaCellLocation = (CdmaCellLocation)
+                    telephonyManager.getCellLocation();
+            cid = cdmaCellLocation.getBaseStationId(); //获取cdma基站识别标号 BID
+            lac = cdmaCellLocation.getNetworkId(); //获取cdma网络编号NID
+            int sid = cdmaCellLocation.getSystemId(); //用谷歌API的话cdma网络的mnc要用这个getSystemId()取得→SID
+        } else {
+            GsmCellLocation gsmCellLocation = (GsmCellLocation) telephonyManager.getCellLocation();
+            cid = gsmCellLocation.getCid(); //获取gsm基站识别标号
+            lac = gsmCellLocation.getLac(); //获取gsm网络编号
+        }
+//        RequestBody formBody = new FormBody.Builder()
+//                .add("coord", "gcj02")
+//                .add("output", "json")
+//                .add("mcc", mcc)
+//                .add("mnc",Integer.parseInt(mnc)+"")
+//                .add("lac", lac + "")
+//                .add("ci", cid + "")
+//                .build();
+        String params="?coord=gcj02&output=json&mcc="+mcc+"&mnc="+Integer.parseInt(mnc)+"&lac="+lac+"&ci="+cid;
+        final Request request = new Request.Builder()
+                .url("http://api.cellocation.com/cell/"+params)
+                .get()
+                .build();
+        System.out.println("定位："+mcc+" "+mnc+" "+lac+" "+cid+" ");
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    Response response = client.newCall(request).execute();
+                    String result = response.body().string();
+                    System.out.println("定位："+result);
+                    Log.v("定位",result);
+                    Gson gson = new Gson();
+                    Location location = gson.fromJson(result, Location.class);
+
+                    Message message = new Message();
+                    message.what = 1;
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("location", location);
+                    message.setData(bundle);
+                    handler.sendMessage(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
 
     class MyThread implements Runnable {
 
@@ -274,14 +356,14 @@ public class Home_Activity extends Fragment {
             @Override
             public void onClick(View view) {
                 String[] permission = new String[]{Manifest.permission.CAMERA};
-                Integer v=Build.VERSION.SDK_INT;
+                Integer v = Build.VERSION.SDK_INT;
                 if (Build.VERSION.SDK_INT < 23) {
                     startCaptureActivityForResult();
                 } else {
                     if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                         //申请CAMERA权限
-                     requestPermissions(new String[]{Manifest.permission.CAMERA}, 0);
-                    }else{
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, 0);
+                    } else {
                         startCaptureActivityForResult();
                     }
                 }
@@ -291,17 +373,28 @@ public class Home_Activity extends Fragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode==0){
-            boolean b = verifyPermissions(grantResults);
-            if(b){
-                startCaptureActivityForResult();
-            }else{
-                showMissingPermissionDialog();
-            }
-        }else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
+        boolean b = verifyPermissions(grantResults);
+       switch (requestCode){
+           case 0:
+               if (b) {
+                   startCaptureActivityForResult();
+               } else {
+                   showMissingPermissionDialog();
+               }
+               break;
+           case 1:
+               if (b) {
+                   init();
+               } else {
+                   showMissingPermissionDialog();
+               }
+               break;
+           default:
+               super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+               break;
+       }
     }
+
     public boolean verifyPermissions(int[] grantResults) {
         // At least one result must be checked.
         if (grantResults.length < 1) {
@@ -315,13 +408,14 @@ public class Home_Activity extends Fragment {
         }
         return true;
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) { //RESULT_OK = -1
             Bundle bundle = data.getExtras();
             String scanResult = bundle.getString("result");
-            Integer cid=Integer.parseInt(scanResult);
+            Integer cid = Integer.parseInt(scanResult);
 
             NetWorks.findCommodity(cid, new BaseObserver<Commodity>() {
                 @Override
@@ -339,6 +433,7 @@ public class Home_Activity extends Fragment {
             Toast.makeText(getActivity(), scanResult, Toast.LENGTH_LONG).show();
         }
     }
+
     /**
      * 跳转至扫描页面
      */
@@ -347,6 +442,7 @@ public class Home_Activity extends Fragment {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivityForResult(intent, REQUEST_CODE);
     }
+
     /**
      * 显示提示信息
      */
@@ -356,7 +452,7 @@ public class Home_Activity extends Fragment {
         builder.setMessage("当前应用缺少必要权限。请点击\"设置\"-\"权限\"-打开所需权限。");
 
         // 拒绝, 退出应用
-        builder.setNegativeButton("取消",null);
+        builder.setNegativeButton("取消", null);
 
         builder.setPositiveButton("设置",
                 new DialogInterface.OnClickListener() {
@@ -430,12 +526,12 @@ public class Home_Activity extends Fragment {
         protected List<Shop> doInBackground(Integer... integers) {
 
             NetWorks.getAllshop(new BaseObserver<List<Shop>>() {
-                    @Override
-                    public void onHandleSuccess(List<Shop> shops) {
-                        shopList = shops;
-                    }
-                });
-            while (shopList==null||shopList.size()==0){
+                @Override
+                public void onHandleSuccess(List<Shop> shops) {
+                    shopList = shops;
+                }
+            });
+            while (shopList == null || shopList.size() == 0) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -444,10 +540,12 @@ public class Home_Activity extends Fragment {
             }
             return shopList;
         }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
+
         @Override
         protected void onPostExecute(List<Shop> shops) {
             super.onPostExecute(shops);
@@ -455,10 +553,12 @@ public class Home_Activity extends Fragment {
             listView.setAdapter(homeImageListAdapter);
             homeImageListAdapter.notifyDataSetChanged();
         }
+
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
         }
     }
+
 
 }

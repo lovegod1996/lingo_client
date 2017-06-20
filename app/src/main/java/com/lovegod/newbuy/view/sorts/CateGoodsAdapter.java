@@ -11,7 +11,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.StringLoader;
 import com.lovegod.newbuy.R;
+import com.lovegod.newbuy.api.BaseObserver;
+import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Commodity;
+import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.view.utils.MyRecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -59,8 +62,15 @@ public class CateGoodsAdapter extends RecyclerView.Adapter<CateGoodsAdapter.Cate
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
         holder.itemView.setLayoutParams(params);//把params设置item布局
 
-        holder.textView1.setText(Dates.get(position).getProductname());//为控件绑定数据
-        holder.textView2.setText(String.valueOf(Dates.get(position).getPrice()));
+        holder.cate_good_name.setText(Dates.get(position).getProductname());//为控件绑定数据
+        holder.cate_good_num.setText(Dates.get(position).getSalesvolu()+"人付款");
+        NetWorks.getIDshop(Dates.get(position).getSid(), new BaseObserver<Shop>() {
+            @Override
+            public void onHandleSuccess(Shop shop) {
+                holder.cate_good_location.setText(shop.getSaddress().substring(0,3));
+            }
+        });
+        holder.cate_good_money.setText(String.valueOf(Dates.get(position).getPrice()));
         Glide.with(context).load(Dates.get(position).getLogo()).fitCenter().into(holder.imageView);
 
     }
@@ -72,14 +82,19 @@ public class CateGoodsAdapter extends RecyclerView.Adapter<CateGoodsAdapter.Cate
 
 
     public class CategoodViewHolder extends RecyclerView.ViewHolder {
-        TextView textView1, textView2;
+        TextView cate_good_name;
+        TextView  cate_good_location;
+        TextView cate_good_money;
+        TextView cate_good_num;
         ImageView imageView;
 
         public CategoodViewHolder(final View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.imageview_cate_good);
-            textView1 = (TextView) itemView.findViewById(R.id.cate_good_name);
-            textView2 = (TextView) itemView.findViewById(R.id.cate_good_money);
+            cate_good_name = (TextView) itemView.findViewById(R.id.cate_good_name);
+            cate_good_location = (TextView) itemView.findViewById(R.id.cate_good_location);
+            cate_good_num = (TextView) itemView.findViewById(R.id.cate_good_num);
+            cate_good_money = (TextView) itemView.findViewById(R.id.cate_good_money);
             //为item添加普通点击回调
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

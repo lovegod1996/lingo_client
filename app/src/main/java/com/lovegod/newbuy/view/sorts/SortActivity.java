@@ -96,6 +96,21 @@ public class SortActivity extends AppCompatActivity {
                     m2Adapter = new SortSecondAdapter(SortActivity.this, mDate1);
                     sort_recyclerview_second.setAdapter(m2Adapter);
                     sort_recyclerview_second.setLayoutManager(mLayoutManager);
+
+                    m2Adapter.setItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            if (mDate1 != null)
+                                CategoryGoods(mDate1.get(position).getCgid(),mDate1.get(position).getSecend());
+                            else
+                                Toast.makeText(getApplicationContext(), "mDate1空", Toast.LENGTH_SHORT).show();
+
+                        }
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+
+                        }
+                    });
                 }
                 m1Adapter.setItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
                     @Override
@@ -119,21 +134,17 @@ public class SortActivity extends AppCompatActivity {
                             sort_recyclerview_second.setAdapter(m2Adapter);
                             sort_recyclerview_second.setLayoutManager(mLayoutManager);
                             m2Adapter.notifyDataSetChanged();
-
                         }
 
                      m2Adapter.setItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
                            @Override
                            public void onItemClick(View view, int position) {
                                if (mDate1 != null)
-                                   CategoryGoods(mDate1.get(position).getCgid());
+                                   CategoryGoods(mDate1.get(position).getCgid(),mDate1.get(position).getSecend());
                                else
                                    Toast.makeText(getApplicationContext(), "mDate1空", Toast.LENGTH_SHORT).show();
 
                            }
-
-
-
                            @Override
                            public void onItemLongClick(View view, int position) {
 
@@ -148,8 +159,6 @@ public class SortActivity extends AppCompatActivity {
                 });
 
              //   m2Adapter.setItemClickListener(new SecondLisstener());
-
-
             }
         });
     }
@@ -160,7 +169,7 @@ public class SortActivity extends AppCompatActivity {
       @Override
       public void onItemClick(View view, int position) {
           if (mDate1 != null)
-              CategoryGoods(mDate1.get(position).getCgid());
+              CategoryGoods(mDate1.get(position).getCgid(),mDate1.get(position).getSecend());
           else
               Toast.makeText(getApplicationContext(), "mDate1空", Toast.LENGTH_SHORT).show();
       }
@@ -171,18 +180,16 @@ public class SortActivity extends AppCompatActivity {
       }
   }
 
-    private void CategoryGoods(int cgid) {
+    private void CategoryGoods(int cgid,String secondname) {
+        final String name=secondname;
         NetWorks.getSecondGoods(cgid, new BaseObserver<List<Commodity>>() {
             @Override
             public void onHandleSuccess(List<Commodity> commodities) {
-                Toast.makeText(getApplicationContext(), "成功", Toast.LENGTH_SHORT).show();
                 mCommodity=commodities;
-
-
-
                 Intent intent = new Intent(getApplication(), CategoryGoodsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("categoods", (Serializable) mCommodity);
+                bundle.putString("sortname",name);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

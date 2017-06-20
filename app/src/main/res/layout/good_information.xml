@@ -10,10 +10,10 @@
         android:id="@+id/scrollview_good"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,17 +23,17 @@
             <RelativeLayout
                 android:id="@+id/relaativelayout_image"
                 android:layout_width="match_parent"
-                android:background="#ffffff"
-                android:layout_height="300dp">
+                android:layout_height="300dp"
+                android:background="#ffffff">
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:scaleType="centerInside"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:scaleType="centerInside" />
 
                 <com.lovegod.newbuy.view.utils.MaterialIndicator
                     android:id="@+id/indicator"
@@ -53,8 +53,8 @@
                 android:id="@+id/ll_offset"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="#ffffff"
+                android:orientation="vertical"
                 android:padding="10dp">
 
                 <TextView
@@ -72,27 +72,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp">
+
                     <TextView
                         android:id="@+id/goodsprice0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="￥"
-                        android:textSize="18dp"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18dp" />
+
                     <TextView
                         android:id="@+id/goodsprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="3900.00"
-                        android:textSize="18dp"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18dp" />
+
                     <TextView
                         android:id="@+id/goodsprice2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="元"
-                        android:textSize="18dp"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -129,45 +132,48 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <LinearLayout
                         android:id="@+id/store1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                    <TextView
-                        android:layout_marginLeft="2dp"
-                        android:id="@+id/if_online_store"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@mipmap/da_ren_services_tick"
-                        android:drawablePadding="6dp"
-                        android:text="实体店"
-                        android:textSize="16dp" />
 
-                    <TextView
-                        android:id="@+id/store_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/if_online_store"
-                        android:text="实体店名字叫。。。"
-                        android:textSize="16dp" />
+                        <TextView
+                            android:id="@+id/if_online_store"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:drawableLeft="@mipmap/da_ren_services_tick"
+                            android:drawablePadding="6dp"
+                            android:text="实体店"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/store_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/if_online_store"
+                            android:text="实体店名字叫。。。"
+                            android:textSize="16dp" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:layout_below="@id/store1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/store1"
                         android:orientation="vertical"
                         android:paddingTop="10dp">
 
                         <TextView
-                             android:id="@+id/store_location"
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:drawableLeft="@mipmap/small_location3"
+                            android:id="@+id/store_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/small_location3"
                             android:drawablePadding="5dp"
-                             android:text="龙湖正的地方很近"
-                             android:textSize="16dp" />
+                            android:text="龙湖正的地方很近"
+                            android:textSize="16dp" />
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -250,35 +256,36 @@
                 android:layout_height="7dp" />
 
             <TextView
-                android:background="#ffffff"
                 android:id="@+id/tv_good_detail_cate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#ffffff"
                 android:drawableRight="@mipmap/rightarrow"
                 android:padding="10dp"
-                android:textSize="18dp"
-                android:text="产品参数" />
+                android:text="产品参数"
+                android:textSize="18dp" />
+
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:gravity="center"
+                android:padding="10dp"
                 android:text="—— 评价 ——" />
-
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="@color/tv_white"
+                android:orientation="vertical"
                 android:padding="12dp">
 
                 <TextView
+                    android:id="@+id/assess_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="商品评价" />
+                    android:padding="5dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -297,9 +304,9 @@
                             android:layout_height="wrap_content">
 
                             <TextView
+                                android:id="@+id/user_name"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="某某某" />
+                                android:layout_height="wrap_content" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -332,28 +339,26 @@
                         </RelativeLayout>
 
                         <TextView
-
+                            android:id="@+id/user_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="2017年01月" />
+                            android:layout_marginTop="2dp" />
 
                         <TextView
+                            android:id="@+id/user_assess"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="该用户未作出评价" />
-
+                            android:maxLines="2"
+                            android:ellipsize="end" />
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/tv_talent_detail_open"
-
+                    android:id="@+id/assess_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/bg_border_color_primary"
@@ -446,21 +451,22 @@
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:padding="5dp"
-            android:src="@mipmap/keep_big" />
+            android:padding="3dp"
+            android:src="@mipmap/keep_big2" />
+
         <TextView
             android:id="@+id/textview_good"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
             android:layout_toLeftOf="@id/keep"
             android:layout_toRightOf="@id/turnback"
-            android:layout_marginTop="10dp"
+            android:ellipsize="end"
             android:gravity="center"
-            android:text="我是标题"
             android:maxEms="14"
             android:singleLine="true"
-            android:ellipsize="end"
+            android:text="我是标题"
             android:textColor="#00000000"
             android:textSize="12sp" />
     </RelativeLayout>

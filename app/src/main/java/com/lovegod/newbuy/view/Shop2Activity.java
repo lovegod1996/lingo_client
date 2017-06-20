@@ -21,6 +21,8 @@ import com.bumptech.glide.Glide;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.view.fragment.Home_Activity;
+import com.lovegod.newbuy.view.goods.GoodActivity;
+import com.lovegod.newbuy.view.map.ShopLocationMap;
 import com.lovegod.newbuy.view.utils.MyFragment;
 import com.lovegod.newbuy.view.utils.MyViewPagerAdapter;
 
@@ -52,7 +54,7 @@ public class Shop2Activity extends AppCompatActivity implements ViewPager.OnPage
     Toolbar toolbar;
     RelativeLayout shop_tops;
     RelativeLayout shop_re1;
-LinearLayout linearlayout_location;
+    LinearLayout linearlayout_location;
     TabLayout mtablayout;
     ViewPager shop_viewpage;
 
@@ -69,7 +71,7 @@ LinearLayout linearlayout_location;
         setContentView(R.layout.shop_info);
 
 
-       final Shop shopdd=(Shop)getIntent().getSerializableExtra("shop");
+        final Shop shopdd = (Shop) getIntent().getSerializableExtra("shop");
 
         shop_tops = (RelativeLayout) findViewById(R.id.shop_tops);
         textview = (TextView) findViewById(R.id.textview);
@@ -78,12 +80,14 @@ LinearLayout linearlayout_location;
         shop_image = (ImageView) findViewById(R.id.shop_image);
         shop_valuation = (RatingBar) findViewById(R.id.shop_valuation);
         shop_back = (ImageView) findViewById(R.id.shop_back);
+        shop_back.getBackground().setAlpha(180);
         shop_san = (ImageView) findViewById(R.id.shop_san);
+        shop_san.getBackground().setAlpha(180);
+
         shop_phone = (ImageView) findViewById(R.id.shop_phone);
         shop_re1 = (RelativeLayout) findViewById(R.id.shop_re1);
-        linearlayout_location=(LinearLayout)findViewById(R.id.linearlayout_location);
+        linearlayout_location = (LinearLayout) findViewById(R.id.linearlayout_location);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //   shop_tablayout = (TableLayout) findViewById(R.id.shop_tablayout);
         shop_viewpage = (ViewPager) findViewById(R.id.shop_viewpage);
 
         textview.setText(shopdd.getShopname());
@@ -112,7 +116,7 @@ LinearLayout linearlayout_location;
         shop_san.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //
+                //
             }
         });
          /* 店铺评价*/
@@ -123,13 +127,19 @@ LinearLayout linearlayout_location;
             }
         });
         /* 导航*/
-       linearlayout_location.setOnClickListener(new View.OnClickListener() {
+        linearlayout_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //导航
-                Toast toast=Toast.makeText(getApplicationContext(), "默认的Toast", Toast.LENGTH_SHORT);
+              //  String[] shopinfo = new String[]{shopdd.getShopname(), String.valueOf(shopdd.getLonggitude()), String.valueOf(shopdd.getLatitude())};
+                Bundle bundle = new Bundle();
+                Intent intent = new Intent(Shop2Activity.this, ShopLocationMap.class);
+                bundle.putSerializable("shop_info",shopdd);
+             //   bundle.putStringArray("shop_info", shopinfo);
+                intent.putExtras(bundle);
+                startActivity(intent);
 
-               toast.show();
+
             }
         });
          /* 电话*/
@@ -139,7 +149,7 @@ LinearLayout linearlayout_location;
                 Intent intent = new Intent();
 
                 intent.setAction("android.intent.action.DIAL");
-                intent.setData(Uri.parse("tel:"+shopdd.getStel()));
+                intent.setData(Uri.parse("tel:" + shopdd.getStel()));
                 startActivity(intent);
             }
         });

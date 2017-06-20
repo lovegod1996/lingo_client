@@ -42,9 +42,9 @@ private int cbid;
 
     private double price;
     private int amount;
-    private boolean isSelect = true;
+    private boolean isSelect = false;
     private int isFirst = 2;
-    private boolean isShopSelect = true;
+    private boolean isShopSelect = false;
 
     public double getPrice() {
         return price;

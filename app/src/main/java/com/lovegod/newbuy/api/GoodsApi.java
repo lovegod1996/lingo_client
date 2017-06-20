@@ -1,5 +1,6 @@
 package com.lovegod.newbuy.api;
 
+import com.lovegod.newbuy.bean.Assess;
 import com.lovegod.newbuy.bean.BaseBean;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Goods;
@@ -21,7 +22,7 @@ public interface GoodsApi {
     long CACHE_STALE_SEC = 60 * 60 * 24 * 1;
     //查询缓存的Cache-Control设置，使用缓存
     String CACHE_CONTROL_CACHE = "only-if-cached, max-stale=" + CACHE_STALE_SEC;
-    //查询网络的Cache-Control设置。不使用缓存
+    //查询网络的Cache-Control设置不使用缓存
     String CACHE_CONTROL_NETWORK = "max-age=0";
 
     @GET("goods/{id}")
@@ -30,6 +31,6 @@ public interface GoodsApi {
     @GET("goods/shop/{sid}")
     Observable<BaseBean<List<Commodity>>>getIDshopgoods(@Path("sid")Integer sid);
 
-    /*@GET("goods/{id}")
-    Observable<BaseBean<Commodity>>getCidGood(@Path("id")Integer id);*/
+   @GET("assess/{cid}")
+    Observable<BaseBean<List<Assess>>> getAllAssess(@Path("cid")Integer cid);
 }

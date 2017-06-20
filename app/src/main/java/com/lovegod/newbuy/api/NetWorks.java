@@ -1,5 +1,6 @@
 package com.lovegod.newbuy.api;
 
+import com.lovegod.newbuy.bean.Assess;
 import com.lovegod.newbuy.bean.BaseBean;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Goods;
@@ -65,7 +66,6 @@ public class NetWorks extends RetrofitUtils {
     }
 
 
-
     public static void getSortFirst(BaseObserver<List<SortFrist>> sortObservable) {
         setSubscribe(sortApi.getSortFirst(), sortObservable);
     }
@@ -91,6 +91,12 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(goodsApi.findCommotity(id), commodityBaseObserver);
     }
 
+
+    public static void getAllAssess(int cid, BaseObserver<List<Assess>> assessObservable) {
+        setSubscribe(goodsApi.getAllAssess(cid), assessObservable);
+    }
+
+
     /**
      * 插入观察者
      *
@@ -104,7 +110,6 @@ public class NetWorks extends RetrofitUtils {
                 .observeOn(AndroidSchedulers.mainThread())//回调到主线程
                 .subscribe(observer);
     }
-
 
 
 }

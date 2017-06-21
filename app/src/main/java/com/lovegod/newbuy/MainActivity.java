@@ -227,7 +227,6 @@ public class MainActivity extends BaseActivity {
         }
     };
 
-
     private long exitTime = 0;
 
     @Override
@@ -236,7 +235,6 @@ public class MainActivity extends BaseActivity {
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
             exitTime = System.currentTimeMillis();
         } else {
-
             MyApplication.getInstance().exit();
             System.exit(0);
         }

@@ -236,11 +236,10 @@ public class BluetoothService extends Service {
                 Log.v("扫描设备：", device.toString() + " " + rssi+"距离： "+blutoothcus.getDistance());
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.v("扫描设备：", device.toString() + " " + rssi);
+                Log.v("扫描设备：", device.toString() + " " + rssi) ;
             }
             blutoothcus.setRssi(rssi);
             blutoothcus.setDate(new Date());
-
             blutoothCusList.add(blutoothcus);
 
         }

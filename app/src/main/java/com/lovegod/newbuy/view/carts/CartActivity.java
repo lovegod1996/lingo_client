@@ -39,7 +39,6 @@ public class CartActivity extends AppCompatActivity {
     private TextView tvShopCartSelect;
     private TextView tvShopCartTotalNum;
     private View mEmtryView;
-
     private TextView tv_item_shopcart_shopname;
     private LinearLayout linearlayout_child_cart;
     private RecyclerView rlvShopCart;
@@ -94,6 +93,12 @@ public class CartActivity extends AppCompatActivity {
                     @Override
                     public void onDeleteClick(View view, int position,int cartid) {
                         mShopCartAdapter.notifyDataSetChanged();
+                        int num=mcartlist.size()-1;
+                        cartnum.setText("("+num+")");
+                        if (num==0){
+                            mTotalPrice1 =0;
+                            tvShopCartTotalPrice.setText("总价：" + 0.0);
+                        }
                     }
                 });
                 //修改数量接口
@@ -122,16 +127,18 @@ public class CartActivity extends AppCompatActivity {
                         mcartlist2.clear();
                         for(int i = 0;i < mcartlist.size(); i++)
                             if(mcartlist.get(i).isSelect()) {
-                            //    mTotalPrice += Float.parseFloat(mcartlist.get(i).getCommodity_select()) * mcartlist.get(i).getAmount();
+                                //    mTotalPrice += Float.parseFloat(mcartlist.get(i).getCommodity_select()) * mcartlist.get(i).getAmount();
                                 mTotalPrice += mcartlist.get(i).getPrice() * mcartlist.get(i).getAmount();
                                 mTotalNum += 1;
                                 mcartlist2.add(mcartlist.get(i));
                             }
+
                    /* if(mAllOrderList.get(i).getIsSelect()) {
                         mTotalPrice += Float.parseFloat(mAllOrderList.get(i).getPrice()) * mAllOrderList.get(i).getCount();
                         mTotalNum += 1;
                         mGoPayList.add(mAllOrderList.get(i));
                     }*/
+
                         mTotalPrice1 = mTotalPrice;
                         tvShopCartTotalPrice.setText("总价：" + mTotalPrice);
                         tvShopCartTotalNum.setText("共" + mTotalNum + "件商品");
@@ -171,6 +178,7 @@ public class CartActivity extends AppCompatActivity {
 
 
     }
+
 
 
     public static void isSelectFirst(List<ShopCartBean> list){

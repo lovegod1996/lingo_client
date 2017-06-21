@@ -32,6 +32,7 @@ import com.bumptech.glide.Glide;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
+import com.lovegod.newbuy.bean.Assess;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.ShopCartBean;
@@ -87,13 +88,16 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     ListView image_details_listview;
     RelativeLayout li_title;
 
+
+    @BindView(R.id.assess_btn)
+    Button assess_btn;
     @BindView(R.id.goodsname)
     TextView goodsName;
     @BindView(R.id.goodsprice)
     TextView goodsPrice;
     @BindView(R.id.goodsalvo)
     TextView goodsalevo;
-@BindView(R.id.if_online_store)
+    @BindView(R.id.if_online_store)
     TextView if_online_store;
     @BindView(R.id.store_name)
     TextView store_name;
@@ -102,6 +106,14 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     @BindView(R.id.store_month_number)
     TextView store_month_number;
 
+    @BindView(R.id.user_name)
+    TextView user_name;
+    @BindView(R.id.user_time)
+    TextView user_time;
+    @BindView(R.id.user_assess)
+    TextView user_assess;
+    @BindView(R.id.assess_num)
+    TextView assess_num;
     TextView tv_good_detail_cate;//产品参数
     /*对话框*/
     Dialog parameterDialog;
@@ -163,6 +175,18 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             }
         });
 
+        assess_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GoodActivity.this, AssessActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Cid", String.valueOf(commodity.getCid()));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
         //对话框
         parameterDialog = new Dialog(this, R.style.map_dialog);
         LinearLayout root = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.layout_parameter_dialog, null);
@@ -194,6 +218,17 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         root.measure(0, 0);
         lp.height = root.getMeasuredHeight();
         dialogWindow.setAttributes(lp);
+
+        // int cid=commodity.getCid();
+        NetWorks.getAllAssess(commodity.getCid(), new BaseObserver<List<Assess>>() {
+            @Override
+            public void onHandleSuccess(List<Assess> assesses) {
+                assess_num.setText("全部评价("+assesses.size()+")");
+                user_name.setText(assesses.get(0).getHollrall());
+                user_time.setText(String.valueOf(assesses.get(0).getUid()));
+                user_assess.setText(assesses.get(0).getDetail());
+            }
+        });
 /**
  * 产品参数
  */
@@ -221,7 +256,6 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         indicator.setAdapter(viewPager.getAdapter());
         initlistener();
         initListeners();
-
 
 
     }
@@ -303,8 +337,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                     @Override
                     public void onHandleSuccess(Shop shop) {
                         Intent intent = new Intent(GoodActivity.this, Shop2Activity.class);
-                        Bundle bundle=new Bundle();
-                        bundle.putSerializable("shop",shop);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("shop", shop);
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }

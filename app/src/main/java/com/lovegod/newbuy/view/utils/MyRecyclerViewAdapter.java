@@ -46,10 +46,7 @@ import static com.lovegod.newbuy.R.id.shop;
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder> implements View.OnClickListener {
 
   public Context mContext;
-  public List<String> mDatas;
-  List<Map<String, Object>> listItems;
   public LayoutInflater mLayoutInflater;
-
   private List<Commodity> goodd;
   private OnItemClickListener mOnItemClickListener=null;
 
@@ -71,9 +68,6 @@ if(mOnItemClickListener!=null){
     this.mOnItemClickListener = listener;
   }
 
-/*  int[] shop_images = {R.mipmap.tv1, R.mipmap.tv2, R.mipmap.tv3, R.mipmap.tv4, R.mipmap.tv5, R.mipmap.tv3,R.mipmap.tv4, R.mipmap.tv5, R.mipmap.tu6};
-  String[] shop_name={"百业家电专营店","思迪电器专营店","中佳电器专营店","华强官方旗舰店","粤城电器","杭越电器专营店","中佳电器专营店","华强官方旗舰店","粤城电器"};
-  int[] moneys={3900,3990,4099,4199,4199,4399,4199,4199,4399};*/
 
   public MyRecyclerViewAdapter(Context mContext, List<Commodity> goodd) {
     this.mContext = mContext;
@@ -121,7 +115,7 @@ if(mOnItemClickListener!=null){
     holder.good_textview.setText(goodd.get(position).getProductname());
     holder.money_textview.setText(String.valueOf(goodd.get(position).getPrice()));
 
-    //holder.good_textview.setText(mDatas.get(position));
+
   }
 
   @Override

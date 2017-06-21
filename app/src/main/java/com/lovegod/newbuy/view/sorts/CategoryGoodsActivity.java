@@ -49,12 +49,12 @@ public class CategoryGoodsActivity extends AppCompatActivity {
     @BindView(R.id.category_goods_recyclerview)
     RecyclerView category_goods_recyclerview;
 
-    @BindView(R.id.category_li3_change)
+ /*   @BindView(R.id.category_li3_change)
     LinearLayout category_li3_change;
 
     @BindView(R.id.change)
     ImageView change;
-
+*/
     private CateGoodsAdapter mAdapter;
 private boolean change10=true;
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +62,12 @@ private boolean change10=true;
         setContentView(R.layout.category_goods);
         ButterKnife.bind(this);
         final List<Commodity> goodscate=(List<Commodity>) getIntent().getSerializableExtra("categoods");
+        final String name_small=(String)getIntent().getSerializableExtra("sortname");
 
 
 
         if(goodscate!=null) {
-            title_name.setText(goodscate.get(0).getProductname());
-
+            title_name.setText(name_small);
             category_goods_recyclerview.setLayoutManager(new LinearLayoutManager(CategoryGoodsActivity.this));
             mAdapter = new CateGoodsAdapter(CategoryGoodsActivity.this, goodscate);
             category_goods_recyclerview.setAdapter(mAdapter);

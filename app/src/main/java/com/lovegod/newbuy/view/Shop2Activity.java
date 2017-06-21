@@ -2,7 +2,6 @@ package com.lovegod.newbuy.view;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -15,23 +14,18 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.bean.Shop;
-import com.lovegod.newbuy.view.fragment.Home_Activity;
-import com.lovegod.newbuy.view.goods.GoodActivity;
 import com.lovegod.newbuy.view.map.ShopLocationMap;
 import com.lovegod.newbuy.view.utils.MyFragment;
 import com.lovegod.newbuy.view.utils.MyViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static android.support.design.widget.TabLayout.MODE_FIXED;
-import static com.lovegod.newbuy.R.id.shop;
 
 
 /**
@@ -80,9 +74,9 @@ public class Shop2Activity extends AppCompatActivity implements ViewPager.OnPage
         shop_image = (ImageView) findViewById(R.id.shop_image);
         shop_valuation = (RatingBar) findViewById(R.id.shop_valuation);
         shop_back = (ImageView) findViewById(R.id.shop_back);
-        shop_back.getBackground().setAlpha(180);
+//        shop_back.getBackground().setAlpha(180);
         shop_san = (ImageView) findViewById(R.id.shop_san);
-        shop_san.getBackground().setAlpha(180);
+//        shop_san.getBackground().setAlpha(180);
 
         shop_phone = (ImageView) findViewById(R.id.shop_phone);
         shop_re1 = (RelativeLayout) findViewById(R.id.shop_re1);

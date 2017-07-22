@@ -395,25 +395,25 @@ public class Home_Activity extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         boolean b = verifyPermissions(grantResults);
-       switch (requestCode){
-           case 0:
-               if (b) {
-                   startCaptureActivityForResult();
-               } else {
-                   showMissingPermissionDialog();
-               }
-               break;
-           case 1:
-               if (b) {
-                   init();
-               } else {
-                   showMissingPermissionDialog();
-               }
-               break;
-           default:
-               super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-               break;
-       }
+        switch (requestCode){
+            case 0:
+                if (b) {
+                    startCaptureActivityForResult();
+                } else {
+                    showMissingPermissionDialog();
+                }
+                break;
+            case 1:
+                if (b) {
+                    init();
+                } else {
+                    showMissingPermissionDialog();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                break;
+        }
     }
 
     public boolean verifyPermissions(int[] grantResults) {

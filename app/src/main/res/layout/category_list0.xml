@@ -34,6 +34,7 @@
             android:textSize="14sp" />
 
 
+
         <TextView
             android:id="@+id/shop_money0"
             android:layout_width="wrap_content"
@@ -49,11 +50,13 @@
             android:id="@+id/cate_good_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_alignBottom="@id/shop_money0"
             android:layout_toRightOf="@id/shop_money0"
 
             android:textColor="@color/orange_FE5203"
             android:textSize="17sp" />
+
 
         <TextView
             android:id="@+id/cate_good_num"
@@ -67,10 +70,12 @@
             android:textColor="@color/text_light_gray"
             android:textSize="12sp" />
 
+
         <TextView
             android:id="@+id/cate_good_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_alignParentLeft="true"
             android:layout_below="@id/cate_good_name"
             android:layout_marginRight="5dp"
@@ -81,6 +86,7 @@
             android:layout_marginLeft="5dp"
             android:textColor="@color/bg_Gray0"
             android:textSize="12sp" />
+
 
         <View
             android:layout_width="match_parent"

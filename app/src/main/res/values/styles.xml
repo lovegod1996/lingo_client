@@ -89,8 +89,10 @@
         <item name="contentInsetStart">0dp</item>
     </style>
 
+
     <style name="popWindowStyle" parent="@android:style/Animation.Activity">
         <item name="android:windowEnterAnimation">@anim/anim_popwindow_in</item>
         <item name="android:windowExitAnimation">@anim/anim_popwindow_out</item>
     </style>
+
 </resources>

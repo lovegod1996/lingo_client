@@ -136,20 +136,20 @@ public class SortActivity extends AppCompatActivity {
                             m2Adapter.notifyDataSetChanged();
                         }
 
-                     m2Adapter.setItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
-                           @Override
-                           public void onItemClick(View view, int position) {
-                               if (mDate1 != null)
-                                   CategoryGoods(mDate1.get(position).getCgid(),mDate1.get(position).getSecend());
-                               else
-                                   Toast.makeText(getApplicationContext(), "mDate1空", Toast.LENGTH_SHORT).show();
+                        m2Adapter.setItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                if (mDate1 != null)
+                                    CategoryGoods(mDate1.get(position).getCgid(),mDate1.get(position).getSecend());
+                                else
+                                    Toast.makeText(getApplicationContext(), "mDate1空", Toast.LENGTH_SHORT).show();
 
-                           }
-                           @Override
-                           public void onItemLongClick(View view, int position) {
+                            }
+                            @Override
+                            public void onItemLongClick(View view, int position) {
 
-                           }
-                       });
+                            }
+                        });
                     }
 
                     @Override
@@ -158,7 +158,7 @@ public class SortActivity extends AppCompatActivity {
                     }
                 });
 
-             //   m2Adapter.setItemClickListener(new SecondLisstener());
+                //   m2Adapter.setItemClickListener(new SecondLisstener());
             }
 
             @Override
@@ -169,21 +169,21 @@ public class SortActivity extends AppCompatActivity {
     }
 
 
-  private final class SecondLisstener implements MyRecyclerViewAdapter.OnItemClickListener{
+    private final class SecondLisstener implements MyRecyclerViewAdapter.OnItemClickListener{
 
-      @Override
-      public void onItemClick(View view, int position) {
-          if (mDate1 != null)
-              CategoryGoods(mDate1.get(position).getCgid(),mDate1.get(position).getSecend());
-          else
-              Toast.makeText(getApplicationContext(), "mDate1空", Toast.LENGTH_SHORT).show();
-      }
+        @Override
+        public void onItemClick(View view, int position) {
+            if (mDate1 != null)
+                CategoryGoods(mDate1.get(position).getCgid(),mDate1.get(position).getSecend());
+            else
+                Toast.makeText(getApplicationContext(), "mDate1空", Toast.LENGTH_SHORT).show();
+        }
 
-      @Override
-      public void onItemLongClick(View view, int position) {
+        @Override
+        public void onItemLongClick(View view, int position) {
 
-      }
-  }
+        }
+    }
 
     private void CategoryGoods(int cgid,String secondname) {
         final String name=secondname;

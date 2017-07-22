@@ -34,7 +34,7 @@ public abstract class BaseObserver<T> implements Observer<BaseBean<T>> {
     public BaseObserver(View view, ProgressDialog dialog) {
         this.view = view;
         this.mDialog=dialog;
-         mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+        mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
                 mDisposable.dispose();

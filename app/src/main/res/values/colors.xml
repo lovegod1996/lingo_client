@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#FD6861</color>
     <color name="colorPrimaryDark">#d4d3d3</color>
     <color name="colorAccent">#e9735e</color>#e9735e
     <!-- 灰色 -->
     <color name="bg_Gray">#CCCCCC</color>
     <color name="bg_Gray2">#e2e2e2</color>
-    <color name="splitline_color">#EFEEEC</color>
+    <color name="splitline_color">#dddddd</color>
     <color name="table_indicator">#cfd8dc</color>
     <color name="bg_Gray3">#515151</color>
     <color name="bg_Gray0">#737272</color>
     <color name="background_color">#f6f6f6</color>
     <color name="text_light_gray">#BDBDBD</color>
+
     <!-- 黑色 -->
     <color name="tv_Black">#000000</color>
     <color name="tv_yellow">#f4d257</color>
@@ -33,7 +35,9 @@
     <color name="grey_text_5d5c5c">#5d5c5c</color>
     <color name="grey_text_d1d1d1">#d1d1d1</color>
     <color name="orange_F57C00">#F57C00</color>
+
     <color name="orange_FE5203">#FE5203</color>
+
     <color name="indicator_selected_607D8B">#607D8B</color>
     <color name="indicator_unselected_607D8B">#607D8B</color>
     <color name="transparent_00ffffff">#00ffffff</color>

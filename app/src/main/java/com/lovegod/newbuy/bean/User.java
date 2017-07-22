@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 说明：
  * Author: lovegod
  * Date:  2017/5/9.
-*/
+ */
 public class User implements Serializable{
 
     private Integer uid;

@@ -133,6 +133,7 @@ public class Commodity implements Serializable{
         this.stock = stock;
     }
 
+
     public String getHeadershow() {
         return headershow;
     }
@@ -140,6 +141,7 @@ public class Commodity implements Serializable{
     public void setHeadershow(String headershow) {
         this.headershow = headershow;
     }
+
 
     @Override
     public String toString() {

@@ -82,4 +82,39 @@ dependencies {
     compile 'com.github.lygttpod:SuperTextView:2.0.5'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:cardview-v7:25.3.0'
+    compile 'com.android.support:design:25.3.0'
+    compile 'com.android.support:palette-v7:25.3.0'
+    compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.0'
+
+    //rxAndroid/rxjava
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+    //butterknife
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    // retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+
+    compile 'com.squareup.okhttp3:okhttp:3.0.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile files('libs/BRT-5.0.4.jar')
+
+    //缓存 DiskLruCache
+    compile 'com.jakewharton:disklrucache:2.0.2'
+    //picasso 图片加载库 （Glide 中有些bug）
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    //二维码扫描
+    compile 'com.google.zxing:core:3.3.0'
+
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.5'
+
 }

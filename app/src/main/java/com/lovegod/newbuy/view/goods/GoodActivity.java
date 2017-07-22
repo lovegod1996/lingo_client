@@ -233,12 +233,12 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         NetWorks.getAllAssess(commodity.getCid(), new BaseObserver<List<Assess>>() {
             @Override
             public void onHandleSuccess(List<Assess> assesses) {
-            if(assesses.size()>0) {
-                assess_num.setText("全部评价(" + assesses.size() + ")");
-                user_name.setText(assesses.get(0).getHollrall());
-                user_time.setText(String.valueOf(assesses.get(0).getUid()));
-                user_assess.setText(assesses.get(0).getDetail());
-            }
+                if(assesses.size()>0) {
+                    assess_num.setText("全部评价(" + assesses.size() + ")");
+                    user_name.setText(assesses.get(0).getHollrall());
+                    user_time.setText(String.valueOf(assesses.get(0).getUid()));
+                    user_assess.setText(assesses.get(0).getDetail());
+                }
 
             }
 

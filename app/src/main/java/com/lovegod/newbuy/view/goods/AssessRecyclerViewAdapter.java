@@ -104,7 +104,7 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
             holder.assess_image_gridview.setVisibility(View.GONE);
             Log.v("不是空的吗。。。。","kongde");
         }
-       if (mDatas.get(position).getPics()!=null)
+        if (mDatas.get(position).getPics()!=null)
         {
             Log.v("不是空的。。。。","BUkongde");
             final String[] pics = mDatas.get(position).getPics().split(";");

@@ -11,12 +11,17 @@
     <string name="encode_qrcode">生成二维码</string>
     <string name="dencode_qrcode">扫描二维码</string>
 
+
     <!-- 底部导航栏-->
+
+   <!-- 底部导航栏-->
+
     <string name="title_home">首页</string>
     <string name="title_sort">分类</string>
     <string name="title_history">历史</string>
     <string name="title_cart">购物车</string>
     <string name="title_me">我的</string>
+
     <!-- 登录界面-->
     <string name="passwd">密码</string>
     <string name="username">用户名/手机号码</string>
@@ -58,4 +63,5 @@
     <string name="address">收货地址</string>
     <string name="change_add">添加/修改</string>
     <string name="focus">关注店铺</string>
+
 </resources>

@@ -30,7 +30,7 @@ public class ShopCartBean implements Serializable{
      * count : null
      */
 
-private int cbid;
+    private int cbid;
     private int uid;
     private int cid;
     private int sid;
@@ -270,5 +270,5 @@ private int cbid;
         public void setCount(int count) {
             this.count = count;
         }*/
-    }
+}
 

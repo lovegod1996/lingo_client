@@ -271,7 +271,7 @@ public class ShopCartAdapter extends RecyclerView.Adapter<ShopCartAdapter.MyView
                 data.remove(position);
                 //重新排序，标记所有商品不同商铺第一个的商品位置
                 CartActivity.isSelectFirst(data);
-               // cartnum.setText("("+mcartlist.size()+")");
+                // cartnum.setText("("+mcartlist.size()+")");
                 notifyDataSetChanged();
             }
 

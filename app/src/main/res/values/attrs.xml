@@ -24,4 +24,6 @@
     <declare-styleable name="VerifyView">
         <attr name="verifynumber_size" format="float"/>
     </declare-styleable>
+
+
 </resources>

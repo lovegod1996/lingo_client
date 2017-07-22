@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/re_diaog"
     android:background="#000000" >
+
     <ImageView
         android:id="@+id/dialog_cuo"
         android:layout_width="wrap_content"
@@ -13,10 +14,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:src="@mipmap/cuo"/>
+
 <com.github.chrisbanes.photoview.PhotoView
     android:id="@+id/dialog_image"
     android:layout_below="@id/dialog_cuo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"/>
+
+
 </RelativeLayout>

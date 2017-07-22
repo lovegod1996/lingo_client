@@ -19,6 +19,10 @@ import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.regex.RegexUtil;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.view.LoginActivity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.telephony.TelephonyManager;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -28,12 +32,14 @@ import java.net.SocketException;
 import java.net.URL;
 import java.util.Enumeration;
 
+
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
 
 /**
  * Created by 123 on 2017/4/14.

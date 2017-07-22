@@ -1,5 +1,6 @@
 package com.lovegod.newbuy.api;
 
+
 import com.lovegod.newbuy.bean.Address;
 import com.lovegod.newbuy.bean.Assess;
 import com.lovegod.newbuy.bean.BaseBean;
@@ -16,6 +17,15 @@ import com.lovegod.newbuy.bean.ShopCartBean;
 import com.lovegod.newbuy.bean.SortFrist;
 import com.lovegod.newbuy.bean.Town;
 import com.lovegod.newbuy.bean.User;
+
+import com.lovegod.newbuy.bean.Assess;
+import com.lovegod.newbuy.bean.BaseBean;
+import com.lovegod.newbuy.bean.Commodity;
+import com.lovegod.newbuy.bean.Goods;
+import com.lovegod.newbuy.bean.Shop;
+import com.lovegod.newbuy.bean.ShopCartBean;
+import com.lovegod.newbuy.bean.SortFrist;
+
 import com.lovegod.newbuy.service.Ble;
 import com.lovegod.newbuy.utils.retrofitRxjava.RetrofitUtils;
 import com.lovegod.newbuy.view.BaseActivity;
@@ -30,12 +40,15 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 
+
 /**
  * Created by 123 on 2017/4/14.
  */
 
 public class NetWorks extends RetrofitUtils {
+
     protected static final LoginApi loginApi = getRetrofit().create(LoginApi.class);
+
 
     protected static final ShopApi shopApi = getRetrofit().create(ShopApi.class);
 
@@ -82,7 +95,6 @@ public class NetWorks extends RetrofitUtils {
     public static void DeleteCart(int cbid, BaseObserver<ShopCartBean> deletebaseObserver) {
         setSubscribe(cartApi.DeleteCart(cbid), deletebaseObserver);
     }
-
 
     public static void getSortFirst(BaseObserver<List<SortFrist>> sortObserver) {
         setSubscribe(sortApi.getSortFirst(), sortObserver);
@@ -177,6 +189,7 @@ public class NetWorks extends RetrofitUtils {
     public static void commitPayOrder(long oid,String paytype,BaseObserver<Order>orderObserver){
         setSubscribe(orderApi.commitPayOrder(oid,paytype),orderObserver);
     }
+
 
     /**
      * 插入观察者

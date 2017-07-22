@@ -52,7 +52,6 @@ public class MainActivity extends BaseActivity {
     public static final int REQUEST_CODE = 0;
     @BindView(R.id.container)
     CoordinatorLayout coordinatorLayout;
-
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
     @BindView(R.id.content)
@@ -185,6 +184,8 @@ public class MainActivity extends BaseActivity {
                     }
                     replaceFragment(mMinTaoFragment);*/
                     startActivity(new Intent(MainActivity.this, SortActivity.class));
+                    Intent intent1 = new Intent(MainActivity.this, SortActivity.class);
+                    startActivity(intent1);
                     return true;
                 case R.id.navigation_history:
 
@@ -195,7 +196,10 @@ public class MainActivity extends BaseActivity {
                     return true;
                 case R.id.navigation_me:
                     startActivity(new Intent(MainActivity.this, MyInfoActivity.class));
+                    Intent intent3 = new Intent(MainActivity.this, CartActivity.class);
+                    startActivity(intent3);
                     return true;
+
             }
             return false;
         }

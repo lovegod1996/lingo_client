@@ -141,7 +141,7 @@ public class CartActivity extends AppCompatActivity {
     /**
      * 对购买的物品列表进行排序，让同一商店的商品在一起
      */
-   class ShopCompartor implements Comparator<ShopCartBean>{
+    class ShopCompartor implements Comparator<ShopCartBean>{
 
         @Override
         public int compare(ShopCartBean o1, ShopCartBean o2) {
@@ -171,9 +171,9 @@ public class CartActivity extends AppCompatActivity {
 //                    tvShopCartTotalNum.setText("共" + 0+ "件商品");
 //                    return;
 //                }
-               for(ShopCartBean shopCartBean:shopCartBeen){
-                   mcartlist.add(shopCartBean);
-               }
+                for(ShopCartBean shopCartBean:shopCartBeen){
+                    mcartlist.add(shopCartBean);
+                }
                 Collections.sort(mcartlist,new ShopCompartor());
                 cartnum.setText("("+mcartlist.size()+")");
                 //删除商品接口

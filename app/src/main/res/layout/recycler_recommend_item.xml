@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/search_activity_shape">
+    <TextView
+        android:maxLines="1"
+        android:id="@+id/recycler_recommend_item_hint"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_the_most_min"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"/>
+</LinearLayout>

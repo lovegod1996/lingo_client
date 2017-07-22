@@ -1,0 +1,206 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <!-- 头部导航 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_first_top"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/scan_code_btn"
+            android:layout_width="50dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#00000000"
+            android:drawableTop="@mipmap/scan_code_white"
+            android:gravity="center_horizontal"
+            android:paddingTop="8dp"
+            android:text="扫一扫"
+            android:textColor="@color/tv_white"
+            android:textSize="10dp" />
+
+        <!-- 头部右边 -->
+        <LinearLayout
+            android:id="@+id/l1"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical">
+
+            <Button
+                android:id="@+id/city_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:drawableRight="@mipmap/location_city"
+                android:text="城市名"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_toLeftOf="@id/l1"
+            android:layout_toRightOf="@id/scan_code_btn"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+           <com.lovegod.newbuy.view.myview.SearchLayout
+               android:id="@+id/main_search_layout"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               custom:search_hint="点击搜索"/>
+            <!--   <TextView
+                   android:id="@+id/tv_city"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center_vertical"
+                   android:layout_marginLeft="5dip"
+                   android:text="O2O"
+                   android:textColor="#FFFFFFFF"
+                   android:textSize="18sp" />
+
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center_vertical" />-->
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.42"
+        android:background="#ffffff"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp" />
+
+                <com.daimajia.slider.library.Indicators.PagerIndicator
+                    android:id="@+id/custom_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:gravity="center"
+                    custom:selected_color="#0095BF"
+                    custom:selected_drawable="@mipmap/point"
+                    custom:selected_height="6dp"
+                    custom:selected_padding_left="5dp"
+                    custom:selected_padding_right="5dp"
+                    custom:selected_width="6dp"
+                    custom:shape="oval"
+                    custom:unselected_color="#55333333"
+                    custom:unselected_height="6dp"
+                    custom:unselected_padding_left="5dp"
+                    custom:unselected_padding_right="5dp"
+                    custom:unselected_width="6dp" />
+            </RelativeLayout>
+
+
+            <!--  <View
+                 android:layout_width="match_parent"
+                 android:layout_height="2dp"
+                 android:background="#25b6ed" />-->
+            <!--   <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal">
+
+                   <android.support.v7.widget.SearchView
+                       android:layout_width="match_parent"
+                       android:layout_height="35dp"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginRight="10dp"
+                       android:layout_marginBottom="7dp"
+                       android:layout_marginTop="5dp"
+                       android:background="@drawable/yuan_jiao"
+                       ></android.support.v7.widget.SearchView>
+               </LinearLayout>-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#edecec" />
+
+
+            <GridView
+                android:id="@+id/gridView_separate"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:background="#ffffff"
+
+                android:divider="#ffffff"
+                android:horizontalSpacing="3dp"
+                android:numColumns="4"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="3dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="5dp"
+                android:background="#edecec" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="精选好店"
+                    android:textColor="@color/tv_Black"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:background="#edecec" />
+
+            <com.lovegod.newbuy.view.utils.NoScrollListView
+                android:id="@+id/suggest_shop"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:verticalSpacing="3dp"></com.lovegod.newbuy.view.utils.NoScrollListView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+>
+
+
+    <com.lovegod.newbuy.view.utils.GradationScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <ImageView
+                android:id="@+id/iv_banner"
+                android:scaleType="fitXY"
+                android:src="@mipmap/shop_bg_1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+            <!--<RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff">-->
+            <RelativeLayout
+                android:id="@+id/re1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff">
+                <TextView
+                    android:id="@+id/shop_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="店铺名称"
+                    android:textSize="25dp"
+                    android:padding="10dp"/>
+                <RatingBar
+                    android:id="@+id/valuation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:isIndicator="true"
+                    android:progressTint="@color/tv_yellow"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:rating="4.5"
+                     style="?android:attr/ratingBarStyleSmall"
+                    android:layout_below="@id/shop_name"/>
+                <View
+                    android:layout_below="@id/valuation"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/bg_Gray"
+                    android:layout_gravity="center_horizontal"/>
+            </RelativeLayout>
+
+
+           <RelativeLayout
+                android:layout_below="@id/re1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:id="@+id/shop_phone"
+                    android:src="@mipmap/phone"
+                    android:layout_alignParentRight="true"/>
+
+                <View
+                    android:id="@+id/view_phone"
+                    android:layout_width="1dp"
+                    android:layout_height="39dp"
+                    android:layout_toLeftOf="@id/shop_phone"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/bg_Gray"/>
+               <LinearLayout
+                   android:id="@+id/linearlayout_location"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_toLeftOf="@id/view_phone"
+                   android:layout_marginRight="15dp">
+                <ImageView
+                    android:id="@+id/imageview_tu"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@mipmap/lotion"/>
+                <TextView
+                    android:id="@+id/shop_dizhi"
+                    android:layout_toLeftOf="@id/view_phone"
+                    android:padding="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/imageview_tu"
+                    android:text="龙湖镇淮河路1号"
+                    android:textSize="18dp"/>
+               </LinearLayout>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="产品类别"
+                    android:textSize="18dp"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/bg_Gray"
+                android:layout_gravity="center_horizontal"/>
+
+
+
+            <ExpandableListView
+                android:id="@id/android:list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></ExpandableListView>
+
+       </LinearLayout>
+    </com.lovegod.newbuy.view.utils.GradationScrollView>
+    <TextView
+        android:paddingBottom="10dp"
+        android:id="@+id/textview"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:gravity="center|bottom"
+        android:text="我是标题"
+        android:textSize="18sp"
+        android:textColor="#00000000"
+        android:background="#00000000" />
+
+
+</RelativeLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splitline_color"
+    tools:context="com.lovegod.newbuy.view.myinfo.ChangePhoneActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/change_phone_toolbar"
+        android:background="@color/white_FFFFFF"
+        app:navigationIcon="@mipmap/ic_back_black"
+        app:title="修改手机号"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+    <com.lovegod.newbuy.view.registered.ControlScrollViewPager
+        android:id="@+id/change_phone_viewpager"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

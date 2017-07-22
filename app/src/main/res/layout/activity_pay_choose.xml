@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splitline_color"
+    tools:context="com.lovegod.newbuy.view.carts.PayChooseActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/pay_choose_toolbar"
+        android:background="@color/white_FFFFFF"
+        app:title="支付订单"
+        app:navigationIcon="@mipmap/ic_back_black"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+    <TextView
+        android:id="@+id/pay_choose_pricetext"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/black_000000"
+        android:textSize="@dimen/text_size_max_title"
+        android:gravity="center"
+        android:text="¥32.0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <com.allen.library.SuperTextView
+        android:id="@+id/pay_choose_wechatpay"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:sLeftTopTextString="微信支付"
+        app:sLeftTopTextSize="@dimen/text_size_mid"
+        app:sLeftIconRes="@mipmap/wechat_pay_icon"
+        app:sRightViewType="checkbox"/>
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/pay_choose_alipay"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:sLeftTopTextString="支付宝支付"
+        app:sLeftTopTextSize="@dimen/text_size_mid"
+        app:sLeftIconRes="@mipmap/alipay_icon"
+        app:sRightViewType="checkbox"/>
+
+    <Button
+        android:id="@+id/pay_choose_button"
+        android:textColor="@color/white_FFFFFF"
+        android:text="确认支付"
+        android:textSize="@dimen/text_size_big"
+        android:background="@color/colorPrimary"
+       android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

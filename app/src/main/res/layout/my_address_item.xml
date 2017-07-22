@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:splitMotionEvents="false"
+    android:id="@+id/my_address_item_layout"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:splitMotionEvents="false"
+        android:background="@color/white_FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:splitMotionEvents="false"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:textColor="@color/black_000000"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:id="@+id/my_address_name_item"
+            android:text="姓名"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:splitMotionEvents="false"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black_000000"
+            android:textSize="@dimen/text_size_mid"
+            android:id="@+id/my_address_phone_item"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@id/my_address_name_item"
+            android:layout_toEndOf="@id/my_address_name_item"
+            android:text="手机号"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:splitMotionEvents="false"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/my_address_address_item"
+            android:textSize="@dimen/text_size_min"
+            android:textColor="@color/text_light_gray"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:text="地址"
+            android:layout_below="@id/my_address_name_item"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content" />
+        <Button
+            android:splitMotionEvents="false"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/shop_item_shape"
+            android:id="@+id/my_address_edit_button"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="编辑"/>
+    </RelativeLayout>
+    <Button
+        android:splitMotionEvents="false"
+        android:id="@+id/my_address_delete_item"
+        android:text="删除"
+        android:textColor="@color/white_FFFFFF"
+        android:background="#FF0000"
+        android:layout_width="60dp"
+        android:layout_height="match_parent" />
+</LinearLayout>

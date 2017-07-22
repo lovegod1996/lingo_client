@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/myinfo_skin"
+        android:icon="@mipmap/theme_skin_icon"
+        android:title="皮肤"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/myinfo_settings"
+        android:icon="@mipmap/setting_icon"
+        android:title="设置"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/myinfo_notification"
+        android:icon="@mipmap/notification_icon"
+        android:title="通知"
+        app:showAsAction="always" />
+</menu>

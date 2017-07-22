@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/good_picture"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/tv2"
+            android:scaleType="centerCrop"/>
+        <TextView
+            android:id="@+id/good_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商品1"
+            android:maxLines="3"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/good_picture"
+            android:textSize="16dp" />
+        <TextView
+            android:id="@+id/money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥"
+            android:textColor="@color/tv_cheng"
+            android:layout_marginTop="75dp"
+            android:layout_toRightOf="@id/good_picture"
+            android:textSize="18dp" />
+    <TextView
+        android:id="@+id/good_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3399.00"
+        android:textColor="@color/tv_cheng"
+        android:layout_marginTop="75dp"
+        android:layout_toRightOf="@id/money"
+        android:textSize="18dp" />
+    <!--  <TextView
+        android:id="@+id/sale_people"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5件"
+        android:layout_marginTop="80dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp" />-->
+        <TextView
+            android:id="@+id/sale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="详情介绍"
+            android:drawableRight="@mipmap/rightarrow"
+            android:drawablePadding="7dp"
+            android:layout_marginTop="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:textSize="14dp" />
+    </RelativeLayout>

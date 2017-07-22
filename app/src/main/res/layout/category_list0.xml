@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="horizontal"
+    android:background="@color/tv_white">
+
+    <ImageView
+        android:id="@+id/imageview_cate_good"
+        android:layout_width="120dp"
+        android:layout_height="115dp"
+        android:layout_marginBottom="5dp"
+        android:paddingRight="5dp"
+        android:background="@color/tv_white"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/entity_shop01" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/cate_good_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="5dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="#0a090a"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/shop_money0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="5dp"
+            android:text="￥"
+            android:textColor="@color/orange_FE5203"
+            android:textSize="9sp" />
+
+        <TextView
+            android:id="@+id/cate_good_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/shop_money0"
+            android:layout_toRightOf="@id/shop_money0"
+
+            android:textColor="@color/orange_FE5203"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/cate_good_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="12dp"
+
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/cate_good_money"
+            android:textColor="@color/text_light_gray"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/cate_good_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/cate_good_name"
+            android:layout_marginRight="5dp"
+            android:drawableRight="@mipmap/good_location_red"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxWidth="120dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/bg_Gray0"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/bg_Gray2"
+            android:paddingLeft="5dp"/>
+    </RelativeLayout>
+
+</LinearLayout>

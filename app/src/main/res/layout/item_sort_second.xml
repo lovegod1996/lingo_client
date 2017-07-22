@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:padding="5dp">
+
+    <ImageView
+        android:background="@color/tv_white"
+        android:id="@+id/itemsort2_image"
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="130dp" />
+
+
+    <TextView
+        android:id="@+id/itemsort2_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:paddingBottom="5dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:background="@color/tv_white"
+        android:gravity="center"
+        android:textColor="@color/bg_Gray3"
+        android:textSize="16sp" />
+
+</LinearLayout>

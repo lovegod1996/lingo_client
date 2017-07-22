@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_FFFFFF"
+    tools:context="com.lovegod.newbuy.view.myinfo.ShowAreaActivity">
+    <android.support.v7.widget.Toolbar
+        android:background="@color/splitline_color"
+        android:id="@+id/choose_area_toolbar"
+        app:title="选择地区"
+        app:navigationIcon="@mipmap/ic_back_black"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+    <ListView
+        android:id="@+id/choose_area_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

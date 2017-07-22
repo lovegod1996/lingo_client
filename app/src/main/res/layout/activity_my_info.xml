@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/myinfo_tool_bar"
+        app:title=" "
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbarHeight" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:background="@color/white_FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/myinfo_title_item" />
+
+                <include layout="@layout/myinfo_head_item"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/splitline_color"/>
+
+                <include layout="@layout/my_info_order_item"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/splitline_color"/>
+
+                <com.lovegod.newbuy.view.myview.ItemImageLayout
+                    android:id="@+id/my_info_wallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:left_image_src="@mipmap/my_wallet_icon"
+                    app:left_text="@string/my_wallet" />
+
+                <com.lovegod.newbuy.view.myview.ItemImageLayout
+                    android:id="@+id/my_info_restmoney"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:left_image_src="@mipmap/rest_money_icon"
+                    app:left_text="@string/rest_money" />
+
+                <com.lovegod.newbuy.view.myview.ItemImageLayout
+                    android:id="@+id/my_info_card_package"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:left_image_src="@mipmap/card_package_icon"
+                    app:left_text="@string/card_package" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/splitline_color"/>
+
+                <com.lovegod.newbuy.view.myview.ItemImageLayout
+                    android:id="@+id/my_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:left_image_src="@mipmap/history_icon"
+                    app:left_text="@string/title_history" />
+
+                <com.lovegod.newbuy.view.myview.ItemImageLayout
+                    android:id="@+id/my_info_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:left_image_src="@mipmap/about_icon"
+                    app:left_text="@string/about" />
+
+                <com.lovegod.newbuy.view.myview.ItemImageLayout
+                    android:id="@+id/my_info_service"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:left_image_src="@mipmap/customer_service_icon"
+                    app:left_text="@string/service" />
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

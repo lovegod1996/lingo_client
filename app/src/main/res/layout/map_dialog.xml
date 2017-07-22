@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="95dp"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/park_info_relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp">
+
+
+        <TextView
+            android:id="@+id/dialog_shop_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="商店名称"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/dialog_shop_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dialog_shop_name"
+            android:layout_marginTop="5dp"
+            android:text="商店位置"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/dialog_shop_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawableLeft="@mipmap/distance24"
+            android:layout_below="@id/dialog_shop_position"
+            android:layout_marginTop="5dp"
+            android:padding="2dp"
+            android:text="商店距离"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/dialog_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dialog_shop_position"
+            android:layout_marginTop="5dp"
+            android:text="我的位置："
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/dialog_me_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/dialog_me"
+            android:layout_below="@id/dialog_shop_position"
+            android:layout_marginTop="5dp"
+            android:text="我的位置"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+</LinearLayout>

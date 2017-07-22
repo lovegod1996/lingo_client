@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<android.support.v7.widget.Toolbar
+    android:id="@+id/shop_cart_toolbar"
+    app:navigationIcon="@mipmap/ic_back"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary">
+    <TextView
+        android:id="@+id/cartname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/tv_white"
+        android:textSize="18dp"
+        android:padding="5dp"
+        android:text="wfrv"
+        android:gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/cartnum"
+        android:padding="5dp"
+        android:textSize="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/tv_white"
+        android:text="wfrv"
+        />
+</android.support.v7.widget.Toolbar>
+    <RelativeLayout
+        android:id="@+id/rl_shopcart_have"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rlv_shopcart"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+            </View>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/tv_white"
+            android:gravity="center_vertical"
+            android:id="@+id/ll_pay"
+            android:layout_above="@+id/emtryview"
+            >
+
+            <TextView
+                android:id="@+id/tv_shopcart_addselect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@mipmap/shopcart_selected"
+                android:text="全选"
+                android:drawablePadding="5dp"
+                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/tv_shopcart_totalprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:text="总价：¥0"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_shopcart_totalnum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:text="共0件商品"
+                    android:textSize="14dp"
+                    android:paddingBottom="10dp"
+                    />
+
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tv_shopcart_submit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+               android:background="@color/colorPrimary"
+                android:text="去结算"
+                android:gravity="center"
+                android:textColor="@color/tv_white"
+
+                />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/emtryview"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="50dp">
+        </View>
+
+    </RelativeLayout>
+</LinearLayout>

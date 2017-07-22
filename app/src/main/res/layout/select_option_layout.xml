@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/round_corners_shape"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/pop_goods_option"
+        android:padding="6dp"
+        android:orientation="horizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            app:srcCompat="@drawable/ic_good_icon"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="商品"
+            android:textColor="@color/white_FFFFFF"
+            android:textSize="@dimen/text_size_small" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/splitline_color"/>
+    <LinearLayout
+        android:id="@+id/pop_shop_option"
+        android:padding="6dp"
+        android:orientation="horizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            app:srcCompat="@drawable/ic_shop_icon"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+        <TextView
+            android:textColor="@color/white_FFFFFF"
+            android:textSize="@dimen/text_size_small"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="店铺"/>
+    </LinearLayout>
+
+
+</LinearLayout>

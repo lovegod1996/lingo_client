@@ -1,0 +1,15 @@
+<vector android:height="24dp" android:viewportHeight="1024.0"
+    android:viewportWidth="1024.0" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:name="red_part">
+        <path android:fillColor="#F45656" android:pathData="M255,172.7V171H64v70h149l209,500.8 0.4,-0.2 0.5,1.4h493.5l9.7,-71H463.5z"/>
+    </group>]
+    <group android:name="basket_part">
+        <path android:fillColor="#BDCCD4" android:pathData="M892.7,241H348.2l154.8,385h366.9c35,0 63.3,-24.9 63.3,-55.4l22.9,-274.4C956.1,265.6 927.7,241 892.7,241z"/>
+    </group>
+    <group android:name="wheel_left">
+        <path android:fillColor="#808C9B" android:pathData="M546.1,808.8m-44.9,0a44.9,44.9 0,1 0,89.7 0,44.9 44.9,0 1,0 -89.7,0Z"/>
+    </group>
+    <group android:name="wheel_right">
+        <path android:fillColor="#808C9B" android:pathData="M799.5,808.8m-44.9,0a44.9,44.9 0,1 0,89.7 0,44.9 44.9,0 1,0 -89.7,0Z"/>
+    </group>
+</vector>

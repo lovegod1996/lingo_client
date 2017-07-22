@@ -49,7 +49,6 @@ public class NetWorks extends RetrofitUtils {
 
     protected static final LoginApi loginApi = getRetrofit().create(LoginApi.class);
 
-
     protected static final ShopApi shopApi = getRetrofit().create(ShopApi.class);
 
     protected static final CartApi cartApi = getRetrofit().create(CartApi.class);

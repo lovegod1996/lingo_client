@@ -52,14 +52,14 @@ public class SubmitOrderAdapter extends RecyclerView.Adapter<SubmitOrderAdapter.
             LinearLayout item=new LinearLayout(mContext);
             LayoutInflater.from(mContext).inflate(R.layout.pay_good_item,item);
             ImageView goodsPic= (ImageView) item.findViewById(R.id.pay_good_item_pic);
-            TextView goodNmae=(TextView)item.findViewById(R.id.pay_good_item_name);
+            TextView goodName=(TextView)item.findViewById(R.id.pay_good_item_name);
             TextView goodInfo=(TextView)item.findViewById(R.id.pay_good_item_info);
             TextView goodPrice=(TextView)item.findViewById(R.id.pay_good_item_price);
             TextView goodNum=(TextView)item.findViewById(R.id.pay_good_item_num);
             goodNum.setText("×"+shopCartBean.getAmount());
             goodPrice.setText("¥"+shopCartBean.getPrice());
             goodInfo.setText(shopCartBean.getCommodity_select());
-            goodNmae.setText(shopCartBean.getCommodity_name());
+            goodName.setText(shopCartBean.getCommodity_name());
             Glide.with(mContext).load(shopCartBean.getCommodity_pic()).into(goodsPic);
             holder.shopListLayout.addView(item);
         }

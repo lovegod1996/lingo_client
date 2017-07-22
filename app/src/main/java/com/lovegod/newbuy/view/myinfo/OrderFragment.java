@@ -46,6 +46,19 @@ public class OrderFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        Bundle bundle=getArguments();
+        int pageTtpe=bundle.getInt(KEY);
+        switch (pageTtpe){
+            case ALL_FLAG:
+                break;
+            case FOR_THE_PAY_FLAG:
+                break;
+            case FOR_THE_GOODS_FLAG:
+                break;
+            case TO_THE_GOODS_FLAG:
+                break;
+            case TO_THE_ASSESS_FLAG:
+                break;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.lovegod.newbuy.view.carts;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +17,7 @@ import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Order;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +103,9 @@ public class PayChooseActivity extends AppCompatActivity {
                         @Override
                         public void onHandleSuccess(Order order) {
                             if(finalI ==orderList.size()-1){
+//                                Intent intent=new Intent(PayChooseActivity.this,OrderInfoActivty.class);
+//                                intent.putExtra("order_info", (Serializable) orderList);
+//                                startActivity(intent);
                                 finish();
                             }
                         }

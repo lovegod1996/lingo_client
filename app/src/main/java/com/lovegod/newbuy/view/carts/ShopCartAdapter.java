@@ -24,6 +24,7 @@ import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.ShopCartBean;
 import com.lovegod.newbuy.view.goods.GoodActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.http.Field;
@@ -40,7 +41,7 @@ import static com.lovegod.newbuy.R.id.iv_item_shopcart_shopselect;
 public class ShopCartAdapter extends RecyclerView.Adapter<ShopCartAdapter.MyViewHolder> {
 
     private Context context;
-    private List<ShopCartBean> data;
+    private List<ShopCartBean> data=new ArrayList<>();
     private View headerView;
     private OnDeleteClickListener mOnDeleteClickListener;
     private OnEditClickListener mOnEditClickListener;

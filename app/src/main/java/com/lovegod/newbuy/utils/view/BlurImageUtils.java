@@ -16,7 +16,7 @@ public class BlurImageUtils {
     /**
      * @param imageView   待处理的imageView
      * @param scaleFactor 模糊处理之前的进行采样缩小被处理图片大小的系数
-     * @param blurf        模糊系数
+     * @param blurf       模糊系数
      * @return 处理后的模糊图像
      */
     public static Bitmap blur(ImageView imageView, float scaleFactor, int blurf) {

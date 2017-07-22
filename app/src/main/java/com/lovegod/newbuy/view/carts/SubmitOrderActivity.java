@@ -212,7 +212,7 @@ public class SubmitOrderActivity extends AppCompatActivity {
             goodsNum=0;
             orderMap=new HashMap<>();
             orderMap.put("uid",user.getUid()+"");
-            for(ShopCartBean shopCartBean:buyList){
+            for(ShopCartBean shopCartBean:payShopList.get(i).goodList){
                 price+=shopCartBean.getPrice()*shopCartBean.getAmount()*1.0F;
                 goodsNum+=shopCartBean.getAmount();
             }

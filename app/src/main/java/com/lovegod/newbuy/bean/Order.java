@@ -1,6 +1,7 @@
 package com.lovegod.newbuy.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by ywx on 2017/7/21.
@@ -8,6 +9,7 @@ import java.io.Serializable;
  */
 
 public class Order implements Serializable {
+    private int sid;
     private long oid;
     private int said;
     private int uid;
@@ -21,15 +23,16 @@ public class Order implements Serializable {
     private String shiptime;
     private String dealtime;
     private int openstatue;
+    private List<OrderGoods>orderGoodsList;
 
    public class OrderGoods{
-        private int ogid;
-        private int oid;
-        private int cid;
-        private int sid;
-        private int count;
-        private double totalprice;
-        private String param;
+        public int ogid;
+        public int oid;
+        public int cid;
+        public int sid;
+        public int count;
+        public double totalprice;
+        public String param;
 
         public int getOgid() {
             return ogid;
@@ -189,5 +192,21 @@ public class Order implements Serializable {
 
     public void setOpenstatue(int openstatue) {
         this.openstatue = openstatue;
+    }
+
+    public List<OrderGoods> getOrderGoodsList() {
+        return orderGoodsList;
+    }
+
+    public void setOrderGoodsList(List<OrderGoods> orderGoodsList) {
+        this.orderGoodsList = orderGoodsList;
+    }
+
+    public int getSid() {
+        return sid;
+    }
+
+    public void setSid(int sid) {
+        this.sid = sid;
     }
 }

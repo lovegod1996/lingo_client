@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -21,9 +20,7 @@ import com.lovegod.newbuy.bean.LoginMessage;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.Md5Util.MD5Util;
 import com.lovegod.newbuy.utils.regex.RegexUtil;
-import com.lovegod.newbuy.utils.system.ActivityCollector;
 import com.lovegod.newbuy.utils.system.SpUtils;
-import com.lovegod.newbuy.utils.system.UserInfoUtil;
 
 public class ChangePasswdActivity extends AppCompatActivity {
     private User user;

@@ -1,8 +1,6 @@
 package com.lovegod.newbuy.view;
 
-import android.app.DownloadManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -16,19 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.lovegod.newbuy.MainActivity;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
-import com.lovegod.newbuy.bean.LoginMessage;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.Md5Util.MD5Util;
-import com.lovegod.newbuy.utils.net.NetWorkUtil;
 import com.lovegod.newbuy.utils.regex.RegexUtil;
-import com.lovegod.newbuy.utils.system.ActivityCollector;
 import com.lovegod.newbuy.utils.system.SpUtils;
-import com.lovegod.newbuy.utils.system.UserInfoUtil;
 import com.lovegod.newbuy.view.registered.RegisteredActivity;
 
 import java.io.IOException;

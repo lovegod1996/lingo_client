@@ -196,8 +196,6 @@ public class MainActivity extends BaseActivity {
                     return true;
                 case R.id.navigation_me:
                     startActivity(new Intent(MainActivity.this, MyInfoActivity.class));
-                    Intent intent3 = new Intent(MainActivity.this, CartActivity.class);
-                    startActivity(intent3);
                     return true;
 
             }

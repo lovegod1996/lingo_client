@@ -69,6 +69,11 @@ public class CateGoodsAdapter extends RecyclerView.Adapter<CateGoodsAdapter.Cate
             public void onHandleSuccess(Shop shop) {
                 holder.cate_good_location.setText(shop.getSaddress().substring(0,3));
             }
+
+            @Override
+            public void onHandleError(Shop shop) {
+
+            }
         });
         holder.cate_good_money.setText(String.valueOf(Dates.get(position).getPrice()));
         Glide.with(context).load(Dates.get(position).getLogo()).fitCenter().into(holder.imageView);

@@ -2,6 +2,8 @@ package com.lovegod.newbuy.view.goods;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.media.Image;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -23,16 +25,23 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.lovegod.newbuy.MainActivity;
 import com.lovegod.newbuy.R;
+import com.lovegod.newbuy.api.BaseObserver;
+import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Assess;
+import com.lovegod.newbuy.bean.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.lovegod.newbuy.MyApplication.getContext;
 import static com.lovegod.newbuy.R.id.assess_image_gridview;
@@ -76,16 +85,26 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
     }
 
     @Override
-    public void onBindViewHolder(AssessViewHolder holder, int position) {
+    public void onBindViewHolder(final AssessViewHolder holder, final int position) {
+        NetWorks.getIdInfo(mDatas.get(position).getUid(), new BaseObserver<User>(mContext) {
+            @Override
+            public void onHandleSuccess(User user) {
+                holder.assess_user_name.setText(user.getUsername());
+                Glide.with(mContext).load(user.getHeaderpic()).into(holder.assess_user_image);
+                holder.assess_user_time.setText(String.valueOf(mDatas.get(position).getDate()));
+                holder.assess_user_assess.setText(mDatas.get(position).getDetail());
+            }
 
-        holder.assess_user_name.setText(String.valueOf(mDatas.get(position).getUid()));
-        holder.assess_user_time.setText(String.valueOf(mDatas.get(position).getCid()));
-        holder.assess_user_assess.setText(mDatas.get(position).getDetail());
+            @Override
+            public void onHandleError(User user) {
+
+            }
+        });
         if (mDatas.get(position).getPics() == null) {
             holder.assess_image_gridview.setVisibility(View.GONE);
             Log.v("不是空的吗。。。。","kongde");
         }
-       if (mDatas.get(position).getPics()!=null)
+        if (mDatas.get(position).getPics()!=null)
         {
             Log.v("不是空的。。。。","BUkongde");
             final String[] pics = mDatas.get(position).getPics().split(";");
@@ -102,17 +121,17 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
                     imageDialog = new Dialog(mContext,R.style.map_dialog);
                     RelativeLayout root = (RelativeLayout) LayoutInflater.from(mContext).inflate(R.layout.assess_dialog, null);
                     root.findViewById(R.id.re_diaog).setOnClickListener(dialoglistener);
-                    ImageView dialog_image = (ImageView) root.findViewById(R.id.dialog_image);
+                    PhotoView dialog_image = (PhotoView) root.findViewById(R.id.dialog_image);
 
                     Glide.with(mContext).load(pics[position]).into(dialog_image);
                     imageDialog.setContentView(root);
-                    Window dialogWindow = imageDialog.getWindow();
-                    dialogWindow.getDecorView().setPadding(0,0,0,0);
-                    WindowManager.LayoutParams lp = dialogWindow.getAttributes(); // 获取对话框当前的参数值
-
-                    lp.width = width; // 宽度
-                    lp.height =height;
-                    imageDialog.getWindow().setAttributes(lp);
+//                    Window dialogWindow = imageDialog.getWindow();
+//                    dialogWindow.getDecorView().setPadding(0,0,0,0);
+//                    WindowManager.LayoutParams lp = dialogWindow.getAttributes(); // 获取对话框当前的参数值
+//
+//                    lp.width = width; // 宽度
+//                    lp.height =height;
+//                    imageDialog.getWindow().setAttributes(lp);
                     imageDialog.show();
                 }
             });
@@ -151,6 +170,7 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
         TextView assess_user_choice;
         TextView assess_user_assess;
         MyGridView assess_image_gridview;
+        CircleImageView assess_user_image;
 
         public AssessViewHolder(View itemView) {
             super(itemView);
@@ -159,6 +179,7 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
             assess_user_choice = (TextView) itemView.findViewById(R.id.assess_user_choice);
             assess_user_assess = (TextView) itemView.findViewById(R.id.assess_user_assess);
             assess_image_gridview = (MyGridView) itemView.findViewById(R.id.assess_image_gridview);
+            assess_user_image=(CircleImageView)itemView.findViewById(R.id.assess_user_image);
         }
     }
 

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 <android.support.v7.widget.Toolbar
+    android:id="@+id/shop_cart_toolbar"
+    app:navigationIcon="@mipmap/ic_back"
     android:layout_width="match_parent"
-    android:layout_height="?actionBarSize"
+    android:layout_height="?attr/actionBarSize"
     android:background="@color/colorPrimary">
     <TextView
         android:id="@+id/cartname"
@@ -40,7 +43,7 @@
                 android:id="@+id/rlv_shopcart"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+                android:layout_weight="1"/>
 
             <View
                 android:layout_width="match_parent"

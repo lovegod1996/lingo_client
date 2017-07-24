@@ -38,4 +38,9 @@ public interface ShopApi {
 
     @POST("api/goodBymac")
     Observable<BaseBean<Commodity>> findGoodByMac(@Query("mac")String mac);
+
+
+    //根据店铺名查询店铺详情
+    @GET("shops/name")
+    Observable<BaseBean<List<Shop>>>findShopByName(@Query("name")String name,@Query("page")Integer page);
 }

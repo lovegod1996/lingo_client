@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1">
+    <ImageView
+        android:id="@+id/colllector_icon"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/collection_icon"
+        android:layout_width="25dp"
+        android:layout_height="25dp" />
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/colllector_icon"
+        android:layout_centerHorizontal="true"
+        android:text="@string/collection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_the_most_min"
+        android:textColor="@color/black_000000"/>
+</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/assess_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/focus_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/assess_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="@string/focus"
+            android:textSize="@dimen/text_size_the_most_min"
+            android:textColor="@color/black_000000"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/order_icon"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/order_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/order_icon"
+            android:layout_centerHorizontal="true"
+            android:text="@string/order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_the_most_min"
+            android:textColor="@color/black_000000"/>
+    </RelativeLayout>
+</LinearLayout>

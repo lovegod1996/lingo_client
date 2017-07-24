@@ -100,6 +100,11 @@ public class BlutoothReceiver extends BroadcastReceiver {
                                     }
                                 }
                             }
+
+                            @Override
+                            public void onHandleError(Commodity commodity) {
+
+                            }
                         });
                     } else {
                         Log.v("蓝牙RSSI", "值达不到");
@@ -161,6 +166,11 @@ public class BlutoothReceiver extends BroadcastReceiver {
                                 }
                             }
                         }
+
+                        @Override
+                        public void onHandleError(Commodity commodity) {
+
+                        }
                     });
                 } else {
                     Log.v("蓝牙RSSI", "值达不到");
@@ -220,6 +230,11 @@ public class BlutoothReceiver extends BroadcastReceiver {
                                 manager.notify(2, builder.build());
                             }
                         }
+                    }
+
+                    @Override
+                    public void onHandleError(Commodity commodity) {
+
                     }
                 });
             } else {

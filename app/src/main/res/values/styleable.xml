@@ -5,4 +5,17 @@
         <attr name="mi_indicatorPadding" format="dimension|reference" />
         <attr name="mi_indicatorColor" format="color|reference" />
     </declare-styleable>
+    <declare-styleable name="ItemImageLayout">
+        <attr name="left_image_src" format="reference"/>
+        <attr name="left_text" format="string"/>
+        <attr name="right_text" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="ItemTextLayout">
+        <attr name="text_left_text" format="string"/>
+        <attr name="text_right_text" format="string"/>
+        <attr name="right_image_visibility" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="SearchLayout">
+        <attr name="search_hint" format="string"/>
+    </declare-styleable>
 </resources>

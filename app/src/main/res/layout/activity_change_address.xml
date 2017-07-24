@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splitline_color"
+    tools:context="com.lovegod.newbuy.view.myinfo.ChangeAddressActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/change_address_toolbar"
+        app:navigationIcon="@mipmap/ic_back_black"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="收货地址"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black_000000"/>
+    <LinearLayout
+        android:background="@color/white_FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:maxLines="1"
+            android:textColor="@color/black_000000"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:text="姓名"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/change_address_name_edit"
+            android:textColor="@color/black_000000"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:hint="最少两个字"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/splitline_color"/>
+
+    <LinearLayout
+        android:background="@color/white_FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:maxLines="1"
+            android:textColor="@color/black_000000"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:text="性别"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/change_address_sex_edit"
+            android:editable="false"
+            android:textColor="@color/black_000000"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:hint="男女"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/splitline_color"/>
+
+    <LinearLayout
+        android:background="@color/white_FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:maxLines="1"
+            android:textColor="@color/black_000000"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:text="电话"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/change_address_phone_edit"
+            android:inputType="number"
+            android:textColor="@color/black_000000"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:hint="11位手机号"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/splitline_color"/>
+
+    <LinearLayout
+        android:background="@color/white_FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:maxLines="1"
+            android:textColor="@color/black_000000"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:text="地区"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/change_address_province_edit"
+            android:textColor="@color/black_000000"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:hint="省份 城市 县区"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/splitline_color"/>
+
+    <LinearLayout
+        android:background="@color/white_FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:maxLines="1"
+            android:textColor="@color/black_000000"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:text="街道"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/change_address_area_edit"
+            android:textColor="@color/black_000000"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:hint="街道 居委会"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/splitline_color"/>
+
+    <LinearLayout
+        android:background="@color/white_FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:maxLines="1"
+            android:textColor="@color/black_000000"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:text="地址"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/change_address_detail_edit"
+            android:textColor="@color/black_000000"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:hint="最少5个字，最多60个字"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/splitline_color"/>
+
+    <LinearLayout
+        android:background="@color/white_FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:maxLines="1"
+            android:textColor="@color/black_000000"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:text="邮编"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/change_address_mail_edit"
+            android:inputType="number"
+            android:textColor="@color/black_000000"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:hint="6位邮政编码"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/splitline_color"/>
+
+    <CheckBox
+        android:id="@+id/change_address_default"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/text_size_mid"
+        android:textColor="@color/black_000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设置成默认收货地址"/>
+
+    <Button
+        android:id="@+id/change_address_button"
+        android:textSize="@dimen/text_size_small"
+        android:text="提交"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

@@ -19,5 +19,11 @@
         <attr name="label_text" format="string"/>
         <attr name="label_text_size" format="float"/>
     </declare-styleable>
+    <!--verifynumber_size 验证码字体大小
+    -->
+    <declare-styleable name="VerifyView">
+        <attr name="verifynumber_size" format="float"/>
+    </declare-styleable>
+
 
 </resources>

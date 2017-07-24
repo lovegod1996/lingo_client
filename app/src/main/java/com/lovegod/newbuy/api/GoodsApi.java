@@ -8,9 +8,17 @@ import com.lovegod.newbuy.bean.Goods;
 import java.util.List;
 
 import io.reactivex.Observable;
+
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
+
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+
 
 /**
  * Created by lovegod on 2017/5/11.
@@ -33,4 +41,9 @@ public interface GoodsApi {
 
    @GET("assess/{cid}")
     Observable<BaseBean<List<Assess>>> getAllAssess(@Path("cid")Integer cid);
+
+
+    //根据名字查询商品
+    @GET("goods/name")
+    Observable<BaseBean<List<Commodity>>>getNameGoods(@Query("name")String name,@Query("page")Integer page);
 }

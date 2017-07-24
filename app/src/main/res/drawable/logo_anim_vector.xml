@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_shop_logo">
+    <target
+        android:animation="@animator/logo_anim1"
+        android:name="red_part"/>
+    <target
+        android:animation="@animator/logo_anim2"
+        android:name="basket_part"/>
+    <target
+        android:animation="@animator/logo_anim2"
+        android:name="wheel_left"/>
+    <target
+        android:animation="@animator/logo_anim2"
+        android:name="wheel_right"/>
+</animated-vector>

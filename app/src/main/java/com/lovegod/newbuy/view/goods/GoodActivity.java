@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -29,6 +31,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
@@ -173,6 +178,11 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                 store_name.setText(shop.getShopname());
 
             }
+
+            @Override
+            public void onHandleError(Shop shop) {
+
+            }
         });
 
         assess_btn.setOnClickListener(new View.OnClickListener() {
@@ -223,10 +233,18 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         NetWorks.getAllAssess(commodity.getCid(), new BaseObserver<List<Assess>>() {
             @Override
             public void onHandleSuccess(List<Assess> assesses) {
-                assess_num.setText("全部评价("+assesses.size()+")");
-                user_name.setText(assesses.get(0).getHollrall());
-                user_time.setText(String.valueOf(assesses.get(0).getUid()));
-                user_assess.setText(assesses.get(0).getDetail());
+                if(assesses.size()>0) {
+                    assess_num.setText("全部评价(" + assesses.size() + ")");
+                    user_name.setText(assesses.get(0).getHollrall());
+                    user_time.setText(String.valueOf(assesses.get(0).getUid()));
+                    user_assess.setText(assesses.get(0).getDetail());
+                }
+
+            }
+
+            @Override
+            public void onHandleError(List<Assess> assesses) {
+
             }
         });
 /**
@@ -314,7 +332,17 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                                 Toast toast = Toast.makeText(getApplicationContext(), "宝贝已添加到购物车", Toast.LENGTH_LONG);
                                 toast.show();
                             }
+
+                            @Override
+                            public void onHandleError(ShopCartBean shopCartBean) {
+
+                            }
                         });
+                    }
+
+                    @Override
+                    public void onHandleError(Shop shop) {
+
                     }
                 });
             }
@@ -342,20 +370,48 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
+
+                    @Override
+                    public void onHandleError(Shop shop) {
+
+                    }
                 });
 
+            }
+        });
+
+        /**
+         * 图片展示列表的每一项点击监听，用于展示大图
+         */
+        image_details_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ImageView imageView= (ImageView) view;
+                final Dialog dialog=new Dialog(GoodActivity.this,R.style.map_dialog);
+                RelativeLayout root= (RelativeLayout) LayoutInflater.from(GoodActivity.this).inflate(R.layout.assess_dialog,null);
+                PhotoView dialog_image = (PhotoView) root.findViewById(R.id.dialog_image);
+                dialog_image.setImageDrawable(imageView.getDrawable());
+                dialog.setContentView(root);
+                dialog.show();
+                //取消按钮监听
+                root.findViewById(R.id.re_diaog).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
             }
         });
 
     }
 
 
-    /*//**
+    /*
      * viewpager适配器
      */
     private class MyPagerAdapter extends PagerAdapter {
         Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
-        String[] a = commodity.getDetailshow().split(";");
+        String[] a = commodity.getHeadershow().split(";");
         String[] only4 = Arrays.copyOfRange(a, 0, 4);
 
         @Override
@@ -370,9 +426,9 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            ImageView view = new ImageView(container.getContext());
-            Glide.with(GoodActivity.this).load(only4[position]).into(view);
+            final ImageView view = new ImageView(container.getContext());
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            Glide.with(GoodActivity.this).load(only4[position]).asBitmap().into(view);
             container.addView(view);
             return view;
         }
@@ -453,10 +509,17 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             if (null == convertView) {
                 convertView = inflater.inflate(R.layout.good_listview_item, parent, false);
             }
-
+            final ImageView imageView= (ImageView) convertView;
+            //先使用 Glide 把图片的原图请求加载过来，然后再按原图来显示图片
             Glide.with(context)
                     .load(imageUrls[position])
-                    .into((ImageView) convertView);
+                    .asBitmap()
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                            imageView.setImageBitmap(resource);
+                        }
+                    });
 
             return convertView;
         }

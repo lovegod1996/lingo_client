@@ -47,7 +47,7 @@ public class AssessActivity extends AppCompatActivity {
     RadioButton bad_assess;
     RadioButton pic_assess;
     RecyclerView assess_listview;
-     List<Assess> assessList=new ArrayList<Assess>();
+    List<Assess> assessList=new ArrayList<Assess>();
     private AssessRecyclerViewAdapter assessRecyclerViewAdapter;
 
     @Override
@@ -66,11 +66,10 @@ public class AssessActivity extends AppCompatActivity {
         int cid=Integer.valueOf(getIntent().getStringExtra("Cid"));
 
 
-
-        NetWorks.getAllAssess(cid, new BaseObserver<List<Assess>>() {
+        NetWorks.getAllAssess(cid, new BaseObserver<List<Assess>>(this) {
             @Override
             public void onHandleSuccess(List<Assess> assesses) {
-                   assessList=assesses;
+                assessList=assesses;
 
                 all_assess.setText("全部评论("+assesses.size()+")");
                 int total=0,good=0,second=0,bad=0,pic=0;
@@ -127,7 +126,7 @@ public class AssessActivity extends AppCompatActivity {
                         second_assess.setChecked(false);
                         bad_assess.setChecked(false);
                         pic_assess.setChecked(false);
-                       // all_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        // all_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
                         assessRecyclerViewAdapter.notifyDataSetChanged();
                         assessRecyclerViewAdapter= new AssessRecyclerViewAdapter(AssessActivity.this,assessList);
                         assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
@@ -136,8 +135,8 @@ public class AssessActivity extends AppCompatActivity {
                 total_assess.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                      //  total_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
-                      all_assess.setChecked(false);
+                        //  total_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        all_assess.setChecked(false);
                         total_assess.setChecked(true);
                         good_assess.setChecked(false);
                         second_assess.setChecked(false);
@@ -155,26 +154,26 @@ public class AssessActivity extends AppCompatActivity {
                 });
 
 
-               good_assess.setOnClickListener(new View.OnClickListener() {
-                   @Override
-                   public void onClick(View v) {
-                       all_assess.setChecked(false);
-                       total_assess.setChecked(false);
-                       good_assess.setChecked(true);
-                       second_assess.setChecked(false);
-                       bad_assess.setChecked(false);
-                       pic_assess.setChecked(false);
-                      // good_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
-                       List<Assess> assessgood = new ArrayList<Assess>();
-                       for (int  i=0;i<assessList.size();i++) {
-                           if ((int)assessList.get(i).getGrade()==4||(int)assessList.get(i).getGrade()==5) {
-                               assessgood.add(assessList.get(i));
-                           }
-                       }
-                       assessRecyclerViewAdapter= new AssessRecyclerViewAdapter(AssessActivity.this,assessgood);
-                       assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
-                   }
-               });
+                good_assess.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        all_assess.setChecked(false);
+                        total_assess.setChecked(false);
+                        good_assess.setChecked(true);
+                        second_assess.setChecked(false);
+                        bad_assess.setChecked(false);
+                        pic_assess.setChecked(false);
+                        // good_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        List<Assess> assessgood = new ArrayList<Assess>();
+                        for (int  i=0;i<assessList.size();i++) {
+                            if ((int)assessList.get(i).getGrade()==4||(int)assessList.get(i).getGrade()==5) {
+                                assessgood.add(assessList.get(i));
+                            }
+                        }
+                        assessRecyclerViewAdapter= new AssessRecyclerViewAdapter(AssessActivity.this,assessgood);
+                        assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
+                    }
+                });
                 second_assess.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -184,7 +183,7 @@ public class AssessActivity extends AppCompatActivity {
                         second_assess.setChecked(true);
                         bad_assess.setChecked(false);
                         pic_assess.setChecked(false);
-                     //   second_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        //   second_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
                         List<Assess> assesssecond = new ArrayList<Assess>();
                         for (int  i=0;i<assessList.size();i++) {
                             if ((int)assessList.get(i).getGrade()==3||(int)assessList.get(i).getGrade()==2) {
@@ -204,7 +203,7 @@ public class AssessActivity extends AppCompatActivity {
                         second_assess.setChecked(false);
                         bad_assess.setChecked(true);
                         pic_assess.setChecked(false);
-                     //   bad_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        //   bad_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
                         List<Assess> assessbad = new ArrayList<Assess>();
                         for (int  i=0;i<assessList.size();i++) {
                             if ((int)assessList.get(i).getGrade()==0||(int)assessList.get(i).getGrade()==1) {
@@ -224,7 +223,7 @@ public class AssessActivity extends AppCompatActivity {
                         second_assess.setChecked(false);
                         bad_assess.setChecked(false);
                         pic_assess.setChecked(true);
-                      //  pic_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        //  pic_assess.setTextColor(getResources().getColor(R.color.colorPrimary));
                         List<Assess> assesspic = new ArrayList<Assess>();
                         for (int  i=0;i<assessList.size();i++) {
                             if (assessList.get(i).getPics() != null) {
@@ -237,8 +236,13 @@ public class AssessActivity extends AppCompatActivity {
                 });
 
 
-               assessRecyclerViewAdapter= new AssessRecyclerViewAdapter(AssessActivity.this,assesses);
-              assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
+                assessRecyclerViewAdapter= new AssessRecyclerViewAdapter(AssessActivity.this,assesses);
+                assess_listview.setAdapter(assessRecyclerViewAdapter);//设置Adapter
+
+            }
+
+            @Override
+            public void onHandleError(List<Assess> assesses) {
 
             }
         });

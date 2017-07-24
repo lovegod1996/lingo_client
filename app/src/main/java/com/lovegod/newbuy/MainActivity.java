@@ -27,6 +27,7 @@ import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Location;
 import com.lovegod.newbuy.service.BluetoothService;
 import com.lovegod.newbuy.view.BaseActivity;
+import com.lovegod.newbuy.view.myinfo.MyInfoActivity;
 import com.lovegod.newbuy.view.carts.CartActivity;
 import com.lovegod.newbuy.view.fragment.Home_Activity;
 import com.lovegod.newbuy.view.goods.GoodActivity;
@@ -51,8 +52,6 @@ public class MainActivity extends BaseActivity {
     public static final int REQUEST_CODE = 0;
     @BindView(R.id.container)
     CoordinatorLayout coordinatorLayout;
-
-
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
     @BindView(R.id.content)
@@ -184,6 +183,7 @@ public class MainActivity extends BaseActivity {
                         mMinTaoFragment = new Mintaofragment();
                     }
                     replaceFragment(mMinTaoFragment);*/
+                    startActivity(new Intent(MainActivity.this, SortActivity.class));
                     Intent intent1 = new Intent(MainActivity.this, SortActivity.class);
                     startActivity(intent1);
                     return true;
@@ -191,13 +191,13 @@ public class MainActivity extends BaseActivity {
 
                     return true;
                 case R.id.navigation_cart:
-                    Intent intent3 = new Intent(MainActivity.this, CartActivity.class);
-                    startActivity(intent3);
+                    startActivity(new Intent(MainActivity.this, CartActivity.class));
 
                     return true;
                 case R.id.navigation_me:
-
+                    startActivity(new Intent(MainActivity.this, MyInfoActivity.class));
                     return true;
+
             }
             return false;
         }
@@ -248,5 +248,11 @@ public class MainActivity extends BaseActivity {
             return false;
         }
         return false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        navigation.setSelectedItemId(R.id.navigation_home);
     }
 }

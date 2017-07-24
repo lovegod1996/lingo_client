@@ -106,14 +106,14 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tv_item_shopcart_clothname"
                         android:paddingTop="5dp"
-                        android:textSize="12dp"
-                        />
+                        android:textSize="12dp" />
+
                     <TextView
                         android:id="@+id/tv_item_shopcart_cloth_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/tv_item_shopcart_cloth_color"
                         android:layout_below="@id/tv_item_shopcart_clothname"
+                        android:layout_toRightOf="@id/tv_item_shopcart_cloth_color"
                         android:paddingTop="5dp"
                         android:textSize="12dp" />
 
@@ -122,11 +122,11 @@
                         android:id="@+id/tv_item_shopcart_cloth_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="10dp"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
-                        android:textColor="@color/colorPrimary"
+                        android:paddingBottom="10dp"
+                        android:textColor="@color/orange_FE5203"
                         android:textSize="14dp" />
 
 
@@ -142,8 +142,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="5dp"
-                            android:paddingBottom="10dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:paddingBottom="10dp">
 
                             <ImageView
                                 android:id="@+id/iv_item_shopcart_cloth_minus"

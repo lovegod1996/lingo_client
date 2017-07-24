@@ -19,7 +19,6 @@ import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.SearchView;
 import android.telephony.TelephonyManager;
 import android.telephony.cdma.CdmaCellLocation;
 import android.telephony.gsm.GsmCellLocation;
@@ -54,6 +53,8 @@ import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.utils.system.SystemUtils;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.goods.GoodActivity;
+import com.lovegod.newbuy.view.myview.SearchLayout;
+import com.lovegod.newbuy.view.search.SearchActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -110,7 +111,7 @@ public class Home_Activity extends Fragment {
     ListView listView;
     Button scan_code_btn;
     static Button city_name;
-    public SearchView searchview;
+    public SearchLayout searchLayout;
     private SliderLayout mSliderLayout;
     private PagerIndicator indicator;
 
@@ -148,7 +149,7 @@ public class Home_Activity extends Fragment {
         city_name = (Button) view.findViewById(R.id.city_name);
 
 
-        searchview = (SearchView) view.findViewById(R.id.searchview);
+        searchLayout = (SearchLayout) view.findViewById(R.id.main_search_layout);
         //容器
         mSliderLayout = (SliderLayout) view.findViewById(R.id.slider);
         //指示器，那些小点
@@ -165,11 +166,20 @@ public class Home_Activity extends Fragment {
                 listView.setAdapter(homeImageListAdapter);
                 homeImageListAdapter.notifyDataSetChanged();
             }
+
+            @Override
+            public void onHandleError(List<Shop> shops) {
+
+            }
         });
         Log.e("网络访问时长", time + "");
         String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION};
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || SystemUtils.checkPermissionGranted(getActivity(), permissions)) {
-            init();
+            try{
+                init();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }else{
             requestPermissions(permissions, 1);
         }
@@ -194,6 +204,11 @@ public class Home_Activity extends Fragment {
                         }
                     }
 
+                    @Override
+                    public void onHandleError(Shop shop) {
+
+                    }
+
                 });
 
 
@@ -201,6 +216,12 @@ public class Home_Activity extends Fragment {
         };
         listView.setOnItemClickListener(listclickListener);
         initGridView();
+        searchLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),SearchActivity.class));
+            }
+        });
         return view;
     }
 
@@ -374,25 +395,25 @@ public class Home_Activity extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         boolean b = verifyPermissions(grantResults);
-       switch (requestCode){
-           case 0:
-               if (b) {
-                   startCaptureActivityForResult();
-               } else {
-                   showMissingPermissionDialog();
-               }
-               break;
-           case 1:
-               if (b) {
-                   init();
-               } else {
-                   showMissingPermissionDialog();
-               }
-               break;
-           default:
-               super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-               break;
-       }
+        switch (requestCode){
+            case 0:
+                if (b) {
+                    startCaptureActivityForResult();
+                } else {
+                    showMissingPermissionDialog();
+                }
+                break;
+            case 1:
+                if (b) {
+                    init();
+                } else {
+                    showMissingPermissionDialog();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                break;
+        }
     }
 
     public boolean verifyPermissions(int[] grantResults) {
@@ -427,6 +448,11 @@ public class Home_Activity extends Fragment {
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
+                }
+
+                @Override
+                public void onHandleError(Commodity commodity) {
+
                 }
             });
 
@@ -529,6 +555,11 @@ public class Home_Activity extends Fragment {
                 @Override
                 public void onHandleSuccess(List<Shop> shops) {
                     shopList = shops;
+                }
+
+                @Override
+                public void onHandleError(List<Shop> shops) {
+
                 }
             });
             while (shopList == null || shopList.size() == 0) {

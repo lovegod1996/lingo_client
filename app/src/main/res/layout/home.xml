@@ -60,12 +60,19 @@
             android:gravity="center"
             android:orientation="horizontal">
 
+           <com.lovegod.newbuy.view.myview.SearchLayout
+               android:id="@+id/main_search_layout"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               custom:search_hint="点击搜索"/>
+
             <android.support.v7.widget.SearchView
                 android:id="@+id/searchview"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/yuan_jiao"></android.support.v7.widget.SearchView>
+
             <!--   <TextView
                    android:id="@+id/tv_city"
                    android:layout_width="wrap_content"

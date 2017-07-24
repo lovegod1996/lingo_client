@@ -1,12 +1,13 @@
 package com.lovegod.newbuy.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/10/14.
  */
 
-public class ShopCartBean {
+public class ShopCartBean implements Serializable{
 
     /**
      * shopId : 2
@@ -29,7 +30,7 @@ public class ShopCartBean {
      * count : null
      */
 
-private int cbid;
+    private int cbid;
     private int uid;
     private int cid;
     private int sid;
@@ -269,5 +270,5 @@ private int cbid;
         public void setCount(int count) {
             this.count = count;
         }*/
-    }
+}
 

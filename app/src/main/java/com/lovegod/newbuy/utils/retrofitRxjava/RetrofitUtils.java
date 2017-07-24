@@ -26,7 +26,7 @@ public abstract class RetrofitUtils {
      *
      * @return
      */
-    protected static Retrofit getRetrofit() {
+    public static Retrofit getRetrofit() {
 
         if (null == mRetrofit) {
 

@@ -154,6 +154,11 @@ public class BluetoothService extends Service {
                         }
                     }
                 }
+
+                @Override
+                public void onHandleError(List<Ble> bles) {
+
+                }
             });
 
             Collections.reverse(blutoothCusList);//倒序

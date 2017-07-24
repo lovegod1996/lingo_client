@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white_FFFFFF"
+    tools:context="com.lovegod.newbuy.view.carts.ChooseAddressActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/choose_address_toobar"
+        app:navigationIcon="@mipmap/ic_back_black"
+        android:background="@color/splitline_color"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/black_000000"
+                android:textSize="@dimen/text_size_big"
+                android:gravity="center"
+                android:text="选择收货地址"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/choose_address_toolbar_edit"
+                android:gravity="center"
+                android:textColor="@color/black_000000"
+                android:textSize="@dimen/text_size_mid"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:text="管理"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/choose_area_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

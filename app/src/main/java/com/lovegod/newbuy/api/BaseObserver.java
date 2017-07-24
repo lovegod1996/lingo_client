@@ -34,17 +34,20 @@ public abstract class BaseObserver<T> implements Observer<BaseBean<T>> {
     public BaseObserver(View view, ProgressDialog dialog) {
         this.view = view;
         this.mDialog=dialog;
-         mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+        mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
                 mDisposable.dispose();
             }
         });
     }
+    public BaseObserver(Context context){
+        mContext=context;
+    }
     public BaseObserver(Context context, ProgressDialog dialog) {
         mContext = context;
         mDialog = dialog;
-
+        mDialog.setCanceledOnTouchOutside(false);
         mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -55,26 +58,30 @@ public abstract class BaseObserver<T> implements Observer<BaseBean<T>> {
 
     @Override
     public void onSubscribe(Disposable d) {
+        if(mDialog!=null&&!mDialog.isShowing()){
+            mDialog.show();
+        }
         mDisposable = d;
     }
 
     @Override
     public void onNext(BaseBean<T> value) {
+        T t = value.getData();
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
         if (value.getCode() == SUCCESS_CODE) {
-            T t = value.getData();
             onHandleSuccess(t);
         } else {
-            onHandleError(value.getCode(), value.getMessage());
+            onHandleError(t);
+            //onHandleError(value.getCode(), value.getMessage());
         }
     }
 
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();
-        Log.d("gesanri", "error:" + e.toString());
+        Log.e("gesanri", "error:" + e.toString());
         if (mContext != null) {
             if (mDialog != null && mDialog.isShowing()) {
                 mDialog.dismiss();
@@ -96,14 +103,16 @@ public abstract class BaseObserver<T> implements Observer<BaseBean<T>> {
             mDialog.dismiss();
         }
     }
-
+    //抽象类，当请求成功进行处理
     public abstract void onHandleSuccess(T t);
-
-    void onHandleError(int code, String message) {
-        if (mContext != null) {
-            Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
-        } else if (view != null) {
-            Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
-        }
-    }
+    //抽象类，当请求失败进行处理
+    public abstract void onHandleError(T t);
+//    void onHandleError(int code, String message) {
+//        Toast.makeText(mContext,"用户名存在",Toast.LENGTH_SHORT).show();
+//       if (mContext != null) {
+//           Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
+//      } else if (view != null) {
+//           Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
+//       }
+//    }
 }

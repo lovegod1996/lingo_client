@@ -37,15 +37,14 @@ public class Assess implements Serializable {
     private String detail;
     private double grade;
     private String pics;
-    private Calendar date;
+    private String date;
     private String param;
 
-    public Calendar getDate() {
-        return date;
-    }
-
-    public void setDate(Calendar date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+    public String getDate() {
+        return date;
     }
 
     public String getParam() {

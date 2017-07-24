@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * SharedPreference操作类
@@ -249,5 +251,33 @@ public class SpUtils {
             retData[i/2]=(byte) int_ch;//将转化后的数放入Byte里
         }
         return retData;
+    }
+    public static void putStringArray(Context context, String key, List<String>list){
+        SharedPreferences.Editor editor=context.getSharedPreferences(key,context.MODE_PRIVATE).edit();
+        editor.putInt(key+"size",list.size());
+        for(int i=0;i<list.size();i++){
+            editor.remove(key+i);
+            editor.putString(key+i,list.get(i));
+        }
+        editor.apply();
+    }
+    public static List<String> getStringArray(Context context, String key){
+        SharedPreferences sharedPreferences=context.getSharedPreferences(key,context.MODE_PRIVATE);
+        int size=sharedPreferences.getInt(key+"size",0);
+        List<String>list=new ArrayList<>();
+        for(int i=0;i<size;i++){
+            list.add(sharedPreferences.getString(key+i,null));
+        }
+        return list;
+    }
+    public static void removeStringArray(Context context,String key){
+        SharedPreferences sharedPreferences=context.getSharedPreferences(key,context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        int size=sharedPreferences.getInt(key+"size",0);
+        editor.remove(key+"size");
+        for(int i=0;i<size;i++){
+            editor.remove(key+i);
+        }
+        editor.apply();
     }
 }

@@ -34,7 +34,7 @@
                     android:gravity="center"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
-                    android:text="female"
+                    android:text="全部评论"
                     android:textColor="@color/color_radiobutton" />
 
                 <RadioButton
@@ -49,7 +49,7 @@
 
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
-                    android:text="female"
+                    android:text="总评"
                     android:textColor="@color/color_radiobutton" />
 
                 <RadioButton
@@ -64,7 +64,7 @@
 
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
-                    android:text="male"
+                    android:text="好评"
                     android:textColor="@color/color_radiobutton" />
 
                 <RadioButton
@@ -79,7 +79,7 @@
 
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
-                    android:text="male"
+                    android:text="中评"
                     android:textColor="@color/color_radiobutton" />
 
                 <RadioButton
@@ -94,7 +94,7 @@
 
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
-                    android:text="male"
+                    android:text="差评"
                     android:textColor="@color/color_radiobutton" />
             </LinearLayout>
 
@@ -117,7 +117,7 @@
 
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
-                    android:text="male"
+                    android:text="有图"
                     android:textColor="@color/color_radiobutton" />
             </LinearLayout>
         </RelativeLayout>

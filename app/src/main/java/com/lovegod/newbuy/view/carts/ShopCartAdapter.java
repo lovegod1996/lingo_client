@@ -24,6 +24,7 @@ import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.ShopCartBean;
 import com.lovegod.newbuy.view.goods.GoodActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.http.Field;
@@ -40,7 +41,7 @@ import static com.lovegod.newbuy.R.id.iv_item_shopcart_shopselect;
 public class ShopCartAdapter extends RecyclerView.Adapter<ShopCartAdapter.MyViewHolder> {
 
     private Context context;
-    private List<ShopCartBean> data;
+    private List<ShopCartBean> data=new ArrayList<>();
     private View headerView;
     private OnDeleteClickListener mOnDeleteClickListener;
     private OnEditClickListener mOnEditClickListener;
@@ -143,6 +144,11 @@ public class ShopCartAdapter extends RecyclerView.Adapter<ShopCartAdapter.MyView
                             data.get(position).setAmount(count);
                             notifyDataSetChanged();
                         }
+
+                        @Override
+                        public void onHandleError(ShopCartBean shopCartBean) {
+
+                        }
                     });
                 }
 
@@ -164,6 +170,11 @@ public class ShopCartAdapter extends RecyclerView.Adapter<ShopCartAdapter.MyView
                         }
                         data.get(position).setAmount(count);
                         notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onHandleError(ShopCartBean shopCartBean) {
+
                     }
                 });
             }
@@ -240,6 +251,11 @@ public class ShopCartAdapter extends RecyclerView.Adapter<ShopCartAdapter.MyView
                         intent.putExtras(bundle);
                         context.startActivity(intent);
                     }
+
+                    @Override
+                    public void onHandleError(Commodity commodity) {
+
+                    }
                 });
             }
         });
@@ -256,8 +272,13 @@ public class ShopCartAdapter extends RecyclerView.Adapter<ShopCartAdapter.MyView
                 data.remove(position);
                 //重新排序，标记所有商品不同商铺第一个的商品位置
                 CartActivity.isSelectFirst(data);
-               // cartnum.setText("("+mcartlist.size()+")");
+                // cartnum.setText("("+mcartlist.size()+")");
                 notifyDataSetChanged();
+            }
+
+            @Override
+            public void onHandleError(ShopCartBean shopCartBean) {
+
             }
         });
     }

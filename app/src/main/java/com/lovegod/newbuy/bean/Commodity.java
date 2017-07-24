@@ -31,6 +31,7 @@ public class Commodity implements Serializable{
     private String productname;
     private String logo;
     private String bluetoothmac;
+    private String headershow;
     private int x;
     private int y;
     private String detailshow;
@@ -131,6 +132,16 @@ public class Commodity implements Serializable{
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+
+    public String getHeadershow() {
+        return headershow;
+    }
+
+    public void setHeadershow(String headershow) {
+        this.headershow = headershow;
+    }
+
 
     @Override
     public String toString() {

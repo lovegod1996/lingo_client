@@ -4,6 +4,7 @@ package com.lovegod.newbuy.view.sorts;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -136,20 +137,20 @@ public class SortActivity extends AppCompatActivity {
                             m2Adapter.notifyDataSetChanged();
                         }
 
-                     m2Adapter.setItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
-                           @Override
-                           public void onItemClick(View view, int position) {
-                               if (mDate1 != null)
-                                   CategoryGoods(mDate1.get(position).getCgid(),mDate1.get(position).getSecend());
-                               else
-                                   Toast.makeText(getApplicationContext(), "mDate1空", Toast.LENGTH_SHORT).show();
+                        m2Adapter.setItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                if (mDate1 != null)
+                                    CategoryGoods(mDate1.get(position).getCgid(),mDate1.get(position).getSecend());
+                                else
+                                    Toast.makeText(getApplicationContext(), "mDate1空", Toast.LENGTH_SHORT).show();
 
-                           }
-                           @Override
-                           public void onItemLongClick(View view, int position) {
+                            }
+                            @Override
+                            public void onItemLongClick(View view, int position) {
 
-                           }
-                       });
+                            }
+                        });
                     }
 
                     @Override
@@ -158,27 +159,32 @@ public class SortActivity extends AppCompatActivity {
                     }
                 });
 
-             //   m2Adapter.setItemClickListener(new SecondLisstener());
+                //   m2Adapter.setItemClickListener(new SecondLisstener());
+            }
+
+            @Override
+            public void onHandleError(List<SortFrist> sortFrists) {
+
             }
         });
     }
 
 
-  private final class SecondLisstener implements MyRecyclerViewAdapter.OnItemClickListener{
+    private final class SecondLisstener implements MyRecyclerViewAdapter.OnItemClickListener{
 
-      @Override
-      public void onItemClick(View view, int position) {
-          if (mDate1 != null)
-              CategoryGoods(mDate1.get(position).getCgid(),mDate1.get(position).getSecend());
-          else
-              Toast.makeText(getApplicationContext(), "mDate1空", Toast.LENGTH_SHORT).show();
-      }
+        @Override
+        public void onItemClick(View view, int position) {
+            if (mDate1 != null)
+                CategoryGoods(mDate1.get(position).getCgid(),mDate1.get(position).getSecend());
+            else
+                Toast.makeText(getApplicationContext(), "mDate1空", Toast.LENGTH_SHORT).show();
+        }
 
-      @Override
-      public void onItemLongClick(View view, int position) {
+        @Override
+        public void onItemLongClick(View view, int position) {
 
-      }
-  }
+        }
+    }
 
     private void CategoryGoods(int cgid,String secondname) {
         final String name=secondname;
@@ -192,6 +198,11 @@ public class SortActivity extends AppCompatActivity {
                 bundle.putString("sortname",name);
                 intent.putExtras(bundle);
                 startActivity(intent);
+            }
+
+            @Override
+            public void onHandleError(List<Commodity> commodities) {
+
             }
         });
 

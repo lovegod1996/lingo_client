@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/my_info_layout"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/splash_image_width"
+    android:background="@color/colorPrimary">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/my_info_portrait"
+            android:src="@mipmap/defulat_portrait"
+            android:layout_width="@dimen/head_portrait_medium"
+            android:layout_height="@dimen/head_portrait_medium" />
+        <TextView
+            android:id="@+id/my_info_text"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center"
+            android:textColor="@color/white_FFFFFF"
+            android:textSize="@dimen/text_size_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/myinfo_login_hint"/>
+</LinearLayout>

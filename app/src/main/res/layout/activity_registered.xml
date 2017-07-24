@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lovegod.newbuy.view.registered.RegisteredActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/registered_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@mipmap/abc_ic_ab_back_mtrl_am_alpha"
+        app:title="@string/registered_title"
+        app:subtitle="@string/registered_phone"
+        android:background="@color/colorPrimary"/>
+    <com.lovegod.newbuy.view.registered.ControlScrollViewPager
+        android:layout_marginTop="40dp"
+        android:id="@+id/registered_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

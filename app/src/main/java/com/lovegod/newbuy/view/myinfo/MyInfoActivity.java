@@ -1,8 +1,6 @@
 package com.lovegod.newbuy.view.myinfo;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +10,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +25,18 @@ import com.lovegod.newbuy.view.LoginActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * 被对应的Fragment替代,该活动已废弃
+ */
+
+@Deprecated
 public class MyInfoActivity extends AppCompatActivity implements View.OnClickListener{
     private SwipeRefreshLayout refreshLayout;
     private User user;
     private Toolbar toolbar;
     private TextView myInfoText;
     private CircleImageView myInfoPortrait;
+    private RelativeLayout allOrder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +48,10 @@ public class MyInfoActivity extends AppCompatActivity implements View.OnClickLis
         refreshLayout=(SwipeRefreshLayout)findViewById(R.id.refresh_layout);
         myInfoText=(TextView)findViewById(R.id.my_info_text);
         myInfoPortrait=(CircleImageView)findViewById(R.id.my_info_portrait);
+        allOrder=(RelativeLayout)findViewById(R.id.all_order_layout);
         myInfoText.setOnClickListener(this);
         myInfoPortrait.setOnClickListener(this);
+        allOrder.setOnClickListener(this);
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -91,6 +97,9 @@ public class MyInfoActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.my_info_portrait:
             case R.id.my_info_text:
                 startActivityByCheck(MoreInfoActivity.class);
+                break;
+            case R.id.all_order_layout:
+                startActivityByCheck(MyOrderInfoActivity.class);
                 break;
         }
     }

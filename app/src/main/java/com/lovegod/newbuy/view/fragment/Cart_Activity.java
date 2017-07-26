@@ -1,23 +1,29 @@
-package com.lovegod.newbuy.view.carts;
+package com.lovegod.newbuy.view.fragment;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.lovegod.newbuy.MainActivity;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.ShopCartBean;
+import com.lovegod.newbuy.view.carts.CartActivity;
+import com.lovegod.newbuy.view.carts.ShopCartAdapter;
+import com.lovegod.newbuy.view.carts.SubmitOrderActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,19 +31,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-
 /**
- * *****************************************
- * Created by thinking on 2017/4/23.
- * 创建时间：
- * <p>
- * 描述：购物车
- * 已经被对应的fragment替代，此活动已废弃
- * *******************************************
+ * Created by Administrator on 2017/7/26.
  */
-@Deprecated
-public class CartActivity extends AppCompatActivity {
 
+public class Cart_Activity extends Fragment{
     private Toolbar toolbar;
     private TextView tvShopCartSubmit;
     private TextView tvShopCartSelect;
@@ -62,36 +60,39 @@ public class CartActivity extends AppCompatActivity {
     private int mCount,mPosition;
     private float mTotalPrice1;
     private boolean mSelect;
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
-        cartname = (TextView) findViewById(R.id.cartname);
-        cartnum = (TextView) findViewById(R.id.cartnum);
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.activity_cart,container,false);
+        cartname = (TextView) view.findViewById(R.id.cartname);
+        cartnum = (TextView) view.findViewById(R.id.cartnum);
         cartname.setText("购物车");
 
-        toolbar=(Toolbar)findViewById(R.id.shop_cart_toolbar);
-        tvShopCartSubmit=(TextView)findViewById(R.id.tv_shopcart_submit);
-        tv_item_shopcart_shopname=(TextView) findViewById(R.id.tv_item_shopcart_shopname);
-        linearlayout_child_cart=(LinearLayout) findViewById(R.id.linearlayout_child_cart);
+        toolbar=(Toolbar)view.findViewById(R.id.shop_cart_toolbar);
+        tvShopCartSubmit=(TextView)view.findViewById(R.id.tv_shopcart_submit);
+        tv_item_shopcart_shopname=(TextView)view. findViewById(R.id.tv_item_shopcart_shopname);
+        linearlayout_child_cart=(LinearLayout) view.findViewById(R.id.linearlayout_child_cart);
 
-        tvShopCartSelect = (TextView) findViewById(R.id.tv_shopcart_addselect);
-        tvShopCartTotalPrice = (TextView) findViewById(R.id.tv_shopcart_totalprice);
-        tvShopCartTotalNum = (TextView) findViewById(R.id.tv_shopcart_totalnum);
+        tvShopCartSelect = (TextView) view.findViewById(R.id.tv_shopcart_addselect);
+        tvShopCartTotalPrice = (TextView) view.findViewById(R.id.tv_shopcart_totalprice);
+        tvShopCartTotalNum = (TextView)view. findViewById(R.id.tv_shopcart_totalnum);
 
-        rlHaveProduct = (RelativeLayout) findViewById(R.id.rl_shopcart_have);
-        rlvShopCart = (RecyclerView) findViewById(R.id.rlv_shopcart);
-        mEmtryView = (View) findViewById(R.id.emtryview);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        rlHaveProduct = (RelativeLayout) view.findViewById(R.id.rl_shopcart_have);
+        rlvShopCart = (RecyclerView)view. findViewById(R.id.rlv_shopcart);
+        mEmtryView = view.findViewById(R.id.emtryview);
+        MainActivity activity= (MainActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         mEmtryView.setVisibility(View.GONE);
-        llPay = (LinearLayout) findViewById(R.id.ll_pay);
+        llPay = (LinearLayout) view.findViewById(R.id.ll_pay);
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
         lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,RelativeLayout.TRUE);
         llPay.setLayoutParams(lp);
-        tvShopCartSubmit = (TextView) findViewById(R.id.tv_shopcart_submit);
-        rlvShopCart.setLayoutManager(new LinearLayoutManager(CartActivity.this));
-        mShopCartAdapter = new ShopCartAdapter(CartActivity.this,mcartlist);
+        tvShopCartSubmit = (TextView) view.findViewById(R.id.tv_shopcart_submit);
+        rlvShopCart.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mShopCartAdapter = new ShopCartAdapter(getActivity(),mcartlist);
         rlvShopCart.setAdapter(mShopCartAdapter);
 
         /**
@@ -101,26 +102,16 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(mcartlist2.size()==0){
-                    Toast.makeText(CartActivity.this,"未选中任何商品",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"未选中任何商品",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent intent=new Intent(CartActivity.this,SubmitOrderActivity.class);
+                Intent intent=new Intent(getActivity(),SubmitOrderActivity.class);
                 intent.putExtra("buy_goods", (Serializable) mcartlist2);
                 startActivity(intent);
             }
         });
-
-        /**
-         * 返回按钮监听
-         */
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        return view;
     }
-
 
 
     public static void isSelectFirst(List<ShopCartBean> list){
@@ -139,7 +130,7 @@ public class CartActivity extends AppCompatActivity {
     /**
      * 对购买的物品列表进行排序，让同一商店的商品在一起
      */
-    class ShopCompartor implements Comparator<ShopCartBean>{
+    class ShopCompartor implements Comparator<ShopCartBean> {
 
         @Override
         public int compare(ShopCartBean o1, ShopCartBean o2) {
@@ -148,7 +139,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         requestCartInfo();
     }

@@ -7,6 +7,7 @@
     <color name="bg_Gray">#CCCCCC</color>
     <color name="bg_Gray2">#e2e2e2</color>
     <color name="splitline_color">#EFEEEC</color>
+    <color name="background_light_gray">#FAFAFA</color>
     <color name="table_indicator">#cfd8dc</color>
     <color name="bg_Gray3">#515151</color>
     <color name="bg_Gray0">#737272</color>

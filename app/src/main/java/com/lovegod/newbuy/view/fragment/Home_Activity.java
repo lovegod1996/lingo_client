@@ -81,7 +81,7 @@ import static com.lovegod.newbuy.MainActivity.REQUEST_CODE;
  * *******************************************
  */
 
-public class Home_Activity extends Fragment {
+public class Home_Activity extends android.support.v4.app.Fragment {
 
     // 按类别搜索显示图标
     final int[] images = new int[]{R.mipmap.gree01, R.mipmap.midea01,

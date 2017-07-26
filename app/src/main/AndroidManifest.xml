@@ -150,9 +150,12 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden|adjustNothing" />
         <activity android:name=".view.carts.ChooseAddressActivity" />
-        <activity android:name=".view.myinfo.my_info_order_activity" />
+        <activity android:name=".view.myinfo.MyOrderInfoActivity" />
         <activity android:name=".view.carts.PayChooseActivity" />
-        <activity android:name=".view.carts.OrderInfoActivty"></activity>
+        <activity
+            android:name=".view.carts.OrderInfoActivty"
+            android:launchMode="singleTask" />
+        <activity android:name=".view.myinfo.AddAssessActivity"></activity>
     </application>
 
 </manifest>

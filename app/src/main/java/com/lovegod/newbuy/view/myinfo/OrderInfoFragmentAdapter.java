@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/7/22.
+ * 查询订单ViewPager的Fragment适配器
+ * Created by ywx on 2017/7/22.
  */
 
 public class OrderInfoFragmentAdapter extends FragmentPagerAdapter {

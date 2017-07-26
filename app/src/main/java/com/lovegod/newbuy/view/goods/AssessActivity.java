@@ -47,7 +47,7 @@ public class AssessActivity extends AppCompatActivity {
     RadioButton bad_assess;
     RadioButton pic_assess;
     RecyclerView assess_listview;
-    List<Assess> assessList=new ArrayList<Assess>();
+    List<Assess> assessList=new ArrayList<>();
     private AssessRecyclerViewAdapter assessRecyclerViewAdapter;
 
     @Override

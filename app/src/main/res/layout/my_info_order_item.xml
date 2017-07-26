@@ -2,92 +2,167 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <ImageView
-            android:id="@+id/for_the_payment_icon"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/for_the_payment_icon"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+        <RelativeLayout
+            android:id="@+id/for_the_payment_layout"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:id="@+id/for_the_payment_icon"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/for_the_payment_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/for_the_payment_icon"
+                android:layout_centerHorizontal="true"
+                android:text="待付款"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_the_most_min"
+                android:textColor="@color/black_000000"/>
+        </RelativeLayout>
         <TextView
-            android:layout_marginTop="8dp"
-            android:layout_below="@id/for_the_payment_icon"
-            android:layout_centerHorizontal="true"
-            android:text="代付款"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/for_the_payment_texthint"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_the_most_min"
-            android:textColor="@color/black_000000"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+            android:background="@drawable/circle_shape"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="18dp"
+            android:layout_height="18dp" />
+    </FrameLayout>
+
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <ImageView
-            android:id="@+id/to_send_the_goods_icon"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/to_send_the_goods"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+        <RelativeLayout
+            android:id="@+id/to_send_the_goods_layout"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:id="@+id/to_send_the_goods_icon"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/to_send_the_goods"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/to_send_the_goods_icon"
+                android:layout_centerHorizontal="true"
+                android:text="待发货"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_the_most_min"
+                android:textColor="@color/black_000000"/>
+        </RelativeLayout>
         <TextView
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/to_send_the_goods_icon"
-            android:layout_centerHorizontal="true"
-            android:text="待发货"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/to_send_the_goods_texthint"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_the_most_min"
-            android:textColor="@color/black_000000"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+            android:background="@drawable/circle_shape"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="18dp"
+            android:layout_height="18dp" />
+    </FrameLayout>
+
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <ImageView
-            android:id="@+id/for_the_goods_icon"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/for_the_goods_icon"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+        <RelativeLayout
+            android:id="@+id/for_the_goods_layout"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:id="@+id/for_the_goods_icon"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/for_the_goods_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/for_the_goods_icon"
+                android:layout_centerHorizontal="true"
+                android:text="待收货"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_the_most_min"
+                android:textColor="@color/black_000000"/>
+        </RelativeLayout>
         <TextView
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/for_the_goods_icon"
-            android:layout_centerHorizontal="true"
-            android:text="待收货"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/for_the_goods_texthint"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_the_most_min"
-            android:textColor="@color/black_000000"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+            android:background="@drawable/circle_shape"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="18dp"
+            android:layout_height="18dp" />
+    </FrameLayout>
+
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <ImageView
-            android:id="@+id/for_the_assess_icon"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/for_the_assess_icon"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+        <RelativeLayout
+            android:id="@+id/for_the_assess_layout"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:id="@+id/for_the_assess_icon"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/for_the_assess_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/for_the_assess_icon"
+                android:layout_centerHorizontal="true"
+                android:text="待评价"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_the_most_min"
+                android:textColor="@color/black_000000"/>
+        </RelativeLayout>
         <TextView
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/for_the_assess_icon"
-            android:layout_centerHorizontal="true"
-            android:text="待评价"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/for_the_assess_texthint"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_the_most_min"
-            android:textColor="@color/black_000000"/>
-    </RelativeLayout>
+            android:background="@drawable/circle_shape"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="18dp"
+            android:layout_height="18dp" />
+    </FrameLayout>
 </LinearLayout>

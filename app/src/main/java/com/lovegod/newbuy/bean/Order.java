@@ -1,6 +1,7 @@
 package com.lovegod.newbuy.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,28 +14,38 @@ public class Order implements Serializable {
     private long oid;
     private int said;
     private int uid;
+    private int count;
     private double totalprice;
     private String number;
     private int statue;
-    private String createTime;
+    private String createtime;
     private double freight;
     private String paytime;
     private String paytype;
     private String shiptime;
     private String dealtime;
     private int openstatue;
-    private List<OrderGoods>orderGoodsList;
+    private List<OrderGoods>orderGoodsList=new ArrayList<>();
 
-   public class OrderGoods{
-        public int ogid;
-        public int oid;
-        public int cid;
-        public int sid;
-        public int count;
-        public double totalprice;
-        public String param;
+   public class OrderGoods implements Serializable{
+        private int ogid;
+       private int oid;
+       private int cid;
+       private int sid;
+       private int count;
+       private double totalprice;
+       private String param;
+       private Commodity commodity;
 
-        public int getOgid() {
+       public Commodity getCommodity() {
+           return commodity;
+       }
+
+       public void setCommodity(Commodity commodity) {
+           this.commodity = commodity;
+       }
+
+       public int getOgid() {
             return ogid;
         }
 
@@ -138,14 +149,6 @@ public class Order implements Serializable {
         this.statue = statue;
     }
 
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
     public double getFreight() {
         return freight;
     }
@@ -208,5 +211,21 @@ public class Order implements Serializable {
 
     public void setSid(int sid) {
         this.sid = sid;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
     }
 }

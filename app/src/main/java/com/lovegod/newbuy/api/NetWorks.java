@@ -188,7 +188,39 @@ public class NetWorks extends RetrofitUtils {
     public static void commitPayOrder(long oid,String paytype,BaseObserver<Order>orderObserver){
         setSubscribe(orderApi.commitPayOrder(oid,paytype),orderObserver);
     }
-
+    public static void getAllOrder(int uid,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getAllOrder(uid),orderObserver);
+    }
+    public static void getOrderGoods(long oid,BaseObserver<List<Order.OrderGoods>>orderObserver){
+        setSubscribe(orderApi.getOrderGoods(oid),orderObserver);
+    }
+    public static void getForThePaymentOrder(int uid,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getForThePaymentOrder(uid),orderObserver);
+    }
+    public static void getToSendGoodsOrder(int uid,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getToSendGoodsOrder(uid),orderObserver);
+    }
+    public static void getForTheGoodsOrder(int uid,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getForTheGoodsOrder(uid),orderObserver);
+    }
+    public static void getFinishOrder(int uid,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getFinishOrder(uid),orderObserver);
+    }
+    public static void getAllOrderByPage(int uid,int page,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getAllOrderByPage(uid,page),orderObserver);
+    }
+    public static void getOrderByStatue(int uid,int statue,int page,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getOrderByStatue(uid,statue,page),orderObserver);
+    }
+    public static void getAddressById(int said,BaseObserver<Address>addressObserver){
+        setSubscribe(addressApi.getAddressById(said),addressObserver);
+    }
+    public static void cancelOrder(long oid,BaseObserver<Order>orderObserver){
+        setSubscribe(orderApi.cancelOrder(oid),orderObserver);
+    }
+    public static void confirmTheGoods(long oid,BaseObserver<Order>orderObserver){
+        setSubscribe(orderApi.confirmTheGoods(oid),orderObserver);
+    }
 
     /**
      * 插入观察者

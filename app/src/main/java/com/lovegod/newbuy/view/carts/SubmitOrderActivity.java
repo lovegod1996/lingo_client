@@ -45,7 +45,7 @@ public class SubmitOrderActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Address orderAddress;
     private double totalPrice;
-    private List<Order>orderList=new ArrayList<>();
+    private ArrayList<String>orderIdList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +67,7 @@ public class SubmitOrderActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
-        //查询默认地址设置到不居中
+        //查询默认地址设置到布局中
         requestDefaultAddress();
 
         /**
@@ -124,6 +124,7 @@ public class SubmitOrderActivity extends AppCompatActivity {
                     payShopBean = new PayShopBean();
                 }
             }
+            payShopBean.setSid(buyList.get(i).getSid());
             payShopBean.setShopname(buyList.get(i).getShopname());
             payShopBean.goodList.add(buyList.get(i));
         }
@@ -168,6 +169,7 @@ public class SubmitOrderActivity extends AppCompatActivity {
         if(resultCode==RESULT_OK){
             if(requestCode==1){
                 Address address= (Address) data.getSerializableExtra("choose_address_return");
+                orderAddress=address;
                 defaultAddressName.setText(address.getName());
                 defaultAddressPhone.setText(address.getPhone());
                 defaultAddress.setText(address.getAddress().replace(" ","").replace(";",""));
@@ -219,13 +221,14 @@ public class SubmitOrderActivity extends AppCompatActivity {
             orderMap.put("count",goodsNum+"");
             orderMap.put("totalprice",price+"");
             orderMap.put("sid",payShopList.get(i).getSid()+"");
+            orderMap.put("said",orderAddress.getSaid()+"");
 
             //在每个订单里循环该订单的每个商品进行提交
             final int finalI = i;
             NetWorks.commitOrder(orderMap, new BaseObserver<Order>(this) {
                 @Override
                 public void onHandleSuccess(Order order) {
-                    orderList.add(order);
+                    orderIdList.add(order.getOid()+"");
                     Map<String,String>orderGoodsMap;
                     for(ShopCartBean shopCartBean:payShopList.get(finalI).goodList){
                         orderGoodsMap=new HashMap<>();
@@ -249,10 +252,15 @@ public class SubmitOrderActivity extends AppCompatActivity {
                     }
                     //如果是最后一个订单了，就打开支付页面
                     if(finalI ==payShopList.size()-1){
-                        Intent intent=new Intent(SubmitOrderActivity.this,PayChooseActivity.class);
-                        intent.putExtra("order_data", (Serializable) orderList);
-                        startActivity(intent);
-                        finish();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent=new Intent(SubmitOrderActivity.this,PayChooseActivity.class);
+                                intent.putStringArrayListExtra("order_data",orderIdList);
+                                startActivity(intent);
+                                finish();
+                            }
+                        },500);
                     }
                 }
 

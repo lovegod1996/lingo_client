@@ -121,11 +121,13 @@ public class SpUtils {
      * @param Key
      */
     public static void removeKey(Context context,String Key){
-        SharedPreferences activityPreferences = context.getSharedPreferences(
-                spFileName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = activityPreferences.edit();
-        editor.remove(Key);
-        editor.commit();
+        if(context!=null) {
+            SharedPreferences activityPreferences = context.getSharedPreferences(
+                    spFileName, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = activityPreferences.edit();
+            editor.remove(Key);
+            editor.commit();
+        }
     }
     /**
      * desc:保存对象
@@ -135,22 +137,24 @@ public class SpUtils {
      * modified:
      */
     public static void putObject(Context context,String key ,Object obj){
-        try {
-            // 保存对象
-            SharedPreferences.Editor sharedata = context.getSharedPreferences(spFileName, 0).edit();
-            //先将序列化结果写到byte缓存中，其实就分配一个内存空间
-            ByteArrayOutputStream bos=new ByteArrayOutputStream();
-            ObjectOutputStream os=new ObjectOutputStream(bos);
-            //将对象序列化写入byte缓存
-            os.writeObject(obj);
-            //将序列化的数据转为16进制保存
-            String bytesToHexString = bytesToHexString(bos.toByteArray());
-            //保存该16进制数组
-            sharedata.putString(key, bytesToHexString);
-            sharedata.commit();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("", "保存obj失败");
+        if(context!=null) {
+            try {
+                // 保存对象
+                SharedPreferences.Editor sharedata = context.getSharedPreferences(spFileName, 0).edit();
+                //先将序列化结果写到byte缓存中，其实就分配一个内存空间
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                ObjectOutputStream os = new ObjectOutputStream(bos);
+                //将对象序列化写入byte缓存
+                os.writeObject(obj);
+                //将序列化的数据转为16进制保存
+                String bytesToHexString = bytesToHexString(bos.toByteArray());
+                //保存该16进制数组
+                sharedata.putString(key, bytesToHexString);
+                sharedata.commit();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e("", "保存obj失败");
+            }
         }
     }
     /**
@@ -184,33 +188,36 @@ public class SpUtils {
      * modified:
      */
     public static Object getObject(Context context,String key ){
-        try {
-            SharedPreferences sharedata = context.getSharedPreferences(spFileName, 0);
-            if (sharedata.contains(key)) {
-                String string = sharedata.getString(key, "");
-                if(TextUtils.isEmpty(string)){
-                    return null;
-                }else{
-                    //将16进制的数据转为数组，准备反序列化
-                    byte[] stringToBytes = StringToBytes(string);
-                    ByteArrayInputStream bis=new ByteArrayInputStream(stringToBytes);
-                    ObjectInputStream is=new ObjectInputStream(bis);
-                    //返回反序列化得到的对象
-                    Object readObject = is.readObject();
-                    return readObject;
+        if(context!=null) {
+            try {
+                SharedPreferences sharedata = context.getSharedPreferences(spFileName, 0);
+                if (sharedata.contains(key)) {
+                    String string = sharedata.getString(key, "");
+                    if (TextUtils.isEmpty(string)) {
+                        return null;
+                    } else {
+                        //将16进制的数据转为数组，准备反序列化
+                        byte[] stringToBytes = StringToBytes(string);
+                        ByteArrayInputStream bis = new ByteArrayInputStream(stringToBytes);
+                        ObjectInputStream is = new ObjectInputStream(bis);
+                        //返回反序列化得到的对象
+                        Object readObject = is.readObject();
+                        return readObject;
+                    }
                 }
+            } catch (StreamCorruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
-        } catch (StreamCorruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            //所有异常返回null
+            return null;
         }
-        //所有异常返回null
         return null;
 
     }

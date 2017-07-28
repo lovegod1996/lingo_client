@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_margin="8dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@mipmap/ask_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/black_000000"
+            android:textSize="@dimen/text_size_mid"
+            android:layout_marginLeft="6dp"
+            android:layout_marginStart="6dp"
+            android:layout_gravity="center"
+            android:text="Xiaomi/小米 小米电视4A 43英寸49/55寸智能平板电视3S48寸现货4K"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_margin="10dp"
+        android:background="@color/white_FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+        <EditText
+            android:id="@+id/ask_dialog_edit"
+            android:layout_margin="10dp"
+            android:textSize="@dimen/text_size_small"
+            android:hint="快来这里提问吧~"
+            android:background="@color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/ask_dialog_cancel"
+            android:textColor="#FF0000"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:gravity="center"
+            android:text="取消"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/ask_dialog_sure"
+            android:textColor="@color/blue_2196F3"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:gravity="center"
+            android:text="确定"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</LinearLayout>

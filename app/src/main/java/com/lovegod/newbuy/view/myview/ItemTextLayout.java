@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.lovegod.newbuy.R;
 
 /**
- * Created by Administrator on 2017/7/12.
+ * Created by ywx on 2017/7/12.
  */
 
 public class ItemTextLayout extends LinearLayout {

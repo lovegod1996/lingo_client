@@ -238,6 +238,8 @@ public class SubmitOrderActivity extends AppCompatActivity {
                         orderGoodsMap.put("count",shopCartBean.getAmount()+"");
                         orderGoodsMap.put("totalprice",(double)(shopCartBean.getAmount())*shopCartBean.getPrice()+"");
                         orderGoodsMap.put("param",shopCartBean.getCommodity_select());
+                        orderGoodsMap.put("goodsname",shopCartBean.getCommodity_name());
+                        orderGoodsMap.put("logo",shopCartBean.getCommodity_pic());
                         NetWorks.commitOrderGoods(orderGoodsMap, new BaseObserver<Order.OrderGoods>(SubmitOrderActivity.this) {
                             @Override
                             public void onHandleSuccess(Order.OrderGoods orderGoods) {

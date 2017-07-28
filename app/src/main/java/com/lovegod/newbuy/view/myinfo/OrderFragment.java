@@ -23,7 +23,13 @@ import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 
@@ -88,25 +94,25 @@ public class OrderFragment extends Fragment {
                 //查询待付款订单
                 orderList.clear();
                 forThePayPage=0;
-                queryOrderByStatue(0,0);
+                queryOrderByStatue(forThePayPage,0,0);
                 break;
             case TO_THE_GOODS_FLAG:
                 //查询待发货订单
                 orderList.clear();
                 forTheGoodsPage=0;
-                queryOrderByStatue(0,1);
+                queryOrderByStatue(forTheGoodsPage,0,1);
                 break;
             case FOR_THE_GOODS_FLAG:
                 //查询待收货订单
                 orderList.clear();
                 toTheGoodsPage=0;
-                queryOrderByStatue(0,2);
+                queryOrderByStatue(toTheGoodsPage,0,2);
                 break;
             case FINISH_FLAG:
                 //查询已完成订单
                 orderList.clear();
                 finishPage=0;
-                queryOrderByStatue(0,3);
+                queryOrderByStatue(finishPage,1,3);
                 break;
         }
 
@@ -147,29 +153,14 @@ public class OrderFragment extends Fragment {
                        final int finalI = i;
                        NetWorks.getOrderGoods(orders.get(i).getOid(), new BaseObserver<List<Order.OrderGoods>>() {
                            @Override
-                           public void onHandleSuccess(final List<Order.OrderGoods> orderGoodses) {
+                           public void onHandleSuccess(List<Order.OrderGoods> orderGoodses) {
                                requestOrderCount[0]++;
                                orders.get(finalI).setOrderGoodsList(orderGoodses);
-                               int j;
-                               for(j=0;j<orderGoodses.size();j++){
-                                   final int finalJ = j;
-                                   NetWorks.findCommodity(orderGoodses.get(j).getCid(), new BaseObserver<Commodity>(getActivity()) {
-                                       @Override
-                                       public void onHandleSuccess(Commodity commodity) {
-                                           orders.get(finalI).getOrderGoodsList().get(finalJ).setCommodity(commodity);
-                                           if(!orderList.contains(orders.get(finalI))) {
-                                               orderList.add(orders.get(finalI));
-                                           }
-                                           if(requestOrderCount[0] ==orders.size()){
-                                               adapter.notifyDataSetChanged();
-                                           }
-                                       }
-
-                                       @Override
-                                       public void onHandleError(Commodity commodity) {
-
-                                       }
-                                   });
+                               orderList.add(orders.get(finalI));
+                               if(requestOrderCount[0] ==orders.size()){
+                                   //排序
+                                   Collections.sort(orderList,new orderComparator());
+                                   adapter.notifyDataSetChanged();
                                }
                            }
 
@@ -196,9 +187,9 @@ public class OrderFragment extends Fragment {
      * @param page 第几页
      * @param statue 订单的状态
      */
-    private void queryOrderByStatue(int page,int statue){
+    private void queryOrderByStatue(int page,int openstatue,int statue){
         final int[] requestOrderCount = {0};
-        NetWorks.getOrderByStatue(user.getUid(),statue, page, new BaseObserver<List<Order>>(getActivity(),new ProgressDialog(getActivity())) {
+        NetWorks.getOrderByStatue(user.getUid(),statue,openstatue, page, new BaseObserver<List<Order>>(getActivity(),new ProgressDialog(getActivity())) {
             @Override
             public void onHandleSuccess(final List<Order> orders) {
                 //判断类型增加相应的页数加一
@@ -218,33 +209,17 @@ public class OrderFragment extends Fragment {
                 }
                 for(int i=0;i<orders.size();i++){
                     //如果订单正在进行，或者订单关闭且已经确认收货就添加到列表中
-                    if((orders.get(i).getOpenstatue()==0)||(orders.get(i).getOpenstatue()==1&&orders.get(i).getStatue()==3)) {
                         final int finalI = i;
                         NetWorks.getOrderGoods(orders.get(i).getOid(), new BaseObserver<List<Order.OrderGoods>>() {
                             @Override
                             public void onHandleSuccess(List<Order.OrderGoods> orderGoodses) {
                                 requestOrderCount[0]++;
                                 orders.get(finalI).setOrderGoodsList(orderGoodses);
-                                int j;
-                                for(j=0;j<orderGoodses.size();j++){
-                                    final int finalJ = j;
-                                    NetWorks.findCommodity(orderGoodses.get(j).getCid(), new BaseObserver<Commodity>(getActivity()) {
-                                        @Override
-                                        public void onHandleSuccess(Commodity commodity) {
-                                            orders.get(finalI).getOrderGoodsList().get(finalJ).setCommodity(commodity);
-                                            if(!orderList.contains(orders.get(finalI))) {
-                                                orderList.add(orders.get(finalI));
-                                            }
-                                            if(requestOrderCount[0] ==orders.size()){
-                                                adapter.notifyDataSetChanged();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onHandleError(Commodity commodity) {
-
-                                        }
-                                    });
+                                orderList.add(orders.get(finalI));
+                                if(requestOrderCount[0] ==orders.size()){
+                                    //排序
+                                    Collections.sort(orderList,new orderComparator());
+                                    adapter.notifyDataSetChanged();
                                 }
                             }
 
@@ -253,9 +228,6 @@ public class OrderFragment extends Fragment {
 
                             }
                         });
-                    }else {
-                        requestOrderCount[0]++;
-                    }
                 }
             }
 
@@ -274,20 +246,38 @@ public class OrderFragment extends Fragment {
                 break;
             case FOR_THE_PAY_FLAG:
                 //查询待付款订单
-                queryOrderByStatue(forThePayPage,0);
+                queryOrderByStatue(forThePayPage,0,0);
                 break;
             case FOR_THE_GOODS_FLAG:
                 //查询待发货订单
-                queryOrderByStatue(forTheGoodsPage,1);
+                queryOrderByStatue(forTheGoodsPage,0,1);
                 break;
             case TO_THE_GOODS_FLAG:
                 //查询待收货订单
-                queryOrderByStatue(toTheGoodsPage,2);
+                queryOrderByStatue(toTheGoodsPage,0,2);
                 break;
             case FINISH_FLAG:
                 //查询已完成订单
-                queryOrderByStatue(finishPage,3);
+                queryOrderByStatue(finishPage,1,3);
                 break;
+        }
+    }
+
+    /**
+     * 自定义排序，按照订单创建的时间由晚到早进行排序
+     */
+    class orderComparator implements Comparator<Order>{
+        @Override
+        public int compare(Order o1, Order o2) {
+            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date o1Date = null,o2Date=null;
+            try {
+                o1Date=format.parse(o1.getCreatetime());
+                o2Date=format.parse(o2.getCreatetime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return (int) (o2Date.getTime()-o1Date.getTime());
         }
     }
 }

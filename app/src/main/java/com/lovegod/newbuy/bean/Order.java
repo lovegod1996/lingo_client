@@ -35,14 +35,23 @@ public class Order implements Serializable {
        private int count;
        private double totalprice;
        private String param;
-       private Commodity commodity;
+       private String goodsname;
+       private String logo;
 
-       public Commodity getCommodity() {
-           return commodity;
+       public String getGoodsname() {
+           return goodsname;
        }
 
-       public void setCommodity(Commodity commodity) {
-           this.commodity = commodity;
+       public void setGoodsname(String goodsname) {
+           this.goodsname = goodsname;
+       }
+
+       public String getLogo() {
+           return logo;
+       }
+
+       public void setLogo(String logo) {
+           this.logo = logo;
        }
 
        public int getOgid() {

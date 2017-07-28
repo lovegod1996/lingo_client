@@ -27,6 +27,7 @@ import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.view.LoginActivity;
+import com.lovegod.newbuy.view.myinfo.AddAssessActivity;
 import com.lovegod.newbuy.view.myinfo.MoreInfoActivity;
 import com.lovegod.newbuy.view.myinfo.MyOrderInfoActivity;
 import com.lovegod.newbuy.view.myinfo.SettingActivity;
@@ -54,9 +55,9 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
     private SwipeRefreshLayout refreshLayout;
     private User user;
     private Toolbar toolbar;
-    private TextView myInfoText,forThePayHint,toSendTheGoodsHint,forTheGoodsHint;
+    private TextView myInfoText,forThePayHint,toSendTheGoodsHint,forTheGoodsHint,forTheAssessHint;
     private CircleImageView myInfoPortrait;
-    private RelativeLayout allOrder,forThePay,toSendTheGoods,forTheGoods;
+    private RelativeLayout allOrder,forThePay,toSendTheGoods,forTheGoods,toTheAssess;
 
     @Nullable
     @Override
@@ -67,12 +68,14 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
         activity.setSupportActionBar(toolbar);
 
         setHasOptionsMenu(true);
+        forTheAssessHint=(TextView)view.findViewById(R.id.for_the_assess_texthint);
         forThePayHint=(TextView)view.findViewById(R.id.for_the_payment_texthint);
         toSendTheGoodsHint=(TextView)view.findViewById(R.id.to_send_the_goods_texthint);
         forTheGoodsHint=(TextView)view.findViewById(R.id.for_the_goods_texthint);
         toSendTheGoods=(RelativeLayout)view.findViewById(R.id.to_send_the_goods_layout);
         forTheGoods=(RelativeLayout)view.findViewById(R.id.for_the_goods_layout);
         forThePay=(RelativeLayout)view.findViewById(R.id.for_the_payment_layout);
+        toTheAssess=(RelativeLayout)view.findViewById(R.id.for_the_assess_layout);
         refreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.refresh_layout);
         myInfoText=(TextView)view.findViewById(R.id.my_info_text);
         myInfoPortrait=(CircleImageView)view.findViewById(R.id.my_info_portrait);
@@ -83,6 +86,7 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
         toSendTheGoods.setOnClickListener(this);
         forThePay.setOnClickListener(this);
         forTheGoods.setOnClickListener(this);
+        toTheAssess.setOnClickListener(this);
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -144,6 +148,8 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
             case R.id.for_the_goods_layout:
                 startActivityByCheckAndInfo(MyOrderInfoActivity.class,FOR_THE_GOODS_FLAG);
                 break;
+            case R.id.for_the_assess_layout:
+                startActivityByCheck(AddAssessActivity.class);
 
         }
     }
@@ -225,7 +231,7 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
         });
 
         //获取待收货订单个数
-        NetWorks.getForTheGoodsOrder(user.getUid(), new BaseObserver<List<Order>>() {
+        NetWorks.getForTheGoodsOrder(user.getUid(), new BaseObserver<List<Order>>(getActivity()) {
             @Override
             public void onHandleSuccess(List<Order> orders) {
                 if(orders.size()!=0){
@@ -238,6 +244,23 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
 
             @Override
             public void onHandleError(List<Order> orders) {
+
+            }
+        });
+
+        //是否有待评价的商品
+        NetWorks.getNoAssessGoods(user.getUid(), 0, new BaseObserver<List<Order.OrderGoods>>(getActivity()) {
+            @Override
+            public void onHandleSuccess(List<Order.OrderGoods> orderGoodses) {
+                if(orderGoodses.size()!=0){
+                    forTheAssessHint.setVisibility(View.VISIBLE);
+                }else {
+                    forTheAssessHint.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onHandleError(List<Order.OrderGoods> orderGoodses) {
 
             }
         });

@@ -1,15 +1,19 @@
 package com.lovegod.newbuy.api;
 
+import com.lovegod.newbuy.MainActivity;
 import com.lovegod.newbuy.bean.Assess;
 import com.lovegod.newbuy.bean.BaseBean;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Goods;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -46,4 +50,9 @@ public interface GoodsApi {
     //根据名字查询商品
     @GET("goods/name")
     Observable<BaseBean<List<Commodity>>>getNameGoods(@Query("name")String name,@Query("page")Integer page);
+
+    //提交评价信息
+    @FormUrlEncoded
+    @POST("assess")
+    Observable<BaseBean<Assess>>commitAssess(@FieldMap Map<String,String> map);
 }

@@ -1,5 +1,6 @@
 package com.lovegod.newbuy.view.carts;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.utils.view.BlurImageUtils;
 import com.lovegod.newbuy.utils.view.FastBlur;
+import com.lovegod.newbuy.view.Shop2Activity;
+import com.lovegod.newbuy.view.goods.GoodActivity;
 import com.lovegod.newbuy.view.myinfo.MyOrderInfoActivity;
 
 import java.net.URL;
@@ -132,16 +135,25 @@ public class OrderInfoActivty extends AppCompatActivity {
     private void getShopLogo(){
         NetWorks.getIDshop(order.getSid(), new BaseObserver<Shop>() {
             @Override
-            public void onHandleSuccess(Shop shop) {
+            public void onHandleSuccess(final Shop shop) {
                 //加载该订单所有商品的第一张图片作为头部，先加载Bitmap对其进行高斯模糊处理再设置到Imageview里面
                 Glide.with(OrderInfoActivty.this).load(shop.getLogo()).asBitmap().into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                         //进行高斯模糊处理并设置禁Imgaeview
-                        headImage.setImageBitmap(FastBlur.doBlur(resource,4, true));
+                        headImage.setImageBitmap(FastBlur.doBlur(resource,3, true));
                     }
                 });
                 shopName.setText(shop.getShopname());
+                //设置店铺名点击跳转
+                shopName.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(OrderInfoActivty.this, Shop2Activity.class);
+                        intent.putExtra("shop",shop);
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
@@ -214,23 +226,34 @@ public class OrderInfoActivty extends AppCompatActivity {
         NetWorks.getOrderGoods(order.getOid(), new BaseObserver<List<Order.OrderGoods>>(this) {
             @Override
             public void onHandleSuccess(List<Order.OrderGoods> orderGoodses) {
+                //获取到订单商品成功，遍历每个商品去寻找它的商品信息
                 for(final Order.OrderGoods goods:orderGoodses){
-                    final LinearLayout item = new LinearLayout(OrderInfoActivty.this);
-                    LayoutInflater.from(OrderInfoActivty.this).inflate(R.layout.pay_good_item, item);
-                    final ImageView goodPic = (ImageView) item.findViewById(R.id.pay_good_item_pic);
-                    final TextView goodName = (TextView) item.findViewById(R.id.pay_good_item_name);
-                    final TextView goodInfo = (TextView) item.findViewById(R.id.pay_good_item_info);
-                    final TextView goodPrice = (TextView) item.findViewById(R.id.pay_good_item_price);
-                    final TextView goodNum = (TextView) item.findViewById(R.id.pay_good_item_num);
                     NetWorks.findCommodity(goods.getCid(), new BaseObserver<Commodity>(OrderInfoActivty.this) {
                         @Override
-                        public void onHandleSuccess(Commodity commodity) {
-                            Glide.with(OrderInfoActivty.this).load(commodity.getLogo()).into(goodPic);
-                            goodName.setText(commodity.getProductname());
+                        public void onHandleSuccess(final Commodity commodity) {
+                            //获取到商品信息，添加信息，并且用作跳转信息
+                            final LinearLayout item = new LinearLayout(OrderInfoActivty.this);
+                            LayoutInflater.from(OrderInfoActivty.this).inflate(R.layout.pay_good_item, item);
+                            final ImageView goodPic = (ImageView) item.findViewById(R.id.pay_good_item_pic);
+                            final TextView goodName = (TextView) item.findViewById(R.id.pay_good_item_name);
+                            final TextView goodInfo = (TextView) item.findViewById(R.id.pay_good_item_info);
+                            final TextView goodPrice = (TextView) item.findViewById(R.id.pay_good_item_price);
+                            final TextView goodNum = (TextView) item.findViewById(R.id.pay_good_item_num);
+                            Glide.with(OrderInfoActivty.this).load(goods.getLogo()).into(goodPic);
+                            goodName.setText(goods.getGoodsname());
                             goodInfo.setText(goods.getParam());
                             goodPrice.setText("¥"+goods.getTotalprice()*1.0F/goods.getCount());
                             goodNum.setText("×"+goods.getCount());
                             goodsLayout.addView(item);
+                            //商品item点击跳转
+                            item.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent=new Intent(OrderInfoActivty.this, GoodActivity.class);
+                                    intent.putExtra("commodity",commodity);
+                                    startActivity(intent);
+                                }
+                            });
                         }
 
                         @Override

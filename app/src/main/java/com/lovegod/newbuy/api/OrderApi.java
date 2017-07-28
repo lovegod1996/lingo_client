@@ -1,5 +1,6 @@
 package com.lovegod.newbuy.api;
 
+import com.baidu.platform.comapi.map.B;
 import com.lovegod.newbuy.bean.BaseBean;
 import com.lovegod.newbuy.bean.Order;
 
@@ -71,13 +72,26 @@ public interface OrderApi {
     Observable<BaseBean<List<Order>>>getAllOrderByPage(@Path("uid")int uid,@Path("page")int page);
 
     //根据订单状态分页查找订单
-    @GET("orders/page/{uid}/{statue}/{page}")
-    Observable<BaseBean<List<Order>>>getOrderByStatue(@Path("uid")int uid,@Path("statue")int statue,@Path("page")int page);
+    @GET("orders/page/{uid}/{statue}/{openstatue}/{page}")
+    Observable<BaseBean<List<Order>>>getOrderByStatue(@Path("uid")int uid,@Path("statue")int statue,@Path("openstatue")int openstatue,@Path("page")int page);
 
     //根据订单id取消订单
     @PUT("order/cancel/{oid}")
     Observable<BaseBean<Order>>cancelOrder(@Path("oid")long oid);
 
+    //确认收货
     @PUT("order/deal/{oid}")
     Observable<BaseBean<Order>>confirmTheGoods(@Path("oid")long oid);
+
+    //根据订单Id查询订单
+    @GET("orders/id/{oid}")
+    Observable<BaseBean<Order>>getOrderById(@Path("oid")long oid);
+
+    //分页查找某用户未评价商品
+    @GET("findAllNoAssess/{uid}/{page}")
+    Observable<BaseBean<List<Order.OrderGoods>>>getNoAssessGoods(@Path("uid")int uid,@Path("page")int page);
+
+    //修改订单商品评价状态
+    @PUT("orgood/ogid/{ogid}")
+    Observable<BaseBean<Order.OrderGoods>>changeOrderGoodsStatue(@Path("ogid")int ogid);
 }

@@ -6,12 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.lovegod.newbuy.view.myinfo.AddAssessActivity">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/add_assess_toolbar"
-        android:navigationIcon="@mipmap/ic_back_black"
-        android:title="待评价"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/add_assess_toolbar"
+            app:navigationIcon="@mipmap/ic_back_black"
+            app:title="待评价"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"/>
+    </android.support.design.widget.AppBarLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/add_assess_recyclerview"
         android:layout_width="match_parent"

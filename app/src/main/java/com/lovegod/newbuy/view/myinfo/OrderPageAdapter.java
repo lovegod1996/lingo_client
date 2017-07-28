@@ -234,17 +234,15 @@ public class OrderPageAdapter extends RecyclerView.Adapter<OrderPageAdapter.View
     private void queryGoodInfo(final ViewHolder holder, final Order order){
                 holder.goodsLayout.removeAllViews();
                 for(final Order.OrderGoods goods:order.getOrderGoodsList()){
-                    final LinearLayout item = new LinearLayout(mContext);
+                    LinearLayout item = new LinearLayout(mContext);
                     LayoutInflater.from(mContext).inflate(R.layout.pay_good_item, item);
-                    final ImageView goodPic = (ImageView) item.findViewById(R.id.pay_good_item_pic);
-                    final TextView goodName = (TextView) item.findViewById(R.id.pay_good_item_name);
-                    final TextView goodInfo = (TextView) item.findViewById(R.id.pay_good_item_info);
-                    final TextView goodPrice = (TextView) item.findViewById(R.id.pay_good_item_price);
-                    final TextView goodNum = (TextView) item.findViewById(R.id.pay_good_item_num);
-                    if(goods.getCommodity()!=null) {
-                        Glide.with(mContext).load(goods.getCommodity().getLogo()).into(goodPic);
-                        goodName.setText(goods.getCommodity().getProductname());
-                    }
+                    ImageView goodPic = (ImageView) item.findViewById(R.id.pay_good_item_pic);
+                    TextView goodName = (TextView) item.findViewById(R.id.pay_good_item_name);
+                    TextView goodInfo = (TextView) item.findViewById(R.id.pay_good_item_info);
+                    TextView goodPrice = (TextView) item.findViewById(R.id.pay_good_item_price);
+                    TextView goodNum = (TextView) item.findViewById(R.id.pay_good_item_num);
+                    Glide.with(mContext).load(goods.getLogo()).into(goodPic);
+                    goodName.setText(goods.getGoodsname());
                     goodInfo.setText(goods.getParam());
                     goodPrice.setText("¥"+goods.getTotalprice()*1.0F/goods.getCount());
                     goodNum.setText("×"+goods.getCount());

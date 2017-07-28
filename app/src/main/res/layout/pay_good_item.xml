@@ -18,7 +18,8 @@
                 android:id="@+id/pay_good_item_pic"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:scaleType="centerCrop"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"

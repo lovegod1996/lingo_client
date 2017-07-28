@@ -64,11 +64,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".MainActivity"
@@ -155,7 +155,15 @@
         <activity
             android:name=".view.carts.OrderInfoActivty"
             android:launchMode="singleTask" />
-        <activity android:name=".view.myinfo.AddAssessActivity"></activity>
+        <activity android:name=".view.myinfo.AddAssessActivity" />
+        <activity android:name=".view.myinfo.PublishAssessActivity" />
+        <activity android:name=".view.goods.AskActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

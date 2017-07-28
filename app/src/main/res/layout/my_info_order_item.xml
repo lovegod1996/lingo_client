@@ -153,16 +153,17 @@
                 android:textColor="@color/black_000000"/>
         </RelativeLayout>
         <TextView
+            android:layout_marginTop="8dp"
             android:id="@+id/for_the_assess_texthint"
             android:visibility="invisible"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_the_most_min"
-            android:background="@drawable/circle_shape"
+            android:background="@drawable/circle_solid_shape"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:layout_gravity="center_horizontal"
-            android:layout_width="18dp"
-            android:layout_height="18dp" />
+            android:layout_width="8dp"
+            android:layout_height="8dp" />
     </FrameLayout>
 </LinearLayout>

@@ -209,8 +209,8 @@ public class NetWorks extends RetrofitUtils {
     public static void getAllOrderByPage(int uid,int page,BaseObserver<List<Order>>orderObserver){
         setSubscribe(orderApi.getAllOrderByPage(uid,page),orderObserver);
     }
-    public static void getOrderByStatue(int uid,int statue,int page,BaseObserver<List<Order>>orderObserver){
-        setSubscribe(orderApi.getOrderByStatue(uid,statue,page),orderObserver);
+    public static void getOrderByStatue(int uid,int statue,int openstatue,int page,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getOrderByStatue(uid,statue,openstatue,page),orderObserver);
     }
     public static void getAddressById(int said,BaseObserver<Address>addressObserver){
         setSubscribe(addressApi.getAddressById(said),addressObserver);
@@ -220,6 +220,18 @@ public class NetWorks extends RetrofitUtils {
     }
     public static void confirmTheGoods(long oid,BaseObserver<Order>orderObserver){
         setSubscribe(orderApi.confirmTheGoods(oid),orderObserver);
+    }
+    public static void getOrderById(long oid,BaseObserver<Order>orderObserver){
+        setSubscribe(orderApi.getOrderById(oid),orderObserver);
+    }
+    public static void getNoAssessGoods(int uid,int page,BaseObserver<List<Order.OrderGoods>>orderObserver){
+        setSubscribe(orderApi.getNoAssessGoods(uid,page),orderObserver);
+    }
+    public static void commitAssess(Map<String,String>map,BaseObserver<Assess>assessObserver){
+        setSubscribe(goodsApi.commitAssess(map),assessObserver);
+    }
+    public static void changeOrderGoodsStatue(int ogid,BaseObserver<Order.OrderGoods>orderObserver){
+        setSubscribe(orderApi.changeOrderGoodsStatue(ogid),orderObserver);
     }
 
     /**

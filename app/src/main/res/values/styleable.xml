@@ -18,4 +18,13 @@
     <declare-styleable name="SearchLayout">
         <attr name="search_hint" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="StarRating">
+        <attr name="starSize" format="dimension" />
+        <attr name="starCount" format="integer"/>
+        <attr name="starSpacing" format="integer"/>
+        <attr name="hasAnim" format="boolean"/>
+        <attr name="clickable" format="boolean"/>
+    </declare-styleable>
+
 </resources>

@@ -1,5 +1,8 @@
 package com.lovegod.newbuy.view.goods;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -7,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -18,6 +22,10 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.Interpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,6 +40,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.animation.ViewPropertyAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.lovegod.newbuy.R;
@@ -80,7 +89,9 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     private TextView textView;
     private int imageHeight;
     private ViewPager viewPager;
-//    LinearLayout text_bg;
+
+    //问答动画是否执行
+    private boolean isAnmi=true;
 
     NoScrollListView imagelist;
 
@@ -93,7 +104,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     ListView image_details_listview;
     RelativeLayout li_title;
 
-
+    @BindView(R.id.good_info_ask_button)
+    FloatingActionButton askButton;
     @BindView(R.id.assess_btn)
     Button assess_btn;
     @BindView(R.id.goodsname)
@@ -182,6 +194,16 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             @Override
             public void onHandleError(Shop shop) {
 
+            }
+        });
+
+        /**
+         * 问答的按钮监听
+         */
+        askButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GoodActivity.this,AskActivity.class));
             }
         });
 
@@ -474,11 +496,32 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         if (y <= 0) {   //设置标题的背景颜色
             li_title.setBackgroundColor(Color.argb((int) 0, 144, 151, 166));
         } else if (y > 0 && y <= imageHeight) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
+            askButton.setVisibility(View.GONE);
+            isAnmi=true;
             float scale = (float) y / imageHeight;
             float alpha = (255 * scale);
             textView.setTextColor(Color.argb((int) alpha, 255, 255, 255));
             li_title.setBackgroundColor(Color.argb((int) alpha, 144, 151, 166));
         } else {    //滑动到banner下面设置普通颜色
+            askButton.setVisibility(View.VISIBLE);
+            //如果刚拉入下面执行动画
+            if(isAnmi){
+                ObjectAnimator scaleX = ObjectAnimator.ofFloat(askButton, "scaleX",0.7f,1f);
+                ObjectAnimator scaleY = ObjectAnimator.ofFloat(askButton, "scaleY", 0.7f,1f);
+                scaleX.setRepeatMode(ValueAnimator.REVERSE);
+                scaleX.setRepeatCount(0);
+                scaleY.setRepeatMode(ValueAnimator.REVERSE);
+                scaleY.setRepeatCount(0);
+                scaleX.setInterpolator(new OvershootInterpolator());
+                scaleX.setDuration(700);
+                scaleY.setDuration(500);
+                //set把两个动画加进来一起执行
+                AnimatorSet set=new AnimatorSet();
+                set.playTogether(scaleX,scaleY);
+                set.start();
+                isAnmi=false;
+            }
+
             li_title.setBackgroundColor(Color.argb((int) 255, 255, 255, 255));
 
             textView.setTextColor(Color.argb((int) 255, 0, 0, 0));

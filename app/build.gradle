@@ -3,7 +3,11 @@ apply plugin: 'android-apt'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+    dexOptions {
+        javaMaxHeapSize "4g" //specify the heap size for the dex process
+    }
     defaultConfig {
+        multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         applicationId "com.lovegod.newbuy"
         minSdkVersion 15
@@ -36,35 +40,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    //rxAndroid/rxjava
-    //butterknife
-    // retrofit
-
 
     compile files('libs/BRT-5.0.4.jar')
 
-    //缓存 DiskLruCache
-    //picasso 图片加载库 （Glide 中有些bug）
-    //二维码扫描
-
-    //圆形头像
-    //动画工具
-
-    //rxAndroid/rxjava
-    //butterknife
-    // retrofit
-
-    compile files('libs/BRT-5.0.4.jar')
-
-    //缓存 DiskLruCache
-    //picasso 图片加载库 （Glide 中有些bug）
-    //二维码扫描
-
-
-    apt
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.0.1'

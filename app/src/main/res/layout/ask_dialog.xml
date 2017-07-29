@@ -33,10 +33,11 @@
         android:layout_width="match_parent"
         android:layout_height="120dp">
         <EditText
+            android:maxLength="40"
             android:id="@+id/ask_dialog_edit"
             android:layout_margin="10dp"
             android:textSize="@dimen/text_size_small"
-            android:hint="快来这里提问吧~"
+            android:hint="快来这里提问吧~(不超过40字)"
             android:background="@color/transparent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

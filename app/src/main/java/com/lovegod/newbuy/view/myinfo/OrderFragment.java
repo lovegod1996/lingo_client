@@ -177,7 +177,6 @@ public class OrderFragment extends Fragment {
 
            @Override
            public void onHandleError(List<Order> orders) {
-               Toast.makeText(getActivity(),"没有更多了~",Toast.LENGTH_SHORT).show();
            }
        });
     }
@@ -233,7 +232,6 @@ public class OrderFragment extends Fragment {
 
             @Override
             public void onHandleError(List<Order> orders) {
-                Toast.makeText(getActivity(),"没有更多了~",Toast.LENGTH_SHORT).show();
             }
         });
     }

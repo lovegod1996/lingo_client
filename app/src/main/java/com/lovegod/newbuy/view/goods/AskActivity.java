@@ -51,7 +51,6 @@ public class AskActivity extends AppCompatActivity {
                 Window window=dialog.getWindow();
                 window.setWindowAnimations(R.style.popWindowStyle);
                 WindowManager.LayoutParams params=window.getAttributes();
-                root.measure(0,0);
                 params.width=getResources().getDisplayMetrics().widthPixels;
                 window.setAttributes(params);
                 dialog.show();

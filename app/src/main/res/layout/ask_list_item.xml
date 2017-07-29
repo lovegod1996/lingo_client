@@ -19,6 +19,8 @@
             android:layout_width="20dp"
             android:layout_height="20dp" />
         <TextView
+            android:maxLines="2"
+            android:ellipsize="end"
             android:id="@+id/ask_item_asktext"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
@@ -46,6 +48,8 @@
             android:layout_width="20dp"
             android:layout_height="20dp" />
         <TextView
+            android:maxLines="3"
+            android:ellipsize="end"
             android:id="@+id/ask_item_answertext"
             android:textColor="@color/black_414040"
             android:layout_marginStart="5dp"

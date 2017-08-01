@@ -59,9 +59,9 @@ public class MoreInfoActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            //注销按钮，直接结束当前活动
             case R.id.un_login_button:
                 SpUtils.removeKey(MoreInfoActivity.this,"userinfo");
-                startActivity(new Intent(MoreInfoActivity.this,MyInfoActivity.class));
                 finish();
                 break;
             case R.id.more_info_username:

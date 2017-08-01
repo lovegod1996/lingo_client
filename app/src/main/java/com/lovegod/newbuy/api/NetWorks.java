@@ -12,6 +12,7 @@ import com.lovegod.newbuy.bean.Goods;
 import com.lovegod.newbuy.bean.LoginMessage;
 import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.Province;
+import com.lovegod.newbuy.bean.Quest;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.ShopCartBean;
 import com.lovegod.newbuy.bean.SortFrist;
@@ -64,6 +65,8 @@ public class NetWorks extends RetrofitUtils {
     protected static final AddressApi addressApi=getRetrofit().create(AddressApi.class);
 
     protected static final OrderApi orderApi=getRetrofit().create(OrderApi.class);
+
+    protected static final QuestApi questApi=getRetrofit().create(QuestApi.class);
 
     public static void getAllshop(BaseObserver<List<Shop>> shopObserver) {
         setSubscribe(shopApi.getAllShop(), shopObserver);
@@ -232,6 +235,18 @@ public class NetWorks extends RetrofitUtils {
     }
     public static void changeOrderGoodsStatue(int ogid,BaseObserver<Order.OrderGoods>orderObserver){
         setSubscribe(orderApi.changeOrderGoodsStatue(ogid),orderObserver);
+    }
+    public static void commitQuest(Map<String,String>map, BaseObserver<Quest>questObserver){
+        setSubscribe(questApi.commitQuest(map),questObserver);
+    }
+    public static void queryQuest(int cid,BaseObserver<List<Quest>>questObserver){
+        setSubscribe(questApi.queryQuest(cid),questObserver);
+    }
+    public static void commitQuestReply(Map<String,String>map,BaseObserver<Quest.Reply>questObserver){
+        setSubscribe(questApi.commitQuestReply(map),questObserver);
+    }
+    public static void isBuy(int uid,int cid,BaseObserver<Order>orderObserver){
+        setSubscribe(orderApi.isBuy(uid,cid),orderObserver);
     }
 
     /**

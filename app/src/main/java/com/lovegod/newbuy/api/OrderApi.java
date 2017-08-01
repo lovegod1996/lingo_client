@@ -94,4 +94,8 @@ public interface OrderApi {
     //修改订单商品评价状态
     @PUT("orgood/ogid/{ogid}")
     Observable<BaseBean<Order.OrderGoods>>changeOrderGoodsStatue(@Path("ogid")int ogid);
+
+    //根据用户id和商品id查询是否购买过
+    @GET("orgood/uid/cid/{uid}/{cid}")
+    Observable<BaseBean<Order>>isBuy(@Path("uid")int uid,@Path("cid")int cid);
 }

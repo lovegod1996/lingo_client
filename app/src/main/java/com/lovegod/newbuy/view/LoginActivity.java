@@ -92,7 +92,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 CircularAnim.fullActivity(LoginActivity.this,loginButton).colorOrImageRes(R.color.colorPrimary).go(new CircularAnim.OnAnimationEndListener() {
                     @Override
                     public void onAnimationEnd() {
-                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
                         finish();
                     }
                 });

@@ -21,6 +21,10 @@
 
     <!--白色-->
     <color name="tv_white">#ffffff</color>
+
+    <!--蓝色-->
+    <color name="light_blue">#44D4FE</color>
+    <color name="dark_blue">#10BCFF</color>
     <!--分割线-->
 
 

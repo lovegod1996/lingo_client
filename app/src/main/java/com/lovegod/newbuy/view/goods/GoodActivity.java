@@ -50,6 +50,8 @@ import com.lovegod.newbuy.bean.Assess;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.ShopCartBean;
+import com.lovegod.newbuy.bean.User;
+import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.ShopActivity;
 import com.lovegod.newbuy.view.utils.GradationScrollView;
@@ -152,6 +154,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         super.onCreate(savedInstanceState);
         StatusBarUtil.setImgTransparent(this);
         setContentView(R.layout.good_information);
+
         ButterKnife.bind(this);
 
         scrollView = (GradationScrollView) findViewById(R.id.scrollview_good);
@@ -203,7 +206,9 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         askButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GoodActivity.this,AskActivity.class));
+                Intent intent=new Intent(GoodActivity.this,AskActivity.class);
+                intent.putExtra("commodity",commodity);
+                startActivity(intent);
             }
         });
 

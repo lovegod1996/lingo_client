@@ -67,11 +67,10 @@
 
              <intent-filter>
              <action android:name="android.intent.action.MAIN" />
-
-
              <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask" />
@@ -159,13 +158,8 @@
             android:launchMode="singleTask" />
         <activity android:name=".view.myinfo.AddAssessActivity" />
         <activity android:name=".view.myinfo.PublishAssessActivity" />
-        <activity android:name=".view.goods.AskActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
+        <activity android:name=".view.goods.AskActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".view.goods.ShowOneAskActivity"></activity>
     </application>
 

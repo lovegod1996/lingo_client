@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
@@ -49,11 +50,13 @@ public class AssessActivity extends AppCompatActivity {
     RecyclerView assess_listview;
     List<Assess> assessList=new ArrayList<>();
     private AssessRecyclerViewAdapter assessRecyclerViewAdapter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.good_assess);
+        toolbar=(Toolbar)findViewById(R.id.good_assess_toolbar);
         radioGroupID=(RadioGroup)findViewById(R.id.radioGroupID);
         all_assess=(RadioButton) findViewById(R.id.all_assess);
         total_assess=(RadioButton)findViewById(R.id.total_assess);
@@ -63,8 +66,19 @@ public class AssessActivity extends AppCompatActivity {
         pic_assess=(RadioButton)findViewById(R.id.pic_assess);
         assess_listview=(RecyclerView) findViewById(R.id.assess_listview);
 
+        setSupportActionBar(toolbar);
+
         int cid=Integer.valueOf(getIntent().getStringExtra("Cid"));
 
+        /**
+         * 返回按钮监听
+         */
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         NetWorks.getAllAssess(cid, new BaseObserver<List<Assess>>(this) {
             @Override

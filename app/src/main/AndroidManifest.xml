@@ -161,7 +161,8 @@
             android:name=".view.goods.AskActivity"
             android:launchMode="singleTask" />
         <activity android:name=".view.goods.ShowOneAskActivity" />
-        <activity android:name=".view.myinfo.FavouriteActivity"></activity>
+        <activity android:name=".view.myinfo.FavouriteActivity" />
+        <activity android:name=".view.ShowImageActivity"></activity>
     </application>
 
 </manifest>

@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="?attr/selectableItemBackground"
+    android:id="@+id/focus_question_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/focus_question_item_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
         <TextView
+            android:layout_toRightOf="@id/focus_question_item_image"
+            android:layout_toEndOf="@id/focus_question_item_image"
             android:maxLines="3"
             android:ellipsize="end"
             android:id="@+id/focus_question_item_title"
@@ -17,6 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+
+            android:id="@+id/focus_question_item_reply_count"
             android:layout_marginBottom="5dp"
             android:textColor="@color/blue_2196F3"
             android:layout_marginEnd="10dp"
@@ -29,6 +43,9 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:layout_toRightOf="@id/focus_question_item_image"
+            android:layout_toEndOf="@id/focus_question_item_image"
+            android:id="@+id/focus_question_item_time"
             android:textSize="@dimen/text_size_min"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
@@ -39,6 +56,8 @@
     </RelativeLayout>
 
     <View
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/splitline_color"/>

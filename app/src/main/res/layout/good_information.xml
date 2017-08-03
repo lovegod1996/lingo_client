@@ -200,57 +200,7 @@
                 </RelativeLayout>
 
             </LinearLayout>
-            <!--<LinearLayout
-                android:id="@+id/ll_good_detail_service"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="#ffffff"
-                android:padding="12dp">
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@mipmap/da_ren_services_tick"
-                    android:drawablePadding="6dp"
-                    android:text="担保交易"
-                    android:textSize="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableLeft="@mipmap/da_ren_services_tick"
-                    android:drawablePadding="6dp"
-                    android:text="正品保障"
-                    android:textSize="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableLeft="@mipmap/da_ren_services_tick"
-                    android:drawablePadding="6dp"
-                    android:text="赔运费险"
-                    android:textSize="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:drawableLeft="@mipmap/da_ren_services_tick"
-                    android:drawablePadding="6dp"
-                    android:text="7天退换"
-                    android:textSize="10dp" />
-
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@mipmap/rightarrow" />
-            </LinearLayout>-->
 
             <View
                 android:layout_width="match_parent"
@@ -289,9 +239,10 @@
                     android:padding="5dp" />
 
                 <LinearLayout
+                    android:id="@+id/assess_li"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -314,28 +265,16 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true">
 
-                                <ImageView
+                                <com.example.ywx.lib.StarRating
+                                    android:id="@+id/user_ratingbar"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@mipmap/da_ren_list_star" />
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="2dp"
-                                    android:src="@mipmap/da_ren_list_star" />
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="2dp"
-                                    android:src="@mipmap/da_ren_list_star" />
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="2dp"
-                                    android:src="@mipmap/da_ren_list_star" />
+                                    android:layout_alignParentRight="true"
+                                    app:clickable="false"
+                                    app:hasAnim="false"
+                                    app:starCount="5"
+                                    app:starSize="16dp"
+                                    app:starSpacing="0"/>
                             </LinearLayout>
                         </RelativeLayout>
 
@@ -398,6 +337,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="60dp"
                 android:background="#EEEEEE"
                 android:padding="8dp">
 
@@ -414,7 +354,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="已经最到底啦!"
+                    android:text="已经到底啦"
                     android:textSize="12dp" />
 
                 <View

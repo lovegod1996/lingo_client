@@ -9,6 +9,7 @@ import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Community;
 import com.lovegod.newbuy.bean.District;
 import com.lovegod.newbuy.bean.FavouriteGoods;
+import com.lovegod.newbuy.bean.FavouriteQuest;
 import com.lovegod.newbuy.bean.FavouriteShop;
 import com.lovegod.newbuy.bean.Goods;
 import com.lovegod.newbuy.bean.LoginMessage;
@@ -273,6 +274,28 @@ public class NetWorks extends RetrofitUtils {
     }
     public static void getFocusShop(int uid,int page,BaseObserver<List<FavouriteShop>>shopObserver){
         setSubscribe(shopApi.getFocusShop(uid, page),shopObserver);
+    }
+    public static void addQuestFocus(Map<String,String>map, BaseObserver<FavouriteQuest>questObserver){
+        setSubscribe(questApi.addQuestFocus(map),questObserver);
+    }
+    public static void cancelQuestFocus(int qaid,BaseObserver<FavouriteQuest>questObserver){
+        setSubscribe(questApi.cancelQuestFocus(qaid),questObserver);
+    }
+    public static void isQuestFocus(int uid,int qid,BaseObserver<FavouriteQuest>questObserver){
+        setSubscribe(questApi.isQuestFocus(uid, qid),questObserver);
+    }
+    public static void getQuestFocus(int uid,int page,BaseObserver<List<FavouriteQuest>>questObserver){
+        setSubscribe(questApi.getQuestFocus(uid, page),questObserver);
+    }
+    public static void getQuesByID(int qid,BaseObserver<Quest>questObserver){
+        setSubscribe(questApi.getQuesByID(qid),questObserver);
+    }
+    public static void getAssessCount(int cid, BaseObserver<Integer> assesscountObserver) {
+        setSubscribe(goodsApi.getAssessCount(cid), assesscountObserver);
+    }
+
+    public static void getNewAssess(int cid, BaseObserver<Assess> assessObserver) {
+        setSubscribe(goodsApi.getNewAssess(cid), assessObserver);
     }
 
     /**

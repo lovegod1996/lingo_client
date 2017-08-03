@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -33,6 +34,7 @@ import com.lovegod.newbuy.MainActivity;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
+import com.lovegod.newbuy.bean.FavouriteQuest;
 import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
@@ -43,6 +45,7 @@ import com.lovegod.newbuy.view.myinfo.MoreInfoActivity;
 import com.lovegod.newbuy.view.myinfo.MyOrderInfoActivity;
 import com.lovegod.newbuy.view.myinfo.SettingActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -69,6 +72,10 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
     private TextView myInfoText,forThePayHint,toSendTheGoodsHint,forTheGoodsHint,forTheAssessHint;
     private CircleImageView myInfoPortrait;
     private RelativeLayout allOrder,forThePay,toSendTheGoods,forTheGoods,toTheAssess,favouriteGoods,favouriteShop;
+
+    private AskAnswerAdapter adapter;
+    private List<FavouriteQuest>questList=new ArrayList<>();
+    private int questPage=0;
 
     @Nullable
     @Override
@@ -311,8 +318,12 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.myinfo_question:
-                //弹出问答对话框
-                showQuestionDialog();
+                //如果登陆了弹出问答对话框
+                if(user!=null) {
+                    showQuestionDialog();
+                }else {
+                    startActivity(new Intent(getActivity(),LoginActivity.class));
+                }
                 break;
             case R.id.myinfo_settings:
                 startActivityByCheck(SettingActivity.class);
@@ -331,6 +342,15 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
         LinearLayout root= (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.ask_answer_dialog,null);
         ImageView headImage= (ImageView) root.findViewById(R.id.ask_answer_dialog_headimage);
         ImageView cancelImage=(ImageView)root.findViewById(R.id.ask_answer_dialog_cancelimage);
+        RecyclerView recyclerView=(RecyclerView)root.findViewById(R.id.ask_answer_dialog_recyclerview);
+        //问答列表初始化
+        LinearLayoutManager manager=new LinearLayoutManager(getActivity());
+        adapter=new AskAnswerAdapter(getActivity(),questList);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
+        //获取关注问题的列表
+        getFocusQuest();
+
         dialog.setContentView(root);
         Window window=dialog.getWindow();
         WindowManager.LayoutParams params=window.getAttributes();
@@ -348,6 +368,23 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                questPage=0;
+                questList.clear();
+            }
+        });
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(recyclerView.computeVerticalScrollExtent()+recyclerView.computeVerticalScrollOffset()>=recyclerView.computeVerticalScrollRange()){
+                    getFocusQuest();
+                }
             }
         });
     }
@@ -383,5 +420,26 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
      */
     private void updateData(){
         onResume();
+    }
+
+    /**
+     * 获取关注问题列表
+     */
+    private void getFocusQuest(){
+        NetWorks.getQuestFocus(user.getUid(), questPage, new BaseObserver<List<FavouriteQuest>>() {
+            @Override
+            public void onHandleSuccess(List<FavouriteQuest> favouriteQuests) {
+                questPage++;
+                for(FavouriteQuest quests:favouriteQuests){
+                    questList.add(quests);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onHandleError(List<FavouriteQuest> favouriteQuests) {
+                Toast.makeText(getActivity(),"没有更多了~",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

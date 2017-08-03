@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.ywx.lib.StarRating;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
@@ -25,14 +26,12 @@ import com.lovegod.newbuy.bean.Assess;
 import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
-import com.lovegod.newbuy.view.carts.ShopCartAdapter;
-import com.lovegod.newbuy.view.myview.StarRating;
+
 import com.lovegod.newbuy.view.registered.PicassoImageLoader;
 import com.lovegod.newbuy.view.search.ControlScrollRecyclerView;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
-import com.lzy.imagepicker.view.CropImageView;
 
 import java.net.URL;
 import java.net.URLConnection;

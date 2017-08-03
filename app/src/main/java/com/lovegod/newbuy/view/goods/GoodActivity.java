@@ -23,9 +23,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.Interpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,6 +40,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.animation.ViewPropertyAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.example.ywx.lib.StarRating;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
@@ -121,6 +119,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     ListView image_details_listview;
     RelativeLayout li_title;
 
+    @BindView(R.id.assess_li)
+    LinearLayout assessLi;
+    @BindView(R.id.user_ratingbar)
+    StarRating userRatingbar;
     @BindView(R.id.shop_cart)
     ImageView shopCartIcon;
     @BindView(R.id.good_info_ask_button)
@@ -203,7 +205,12 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
         tv_good_detail_cate = (TextView) findViewById(R.id.tv_good_detail_cate);
 
+        //查询是否已经管制
         queryWhetherFoucus();
+
+        //获取最新的评论信息以及评论个数
+        getAssess();
+
         NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>() {
             @Override
             public void onHandleSuccess(Shop shop) {
@@ -283,27 +290,9 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         lp.width = getResources().getDisplayMetrics().widthPixels; // 宽度
         dialogWindow.setAttributes(lp);
 
-        // int cid=commodity.getCid();
-        NetWorks.getAllAssess(commodity.getCid(), new BaseObserver<List<Assess>>() {
-            @Override
-            public void onHandleSuccess(List<Assess> assesses) {
-                if(assesses.size()>0) {
-                    assess_num.setText("全部评价(" + assesses.size() + ")");
-                    user_name.setText(assesses.get(0).getHollrall());
-                    user_time.setText(String.valueOf(assesses.get(0).getUid()));
-                    user_assess.setText(assesses.get(0).getDetail());
-                }
-
-            }
-
-            @Override
-            public void onHandleError(List<Assess> assesses) {
-
-            }
-        });
-/**
- * 产品参数
- */
+        /**
+         * 产品参数
+         */
         tv_good_detail_cate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -311,9 +300,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             }
         });
         final String[] a = commodity.getDetailshow().split(";");
-/**
- * 商品详情listview
- */
+
+        /**
+         * 商品详情listview
+         */
         image_details_listview = (ListView) findViewById(R.id.image_details_listview);
         image_details_listview.setAdapter(new ImageListAdapter(GoodActivity.this, a));
         MaterialIndicator indicator = (MaterialIndicator) findViewById(R.id.indicator);
@@ -709,6 +699,59 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             return convertView;
         }
 
+    }
+
+    /**
+     * 获取一条最新的评价以及获取评价总个数
+     */
+    private void getAssess(){
+        final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+         /*获取评价*/
+        NetWorks.getNewAssess(commodity.getCid(), new BaseObserver<Assess>(this) {
+
+            @Override
+            public void onHandleSuccess(Assess assess) {
+                if (assess!=null) {
+                    Log.v("评价：",assess.getUsername());
+                    user_name.setText(newName(assess.getUsername()));
+                    user_time.setText(assess.getDate().substring(0, 10));
+                    user_assess.setText(assess.getDetail());
+                    userRatingbar.setCurrentStarCount((int) assess.getGrade());
+
+                    //获取评价的总条数
+                    NetWorks.getAssessCount(commodity.getCid(), new BaseObserver<Integer>() {
+                        @Override
+                        public void onHandleSuccess(Integer integer) {
+                            assess_num.setText("全部评价(" + integer + ")");
+                        }
+
+                        @Override
+                        public void onHandleError(Integer integer) {
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onHandleError(Assess assess) {
+                assessLi.setVisibility(View.GONE);
+                assess_num.setText("全部评价(" + 0 + ")");
+            }
+        });
+    }
+
+    /**
+     * 隐藏名字，中间用*隐藏
+     * @param username 原始用户名
+     * @return 隐藏后的用户名
+     */
+    private String newName(String username) {
+        String newname;
+        int num = username.length();
+        newname = username.charAt(0) + "**" + username.charAt(num - 2) + username.charAt(num - 1);
+        return newname;
     }
 
 }

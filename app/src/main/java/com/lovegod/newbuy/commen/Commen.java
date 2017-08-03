@@ -6,4 +6,5 @@ package com.lovegod.newbuy.commen;
 
 public class Commen {
     public static final String FIRST_OPEN = "first_open";
+
 }

@@ -43,6 +43,10 @@ dependencies {
 
     compile files('libs/BRT-5.0.4.jar')
 
+    //BubbleLayout对话框式布局
+    //textview的折叠、展开
+    
+
     compile 'com.android.support:design:25.3.1'
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -73,6 +77,9 @@ dependencies {
     compile 'com.contrarywind:Android-PickerView:3.2.5'
     compile 'com.github.lygttpod:SuperTextView:2.0.5'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.daasuu:BubbleLayout:1.1.1'
+    compile 'com.ms-square:expandableTextView:0.1.4'
+    compile 'com.ninghaiywx.StarRating:lib:1.0'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }

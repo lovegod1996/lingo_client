@@ -49,6 +49,11 @@ public interface GoodsApi {
    @GET("assess/{cid}")
     Observable<BaseBean<List<Assess>>> getAllAssess(@Path("cid")Integer cid);
 
+    @GET("assess/count/{cid}")
+    Observable<BaseBean<Integer>>getAssessCount(@Path("cid")int cid);
+
+    @GET("assess/new/{cid}")
+    Observable<BaseBean<Assess>>getNewAssess(@Path("cid")int cid);
 
     //根据名字查询商品
     @GET("goods/name")

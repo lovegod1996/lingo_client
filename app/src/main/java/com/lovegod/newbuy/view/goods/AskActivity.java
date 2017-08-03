@@ -85,7 +85,7 @@ public class AskActivity extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Bundle bundle=new Bundle();
                 //商品信息
-                bundle.putSerializable("commodity",commodity);
+                bundle.putInt("commodityId",commodity.getCid());
                 //被点击的问题信息
                 bundle.putSerializable("quest",questList.get(position));
                 Intent intent=new Intent(AskActivity.this,ShowOneAskActivity.class);

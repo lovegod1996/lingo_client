@@ -104,7 +104,7 @@
                 <Button
                     android:textColor="@color/black_000000"
                     android:textSize="@dimen/text_size_min"
-                    android:background="@drawable/foucus_selector"
+                    android:background="@drawable/focus_shape"
                     android:layout_gravity="right"
                     android:id="@+id/show_one_ask_focus"
                     android:layout_margin="10dp"

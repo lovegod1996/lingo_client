@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <com.lovegod.newbuy.view.myview.StarRating
+        <com.example.ywx.lib.StarRating
             android:id="@+id/publish_assess_total_star"
             app:hasAnim="true"
             android:layout_marginLeft="20dp"
@@ -172,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <com.lovegod.newbuy.view.myview.StarRating
+                <com.example.ywx.lib.StarRating
                     android:id="@+id/publish_assess_deliverservice_star"
                     app:hasAnim="true"
                     android:layout_marginLeft="20dp"
@@ -209,7 +209,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <com.lovegod.newbuy.view.myview.StarRating
+            <com.example.ywx.lib.StarRating
                 android:id="@+id/publish_assess_shopservice_star"
                 app:hasAnim="true"
                 android:layout_marginLeft="20dp"

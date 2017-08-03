@@ -19,13 +19,14 @@
             android:src="@drawable/ic_net_error" />
 
         <TextView
+            android:textSize="@dimen/text_size_mid"
             android:id="@+id/error_saying_bg_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/error_saying_bg_imageview"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:layout_margin="8dip"
+            android:layout_margin="8dp"
             android:text="@string/tips_net_error"
             android:textColor="@color/tv_Black" />
     </RelativeLayout>

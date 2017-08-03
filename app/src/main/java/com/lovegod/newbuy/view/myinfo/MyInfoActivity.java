@@ -152,7 +152,7 @@ public class MyInfoActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.myinfo_skin:
+            case R.id.myinfo_question:
                 break;
             case R.id.myinfo_settings:
                 startActivityByCheck(SettingActivity.class);

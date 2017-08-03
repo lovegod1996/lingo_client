@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/myinfo_skin"
-        android:icon="@mipmap/theme_skin_icon"
-        android:title="皮肤"
+        android:id="@+id/myinfo_question"
+        android:icon="@mipmap/ask_answer_icon"
+        android:title="问答"
         app:showAsAction="always"/>
     <item
         android:id="@+id/myinfo_settings"

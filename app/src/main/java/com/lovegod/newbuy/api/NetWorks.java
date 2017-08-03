@@ -8,6 +8,8 @@ import com.lovegod.newbuy.bean.City;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Community;
 import com.lovegod.newbuy.bean.District;
+import com.lovegod.newbuy.bean.FavouriteGoods;
+import com.lovegod.newbuy.bean.FavouriteShop;
 import com.lovegod.newbuy.bean.Goods;
 import com.lovegod.newbuy.bean.LoginMessage;
 import com.lovegod.newbuy.bean.Order;
@@ -247,6 +249,30 @@ public class NetWorks extends RetrofitUtils {
     }
     public static void isBuy(int uid,int cid,BaseObserver<Order>orderObserver){
         setSubscribe(orderApi.isBuy(uid,cid),orderObserver);
+    }
+    public static void addFoucusGoods(Map<String,String>map, BaseObserver<FavouriteGoods>goodsObserver){
+        setSubscribe(goodsApi.addFoucusGoods(map),goodsObserver);
+    }
+    public static void cancelFoucusGoods(int gaid,BaseObserver<FavouriteGoods>goodsObserver){
+        setSubscribe(goodsApi.cancelFoucusGoods(gaid),goodsObserver);
+    }
+    public static void getFoucusGoods(int uid,int page,BaseObserver<List<FavouriteGoods>>goodsObserver){
+        setSubscribe(goodsApi.getFoucusGoods(uid,page),goodsObserver);
+    }
+    public static void isGoodsFoucus(int uid,int cid,BaseObserver<FavouriteGoods>goodsObserver){
+        setSubscribe(goodsApi.isGoodsFoucus(uid,cid),goodsObserver);
+    }
+    public static void addFocusShop(Map<String,String>map, BaseObserver<FavouriteShop>shopObserver){
+        setSubscribe(shopApi.addFocusShop(map),shopObserver);
+    }
+    public static void isShopFocus(int uid,int sid,BaseObserver<FavouriteShop>shopObserver){
+        setSubscribe(shopApi.isShopFocus(uid,sid),shopObserver);
+    }
+    public static void cancelShopFocus(int said,BaseObserver<FavouriteShop>shopObserver){
+        setSubscribe(shopApi.cancelShopFocus(said),shopObserver);
+    }
+    public static void getFocusShop(int uid,int page,BaseObserver<List<FavouriteShop>>shopObserver){
+        setSubscribe(shopApi.getFocusShop(uid, page),shopObserver);
     }
 
     /**

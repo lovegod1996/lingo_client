@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -39,11 +40,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ShowOneAskActivity extends AppCompatActivity {
+    private boolean isFocus;
+    private Button focusButton;
     private RelativeLayout goodsInfoLayout;
     private Toolbar toolbar;
     private EditText replyEdit;
     private RecyclerView recycler;
-    private ImageView goodsImage,thanksImage;
+    private ImageView goodsImage;
     private TextView goodsName,askText,countText,sendText;
     private User user;
     private Quest quest;
@@ -61,7 +64,6 @@ public class ShowOneAskActivity extends AppCompatActivity {
         replieList=quest.getReplies();
         goodsInfoLayout=(RelativeLayout)findViewById(R.id.show_one_ask_goodsinfo_layout);
         toolbar=(Toolbar)findViewById(R.id.show_one_ask_toolbar);
-        thanksImage=(ImageView)findViewById(R.id.show_one_ask_thanks);
         replyEdit=(EditText)findViewById(R.id.show_one_ask_reply_edit);
         sendText=(TextView)findViewById(R.id.show_one_ask_send);
         askText=(TextView)findViewById(R.id.show_one_ask_ask);
@@ -69,6 +71,7 @@ public class ShowOneAskActivity extends AppCompatActivity {
         goodsImage=(ImageView)findViewById(R.id.show_one_ask_image);
         goodsName=(TextView)findViewById(R.id.show_one_ask_goodsname);
         countText=(TextView)findViewById(R.id.show_one_ask_count);
+        focusButton=(Button)findViewById(R.id.show_one_ask_focus);
 
         setSupportActionBar(toolbar);
 
@@ -80,6 +83,15 @@ public class ShowOneAskActivity extends AppCompatActivity {
 
         //初始化各个值
         initInfo();
+
+        /**
+         * 关注按钮监听
+         */
+        focusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
         /**
          * 返回按钮监听
@@ -105,15 +117,6 @@ public class ShowOneAskActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * 点赞图标点击监听
-         */
-        thanksImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                thanksImage.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.thanks_red));
-            }
-        });
 
         /**
          * 返回键监听

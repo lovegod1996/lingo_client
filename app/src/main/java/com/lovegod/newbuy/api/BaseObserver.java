@@ -1,14 +1,17 @@
 package com.lovegod.newbuy.api;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.bean.BaseBean;
 
 import io.reactivex.Observer;
@@ -80,6 +83,7 @@ public abstract class BaseObserver<T> implements Observer<BaseBean<T>> {
 
     @Override
     public void onError(Throwable e) {
+        Activity activity= (Activity) mContext;
         e.printStackTrace();
         Log.e("gesanri", "error:" + e.toString());
         if (mContext != null) {
@@ -87,11 +91,13 @@ public abstract class BaseObserver<T> implements Observer<BaseBean<T>> {
                 mDialog.dismiss();
             }
             Toast.makeText(mContext, "网络异常，请稍后再试", Toast.LENGTH_LONG).show();
+            activity.setContentView(R.layout.common_net_error_layout);
         } else if (view != null) {
             if (mDialog != null && mDialog.isShowing()) {
                 mDialog.dismiss();
             }
             Snackbar.make(view, "网络异常，请稍后再试", Snackbar.LENGTH_SHORT);
+            activity.setContentView(R.layout.common_net_error_layout);
         }
     }
 

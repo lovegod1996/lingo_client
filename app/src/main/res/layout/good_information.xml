@@ -31,10 +31,10 @@
                     android:id="@+id/viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                    android:scaleType="centerInside"
                     android:layout_alignParentTop="true"
-                    android:scaleType="centerInside" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
                 <com.lovegod.newbuy.view.utils.MaterialIndicator
                     android:id="@+id/indicator"
@@ -393,7 +393,7 @@
                 android:id="@+id/image_details_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"></com.lovegod.newbuy.view.utils.NoScrollListView>
+                android:scrollbars="none"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -438,22 +438,33 @@
 
         <ImageView
             android:id="@+id/turnback"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_gravity="left"
             android:layout_marginLeft="10dp"
-            android:padding="5dp"
+            android:layout_marginTop="3dp"
             android:src="@mipmap/turn_left" />
-
 
         <ImageView
             android:id="@+id/keep"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginRight="10dp"
-            android:padding="3dp"
-            android:src="@mipmap/keep_big2" />
+            android:layout_marginTop="3dp"
+            android:src="@mipmap/keep_gray" />
+
+        <ImageView
+            android:id="@+id/shop_cart"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_toLeftOf="@id/keep"
+            android:layout_marginTop="3dp"
+            android:src="@mipmap/shop_cart_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+
 
         <TextView
             android:id="@+id/textview_good"
@@ -461,15 +472,14 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
-            android:layout_toLeftOf="@id/keep"
+            android:layout_toLeftOf="@id/shop_cart"
             android:layout_toRightOf="@id/turnback"
             android:ellipsize="end"
             android:gravity="center"
             android:maxEms="14"
-            android:singleLine="true"
-            android:text="我是标题"
+            android:maxLines="1"
             android:textColor="#00000000"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_size_small" />
     </RelativeLayout>
 
 

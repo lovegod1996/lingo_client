@@ -3,6 +3,8 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 <RelativeLayout
+    android:background="?attr/selectableItemBackground"
+    android:id="@+id/favourite_good_layout"
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1">
@@ -26,6 +28,8 @@
 </RelativeLayout>
 
     <RelativeLayout
+        android:background="?attr/selectableItemBackground"
+        android:id="@+id/favourite_shop_layout"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1">

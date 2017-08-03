@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -48,12 +49,17 @@ import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Assess;
 import com.lovegod.newbuy.bean.Commodity;
+import com.lovegod.newbuy.bean.FavouriteGoods;
+import com.lovegod.newbuy.bean.Quest;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.ShopCartBean;
+import com.lovegod.newbuy.bean.Shopcate;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.ShopActivity;
+import com.lovegod.newbuy.view.carts.CartActivity;
+import com.lovegod.newbuy.view.fragment.Cart_Activity;
 import com.lovegod.newbuy.view.utils.GradationScrollView;
 import com.lovegod.newbuy.view.utils.MaterialIndicator;
 import com.lovegod.newbuy.view.utils.MyRecyclerViewAdapter;
@@ -61,8 +67,12 @@ import com.lovegod.newbuy.view.utils.NoScrollListView;
 import com.lovegod.newbuy.view.utils.StatusBarUtil;
 
 import java.lang.reflect.Array;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +82,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static android.os.Build.VERSION_CODES.M;
 import static android.os.Build.VERSION_CODES.N;
 
 
@@ -87,10 +98,14 @@ import static android.os.Build.VERSION_CODES.N;
  */
 
 public class GoodActivity extends Activity implements GradationScrollView.ScrollViewListener {
+    private FavouriteGoods foucusGoods;
+    //是否收藏该商品
+    private boolean isFoucus=false;
     private GradationScrollView scrollView;
     private TextView textView;
     private int imageHeight;
     private ViewPager viewPager;
+    private User user;
 
     //问答动画是否执行
     private boolean isAnmi=true;
@@ -106,6 +121,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     ListView image_details_listview;
     RelativeLayout li_title;
 
+    @BindView(R.id.shop_cart)
+    ImageView shopCartIcon;
     @BindView(R.id.good_info_ask_button)
     FloatingActionButton askButton;
     @BindView(R.id.assess_btn)
@@ -154,6 +171,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         super.onCreate(savedInstanceState);
         StatusBarUtil.setImgTransparent(this);
         setContentView(R.layout.good_information);
+        user= (User) SpUtils.getObject(this,"userinfo");
 
         ButterKnife.bind(this);
 
@@ -185,6 +203,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
         tv_good_detail_cate = (TextView) findViewById(R.id.tv_good_detail_cate);
 
+        queryWhetherFoucus();
         NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>() {
             @Override
             public void onHandleSuccess(Shop shop) {
@@ -197,6 +216,16 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             @Override
             public void onHandleError(Shop shop) {
 
+            }
+        });
+
+        /**
+         * 购物车按钮监听
+         */
+        shopCartIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GoodActivity.this, CartActivity.class));
             }
         });
 
@@ -225,7 +254,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
 
         //对话框
-        parameterDialog = new Dialog(this, R.style.map_dialog);
+        parameterDialog = new Dialog(this, R.style.param_dialog);
         LinearLayout root = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.layout_parameter_dialog, null);
 
         root.findViewById(R.id.dialog_button).setOnClickListener(dialoglistener);
@@ -247,13 +276,11 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         parameterDialog.setContentView(root);
         Window dialogWindow = parameterDialog.getWindow();
         dialogWindow.setGravity(Gravity.BOTTOM);
+
         dialogWindow.setWindowAnimations(R.style.dialogstyle); // 添加动画
         WindowManager.LayoutParams lp = dialogWindow.getAttributes(); // 获取对话框当前的参数值
-        lp.x = 0; // 新位置X坐标
-        lp.y = -20; // 新位置Y坐标
-        lp.width = (int) getResources().getDisplayMetrics().widthPixels; // 宽度
-        root.measure(0, 0);
-        lp.height = root.getMeasuredHeight();
+
+        lp.width = getResources().getDisplayMetrics().widthPixels; // 宽度
         dialogWindow.setAttributes(lp);
 
         // int cid=commodity.getCid();
@@ -305,6 +332,33 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
     }
 
+    /**
+     * 判断该商品该用户是否关注(如果用户登录了的话)
+     */
+    private void queryWhetherFoucus() {
+        if(user!=null){
+            Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+            NetWorks.isGoodsFoucus(user.getUid(), commodity.getCid(), new BaseObserver<FavouriteGoods>(this,new ProgressDialog(this)) {
+                @Override
+                public void onHandleSuccess(FavouriteGoods favouriteGoods) {
+                    if(favouriteGoods!=null){
+                        keep.setImageResource(R.mipmap.keeped);
+                        foucusGoods=favouriteGoods;
+                        isFoucus=true;
+                    }else {
+                        keep.setImageResource(R.mipmap.keep_gray);
+                        isFoucus=false;
+                    }
+                }
+
+                @Override
+                public void onHandleError(FavouriteGoods favouriteGoods) {
+
+                }
+            });
+        }
+    }
+
     //对话框的点击事件
     private View.OnClickListener dialoglistener = new View.OnClickListener() {
         @Override
@@ -329,49 +383,65 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             }
         });
 
+        /**
+         * 收藏按钮监听
+         */
         keep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                keep.setImageResource(R.mipmap.keeped);
+                if(user!=null) {
+                    if (!isFoucus) {
+                        //提交关注请求
+                        addFoucus();
+                    } else {
+                        deleteFoucus();
+                    }
+                }else {
+                    Toast.makeText(GoodActivity.this, "登陆后才能收藏喜欢的宝贝哦~", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         addcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
-                NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>() {
-                    @Override
-                    public void onHandleSuccess(Shop shop) {
-                        Map<String, Object> addcartMap = new HashMap<String, Object>();
-                        addcartMap.put("uid", 1);
-                        addcartMap.put("sid", commodity.getSid());
-                        addcartMap.put("cid", commodity.getCid());
-                        addcartMap.put("commodity_pic", commodity.getLogo());
-                        addcartMap.put("commodity_name", commodity.getProductname());
-                        addcartMap.put("price", commodity.getPrice());
-                        addcartMap.put("commodity_select", "55寸");
-                        addcartMap.put("amount", 1);
-                        addcartMap.put("shopname", shop.getShopname());
-                        NetWorks.postAddcart(addcartMap, new BaseObserver<ShopCartBean>() {
-                            @Override
-                            public void onHandleSuccess(ShopCartBean shopCartBean) {
-                                Toast toast = Toast.makeText(getApplicationContext(), "宝贝已添加到购物车", Toast.LENGTH_LONG);
-                                toast.show();
-                            }
+                if (user != null) {
+                    final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+                    NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>() {
+                        @Override
+                        public void onHandleSuccess(Shop shop) {
+                            Map<String, Object> addcartMap = new HashMap<String, Object>();
+                            addcartMap.put("uid", 1);
+                            addcartMap.put("sid", commodity.getSid());
+                            addcartMap.put("cid", commodity.getCid());
+                            addcartMap.put("commodity_pic", commodity.getLogo());
+                            addcartMap.put("commodity_name", commodity.getProductname());
+                            addcartMap.put("price", commodity.getPrice());
+                            addcartMap.put("commodity_select", "55寸");
+                            addcartMap.put("amount", 1);
+                            addcartMap.put("shopname", shop.getShopname());
+                            NetWorks.postAddcart(addcartMap, new BaseObserver<ShopCartBean>() {
+                                @Override
+                                public void onHandleSuccess(ShopCartBean shopCartBean) {
+                                    Toast toast = Toast.makeText(getApplicationContext(), "宝贝已添加到购物车", Toast.LENGTH_LONG);
+                                    toast.show();
+                                }
 
-                            @Override
-                            public void onHandleError(ShopCartBean shopCartBean) {
+                                @Override
+                                public void onHandleError(ShopCartBean shopCartBean) {
 
-                            }
-                        });
-                    }
+                                }
+                            });
+                        }
 
-                    @Override
-                    public void onHandleError(Shop shop) {
+                        @Override
+                        public void onHandleError(Shop shop) {
 
-                    }
-                });
+                        }
+                    });
+                }else {
+                    Toast.makeText(GoodActivity.this, "登陆后才能购买喜欢的宝贝哦~", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -430,6 +500,73 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             }
         });
 
+    }
+
+    /**
+     * 取消收藏宝贝请求
+     */
+    private void deleteFoucus() {
+        NetWorks.cancelFoucusGoods(foucusGoods.getGaid(), new BaseObserver<FavouriteGoods>(this) {
+            @Override
+            public void onHandleSuccess(FavouriteGoods favouriteGoods) {
+                keep.setImageResource(R.mipmap.keep_gray);
+                Toast.makeText(GoodActivity.this, "取消收藏成功~", Toast.LENGTH_SHORT).show();
+                isFoucus = false;
+            }
+
+            @Override
+            public void onHandleError(FavouriteGoods favouriteGoods) {
+
+            }
+        });
+    }
+
+    /**
+     * 添加收藏宝贝请求
+     */
+    private void addFoucus() {
+        Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+        final Map<String,String>map=new HashMap<>();
+        map.put("sid",commodity.getSid()+"");
+        map.put("cid",commodity.getCid()+"");
+        map.put("uid",user.getUid()+"");
+        //联网获取时间
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                URL url= null;//取得资源对象
+                try {
+                    url = new URL("http://www.taobao.com");
+                    URLConnection uc = url.openConnection();//生成连接对象
+                    uc.connect(); //发出连接
+                    final long ld = uc.getDate(); //取得网站日期时间
+                    final Date currentDate = new Date(ld); //转换为标准时间对象
+                    final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            map.put("looktime",format.format(currentDate));
+                            NetWorks.addFoucusGoods(map, new BaseObserver<FavouriteGoods>(GoodActivity.this) {
+                                @Override
+                                public void onHandleSuccess(FavouriteGoods favouriteGoods) {
+                                    foucusGoods=favouriteGoods;
+                                    keep.setImageResource(R.mipmap.keeped);
+                                    Toast.makeText(GoodActivity.this, "成功收藏该宝贝~", Toast.LENGTH_SHORT).show();
+                                    isFoucus = true;
+                                }
+
+                                @Override
+                                public void onHandleError(FavouriteGoods favouriteGoods) {
+
+                                }
+                            });
+                        }
+                    });
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
 

@@ -32,10 +32,10 @@ import java.util.List;
  * 创建时间：
  * <p>
  * 描述：购物车
- * 已经被对应的fragment替代，此活动已废弃
+ * 购物车活动，在商品页面跳转到点击购物车跳转到此活动而不跳转到首页fragment的购物车页面
  * *******************************************
  */
-@Deprecated
+
 public class CartActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -93,6 +93,18 @@ public class CartActivity extends AppCompatActivity {
         rlvShopCart.setLayoutManager(new LinearLayoutManager(CartActivity.this));
         mShopCartAdapter = new ShopCartAdapter(CartActivity.this,mcartlist);
         rlvShopCart.setAdapter(mShopCartAdapter);
+
+        //设置返回按钮
+        toolbar.setNavigationIcon(R.mipmap.ic_back);
+        /**
+         * 设置返回按钮点击监听
+         */
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         /**
          * 去结算点击监听

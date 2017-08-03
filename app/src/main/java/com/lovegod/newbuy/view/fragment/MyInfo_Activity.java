@@ -1,19 +1,29 @@
 package com.lovegod.newbuy.view.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +38,7 @@ import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.view.LoginActivity;
 import com.lovegod.newbuy.view.myinfo.AddAssessActivity;
+import com.lovegod.newbuy.view.myinfo.FavouriteActivity;
 import com.lovegod.newbuy.view.myinfo.MoreInfoActivity;
 import com.lovegod.newbuy.view.myinfo.MyOrderInfoActivity;
 import com.lovegod.newbuy.view.myinfo.SettingActivity;
@@ -57,7 +68,7 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
     private Toolbar toolbar;
     private TextView myInfoText,forThePayHint,toSendTheGoodsHint,forTheGoodsHint,forTheAssessHint;
     private CircleImageView myInfoPortrait;
-    private RelativeLayout allOrder,forThePay,toSendTheGoods,forTheGoods,toTheAssess;
+    private RelativeLayout allOrder,forThePay,toSendTheGoods,forTheGoods,toTheAssess,favouriteGoods,favouriteShop;
 
     @Nullable
     @Override
@@ -72,6 +83,8 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
         forThePayHint=(TextView)view.findViewById(R.id.for_the_payment_texthint);
         toSendTheGoodsHint=(TextView)view.findViewById(R.id.to_send_the_goods_texthint);
         forTheGoodsHint=(TextView)view.findViewById(R.id.for_the_goods_texthint);
+        favouriteShop=(RelativeLayout)view.findViewById(R.id.favourite_shop_layout);
+        favouriteGoods=(RelativeLayout)view.findViewById(R.id.favourite_good_layout);
         toSendTheGoods=(RelativeLayout)view.findViewById(R.id.to_send_the_goods_layout);
         forTheGoods=(RelativeLayout)view.findViewById(R.id.for_the_goods_layout);
         forThePay=(RelativeLayout)view.findViewById(R.id.for_the_payment_layout);
@@ -87,6 +100,8 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
         forThePay.setOnClickListener(this);
         forTheGoods.setOnClickListener(this);
         toTheAssess.setOnClickListener(this);
+        favouriteGoods.setOnClickListener(this);
+        favouriteShop.setOnClickListener(this);
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -131,25 +146,51 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()){
+            //点击头像或者用户名
             case R.id.my_info_portrait:
             case R.id.my_info_text:
                 startActivityByCheck(MoreInfoActivity.class);
                 break;
+            //点击全部订单
             case R.id.all_order_layout:
                 startActivityByCheck(MyOrderInfoActivity.class);
                 break;
+            //点击待付款
             case R.id.for_the_payment_layout:
-                startActivityByCheckAndInfo(MyOrderInfoActivity.class,FOR_THE_PAY_FLAG);
+                intent=new Intent(getActivity(), MyOrderInfoActivity.class);
+                intent.putExtra("order_page",FOR_THE_PAY_FLAG);
+                startActivityByCheckAndInfo(intent);
                 break;
+            //点击待发货
             case R.id.to_send_the_goods_layout:
-                startActivityByCheckAndInfo(MyOrderInfoActivity.class,TO_THE_GOODS_FLAG);
+                intent=new Intent(getActivity(), MyOrderInfoActivity.class);
+                intent.putExtra("order_page",TO_THE_GOODS_FLAG);
+                startActivityByCheckAndInfo(intent);
                 break;
+            //点击待收货
             case R.id.for_the_goods_layout:
-                startActivityByCheckAndInfo(MyOrderInfoActivity.class,FOR_THE_GOODS_FLAG);
+                intent=new Intent(getActivity(), MyOrderInfoActivity.class);
+                intent.putExtra("order_page",FOR_THE_GOODS_FLAG);
+                startActivityByCheckAndInfo(intent);
                 break;
+            //点击待评价
             case R.id.for_the_assess_layout:
                 startActivityByCheck(AddAssessActivity.class);
+                break;
+            //点击收藏宝贝
+            case R.id.favourite_good_layout:
+                intent=new Intent(getActivity(),FavouriteActivity.class);
+                //0表示前往收藏商品页面
+                intent.putExtra("type",0);
+                startActivityByCheckAndInfo(intent);
+                break;
+            case R.id.favourite_shop_layout:
+                intent=new Intent(getActivity(),FavouriteActivity.class);
+                intent.putExtra("type",1);
+                startActivityByCheckAndInfo(intent);
+                break;
 
         }
     }
@@ -269,7 +310,9 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.myinfo_skin:
+            case R.id.myinfo_question:
+                //弹出问答对话框
+                showQuestionDialog();
                 break;
             case R.id.myinfo_settings:
                 startActivityByCheck(SettingActivity.class);
@@ -278,6 +321,35 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
                 break;
         }
         return true;
+    }
+
+    /**
+     * 弹出问答对话框
+     */
+    private void showQuestionDialog() {
+        final Dialog dialog=new Dialog(getActivity(),R.style.transparent_dialog);
+        LinearLayout root= (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.ask_answer_dialog,null);
+        ImageView headImage= (ImageView) root.findViewById(R.id.ask_answer_dialog_headimage);
+        ImageView cancelImage=(ImageView)root.findViewById(R.id.ask_answer_dialog_cancelimage);
+        dialog.setContentView(root);
+        Window window=dialog.getWindow();
+        WindowManager.LayoutParams params=window.getAttributes();
+        params.width=getResources().getDisplayMetrics().widthPixels;
+        window.setAttributes(params);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        //开启动画
+        Drawable drawable=headImage.getDrawable();
+        if(drawable instanceof Animatable){
+            ((Animatable) drawable).start();
+        }
+
+        cancelImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 
     /**
@@ -294,17 +366,14 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
     }
 
     /**
-     * 根据登录状态判断要去的活动并且携带参数
+     * 根据登录状态判断要去的活动
      * 不登录就跳转到登录活动
-     * @param startClass 登录状态下去的活动
-     * @param flag 携带的参数
+     * @param intent 携带参数的Intent
      */
-    private void startActivityByCheckAndInfo(Class<?> startClass,int flag){
+    private void startActivityByCheckAndInfo(Intent intent){
         if (user==null) {
             startActivity(new Intent(getActivity(), LoginActivity.class));
         }else {
-            Intent intent=new Intent(getActivity(), startClass);
-            intent.putExtra("order_page",flag);
             startActivity(intent);
         }
     }

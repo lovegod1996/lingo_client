@@ -72,6 +72,7 @@ dependencies {
     compile 'com.github.chrisbanes:PhotoView:2.1.2'
     compile 'com.contrarywind:Android-PickerView:3.2.5'
     compile 'com.github.lygttpod:SuperTextView:2.0.5'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }

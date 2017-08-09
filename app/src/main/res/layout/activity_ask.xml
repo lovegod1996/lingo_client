@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_FFFFFF"
+    tools:context="com.lovegod.newbuy.view.goods.AskActivity">
+    <android.support.v7.widget.Toolbar
+        android:background="@color/splitline_color"
+        android:id="@+id/ask_toolbar"
+        app:navigationIcon="@mipmap/ic_back_black"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_centerVertical="true"
+                android:text="问大家"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/black_000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ask_recyclerview"
+        android:layout_below="@+id/ask_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"/>
+
+        <RelativeLayout
+            android:id="@+id/ask_commit_ask_layout"
+            android:background="#88FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black_000000"/>
+
+            <TextView
+                android:id="@+id/ask_text"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:text="向已买的人提问"
+                android:textSize="@dimen/text_size_mid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_marginRight="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/ask_text"
+                android:layout_toStartOf="@id/ask_text"
+                android:src="@mipmap/question_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+        </RelativeLayout>
+</LinearLayout>

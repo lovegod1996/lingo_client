@@ -1,5 +1,6 @@
 package com.lovegod.newbuy.view.carts;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Order;
+import com.lovegod.newbuy.view.myinfo.MyOrderInfoActivity;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -27,29 +29,26 @@ public class PayChooseActivity extends AppCompatActivity {
     private SuperTextView wechatPay,aliPay;
     private TextView priceText;
     private double payPrice=0F;
-    private List<Order>orderList=new ArrayList<>();
+    private ArrayList<String> orderIdList=new ArrayList();
     private Button commtButton;
     private String payType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_choose);
-        //获取传过来的总价格
-        orderList= (List<Order>) getIntent().getSerializableExtra("order_data");
+
+        //获取一次提交的订单Id数组
+        orderIdList= getIntent().getStringArrayListExtra("order_data");
         toolbar=(Toolbar)findViewById(R.id.pay_choose_toolbar);
         priceText=(TextView)findViewById(R.id.pay_choose_pricetext);
         wechatPay=(SuperTextView)findViewById(R.id.pay_choose_wechatpay);
         aliPay=(SuperTextView)findViewById(R.id.pay_choose_alipay);
         commtButton=(Button)findViewById(R.id.pay_choose_button);
-        //拿到这次交易的总价
-        for(int i=0;i<orderList.size();i++){
-            payPrice+=orderList.get(i).getTotalprice();
-        }
+
+        //访问服务器查询最终
+        getTotalPrice();
 
         setSupportActionBar(toolbar);
-
-        DecimalFormat df=new DecimalFormat("######0.0");
-        priceText.setText("¥"+df.format(payPrice));
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +83,7 @@ public class PayChooseActivity extends AppCompatActivity {
             }
         });
 
+
         /**
          * 设置确认支付按钮监听
          */
@@ -97,15 +97,14 @@ public class PayChooseActivity extends AppCompatActivity {
                     return;
                 }
                 //选择了就一个一个订单添加支付信息
-                for(i=0;i<orderList.size();i++){
+                for(i=0;i<orderIdList.size();i++){
                     final int finalI = i;
-                    NetWorks.commitPayOrder(orderList.get(i).getOid(), payType, new BaseObserver<Order>(PayChooseActivity.this) {
+                    long id=Long.parseLong(orderIdList.get(i));
+                    NetWorks.commitPayOrder(id, payType, new BaseObserver<Order>(PayChooseActivity.this) {
                         @Override
                         public void onHandleSuccess(Order order) {
-                            if(finalI ==orderList.size()-1){
-//                                Intent intent=new Intent(PayChooseActivity.this,OrderInfoActivty.class);
-//                                intent.putExtra("order_info", (Serializable) orderList);
-//                                startActivity(intent);
+                            if(finalI ==orderIdList.size()-1){
+                                startActivity(new Intent(PayChooseActivity.this,MyOrderInfoActivity.class));
                                 finish();
                             }
                         }
@@ -118,5 +117,35 @@ public class PayChooseActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    /**
+     * 查询最终的价格
+     */
+    private void getTotalPrice(){
+        //遍历此次提交的订单列表
+        for(int i=0;i<orderIdList.size();i++) {
+            long id=Long.parseLong(orderIdList.get(i));
+            final int finalI = i;
+            NetWorks.getOrderGoods(id, new BaseObserver<List<Order.OrderGoods>>(this,new ProgressDialog(this)) {
+                @Override
+                public void onHandleSuccess(List<Order.OrderGoods> orderGoodses) {
+                    //算出总价
+                    for(Order.OrderGoods goods:orderGoodses){
+                        payPrice+=goods.getTotalprice();
+                    }
+                    if(finalI ==orderIdList.size()-1){
+                        DecimalFormat df=new DecimalFormat("######0.0");
+                        priceText.setText("¥"+df.format(payPrice));
+                    }
+                }
+
+                @Override
+                public void onHandleError(List<Order.OrderGoods> orderGoodses) {
+
+                }
+            });
+        }
     }
 }

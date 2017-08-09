@@ -1,14 +1,17 @@
 package com.lovegod.newbuy.api;
 
+import com.baidu.platform.comapi.map.B;
 import com.lovegod.newbuy.bean.BaseBean;
 import com.lovegod.newbuy.bean.Order;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -36,7 +39,63 @@ public interface OrderApi {
     @POST("orgood")
     Observable<BaseBean<Order.OrderGoods>>commitOrderGoods(@FieldMap Map<String,String>map);
 
+    //添加某个订单的支付信息
     @FormUrlEncoded
     @PUT("order/pay/{oid}")
     Observable<BaseBean<Order>>commitPayOrder(@Path("oid")long oid, @Field("paytype")String paytype);
+
+    //获取所有订单信息
+    @GET("orders/uid/{uid}")
+    Observable<BaseBean<List<Order>>>getAllOrder(@Path("uid")int uid);
+
+    //根据订单id查找该订单的商品
+    @GET("orgood/oid/{oid}")
+    Observable<BaseBean<List<Order.OrderGoods>>>getOrderGoods(@Path("oid")long oid);
+
+    //查找未付款订单
+    @GET("orders/nopay/{uid}")
+    Observable<BaseBean<List<Order>>>getForThePaymentOrder(@Path("uid")int uid);
+
+    //查看未发货订单
+    @GET("orders/noship/{uid}")
+    Observable<BaseBean<List<Order>>>getToSendGoodsOrder(@Path("uid")int uid);
+
+    //查询未收货订单
+    @GET("orders/noreceipt/{uid}")
+    Observable<BaseBean<List<Order>>>getForTheGoodsOrder(@Path("uid")int uid);
+
+    @GET("orders/receipt/{uid}")
+    Observable<BaseBean<List<Order>>>getFinishOrder(@Path("uid")int uid);
+
+    //分页查找所有订单
+    @GET("orders/page/{uid}/{page}")
+    Observable<BaseBean<List<Order>>>getAllOrderByPage(@Path("uid")int uid,@Path("page")int page);
+
+    //根据订单状态分页查找订单
+    @GET("orders/page/{uid}/{statue}/{openstatue}/{page}")
+    Observable<BaseBean<List<Order>>>getOrderByStatue(@Path("uid")int uid,@Path("statue")int statue,@Path("openstatue")int openstatue,@Path("page")int page);
+
+    //根据订单id取消订单
+    @PUT("order/cancel/{oid}")
+    Observable<BaseBean<Order>>cancelOrder(@Path("oid")long oid);
+
+    //确认收货
+    @PUT("order/deal/{oid}")
+    Observable<BaseBean<Order>>confirmTheGoods(@Path("oid")long oid);
+
+    //根据订单Id查询订单
+    @GET("orders/id/{oid}")
+    Observable<BaseBean<Order>>getOrderById(@Path("oid")long oid);
+
+    //分页查找某用户未评价商品
+    @GET("findAllNoAssess/{uid}/{page}")
+    Observable<BaseBean<List<Order.OrderGoods>>>getNoAssessGoods(@Path("uid")int uid,@Path("page")int page);
+
+    //修改订单商品评价状态
+    @PUT("orgood/ogid/{ogid}")
+    Observable<BaseBean<Order.OrderGoods>>changeOrderGoodsStatue(@Path("ogid")int ogid);
+
+    //根据用户id和商品id查询是否购买过
+    @GET("orgood/uid/cid/{uid}/{cid}")
+    Observable<BaseBean<Order>>isBuy(@Path("uid")int uid,@Path("cid")int cid);
 }

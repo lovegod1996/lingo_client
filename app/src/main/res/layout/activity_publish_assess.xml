@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splitline_color"
+    tools:context="com.lovegod.newbuy.view.myinfo.PublishAssessActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/publish_assess_toolbar"
+        app:navigationIcon="@mipmap/ic_back_black"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/black_000000"
+                android:layout_centerVertical="true"
+                android:text="发表评价"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/publish_assess_publish"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_mid"
+                android:text="发布"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:background="@color/white_FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/publish_assess_goodsimage"
+            android:layout_margin="10dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <TextView
+            android:textColor="@color/black_000000"
+            android:layout_gravity="center"
+            android:text="描述相符"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.example.ywx.lib.StarRating
+            android:id="@+id/publish_assess_total_star"
+            app:hasAnim="true"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            app:starSpacing="15"
+            app:starCount="5"
+            app:starSize="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/publish_assess_total_text"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="非常好"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_marginTop="2dp"
+        android:background="@color/white_FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:maxLength="12"
+            android:gravity="center"
+            android:id="@+id/publish_assess_title_edit"
+            android:maxLines="1"
+            android:layout_margin="10dp"
+            android:textSize="@dimen/text_size_mid"
+            android:textColor="@color/black_000000"
+            android:textColorHint="@color/text_light_gray"
+            android:hint="写个概述让小伙伴知道吧"
+            android:background="@color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
+    <ScrollView
+        android:background="@color/white_FFFFFF"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <EditText
+            android:id="@+id/publish_assess_content_edit"
+            android:textColorHint="@color/text_light_gray"
+            android:hint="(选填)宝贝符合你的期望值吗?来说说吧~"
+            android:textSize="@dimen/text_size_small"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
+
+    <com.google.android.flexbox.FlexboxLayout
+        app:flexWrap="wrap"
+        android:background="@color/white_FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.lovegod.newbuy.view.search.ControlScrollRecyclerView
+            android:id="@+id/publish_assess_recyclerview"
+            android:background="@color/white_FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/publish_assess_addimage"
+            app:srcCompat="@drawable/ic_add_photo"
+            android:layout_width="80dp"
+            android:layout_height="80dp" />
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <LinearLayout
+            android:background="@color/white_FFFFFF"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:drawableLeft="@mipmap/shopcart_shop"
+                android:drawablePadding="5dp"
+                android:text="店铺评分"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:background="@color/white_FFFFFF"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/black_000000"
+                    android:layout_gravity="center"
+                    android:text="物流服务"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.example.ywx.lib.StarRating
+                    android:id="@+id/publish_assess_deliverservice_star"
+                    app:hasAnim="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_gravity="center"
+                    app:starSpacing="15"
+                    app:starCount="5"
+                    app:starSize="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/publish_assess_deliverservice_text"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="非常好"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white_FFFFFF"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/black_000000"
+                android:layout_gravity="center"
+                android:text="服务态度"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.example.ywx.lib.StarRating
+                android:id="@+id/publish_assess_shopservice_star"
+                app:hasAnim="true"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
+                app:starSpacing="15"
+                app:starCount="5"
+                app:starSize="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/publish_assess_shopservice_text"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="非常好"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

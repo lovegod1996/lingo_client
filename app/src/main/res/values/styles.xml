@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -65,10 +65,38 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="no_title_dialog" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="windowNoTitle">false</item>
+        <item name="android:background">@color/splitline_color</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="transparent_dialog" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">false</item><!--半透明-->
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="android:windowBackground">@color/transparent</item><!--背景透明-->
+    </style>
+
+    <style name="param_dialog">
+        <!--灰度值，用来控制dialog外的背景的明暗，默认为0.5-->
+        <item name="android:backgroundDimAmount">0.7</item>
+        <!--是否浮在activity上面-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否需要标题-->
+        <item name="windowNoTitle">false</item>
+        <!--dialog背景颜色-->
+        <item name="android:background">@color/white_FFFFFF</item>
+        <!--是否让dialog外的背景设置半透明-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
     <style name="dialogstyle" parent="android:Animation">
         <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
         <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
     </style>
+
     <style name="loading_dialog" parent="android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>

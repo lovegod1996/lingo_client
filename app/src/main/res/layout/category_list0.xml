@@ -13,7 +13,7 @@
         android:paddingRight="5dp"
         android:background="@color/tv_white"
         android:scaleType="centerCrop"
-        android:src="@mipmap/entity_shop01" />
+        android:src="@mipmap/default_image" />
 
     <RelativeLayout
         android:layout_width="match_parent"

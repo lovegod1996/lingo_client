@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -26,11 +27,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -41,6 +45,7 @@ import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.google.common.math.DoubleMath;
 import com.google.gson.Gson;
 import com.google.zxing.activity.CaptureActivity;
 import com.lovegod.newbuy.MyApplication;
@@ -50,6 +55,7 @@ import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Location;
 import com.lovegod.newbuy.bean.Shop;
+import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.utils.system.SystemUtils;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.goods.GoodActivity;
@@ -81,7 +87,7 @@ import static com.lovegod.newbuy.MainActivity.REQUEST_CODE;
  * *******************************************
  */
 
-public class Home_Activity extends Fragment {
+public class Home_Activity extends android.support.v4.app.Fragment implements ViewTreeObserver.OnGlobalLayoutListener{
 
     // 按类别搜索显示图标
     final int[] images = new int[]{R.mipmap.gree01, R.mipmap.midea01,
@@ -114,12 +120,16 @@ public class Home_Activity extends Fragment {
     public SearchLayout searchLayout;
     private SliderLayout mSliderLayout;
     private PagerIndicator indicator;
+    private ScrollView scrollView;
+    //轮播图高度
+    private int imageHeight;
+
+    private RelativeLayout titleLayout;
 
     private HomeImageListAdapter homeImageListAdapter;
     private List<Shop> shopList = new ArrayList<>();
     int time = 0;
     boolean run = true;
-    Thread thread;
 
     private static Geocoder geocoder;//此对象能通过经纬度来获取相应的城市等信息
 
@@ -132,7 +142,24 @@ public class Home_Activity extends Fragment {
             switch (msg.what) {
                 case 1:
                     Location location = (Location) msg.getData().getSerializable("location");
+                    if(location!=null) {
+                        NetWorks.getNearbyShop(Double.parseDouble(location.getLon()), Double.parseDouble(location.getLat()),5000,new BaseObserver<List<Shop>>() {
+                            @Override
+                            public void onHandleSuccess(List<Shop> shops) {
+                                shopList = shops;
+                                homeImageListAdapter.bindData(MyApplication.getInstance().getApplicationContext(), shops);
+                                listView.setAdapter(homeImageListAdapter);
+                                homeImageListAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onHandleError(List<Shop> shops) {
+
+                            }
+                        });
+                    }
                     city_name.setText(location.getAddress().substring(3, 6));
+                    homeImageListAdapter.notifyDataSetChanged();
                     break;
                 default:
                     break;
@@ -147,6 +174,8 @@ public class Home_Activity extends Fragment {
         gridView = (GridView) view.findViewById(R.id.gridView_separate);
         scan_code_btn = (Button) view.findViewById(R.id.scan_code_btn);
         city_name = (Button) view.findViewById(R.id.city_name);
+        scrollView=(ScrollView)view.findViewById(R.id.home_scroll_view);
+        titleLayout=(RelativeLayout)view.findViewById(R.id.rl_first_top);
 
 
         searchLayout = (SearchLayout) view.findViewById(R.id.main_search_layout);
@@ -154,24 +183,11 @@ public class Home_Activity extends Fragment {
         mSliderLayout = (SliderLayout) view.findViewById(R.id.slider);
         //指示器，那些小点
         indicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
+
         initSlider();
 //        thread = new Thread(new MyThread());
 //        thread.start();
         homeImageListAdapter = new HomeImageListAdapter();
-        NetWorks.getAllshop(new BaseObserver<List<Shop>>() {
-            @Override
-            public void onHandleSuccess(List<Shop> shops) {
-                shopList = shops;
-                homeImageListAdapter.bindData(MyApplication.getInstance().getApplicationContext(), shops);
-                listView.setAdapter(homeImageListAdapter);
-                homeImageListAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onHandleError(List<Shop> shops) {
-
-            }
-        });
         Log.e("网络访问时长", time + "");
         String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION};
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || SystemUtils.checkPermissionGranted(getActivity(), permissions)) {
@@ -222,6 +238,24 @@ public class Home_Activity extends Fragment {
                 startActivity(new Intent(getActivity(),SearchActivity.class));
             }
         });
+
+        /**
+         * 布局滚动监听
+         */
+        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if(scrollY<=0){
+                    titleLayout.setBackgroundColor(Color.argb(0,253,104,97));
+                }else if(scrollY>0&&scrollY<=imageHeight) {
+                    float scale = (float)scrollY/imageHeight;
+                    titleLayout.setBackgroundColor(Color.argb((int) (255*scale),253,104,97));
+                }else if(scrollY>imageHeight){
+                    titleLayout.setBackgroundColor(Color.argb(255,253,104,97));
+                }
+            }
+        });
+
         return view;
     }
 
@@ -272,7 +306,8 @@ public class Home_Activity extends Fragment {
                     Log.v("定位",result);
                     Gson gson = new Gson();
                     Location location = gson.fromJson(result, Location.class);
-
+                    //将当前位置存入缓存
+                    SpUtils.putObject(getActivity(),"location",location);
                     Message message = new Message();
                     message.what = 1;
                     Bundle bundle = new Bundle();
@@ -284,6 +319,12 @@ public class Home_Activity extends Fragment {
                 }
             }
         }.start();
+    }
+
+    @Override
+    public void onGlobalLayout() {
+        imageHeight=mSliderLayout.getMeasuredHeight();
+        mSliderLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
     }
 
     class MyThread implements Runnable {
@@ -308,10 +349,11 @@ public class Home_Activity extends Fragment {
 
     /*广告栏轮播*/
     private void initSlider() {
+        mSliderLayout.getViewTreeObserver().addOnGlobalLayoutListener(this);
         List<String> imageUrls = new ArrayList<>();
-        imageUrls.add("http://m.360buyimg.com/mobilecms/s300x98_jfs/t2416/102/20949846/13425/a3027ebc/55e6d1b9Ne6fd6d8f.jpg");
-        imageUrls.add("http://m.360buyimg.com/mobilecms/s300x98_jfs/t1507/64/486775407/55927/d72d78cb/558d2fbaNb3c2f349.jpg");
-        imageUrls.add("http://m.360buyimg.com/mobilecms/s300x98_jfs/t1363/77/1381395719/60705/ce91ad5c/55dd271aN49efd216.jpg");
+        imageUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1502106197328&di=53f4cc298f1cef374cd6315bc3ee469f&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F10%2F73%2F38%2F90b1OOOPIC9d.jpg");
+        imageUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1502106231949&di=c821f7c7371b60a71c28b58d2aee3a05&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F95%2F09%2F16bOOOPIC6b_1024.jpg");
+        imageUrls.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3922813695,1834018485&fm=26&gp=0.jpg");
         for (int i = 0; i < imageUrls.size(); i++) {
             //新建三个展示View，并且添加到SliderLayout
             TextSliderView tsv = new TextSliderView(getActivity());

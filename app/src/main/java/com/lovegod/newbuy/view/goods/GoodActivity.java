@@ -1,12 +1,17 @@
 package com.lovegod.newbuy.view.goods;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -18,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,17 +38,26 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.animation.ViewPropertyAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.example.ywx.lib.StarRating;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Assess;
 import com.lovegod.newbuy.bean.Commodity;
+import com.lovegod.newbuy.bean.FavouriteGoods;
+import com.lovegod.newbuy.bean.Quest;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.ShopCartBean;
+import com.lovegod.newbuy.bean.Shopcate;
+import com.lovegod.newbuy.bean.User;
+import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.ShopActivity;
+import com.lovegod.newbuy.view.carts.CartActivity;
+import com.lovegod.newbuy.view.fragment.Cart_Activity;
 import com.lovegod.newbuy.view.utils.GradationScrollView;
 import com.lovegod.newbuy.view.utils.MaterialIndicator;
 import com.lovegod.newbuy.view.utils.MyRecyclerViewAdapter;
@@ -50,8 +65,12 @@ import com.lovegod.newbuy.view.utils.NoScrollListView;
 import com.lovegod.newbuy.view.utils.StatusBarUtil;
 
 import java.lang.reflect.Array;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +80,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static android.os.Build.VERSION_CODES.M;
 import static android.os.Build.VERSION_CODES.N;
 
 
@@ -76,11 +96,17 @@ import static android.os.Build.VERSION_CODES.N;
  */
 
 public class GoodActivity extends Activity implements GradationScrollView.ScrollViewListener {
+    private FavouriteGoods foucusGoods;
+    //是否收藏该商品
+    private boolean isFoucus=false;
     private GradationScrollView scrollView;
     private TextView textView;
     private int imageHeight;
     private ViewPager viewPager;
-//    LinearLayout text_bg;
+    private User user;
+
+    //问答动画是否执行
+    private boolean isAnmi=true;
 
     NoScrollListView imagelist;
 
@@ -93,7 +119,14 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     ListView image_details_listview;
     RelativeLayout li_title;
 
-
+    @BindView(R.id.assess_li)
+    LinearLayout assessLi;
+    @BindView(R.id.user_ratingbar)
+    StarRating userRatingbar;
+    @BindView(R.id.shop_cart)
+    ImageView shopCartIcon;
+    @BindView(R.id.good_info_ask_button)
+    FloatingActionButton askButton;
     @BindView(R.id.assess_btn)
     Button assess_btn;
     @BindView(R.id.goodsname)
@@ -140,6 +173,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         super.onCreate(savedInstanceState);
         StatusBarUtil.setImgTransparent(this);
         setContentView(R.layout.good_information);
+        user= (User) SpUtils.getObject(this,"userinfo");
+
         ButterKnife.bind(this);
 
         scrollView = (GradationScrollView) findViewById(R.id.scrollview_good);
@@ -170,6 +205,12 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
         tv_good_detail_cate = (TextView) findViewById(R.id.tv_good_detail_cate);
 
+        //查询是否已经管制
+        queryWhetherFoucus();
+
+        //获取最新的评论信息以及评论个数
+        getAssess();
+
         NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>() {
             @Override
             public void onHandleSuccess(Shop shop) {
@@ -182,6 +223,28 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             @Override
             public void onHandleError(Shop shop) {
 
+            }
+        });
+
+        /**
+         * 购物车按钮监听
+         */
+        shopCartIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GoodActivity.this, CartActivity.class));
+            }
+        });
+
+        /**
+         * 问答的按钮监听
+         */
+        askButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(GoodActivity.this,AskActivity.class);
+                intent.putExtra("commodity",commodity);
+                startActivity(intent);
             }
         });
 
@@ -198,7 +261,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
 
         //对话框
-        parameterDialog = new Dialog(this, R.style.map_dialog);
+        parameterDialog = new Dialog(this, R.style.param_dialog);
         LinearLayout root = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.layout_parameter_dialog, null);
 
         root.findViewById(R.id.dialog_button).setOnClickListener(dialoglistener);
@@ -220,36 +283,16 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         parameterDialog.setContentView(root);
         Window dialogWindow = parameterDialog.getWindow();
         dialogWindow.setGravity(Gravity.BOTTOM);
+
         dialogWindow.setWindowAnimations(R.style.dialogstyle); // 添加动画
         WindowManager.LayoutParams lp = dialogWindow.getAttributes(); // 获取对话框当前的参数值
-        lp.x = 0; // 新位置X坐标
-        lp.y = -20; // 新位置Y坐标
-        lp.width = (int) getResources().getDisplayMetrics().widthPixels; // 宽度
-        root.measure(0, 0);
-        lp.height = root.getMeasuredHeight();
+
+        lp.width = getResources().getDisplayMetrics().widthPixels; // 宽度
         dialogWindow.setAttributes(lp);
 
-        // int cid=commodity.getCid();
-        NetWorks.getAllAssess(commodity.getCid(), new BaseObserver<List<Assess>>() {
-            @Override
-            public void onHandleSuccess(List<Assess> assesses) {
-                if(assesses.size()>0) {
-                    assess_num.setText("全部评价(" + assesses.size() + ")");
-                    user_name.setText(assesses.get(0).getHollrall());
-                    user_time.setText(String.valueOf(assesses.get(0).getUid()));
-                    user_assess.setText(assesses.get(0).getDetail());
-                }
-
-            }
-
-            @Override
-            public void onHandleError(List<Assess> assesses) {
-
-            }
-        });
-/**
- * 产品参数
- */
+        /**
+         * 产品参数
+         */
         tv_good_detail_cate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -257,9 +300,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             }
         });
         final String[] a = commodity.getDetailshow().split(";");
-/**
- * 商品详情listview
- */
+
+        /**
+         * 商品详情listview
+         */
         image_details_listview = (ListView) findViewById(R.id.image_details_listview);
         image_details_listview.setAdapter(new ImageListAdapter(GoodActivity.this, a));
         MaterialIndicator indicator = (MaterialIndicator) findViewById(R.id.indicator);
@@ -276,6 +320,33 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         initListeners();
 
 
+    }
+
+    /**
+     * 判断该商品该用户是否关注(如果用户登录了的话)
+     */
+    private void queryWhetherFoucus() {
+        if(user!=null){
+            Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+            NetWorks.isGoodsFoucus(user.getUid(), commodity.getCid(), new BaseObserver<FavouriteGoods>(this,new ProgressDialog(this)) {
+                @Override
+                public void onHandleSuccess(FavouriteGoods favouriteGoods) {
+                    if(favouriteGoods!=null){
+                        keep.setImageResource(R.mipmap.keeped);
+                        foucusGoods=favouriteGoods;
+                        isFoucus=true;
+                    }else {
+                        keep.setImageResource(R.mipmap.keep_gray);
+                        isFoucus=false;
+                    }
+                }
+
+                @Override
+                public void onHandleError(FavouriteGoods favouriteGoods) {
+
+                }
+            });
+        }
     }
 
     //对话框的点击事件
@@ -302,49 +373,65 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             }
         });
 
+        /**
+         * 收藏按钮监听
+         */
         keep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                keep.setImageResource(R.mipmap.keeped);
+                if(user!=null) {
+                    if (!isFoucus) {
+                        //提交关注请求
+                        addFoucus();
+                    } else {
+                        deleteFoucus();
+                    }
+                }else {
+                    Toast.makeText(GoodActivity.this, "登陆后才能收藏喜欢的宝贝哦~", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         addcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
-                NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>() {
-                    @Override
-                    public void onHandleSuccess(Shop shop) {
-                        Map<String, Object> addcartMap = new HashMap<String, Object>();
-                        addcartMap.put("uid", 1);
-                        addcartMap.put("sid", commodity.getSid());
-                        addcartMap.put("cid", commodity.getCid());
-                        addcartMap.put("commodity_pic", commodity.getLogo());
-                        addcartMap.put("commodity_name", commodity.getProductname());
-                        addcartMap.put("price", commodity.getPrice());
-                        addcartMap.put("commodity_select", "55寸");
-                        addcartMap.put("amount", 1);
-                        addcartMap.put("shopname", shop.getShopname());
-                        NetWorks.postAddcart(addcartMap, new BaseObserver<ShopCartBean>() {
-                            @Override
-                            public void onHandleSuccess(ShopCartBean shopCartBean) {
-                                Toast toast = Toast.makeText(getApplicationContext(), "宝贝已添加到购物车", Toast.LENGTH_LONG);
-                                toast.show();
-                            }
+                if (user != null) {
+                    final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+                    NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>() {
+                        @Override
+                        public void onHandleSuccess(Shop shop) {
+                            Map<String, Object> addcartMap = new HashMap<String, Object>();
+                            addcartMap.put("uid", 1);
+                            addcartMap.put("sid", commodity.getSid());
+                            addcartMap.put("cid", commodity.getCid());
+                            addcartMap.put("commodity_pic", commodity.getLogo());
+                            addcartMap.put("commodity_name", commodity.getProductname());
+                            addcartMap.put("price", commodity.getPrice());
+                            addcartMap.put("commodity_select", "55寸");
+                            addcartMap.put("amount", 1);
+                            addcartMap.put("shopname", shop.getShopname());
+                            NetWorks.postAddcart(addcartMap, new BaseObserver<ShopCartBean>() {
+                                @Override
+                                public void onHandleSuccess(ShopCartBean shopCartBean) {
+                                    Toast toast = Toast.makeText(getApplicationContext(), "宝贝已添加到购物车", Toast.LENGTH_LONG);
+                                    toast.show();
+                                }
 
-                            @Override
-                            public void onHandleError(ShopCartBean shopCartBean) {
+                                @Override
+                                public void onHandleError(ShopCartBean shopCartBean) {
 
-                            }
-                        });
-                    }
+                                }
+                            });
+                        }
 
-                    @Override
-                    public void onHandleError(Shop shop) {
+                        @Override
+                        public void onHandleError(Shop shop) {
 
-                    }
-                });
+                        }
+                    });
+                }else {
+                    Toast.makeText(GoodActivity.this, "登陆后才能购买喜欢的宝贝哦~", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -403,6 +490,73 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             }
         });
 
+    }
+
+    /**
+     * 取消收藏宝贝请求
+     */
+    private void deleteFoucus() {
+        NetWorks.cancelFoucusGoods(foucusGoods.getGaid(), new BaseObserver<FavouriteGoods>(this) {
+            @Override
+            public void onHandleSuccess(FavouriteGoods favouriteGoods) {
+                keep.setImageResource(R.mipmap.keep_gray);
+                Toast.makeText(GoodActivity.this, "取消收藏成功~", Toast.LENGTH_SHORT).show();
+                isFoucus = false;
+            }
+
+            @Override
+            public void onHandleError(FavouriteGoods favouriteGoods) {
+
+            }
+        });
+    }
+
+    /**
+     * 添加收藏宝贝请求
+     */
+    private void addFoucus() {
+        Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+        final Map<String,String>map=new HashMap<>();
+        map.put("sid",commodity.getSid()+"");
+        map.put("cid",commodity.getCid()+"");
+        map.put("uid",user.getUid()+"");
+        //联网获取时间
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                URL url= null;//取得资源对象
+                try {
+                    url = new URL("http://www.taobao.com");
+                    URLConnection uc = url.openConnection();//生成连接对象
+                    uc.connect(); //发出连接
+                    final long ld = uc.getDate(); //取得网站日期时间
+                    final Date currentDate = new Date(ld); //转换为标准时间对象
+                    final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            map.put("looktime",format.format(currentDate));
+                            NetWorks.addFoucusGoods(map, new BaseObserver<FavouriteGoods>(GoodActivity.this) {
+                                @Override
+                                public void onHandleSuccess(FavouriteGoods favouriteGoods) {
+                                    foucusGoods=favouriteGoods;
+                                    keep.setImageResource(R.mipmap.keeped);
+                                    Toast.makeText(GoodActivity.this, "成功收藏该宝贝~", Toast.LENGTH_SHORT).show();
+                                    isFoucus = true;
+                                }
+
+                                @Override
+                                public void onHandleError(FavouriteGoods favouriteGoods) {
+
+                                }
+                            });
+                        }
+                    });
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
 
@@ -472,13 +626,34 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                                 int oldx, int oldy) {
         // TODO Auto-generated method stub
         if (y <= 0) {   //设置标题的背景颜色
-            li_title.setBackgroundColor(Color.argb((int) 0, 144, 151, 166));
+            li_title.setBackgroundColor(Color.argb( 0, 144, 151, 166));
         } else if (y > 0 && y <= imageHeight) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
+            askButton.setVisibility(View.GONE);
+            isAnmi=true;
             float scale = (float) y / imageHeight;
             float alpha = (255 * scale);
             textView.setTextColor(Color.argb((int) alpha, 255, 255, 255));
             li_title.setBackgroundColor(Color.argb((int) alpha, 144, 151, 166));
         } else {    //滑动到banner下面设置普通颜色
+            askButton.setVisibility(View.VISIBLE);
+            //如果刚拉入下面执行动画
+            if(isAnmi){
+                ObjectAnimator scaleX = ObjectAnimator.ofFloat(askButton, "scaleX",0.7f,1f);
+                ObjectAnimator scaleY = ObjectAnimator.ofFloat(askButton, "scaleY", 0.7f,1f);
+                scaleX.setRepeatMode(ValueAnimator.REVERSE);
+                scaleX.setRepeatCount(0);
+                scaleY.setRepeatMode(ValueAnimator.REVERSE);
+                scaleY.setRepeatCount(0);
+                scaleX.setInterpolator(new OvershootInterpolator());
+                scaleX.setDuration(700);
+                scaleY.setDuration(500);
+                //set把两个动画加进来一起执行
+                AnimatorSet set=new AnimatorSet();
+                set.playTogether(scaleX,scaleY);
+                set.start();
+                isAnmi=false;
+            }
+
             li_title.setBackgroundColor(Color.argb((int) 255, 255, 255, 255));
 
             textView.setTextColor(Color.argb((int) 255, 0, 0, 0));
@@ -524,6 +699,59 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             return convertView;
         }
 
+    }
+
+    /**
+     * 获取一条最新的评价以及获取评价总个数
+     */
+    private void getAssess(){
+        final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+         /*获取评价*/
+        NetWorks.getNewAssess(commodity.getCid(), new BaseObserver<Assess>(this) {
+
+            @Override
+            public void onHandleSuccess(Assess assess) {
+                if (assess!=null) {
+                    Log.v("评价：",assess.getUsername());
+                    user_name.setText(newName(assess.getUsername()));
+                    user_time.setText(assess.getDate().substring(0, 10));
+                    user_assess.setText(assess.getDetail());
+                    userRatingbar.setCurrentStarCount((int) assess.getGrade());
+
+                    //获取评价的总条数
+                    NetWorks.getAssessCount(commodity.getCid(), new BaseObserver<Integer>() {
+                        @Override
+                        public void onHandleSuccess(Integer integer) {
+                            assess_num.setText("全部评价(" + integer + ")");
+                        }
+
+                        @Override
+                        public void onHandleError(Integer integer) {
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onHandleError(Assess assess) {
+                assessLi.setVisibility(View.GONE);
+                assess_num.setText("全部评价(" + 0 + ")");
+            }
+        });
+    }
+
+    /**
+     * 隐藏名字，中间用*隐藏
+     * @param username 原始用户名
+     * @return 隐藏后的用户名
+     */
+    private String newName(String username) {
+        String newname;
+        int num = username.length();
+        newname = username.charAt(0) + "**" + username.charAt(num - 2) + username.charAt(num - 1);
+        return newname;
     }
 
 }

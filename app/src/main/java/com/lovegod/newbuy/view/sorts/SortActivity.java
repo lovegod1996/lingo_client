@@ -36,11 +36,10 @@ import java.util.Set;
  * 创建时间：
  * <p>
  * 描述：
- * <p/>
- * <p/>
+ * 已经被fragment替代，该活动已废弃
  * *******************************************
  */
-
+@Deprecated
 public class SortActivity extends AppCompatActivity {
     Toolbar toolbar;
     private RecyclerView sort_recyclerview_first;

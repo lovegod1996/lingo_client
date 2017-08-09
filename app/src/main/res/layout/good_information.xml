@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
@@ -30,10 +31,10 @@
                     android:id="@+id/viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                    android:scaleType="centerInside"
                     android:layout_alignParentTop="true"
-                    android:scaleType="centerInside" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
                 <com.lovegod.newbuy.view.utils.MaterialIndicator
                     android:id="@+id/indicator"
@@ -199,57 +200,7 @@
                 </RelativeLayout>
 
             </LinearLayout>
-            <!--<LinearLayout
-                android:id="@+id/ll_good_detail_service"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="#ffffff"
-                android:padding="12dp">
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@mipmap/da_ren_services_tick"
-                    android:drawablePadding="6dp"
-                    android:text="担保交易"
-                    android:textSize="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableLeft="@mipmap/da_ren_services_tick"
-                    android:drawablePadding="6dp"
-                    android:text="正品保障"
-                    android:textSize="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableLeft="@mipmap/da_ren_services_tick"
-                    android:drawablePadding="6dp"
-                    android:text="赔运费险"
-                    android:textSize="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:drawableLeft="@mipmap/da_ren_services_tick"
-                    android:drawablePadding="6dp"
-                    android:text="7天退换"
-                    android:textSize="10dp" />
-
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@mipmap/rightarrow" />
-            </LinearLayout>-->
 
             <View
                 android:layout_width="match_parent"
@@ -288,9 +239,10 @@
                     android:padding="5dp" />
 
                 <LinearLayout
+                    android:id="@+id/assess_li"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -313,28 +265,16 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true">
 
-                                <ImageView
+                                <com.example.ywx.lib.StarRating
+                                    android:id="@+id/user_ratingbar"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@mipmap/da_ren_list_star" />
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="2dp"
-                                    android:src="@mipmap/da_ren_list_star" />
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="2dp"
-                                    android:src="@mipmap/da_ren_list_star" />
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="2dp"
-                                    android:src="@mipmap/da_ren_list_star" />
+                                    android:layout_alignParentRight="true"
+                                    app:clickable="false"
+                                    app:hasAnim="false"
+                                    app:starCount="5"
+                                    app:starSize="16dp"
+                                    app:starSpacing="0"/>
                             </LinearLayout>
                         </RelativeLayout>
 
@@ -392,11 +332,12 @@
                 android:id="@+id/image_details_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"></com.lovegod.newbuy.view.utils.NoScrollListView>
+                android:scrollbars="none"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="60dp"
                 android:background="#EEEEEE"
                 android:padding="8dp">
 
@@ -413,7 +354,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="已经最到底啦!"
+                    android:text="已经到底啦"
                     android:textSize="12dp" />
 
                 <View
@@ -437,22 +378,33 @@
 
         <ImageView
             android:id="@+id/turnback"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_gravity="left"
             android:layout_marginLeft="10dp"
-            android:padding="5dp"
+            android:layout_marginTop="3dp"
             android:src="@mipmap/turn_left" />
-
 
         <ImageView
             android:id="@+id/keep"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginRight="10dp"
-            android:padding="3dp"
-            android:src="@mipmap/keep_big2" />
+            android:layout_marginTop="3dp"
+            android:src="@mipmap/keep_gray" />
+
+        <ImageView
+            android:id="@+id/shop_cart"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_toLeftOf="@id/keep"
+            android:layout_marginTop="3dp"
+            android:src="@mipmap/shop_cart_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+
 
         <TextView
             android:id="@+id/textview_good"
@@ -460,15 +412,14 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
-            android:layout_toLeftOf="@id/keep"
+            android:layout_toLeftOf="@id/shop_cart"
             android:layout_toRightOf="@id/turnback"
             android:ellipsize="end"
             android:gravity="center"
             android:maxEms="14"
-            android:singleLine="true"
-            android:text="我是标题"
+            android:maxLines="1"
             android:textColor="#00000000"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_size_small" />
     </RelativeLayout>
 
 
@@ -548,4 +499,17 @@
         android:layout_height="0.5dp"
         android:layout_above="@id/l1"
         android:background="@color/bg_Gray2" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:visibility="gone"
+        android:id="@+id/good_info_ask_button"
+        app:elevation="10dp"
+        app:backgroundTint="#1296DB"
+        android:src="@mipmap/ask_character"
+        android:layout_margin="15dp"
+        android:layout_above="@id/l1"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

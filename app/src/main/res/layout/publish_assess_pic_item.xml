@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="2dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:scaleType="centerCrop"
+        android:id="@+id/publish_assess_pic_item_image"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@mipmap/default_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
+    <ImageView
+        android:id="@+id/publish_assess_pic_item_cancel"
+        android:layout_gravity="right"
+        android:src="@mipmap/cancel_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
+</FrameLayout>

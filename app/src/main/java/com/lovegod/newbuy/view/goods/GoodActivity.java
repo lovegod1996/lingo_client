@@ -626,7 +626,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                                 int oldx, int oldy) {
         // TODO Auto-generated method stub
         if (y <= 0) {   //设置标题的背景颜色
-            li_title.setBackgroundColor(Color.argb((int) 0, 144, 151, 166));
+            li_title.setBackgroundColor(Color.argb( 0, 144, 151, 166));
         } else if (y > 0 && y <= imageHeight) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
             askButton.setVisibility(View.GONE);
             isAnmi=true;

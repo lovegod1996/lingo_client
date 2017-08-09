@@ -57,7 +57,6 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
     public List<Assess> mDatas;
     public LayoutInflater mLayoutInflater;
     String[] pics;
-    private ArrayList<String>picList=new ArrayList<>();
     /*对话框*/
     Dialog imageDialog;
 
@@ -79,7 +78,8 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
 
     @Override
     public void onBindViewHolder(final AssessViewHolder holder, final int position) {
-
+        //当前点击的图片列表
+       final ArrayList<String>picList=new ArrayList<>();
         holder.assess_user_time.setText(String.valueOf(mDatas.get(position).getDate().substring(0,10)));
         holder.assess_text_view.setText(mDatas.get(position).getDetail());
         holder.overviewAssess.setText(mDatas.get(position).getHollrall());
@@ -100,7 +100,6 @@ public class AssessRecyclerViewAdapter extends RecyclerView.Adapter<AssessRecycl
             pics = mDatas.get(position).getPics().split(";");
 
             //将字符串数组转变为字符串list
-            picList.clear();
             for(int i=0;i<pics.length;i++){
                 picList.add(pics[i]);
             }

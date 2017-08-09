@@ -36,6 +36,15 @@ public class Shop implements Serializable{
     private String logo;
     private String showpic;
     private String headershow;
+    private String scope;
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
 
     public int getSid() {
         return sid;

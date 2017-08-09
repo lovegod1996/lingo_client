@@ -143,7 +143,7 @@ public class OrderInfoActivty extends AppCompatActivity {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                         //进行高斯模糊处理并设置禁Imgaeview
-                        headImage.setImageBitmap(FastBlur.doBlur(resource,3, true));
+                        headImage.setImageBitmap(FastBlur.doBlur(resource,10, true));
                     }
                 });
                 shopName.setText(shop.getShopname());

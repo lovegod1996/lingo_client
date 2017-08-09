@@ -135,6 +135,9 @@ public class ShowOneAskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String content=replyEdit.getText().toString().trim();
+                //提交成功前不可点击
+                sendText.setEnabled(false);
+                sendText.setClickable(false);
                 if(!TextUtils.isEmpty(content)){
                     sendReplyPre(content);
                 }
@@ -216,11 +219,15 @@ public class ShowOneAskActivity extends AppCompatActivity {
                 replieList.add(reply);
                 Collections.sort(replieList,new orderComparator());
                 adapter.notifyDataSetChanged();
+                initInfo();
+                sendText.setEnabled(true);
+                sendText.setClickable(true);
             }
 
             @Override
             public void onHandleError(Quest.Reply reply) {
-
+                sendText.setEnabled(true);
+                sendText.setClickable(true);
             }
         });
     }

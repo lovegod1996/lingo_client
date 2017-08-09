@@ -12,9 +12,9 @@
         android:title="@string/title_sort" />
 
     <item
-        android:id="@+id/navigation_history"
-        android:icon="@drawable/ic_description_black_24dp"
-        android:title="@string/title_history" />
+        android:id="@+id/navigation_life"
+        android:icon="@drawable/ic_filter_tilt_shift_black_24dp"
+        android:title="@string/title_life" />
     <item
         android:id="@+id/navigation_cart"
         android:icon="@drawable/ic_shopping_cart_black_24dp"

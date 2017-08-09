@@ -32,7 +32,7 @@
             android:id="@+id/focus_shop_item_type"
             android:layout_toRightOf="@id/focus_shop_item_logo"
             android:layout_below="@id/focus_shop_item_name"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="20dp" />
 
         <Button

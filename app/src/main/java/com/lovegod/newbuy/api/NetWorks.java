@@ -297,6 +297,9 @@ public class NetWorks extends RetrofitUtils {
     public static void getNewAssess(int cid, BaseObserver<Assess> assessObserver) {
         setSubscribe(goodsApi.getNewAssess(cid), assessObserver);
     }
+    public static void getNearbyShop(double longgitude,double latitude,int dis,BaseObserver<List<Shop>>shopObserver){
+        setSubscribe(shopApi.getNearbyShop(longgitude,latitude,dis),shopObserver);
+    }
 
     /**
      * 插入观察者

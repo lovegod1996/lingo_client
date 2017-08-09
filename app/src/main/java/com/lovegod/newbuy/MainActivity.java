@@ -30,6 +30,7 @@ import com.lovegod.newbuy.bean.Location;
 import com.lovegod.newbuy.service.BluetoothService;
 import com.lovegod.newbuy.view.BaseActivity;
 import com.lovegod.newbuy.view.fragment.Cart_Activity;
+import com.lovegod.newbuy.view.fragment.Life_Fragment;
 import com.lovegod.newbuy.view.fragment.MyInfo_Activity;
 import com.lovegod.newbuy.view.fragment.Sort_Activity;
 import com.lovegod.newbuy.view.myinfo.MyInfoActivity;
@@ -183,8 +184,8 @@ public class MainActivity extends BaseActivity {
                     replaceFragment(new Sort_Activity());
                     //startActivity(new Intent(MainActivity.this, SortActivity.class));
                     return true;
-                case R.id.navigation_history:
-
+                case R.id.navigation_life:
+                    replaceFragment(new Life_Fragment());
                     return true;
                 case R.id.navigation_cart:
                     replaceFragment(new Cart_Activity());

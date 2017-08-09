@@ -91,11 +91,7 @@ public class FavouriteShopAdapter extends RecyclerView.Adapter<FavouriteShopAdap
         NetWorks.getIDshop(favouriteShop.getSid(), new BaseObserver<Shop>(mContext) {
             @Override
             public void onHandleSuccess(final Shop shop) {
-                if(shop.getType().equals("实体零售")){
-                    holder.shopType.setText("实体店");
-                }else {
-                    holder.shopType.setText("线上店");
-                }
+                holder.shopType.setText(shop.getType());
                 /**
                  * 每个item的点击监听
                  */

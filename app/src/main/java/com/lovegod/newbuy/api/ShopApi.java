@@ -11,6 +11,7 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -66,4 +67,7 @@ public interface ShopApi {
     @GET("shoplook/user/{uid}/{page}")
     Observable<BaseBean<List<FavouriteShop>>>getFocusShop(@Path("uid")int uid,@Path("page")int page);
 
+    //获取附近店铺
+    @GET("shops/near/{longgitude}/{latitude}/{dis}")
+    Observable<BaseBean<List<Shop>>>getNearbyShop(@Path("longgitude")double longgitude,@Path("latitude")double latitude,@Path("dis")int dis);
 }

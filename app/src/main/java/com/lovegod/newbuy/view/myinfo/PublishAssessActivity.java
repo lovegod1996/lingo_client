@@ -223,6 +223,9 @@ public class PublishAssessActivity extends AppCompatActivity {
         publishText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //防止多次提交请求
+                publishText.setEnabled(false);
+                publishText.setClickable(false);
                 String title=assessTitleText.getText().toString().trim();
                 String content=assessContentText.getText().toString().trim();
                 //如果总评为空
@@ -274,12 +277,16 @@ public class PublishAssessActivity extends AppCompatActivity {
                                     NetWorks.changeOrderGoodsStatue(orderGoods.getOgid(), new BaseObserver<Order.OrderGoods>(PublishAssessActivity.this) {
                                         @Override
                                         public void onHandleSuccess(Order.OrderGoods orderGoods) {
+                                            //提交成功直接结束该活动不用再设置可点击
+
                                             finish();
                                         }
 
                                         @Override
                                         public void onHandleError(Order.OrderGoods orderGoods) {
-
+                                            //如果提交出问题就把提交按钮再变回可点击
+                                            publishText.setEnabled(true);
+                                            publishText.setClickable(true);
                                         }
                                     });
                                 }

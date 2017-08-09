@@ -13,6 +13,7 @@
     <color name="bg_Gray0">#737272</color>
     <color name="background_color">#f6f6f6</color>
     <color name="text_light_gray">#BDBDBD</color>
+    <color name="text_dark_gray">#8E8E8E</color>
     <!-- 黑色 -->
     <color name="tv_Black">#000000</color>
     <color name="tv_yellow">#f4d257</color>

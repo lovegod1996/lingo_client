@@ -1,42 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="85dp"
-    android:orientation="horizontal" >
-
-    <ImageView
-        android:id="@+id/imageview1"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_margin="5dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/sanxing" />
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white_FFFFFF">
 
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imageview1"
+        android:layout_width="90dp"
+        android:layout_height="80dp"
+        android:layout_margin="5dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/default_image" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-     <TextView
-            android:id="@+id/shop_name"
+        <com.example.ywx.lib.StarRating
+            android:layout_marginTop="3dp"
+            android:id="@+id/shop_star"
+            app:clickable="false"
+            app:starCount="5"
+            app:starSpacing="0"
+            app:starSize="10dp"
+            android:layout_alignLeft="@+id/shop_type"
+            android:layout_alignStart="@+id/shop_type"
+            android:layout_below="@id/shop_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:textColor="#0a090a"
-            android:text="我的都是vbghh"
-            android:textSize="17dp" />
+            android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/shop_instruction"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/text_dark_gray"
+            android:id="@+id/shop_scope"
+            android:layout_below="@id/shop_star"
+            android:layout_alignLeft="@id/shop_type"
+            android:text="电器 |"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:text="我的都是vbghh"
-            android:layout_marginTop="8dp"
+            android:textSize="@dimen/text_size_min"/>
 
-            android:textColor="#2b2b2b"
-            android:textSize="12dp" />
+        <TextView
+            android:layout_marginTop="3dp"
+            android:textSize="@dimen/text_size_min"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/text_dark_gray"
+            android:layout_toRightOf="@id/shop_scope"
+            android:text="经营小米电器"
+            android:layout_below="@id/shop_star"
+            android:id="@+id/shop_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:padding="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/shop_type"
+            android:textSize="@dimen/text_size_the_most_min"
+            android:textColor="@color/white_FFFFFF"
+            android:text="实体零售"
+            android:background="@color/blue_2196F3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+     <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@id/shop_type"
+            android:text="小米家电"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:id="@+id/shop_name"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="#0a090a"
+            android:textSize="@dimen/text_size_mid" />
+
+        <TextView
+            android:layout_marginTop="6dp"
+            android:layout_below="@id/shop_description"
+            android:text="郑州市龙湖中工"
+            android:id="@+id/shop_instruction"
+            android:layout_width="180dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/text_dark_gray"
+            android:textSize="@dimen/text_size_the_most_min" />
+
+        <View
+            android:background="@color/splitline_color"
+            android:layout_below="@id/shop_instruction"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"/>
+
+        <TextView
+            android:text="1km"
+            android:padding="2dp"
+            android:background="@color/splitline_color"
+            android:textColor="@color/text_dark_gray"
+            android:textSize="11sp"
+            android:layout_margin="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/shop_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:id="@+id/shop_support"
+            android:src="@mipmap/support_yellow"
+            android:layout_alignLeft="@id/shop_instruction"
+            android:layout_below="@id/shop_instruction"
+            android:layout_width="16dp"
+            android:layout_height="16dp" />
+
+        <TextView
+            android:layout_toRightOf="@id/shop_support"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text="10000已卖"
+            android:textColor="@color/black_000000"
+            android:textSize="@dimen/text_size_the_most_min"
+            android:layout_marginRight="12dp"
+            android:layout_below="@id/shop_instruction"
+            android:id="@+id/shop_sale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/splitline_color"/>
 </LinearLayout>

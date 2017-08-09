@@ -8,10 +8,14 @@ import com.lovegod.newbuy.bean.City;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Community;
 import com.lovegod.newbuy.bean.District;
+import com.lovegod.newbuy.bean.FavouriteGoods;
+import com.lovegod.newbuy.bean.FavouriteQuest;
+import com.lovegod.newbuy.bean.FavouriteShop;
 import com.lovegod.newbuy.bean.Goods;
 import com.lovegod.newbuy.bean.LoginMessage;
 import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.Province;
+import com.lovegod.newbuy.bean.Quest;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.ShopCartBean;
 import com.lovegod.newbuy.bean.SortFrist;
@@ -64,6 +68,8 @@ public class NetWorks extends RetrofitUtils {
     protected static final AddressApi addressApi=getRetrofit().create(AddressApi.class);
 
     protected static final OrderApi orderApi=getRetrofit().create(OrderApi.class);
+
+    protected static final QuestApi questApi=getRetrofit().create(QuestApi.class);
 
     public static void getAllshop(BaseObserver<List<Shop>> shopObserver) {
         setSubscribe(shopApi.getAllShop(), shopObserver);
@@ -188,7 +194,112 @@ public class NetWorks extends RetrofitUtils {
     public static void commitPayOrder(long oid,String paytype,BaseObserver<Order>orderObserver){
         setSubscribe(orderApi.commitPayOrder(oid,paytype),orderObserver);
     }
+    public static void getAllOrder(int uid,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getAllOrder(uid),orderObserver);
+    }
+    public static void getOrderGoods(long oid,BaseObserver<List<Order.OrderGoods>>orderObserver){
+        setSubscribe(orderApi.getOrderGoods(oid),orderObserver);
+    }
+    public static void getForThePaymentOrder(int uid,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getForThePaymentOrder(uid),orderObserver);
+    }
+    public static void getToSendGoodsOrder(int uid,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getToSendGoodsOrder(uid),orderObserver);
+    }
+    public static void getForTheGoodsOrder(int uid,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getForTheGoodsOrder(uid),orderObserver);
+    }
+    public static void getFinishOrder(int uid,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getFinishOrder(uid),orderObserver);
+    }
+    public static void getAllOrderByPage(int uid,int page,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getAllOrderByPage(uid,page),orderObserver);
+    }
+    public static void getOrderByStatue(int uid,int statue,int openstatue,int page,BaseObserver<List<Order>>orderObserver){
+        setSubscribe(orderApi.getOrderByStatue(uid,statue,openstatue,page),orderObserver);
+    }
+    public static void getAddressById(int said,BaseObserver<Address>addressObserver){
+        setSubscribe(addressApi.getAddressById(said),addressObserver);
+    }
+    public static void cancelOrder(long oid,BaseObserver<Order>orderObserver){
+        setSubscribe(orderApi.cancelOrder(oid),orderObserver);
+    }
+    public static void confirmTheGoods(long oid,BaseObserver<Order>orderObserver){
+        setSubscribe(orderApi.confirmTheGoods(oid),orderObserver);
+    }
+    public static void getOrderById(long oid,BaseObserver<Order>orderObserver){
+        setSubscribe(orderApi.getOrderById(oid),orderObserver);
+    }
+    public static void getNoAssessGoods(int uid,int page,BaseObserver<List<Order.OrderGoods>>orderObserver){
+        setSubscribe(orderApi.getNoAssessGoods(uid,page),orderObserver);
+    }
+    public static void commitAssess(Map<String,String>map,BaseObserver<Assess>assessObserver){
+        setSubscribe(goodsApi.commitAssess(map),assessObserver);
+    }
+    public static void changeOrderGoodsStatue(int ogid,BaseObserver<Order.OrderGoods>orderObserver){
+        setSubscribe(orderApi.changeOrderGoodsStatue(ogid),orderObserver);
+    }
+    public static void commitQuest(Map<String,String>map, BaseObserver<Quest>questObserver){
+        setSubscribe(questApi.commitQuest(map),questObserver);
+    }
+    public static void queryQuest(int cid,BaseObserver<List<Quest>>questObserver){
+        setSubscribe(questApi.queryQuest(cid),questObserver);
+    }
+    public static void commitQuestReply(Map<String,String>map,BaseObserver<Quest.Reply>questObserver){
+        setSubscribe(questApi.commitQuestReply(map),questObserver);
+    }
+    public static void isBuy(int uid,int cid,BaseObserver<Order>orderObserver){
+        setSubscribe(orderApi.isBuy(uid,cid),orderObserver);
+    }
+    public static void addFoucusGoods(Map<String,String>map, BaseObserver<FavouriteGoods>goodsObserver){
+        setSubscribe(goodsApi.addFoucusGoods(map),goodsObserver);
+    }
+    public static void cancelFoucusGoods(int gaid,BaseObserver<FavouriteGoods>goodsObserver){
+        setSubscribe(goodsApi.cancelFoucusGoods(gaid),goodsObserver);
+    }
+    public static void getFoucusGoods(int uid,int page,BaseObserver<List<FavouriteGoods>>goodsObserver){
+        setSubscribe(goodsApi.getFoucusGoods(uid,page),goodsObserver);
+    }
+    public static void isGoodsFoucus(int uid,int cid,BaseObserver<FavouriteGoods>goodsObserver){
+        setSubscribe(goodsApi.isGoodsFoucus(uid,cid),goodsObserver);
+    }
+    public static void addFocusShop(Map<String,String>map, BaseObserver<FavouriteShop>shopObserver){
+        setSubscribe(shopApi.addFocusShop(map),shopObserver);
+    }
+    public static void isShopFocus(int uid,int sid,BaseObserver<FavouriteShop>shopObserver){
+        setSubscribe(shopApi.isShopFocus(uid,sid),shopObserver);
+    }
+    public static void cancelShopFocus(int said,BaseObserver<FavouriteShop>shopObserver){
+        setSubscribe(shopApi.cancelShopFocus(said),shopObserver);
+    }
+    public static void getFocusShop(int uid,int page,BaseObserver<List<FavouriteShop>>shopObserver){
+        setSubscribe(shopApi.getFocusShop(uid, page),shopObserver);
+    }
+    public static void addQuestFocus(Map<String,String>map, BaseObserver<FavouriteQuest>questObserver){
+        setSubscribe(questApi.addQuestFocus(map),questObserver);
+    }
+    public static void cancelQuestFocus(int qaid,BaseObserver<FavouriteQuest>questObserver){
+        setSubscribe(questApi.cancelQuestFocus(qaid),questObserver);
+    }
+    public static void isQuestFocus(int uid,int qid,BaseObserver<FavouriteQuest>questObserver){
+        setSubscribe(questApi.isQuestFocus(uid, qid),questObserver);
+    }
+    public static void getQuestFocus(int uid,int page,BaseObserver<List<FavouriteQuest>>questObserver){
+        setSubscribe(questApi.getQuestFocus(uid, page),questObserver);
+    }
+    public static void getQuesByID(int qid,BaseObserver<Quest>questObserver){
+        setSubscribe(questApi.getQuesByID(qid),questObserver);
+    }
+    public static void getAssessCount(int cid, BaseObserver<Integer> assesscountObserver) {
+        setSubscribe(goodsApi.getAssessCount(cid), assesscountObserver);
+    }
 
+    public static void getNewAssess(int cid, BaseObserver<Assess> assessObserver) {
+        setSubscribe(goodsApi.getNewAssess(cid), assessObserver);
+    }
+    public static void getNearbyShop(double longgitude,double latitude,int dis,BaseObserver<List<Shop>>shopObserver){
+        setSubscribe(shopApi.getNearbyShop(longgitude,latitude,dis),shopObserver);
+    }
 
     /**
      * 插入观察者

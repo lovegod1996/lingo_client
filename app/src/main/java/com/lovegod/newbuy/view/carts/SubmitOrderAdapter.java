@@ -65,8 +65,8 @@ public class SubmitOrderAdapter extends RecyclerView.Adapter<SubmitOrderAdapter.
         }
         holder.shopName.setText(payShopBean.getShopname());
         holder.goodNum.setText("共"+goodsNum+"件商品");
-        //保留两位小数
-        DecimalFormat    df   = new DecimalFormat("######0.0");
+        //保留一位小数
+        DecimalFormat df=new DecimalFormat("######0.0");
         holder.price.setText("¥"+df.format(totalPrice));
     }
 

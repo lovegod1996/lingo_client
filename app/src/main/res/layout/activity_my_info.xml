@@ -69,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:left_image_src="@mipmap/history_icon"
-                    app:left_text="@string/title_history" />
+                    app:left_text="历史" />
 
                 <com.lovegod.newbuy.view.myview.ItemImageLayout
                     android:id="@+id/my_info_about"

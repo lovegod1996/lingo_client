@@ -11,8 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.ywx.lib.StarRating;
 import com.lovegod.newbuy.R;
+import com.lovegod.newbuy.bean.Location;
 import com.lovegod.newbuy.bean.Shop;
+import com.lovegod.newbuy.utils.distance.DistanceUtil;
+import com.lovegod.newbuy.utils.system.SpUtils;
 
 import java.util.List;
 
@@ -50,16 +54,22 @@ public void bindData(Context context,List<Shop> shops){
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            ViewHoler viewHoler;
+        ViewHolder viewHolder;
         if(convertView==null){
-            viewHoler=new ViewHoler();
+            viewHolder=new ViewHolder();
             convertView=inflater.inflate(R.layout.suggest_shop_list,null);
-             viewHoler.imageView= (ImageView) convertView.findViewById(R.id.imageview1);
-            viewHoler.textView1= (TextView) convertView.findViewById(R.id.shop_name);
-            viewHoler.textView2= (TextView) convertView.findViewById(R.id.shop_instruction);
-            convertView.setTag(viewHoler);
+            viewHolder.imageView= (ImageView) convertView.findViewById(R.id.imageview1);
+            viewHolder.name= (TextView) convertView.findViewById(R.id.shop_name);
+            viewHolder.instruction= (TextView) convertView.findViewById(R.id.shop_instruction);
+            viewHolder.sale=(TextView)convertView.findViewById(R.id.shop_sale);
+            viewHolder.distance=(TextView)convertView.findViewById(R.id.shop_distance);
+            viewHolder.type=(TextView)convertView.findViewById(R.id.shop_type);
+            viewHolder.description=(TextView)convertView.findViewById(R.id.shop_description);
+            viewHolder.starRating=(StarRating)convertView.findViewById(R.id.shop_star);
+            viewHolder.scope=(TextView)convertView.findViewById(R.id.shop_scope);
+            convertView.setTag(viewHolder);
         }else{
-            viewHoler= (ViewHoler) convertView.getTag();
+            viewHolder= (ViewHolder) convertView.getTag();
         }
         Shop shop=shops.get(position);
         //使用Glide加载图片
@@ -68,17 +78,38 @@ public void bindData(Context context,List<Shop> shops){
                 .error(R.mipmap.shop_bg_1)
                 .fitCenter()
               //  .placeholder(R.mipmap.shop_bg_1)
-                .into(viewHoler.imageView);
+                .into(viewHolder.imageView);
 
-        viewHoler.textView1.setText(shop.getShopname());
-        viewHoler.textView2.setText(shop.getSaddress());
-
+        viewHolder.name.setText(shop.getShopname());
+        viewHolder.instruction.setText(shop.getSaddress());
+        viewHolder.sale.setText(shop.getSalesvo()+"已卖");
+        //获取用户位置
+        Location location= (Location) SpUtils.getObject(context,"location");
+        if(location!=null) {
+            //获取距离
+            int dis= (int) DistanceUtil.LantitudeLongitudeDist(Double.parseDouble(location.getLon()), Double.parseDouble(location.getLat()), shop.getLonggitude(), shop.getLatitude());
+            if(dis>=1000) {
+                viewHolder.distance.setText(dis / 1000f + "km");
+            }else {
+                viewHolder.distance.setText(dis+ "m");
+            }
+        }
+        viewHolder.description.setText(shop.getSubscrib());
+        viewHolder.type.setText(shop.getType());
+        viewHolder.scope.setText(shop.getScope()+" |");
+        viewHolder.starRating.setCurrentStarCount((int)shop.getSlevel());
         return  convertView;
 
     }
-    class ViewHoler{
-        public ImageView imageView;
-        public TextView textView1;
-        public TextView textView2;
+    class ViewHolder{
+        ImageView imageView;
+        TextView name;
+        TextView instruction;
+        TextView sale;
+        TextView distance;
+        TextView description;
+        TextView type;
+        TextView scope;
+        StarRating starRating;
     }
 }

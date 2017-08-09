@@ -16,7 +16,7 @@ import com.lovegod.newbuy.R;
  * Created by ywx on 2017/7/12.
  */
 
-class ItemImageLayout extends LinearLayout {
+public class ItemImageLayout extends LinearLayout {
     private String rightText,leftText;
     private Drawable leftSrc;
     private TextView leftTextView,rightTextView;

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/focus_shop_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_margin="10dp"
+            android:id="@+id/focus_shop_item_logo"
+            android:src="@mipmap/default_image"
+            android:scaleType="centerCrop"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:id="@+id/focus_shop_item_name"
+            android:textColor="@color/black_000000"
+            android:textSize="@dimen/text_size_mid"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@id/focus_shop_item_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/white_FFFFFF"
+            android:background="@color/blue_2196F3"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_min"
+            android:id="@+id/focus_shop_item_type"
+            android:layout_toRightOf="@id/focus_shop_item_logo"
+            android:layout_below="@id/focus_shop_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
+        <Button
+            android:id="@+id/focus_shop_item_delete"
+            android:visibility="gone"
+            android:textSize="@dimen/text_size_mid"
+            android:textColor="@color/white_FFFFFF"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="#FF00"
+            android:text="取消收藏"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/splitline_color"/>
+</LinearLayout>

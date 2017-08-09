@@ -4,7 +4,7 @@
     <string name="attention">提示</string>
     <string name="ok">好的~</string>
 
-    <string name="tips_net_error">网络不给力\n点击屏幕继续加载</string>
+    <string name="tips_net_error">你的网络信号被外星人劫持了</string>
     <string name="tips_content_empty">空空如野</string>
     <string name="loading_busy">努力加载中...</string>
 
@@ -18,7 +18,7 @@
 
     <string name="title_home">首页</string>
     <string name="title_sort">分类</string>
-    <string name="title_history">历史</string>
+    <string name="title_life">生活圈</string>
     <string name="title_cart">购物车</string>
     <string name="title_me">我的</string>
 

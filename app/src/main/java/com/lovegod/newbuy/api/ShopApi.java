@@ -2,12 +2,18 @@ package com.lovegod.newbuy.api;
 
 import com.lovegod.newbuy.bean.BaseBean;
 import com.lovegod.newbuy.bean.Commodity;
+import com.lovegod.newbuy.bean.FavouriteShop;
 import com.lovegod.newbuy.bean.Goods;
 import com.lovegod.newbuy.bean.Shop;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -43,4 +49,25 @@ public interface ShopApi {
     //根据店铺名查询店铺详情
     @GET("shops/name")
     Observable<BaseBean<List<Shop>>>findShopByName(@Query("name")String name,@Query("page")Integer page);
+
+    //添加店铺关注
+    @FormUrlEncoded
+    @POST("shoplook/add")
+    Observable<BaseBean<FavouriteShop>>addFocusShop(@FieldMap Map<String,String>map);
+
+    //查询某店是否被某用户关注
+    @GET("shoplook/user/one/{uid}/{sid}")
+    Observable<BaseBean<FavouriteShop>>isShopFocus(@Path("uid")int uid,@Path("sid")int sid);
+
+    //取消关注店铺
+    @DELETE("shoplook/delete/{said}")
+    Observable<BaseBean<FavouriteShop>>cancelShopFocus(@Path("said")int said);
+
+    //分页查找该用户所有关注的店铺
+    @GET("shoplook/user/{uid}/{page}")
+    Observable<BaseBean<List<FavouriteShop>>>getFocusShop(@Path("uid")int uid,@Path("page")int page);
+
+    //获取附近店铺
+    @GET("shops/near/{longgitude}/{latitude}/{dis}")
+    Observable<BaseBean<List<Shop>>>getNearbyShop(@Path("longgitude")double longgitude,@Path("latitude")double latitude,@Path("dis")int dis);
 }

@@ -3,7 +3,6 @@ package com.lovegod.newbuy.view.myinfo;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.solver.SolverVariable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -13,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;

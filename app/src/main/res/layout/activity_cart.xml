@@ -6,7 +6,6 @@
 
 <android.support.v7.widget.Toolbar
     android:id="@+id/shop_cart_toolbar"
-    app:navigationIcon="@mipmap/ic_back"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@color/colorPrimary">

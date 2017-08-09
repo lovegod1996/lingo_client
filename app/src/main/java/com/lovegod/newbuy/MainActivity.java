@@ -14,6 +14,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.telephony.TelephonyManager;
 import android.telephony.cdma.CdmaCellLocation;
 import android.telephony.gsm.GsmCellLocation;
@@ -27,6 +29,10 @@ import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Location;
 import com.lovegod.newbuy.service.BluetoothService;
 import com.lovegod.newbuy.view.BaseActivity;
+import com.lovegod.newbuy.view.fragment.Cart_Activity;
+import com.lovegod.newbuy.view.fragment.Life_Fragment;
+import com.lovegod.newbuy.view.fragment.MyInfo_Activity;
+import com.lovegod.newbuy.view.fragment.Sort_Activity;
 import com.lovegod.newbuy.view.myinfo.MyInfoActivity;
 import com.lovegod.newbuy.view.carts.CartActivity;
 import com.lovegod.newbuy.view.fragment.Home_Activity;
@@ -108,10 +114,7 @@ public class MainActivity extends BaseActivity {
         initView();
 
 
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        Home_Activity fg1 = new Home_Activity();
-        ft.add(R.id.content, fg1);
-        ft.commit();
+        replaceFragment(new Home_Activity());
         BottomNavigationViewHelper.disableShiftMode(navigation);
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -175,27 +178,23 @@ public class MainActivity extends BaseActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
-                    //    replaceFragment(mHome_Activity);
+                     replaceFragment(new Home_Activity());
                     return true;
                 case R.id.navigation_sort:
-                  /*  if (null == mMinTaoFragment) {
-                        mMinTaoFragment = new Mintaofragment();
-                    }
-                    replaceFragment(mMinTaoFragment);*/
-                    startActivity(new Intent(MainActivity.this, SortActivity.class));
-                    Intent intent1 = new Intent(MainActivity.this, SortActivity.class);
-                    startActivity(intent1);
+                    replaceFragment(new Sort_Activity());
+                    //startActivity(new Intent(MainActivity.this, SortActivity.class));
                     return true;
-                case R.id.navigation_history:
-
+                case R.id.navigation_life:
+                    replaceFragment(new Life_Fragment());
                     return true;
                 case R.id.navigation_cart:
-                    startActivity(new Intent(MainActivity.this, CartActivity.class));
+                    replaceFragment(new Cart_Activity());
+                    //startActivity(new Intent(MainActivity.this, CartActivity.class));
 
                     return true;
                 case R.id.navigation_me:
-                    startActivity(new Intent(MainActivity.this, MyInfoActivity.class));
+                    replaceFragment(new MyInfo_Activity());
+                    //startActivity(new Intent(MainActivity.this, MyInfoActivity.class));
                     return true;
 
             }
@@ -250,9 +249,15 @@ public class MainActivity extends BaseActivity {
         return false;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        navigation.setSelectedItemId(R.id.navigation_home);
+    /**
+     * 替换fragment到主页面中
+     * @param fragment 新的fragment
+     */
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction=fragmentManager.beginTransaction();
+        transaction.replace(R.id.content,fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

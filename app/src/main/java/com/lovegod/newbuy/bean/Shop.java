@@ -35,6 +35,16 @@ public class Shop implements Serializable{
     private String subscrib;
     private String logo;
     private String showpic;
+    private String headershow;
+    private String scope;
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
 
     public int getSid() {
         return sid;
@@ -132,21 +142,11 @@ public class Shop implements Serializable{
         this.showpic = showpic;
     }
 
-    @Override
-    public String toString() {
-        return "Shop{" +
-                "sid=" + sid +
-                ", shopname='" + shopname + '\'' +
-                ", saddress='" + saddress + '\'' +
-                ", stel='" + stel + '\'' +
-                ", slevel=" + slevel +
-                ", longgitude=" + longgitude +
-                ", latitude=" + latitude +
-                ", type='" + type + '\'' +
-                ", salesvo=" + salesvo +
-                ", subscrib='" + subscrib + '\'' +
-                ", logo='" + logo + '\'' +
-                ", showpic='" + showpic + '\'' +
-                '}';
+    public String getHeadershow() {
+        return headershow;
+    }
+
+    public void setHeadershow(String headershow) {
+        this.headershow = headershow;
     }
 }

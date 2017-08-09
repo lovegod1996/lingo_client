@@ -71,4 +71,7 @@ public interface AddressApi {
     @FormUrlEncoded
     @PUT("editShip")
     Observable<BaseBean<Address>>editAddress(@FieldMap Map<String,String>map);
+
+    @GET("ship/id/{said}")
+    Observable<BaseBean<Address>>getAddressById(@Path("said")int said);
 }

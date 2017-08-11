@@ -6,6 +6,7 @@ import com.lovegod.newbuy.bean.BaseBean;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.FavouriteGoods;
 import com.lovegod.newbuy.bean.Goods;
+import com.lovegod.newbuy.bean.Trial;
 import com.lovegod.newbuy.view.myinfo.FavouriteGoodsAdapter;
 
 import java.util.List;
@@ -80,4 +81,17 @@ public interface GoodsApi {
     //查询某件商品是否被某用户关注
     @GET("goodslook/user/one/{uid}/{cid}")
     Observable<BaseBean<FavouriteGoods>>isGoodsFoucus(@Path("uid")int uid,@Path("cid")int cid);
+
+    //添加试用商品请求
+    @FormUrlEncoded
+    @POST("apply/experience/add")
+    Observable<BaseBean<Trial>>addTrialGoods(@FieldMap Map<String,String>map);
+
+    //获取申请试用的列表
+    @GET("apply/experience/uid/{uid}")
+    Observable<BaseBean<List<Trial>>>getTrialGoods(@Path("uid")int uid);
+
+    //查看某用户是否申请了我商品
+    @GET("apply/experience/uid/{uid}/cid/{cid}")
+    Observable<BaseBean<Trial>>isTrial(@Path("uid")int uid,@Path("cid")int cid);
 }

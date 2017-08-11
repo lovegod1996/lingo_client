@@ -21,6 +21,7 @@ import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.FavouriteGoods;
+import com.lovegod.newbuy.view.carts.ShopCartAdapter;
 import com.lovegod.newbuy.view.goods.GoodActivity;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class FavouriteGoodsAdapter extends RecyclerView.Adapter<FavouriteGoodsAd
     private Context mContext;
     private ObjectAnimator animator;
     private OnAnimEndListener onAnimEndListener;
+    private ShopCartAdapter.OnItemClickListener onItemClickListener;
 
     public FavouriteGoodsAdapter(Context context,List<FavouriteGoods>list){
         mContext=context;
@@ -136,12 +138,14 @@ public class FavouriteGoodsAdapter extends RecyclerView.Adapter<FavouriteGoodsAd
              */
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     NetWorks.cancelFoucusGoods(goodsList.get(getAdapterPosition()).getGaid(), new BaseObserver<FavouriteGoods>(mContext) {
                         @Override
                         public void onHandleSuccess(FavouriteGoods favouriteGoods) {
                             goodsList.remove(getAdapterPosition());
-                            notifyItemRemoved(getAdapterPosition());
+                            if(onItemClickListener!=null){
+                                onItemClickListener.onItemClick(v,getAdapterPosition());
+                            }
                         }
 
                         @Override
@@ -161,5 +165,9 @@ public class FavouriteGoodsAdapter extends RecyclerView.Adapter<FavouriteGoodsAd
 
     public void setOnAnimEndListener(OnAnimEndListener onAnimEndListener) {
         this.onAnimEndListener = onAnimEndListener;
+    }
+
+    public void setOnItemClickListener(ShopCartAdapter.OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

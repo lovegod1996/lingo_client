@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,8 @@ import com.lovegod.newbuy.bean.FavouriteGoods;
 import com.lovegod.newbuy.bean.FavouriteShop;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
+import com.lovegod.newbuy.utils.view.AdapterWrapper;
+import com.lovegod.newbuy.view.carts.ShopCartAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +41,9 @@ public class FavouriteActivity extends AppCompatActivity {
     private int currentPage=0;
     private boolean isEdit=false;
     private int type;
+    //是否第一次加载
+    private boolean isFirstLoad=true;
+    private AdapterWrapper goodsWrapper,shopWrapper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +57,9 @@ public class FavouriteActivity extends AppCompatActivity {
         LinearLayoutManager manager=new LinearLayoutManager(this);
         goodsAdapter=new FavouriteGoodsAdapter(this,goodsList);
         shopAdapter=new FavouriteShopAdapter(this,shopList);
+        RelativeLayout emptyLayout= (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.no_data_layout,null);
+        goodsWrapper=new AdapterWrapper(this,goodsAdapter,emptyLayout);
+        shopWrapper=new AdapterWrapper(this,shopAdapter,emptyLayout);
         recyclerView.setLayoutManager(manager);
 
         setSupportActionBar(toolbar);
@@ -70,8 +80,7 @@ public class FavouriteActivity extends AppCompatActivity {
                     type=GOODS_TYPE;
                     currentPage=0;
                     goodsList.clear();
-                    recyclerView.setAdapter(goodsAdapter);
-                    getFoucusGoods();
+                    recyclerView.setAdapter(goodsWrapper);
                 }
             }
         });
@@ -89,8 +98,7 @@ public class FavouriteActivity extends AppCompatActivity {
                     currentPage=0;
                     type=SHOP_TYPE;
                     shopList.clear();
-                    recyclerView.setAdapter(shopAdapter);
-                    getFocusShop();
+                    recyclerView.setAdapter(shopWrapper);
                 }
             }
         });
@@ -104,6 +112,26 @@ public class FavouriteActivity extends AppCompatActivity {
                 //动画结束设置编辑按钮可点击防止
                 editText.setEnabled(true);
                 editText.setClickable(true);
+            }
+        });
+
+        /**
+         * 关注商店删除监听
+         */
+        shopAdapter.setOnItemClickListener(new ShopCartAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                shopWrapper.wrapperNotifyItemRemoved(position);
+            }
+        });
+
+        /**
+         * 关注商品删除按钮点击监听
+         */
+        goodsAdapter.setOnItemClickListener(new ShopCartAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                goodsWrapper.notifyItemRemoved(goodsWrapper.getHeaderCount()+position);
             }
         });
 
@@ -129,7 +157,7 @@ public class FavouriteActivity extends AppCompatActivity {
                         }
                         editText.setEnabled(false);
                         editText.setClickable(false);
-                        goodsAdapter.notifyDataSetChanged();
+                        goodsWrapper.notifyDataSetChanged();
                         inEdit();
                     } else {
                         for (FavouriteGoods goods : goodsList) {
@@ -137,7 +165,7 @@ public class FavouriteActivity extends AppCompatActivity {
                         }
                         editText.setEnabled(false);
                         editText.setClickable(false);
-                        goodsAdapter.notifyDataSetChanged();
+                        goodsWrapper.notifyDataSetChanged();
                         restoreEdit();
                     }
                 }else if(type==SHOP_TYPE){
@@ -147,7 +175,7 @@ public class FavouriteActivity extends AppCompatActivity {
                         }
                         editText.setEnabled(false);
                         editText.setClickable(false);
-                        shopAdapter.notifyDataSetChanged();
+                        shopWrapper.notifyDataSetChanged();
                         inEdit();
                     } else {
                         for (FavouriteShop shop : shopList) {
@@ -155,7 +183,7 @@ public class FavouriteActivity extends AppCompatActivity {
                         }
                         editText.setEnabled(false);
                         editText.setClickable(false);
-                        shopAdapter.notifyDataSetChanged();
+                        shopWrapper.notifyDataSetChanged();
                         restoreEdit();
                     }
                 }
@@ -181,12 +209,16 @@ public class FavouriteActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(recyclerView.computeVerticalScrollExtent()+recyclerView.computeVerticalScrollOffset()>=recyclerView.computeVerticalScrollRange()){
-                    if(type==GOODS_TYPE) {
-                        getFoucusGoods();
-                    }else if(type==SHOP_TYPE){
-                        getFocusShop();
+                if(!isFirstLoad) {
+                    if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange()) {
+                        if (type == GOODS_TYPE) {
+                            getFoucusGoods();
+                        } else if (type == SHOP_TYPE) {
+                            getFocusShop();
+                        }
                     }
+                }else {
+                    isFirstLoad=false;
                 }
             }
         });
@@ -200,9 +232,9 @@ public class FavouriteActivity extends AppCompatActivity {
         if(type==SHOP_TYPE){
             goodsType.setTextColor(Color.BLACK);
             shopType.setTextColor(Color.parseColor("#FD6861"));
-            recyclerView.setAdapter(shopAdapter);
+            recyclerView.setAdapter(shopWrapper);
         }else {
-            recyclerView.setAdapter(goodsAdapter);
+            recyclerView.setAdapter(goodsWrapper);
         }
     }
 
@@ -240,7 +272,7 @@ public class FavouriteActivity extends AppCompatActivity {
                     goods.setEdit(false);
                     goodsList.add(goods);
                 }
-                goodsAdapter.notifyDataSetChanged();
+                goodsWrapper.notifyDataSetChanged();
                 //查询成功页数加1，方便下一次查找
                 currentPage++;
             }
@@ -263,7 +295,7 @@ public class FavouriteActivity extends AppCompatActivity {
                     shop.setEdit(false);
                     shopList.add(shop);
                 }
-                shopAdapter.notifyDataSetChanged();
+                shopWrapper.notifyDataSetChanged();
                 currentPage++;
             }
 

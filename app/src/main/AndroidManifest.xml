@@ -162,7 +162,8 @@
             android:launchMode="singleTask" />
         <activity android:name=".view.goods.ShowOneAskActivity" />
         <activity android:name=".view.myinfo.FavouriteActivity" />
-        <activity android:name=".view.ShowImageActivity"></activity>
+        <activity android:name=".view.ShowImageActivity" />
+        <activity android:name=".view.myinfo.Trial_Activity"></activity>
     </application>
 
 </manifest>

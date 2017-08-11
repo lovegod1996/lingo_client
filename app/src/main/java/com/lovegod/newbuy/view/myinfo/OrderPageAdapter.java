@@ -40,6 +40,7 @@ public class OrderPageAdapter extends RecyclerView.Adapter<OrderPageAdapter.View
     private Context mContext;
     private List<Order>orderList=new ArrayList<>();
     private Activity mActivity;
+    private OnButtonClickListener onButtonClickListener;
     public OrderPageAdapter(Context context, List<Order>orders,Activity activity){
         mContext=context;
         orderList=orders;
@@ -142,7 +143,9 @@ public class OrderPageAdapter extends RecyclerView.Adapter<OrderPageAdapter.View
                             public void onHandleSuccess(Order order) {
                                 //删除成功就删除掉该位置的数据并通知适配器数据改变
                                 orderList.remove(position);
-                                notifyDataSetChanged();
+                                if(onButtonClickListener!=null){
+                                    onButtonClickListener.onCancelClick();
+                                }
                             }
 
                             @Override
@@ -179,7 +182,9 @@ public class OrderPageAdapter extends RecyclerView.Adapter<OrderPageAdapter.View
                             public void onHandleSuccess(Order order) {
                                 order.setStatue(3);
                                 orderList.remove(position);
-                                notifyDataSetChanged();
+                                if(onButtonClickListener!=null){
+                                    onButtonClickListener.onSureClick();
+                                }
                                 Toast.makeText(mContext,"收货成功，别忘了去评价你买到的宝贝哦",Toast.LENGTH_SHORT).show();
                             }
 
@@ -262,4 +267,14 @@ public class OrderPageAdapter extends RecyclerView.Adapter<OrderPageAdapter.View
              }
          });
      }
+
+    public interface OnButtonClickListener{
+        void onPayClick();
+        void onCancelClick();
+        void onSureClick();
+    }
+
+    public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener) {
+        this.onButtonClickListener = onButtonClickListener;
+    }
 }

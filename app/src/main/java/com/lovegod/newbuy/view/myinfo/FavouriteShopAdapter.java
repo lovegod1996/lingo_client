@@ -22,6 +22,7 @@ import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.FavouriteShop;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.view.Shop2Activity;
+import com.lovegod.newbuy.view.carts.ShopCartAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class FavouriteShopAdapter extends RecyclerView.Adapter<FavouriteShopAdap
     private Context mContext;
     private ObjectAnimator animator;
     private FavouriteGoodsAdapter.OnAnimEndListener onAnimEndListener;
+    private ShopCartAdapter.OnItemClickListener onItemClickListener;
 
     public FavouriteShopAdapter(Context context,List<FavouriteShop>list){
         mContext=context;
@@ -135,12 +137,14 @@ public class FavouriteShopAdapter extends RecyclerView.Adapter<FavouriteShopAdap
              */
            deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     NetWorks.cancelShopFocus(shopList.get(getAdapterPosition()).getSaid(), new BaseObserver<FavouriteShop>(mContext) {
                         @Override
                         public void onHandleSuccess(FavouriteShop favouriteShop) {
                             shopList.remove(getAdapterPosition());
-                            notifyItemRemoved(getAdapterPosition());
+                            if(onItemClickListener!=null){
+                                onItemClickListener.onItemClick(v,getAdapterPosition());
+                            }
                         }
 
                         @Override
@@ -155,5 +159,9 @@ public class FavouriteShopAdapter extends RecyclerView.Adapter<FavouriteShopAdap
 
     public void setOnAnimEndListener(FavouriteGoodsAdapter.OnAnimEndListener onAnimEndListener) {
         this.onAnimEndListener = onAnimEndListener;
+    }
+
+    public void setOnItemClickListener(ShopCartAdapter.OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

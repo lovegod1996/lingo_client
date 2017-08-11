@@ -20,6 +20,7 @@ import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.ShopCartBean;
 import com.lovegod.newbuy.bean.SortFrist;
 import com.lovegod.newbuy.bean.Town;
+import com.lovegod.newbuy.bean.Trial;
 import com.lovegod.newbuy.bean.User;
 
 import com.lovegod.newbuy.bean.Assess;
@@ -299,6 +300,15 @@ public class NetWorks extends RetrofitUtils {
     }
     public static void getNearbyShop(double longgitude,double latitude,int dis,BaseObserver<List<Shop>>shopObserver){
         setSubscribe(shopApi.getNearbyShop(longgitude,latitude,dis),shopObserver);
+    }
+    public static void addTrialGoods(Map<String,String>map, BaseObserver<Trial>trialObserver){
+        setSubscribe(goodsApi.addTrialGoods(map),trialObserver);
+    }
+    public static void getTrialGoods(int uid,BaseObserver<List<Trial>>trialObserver){
+        setSubscribe(goodsApi.getTrialGoods(uid),trialObserver);
+    }
+    public static void isTrial(int uid,int cid,BaseObserver<Trial>trialObserver){
+        setSubscribe(goodsApi.isTrial(uid, cid),trialObserver);
     }
 
     /**

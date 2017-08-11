@@ -45,7 +45,7 @@ dependencies {
 
     //BubbleLayout对话框式布局
     //textview的折叠、展开
-    
+
 
     compile 'com.android.support:design:25.3.1'
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.0'
@@ -80,6 +80,7 @@ dependencies {
     compile 'com.daasuu:BubbleLayout:1.1.1'
     compile 'com.ms-square:expandableTextView:0.1.4'
     compile 'com.ninghaiywx.StarRating:lib:1.0'
+    compile 'me.ywx.LoadingButton:viewlibrary:1.0.3'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }

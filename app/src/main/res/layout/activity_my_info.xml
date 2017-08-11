@@ -65,6 +65,13 @@
                     android:background="@color/splitline_color"/>
 
                 <com.lovegod.newbuy.view.myview.ItemImageLayout
+                    android:id="@+id/my_apply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:left_image_src="@mipmap/trial_icon"
+                    app:left_text="我的体验"/>
+
+                <com.lovegod.newbuy.view.myview.ItemImageLayout
                     android:id="@+id/my_history"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

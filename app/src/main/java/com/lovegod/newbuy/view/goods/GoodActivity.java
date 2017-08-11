@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -41,6 +42,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.animation.ViewPropertyAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.ywx.lib.StarRating;
+import com.example.ywx.viewlibrary.LoadingButton;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
@@ -48,16 +50,19 @@ import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Assess;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.FavouriteGoods;
+import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.Quest;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.ShopCartBean;
 import com.lovegod.newbuy.bean.Shopcate;
+import com.lovegod.newbuy.bean.Trial;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.ShopActivity;
 import com.lovegod.newbuy.view.carts.CartActivity;
 import com.lovegod.newbuy.view.fragment.Cart_Activity;
+import com.lovegod.newbuy.view.myinfo.PublishAssessActivity;
 import com.lovegod.newbuy.view.utils.GradationScrollView;
 import com.lovegod.newbuy.view.utils.MaterialIndicator;
 import com.lovegod.newbuy.view.utils.MyRecyclerViewAdapter;
@@ -143,7 +148,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     TextView store_location;
     @BindView(R.id.store_month_number)
     TextView store_month_number;
-
+    @BindView(R.id.goods_trial)
+    TextView trialText;
     @BindView(R.id.user_name)
     TextView user_name;
     @BindView(R.id.user_time)
@@ -205,8 +211,11 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
         tv_good_detail_cate = (TextView) findViewById(R.id.tv_good_detail_cate);
 
-        //查询是否已经管制
+        //查询是否已经关注
         queryWhetherFoucus();
+
+        //查询是否已经申请体验
+        queryWhetherApply();
 
         //获取最新的评论信息以及评论个数
         getAssess();
@@ -281,7 +290,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
         parameterDialog.setCanceledOnTouchOutside(true);//点击外部使对话框消失
         parameterDialog.setContentView(root);
-        Window dialogWindow = parameterDialog.getWindow();
+        final Window dialogWindow = parameterDialog.getWindow();
         dialogWindow.setGravity(Gravity.BOTTOM);
 
         dialogWindow.setWindowAnimations(R.style.dialogstyle); // 添加动画
@@ -319,7 +328,116 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         initlistener();
         initListeners();
 
+        /**
+         * 申请体验按钮监听
+         */
+        trialText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (user != null) {
+                    final Map<String, String> map = new HashMap<>();
+                    map.put("uid",user.getUid()+"");
+                    map.put("username",user.getUsername());
+                    map.put("cid",commodity.getCid()+"");
+                    map.put("sid",commodity.getSid()+"");
+                    map.put("areatype",3+"");
+                    //获取商店信息
+                    NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>(GoodActivity.this) {
+                        @Override
+                        public void onHandleSuccess(Shop shop) {
+                            map.put("area",shop.getCity()+"");
+                        }
 
+                        @Override
+                        public void onHandleError(Shop shop) {
+
+                        }
+                    });
+                    //获取时间
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            URL url= null;//取得资源对象
+                            try {
+                                url = new URL("http://www.taobao.com");
+                                URLConnection uc=url.openConnection();//生成连接对象
+                                uc.connect(); //发出连接
+                                final long ld=uc.getDate(); //取得网站日期时间
+                                final Date currentDate=new Date(ld); //转换为标准时间对象
+                                final SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                //获取到了后在主线程进行操作
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        map.put("applytime",format.format(currentDate));
+                                    }
+                                });
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+                    //弹出对话框
+                    final Dialog dialog = new Dialog(GoodActivity.this, R.style.transparent_dialog);
+                    LinearLayout root = (LinearLayout) LayoutInflater.from(GoodActivity.this).inflate(R.layout.apply_trial_dialog, null);
+                    final StarRating starRating= (StarRating) root.findViewById(R.id.apply_trial_star);
+                    LoadingButton commitButton=(LoadingButton)root.findViewById(R.id.apply_trial_button);
+                    dialog.setContentView(root);
+                    Window window = dialog.getWindow();
+                    WindowManager.LayoutParams params = window.getAttributes();
+                    params.width = getResources().getDisplayMetrics().widthPixels;
+                    window.setAttributes(params);
+                    dialog.show();
+                    /**
+                     * 提交按钮监听
+                     */
+                    commitButton.setOnButtonClickListener(new LoadingButton.OnButtonClickListener() {
+                        @Override
+                        public void onButtonClick() {
+                            map.put("star",starRating.getCurrentCount()+"");
+                            NetWorks.addTrialGoods(map, new BaseObserver<Trial>(GoodActivity.this) {
+                                @Override
+                                public void onHandleSuccess(Trial trial) {
+                                    dialog.dismiss();
+                                    Toast.makeText(GoodActivity.this,"申请成功，会尽快帮您处理",Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onHandleError(Trial trial) {
+
+                                }
+                            });
+                        }
+                    });
+                }else {
+                    Toast.makeText(GoodActivity.this,"快去登录，享受体验资格~",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    /**
+     * 查询该商品是否申请体验
+     */
+    private void queryWhetherApply() {
+        if(user!=null){
+            Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+            NetWorks.isTrial(user.getUid(), commodity.getCid(), new BaseObserver<Trial>(this) {
+                @Override
+                public void onHandleSuccess(Trial trial) {
+                    if(trial!=null){
+                        trialText.setText("已申请");
+                    }else {
+                        trialText.setText("申请体验");
+                    }
+                }
+
+                @Override
+                public void onHandleError(Trial trial) {
+
+                }
+            });
+        }
     }
 
     /**

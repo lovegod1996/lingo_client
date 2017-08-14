@@ -1,4 +1,4 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.trial;
 
 import android.content.Context;
 import android.content.Intent;

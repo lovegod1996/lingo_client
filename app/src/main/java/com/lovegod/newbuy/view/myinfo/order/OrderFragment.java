@@ -1,9 +1,7 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.order;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,20 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
-import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.utils.view.AdapterWrapper;
-import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -88,41 +81,6 @@ public class OrderFragment extends Fragment {
         RelativeLayout emptyLayout= (RelativeLayout) LayoutInflater.from(getActivity()).inflate(R.layout.no_data_layout,null);
         wrapper=new AdapterWrapper(getActivity(),adapter,emptyLayout);
         recyclerView.setAdapter(wrapper);
-        //设置为第一次加载
-        isFirstLoad=true;
-        //初始化查询第一页，并且将当前页数设置为1，防止切换viewpager的时候该方法不断执行导致页数增加
-        switch (pageType){
-            case ALL_FLAG:
-                //查询所有订单
-                orderList.clear();
-                allPage=0;
-                queryAllOrder(0);
-                break;
-            case FOR_THE_PAY_FLAG:
-                //查询待付款订单
-                orderList.clear();
-                forThePayPage=0;
-                queryOrderByStatue(forThePayPage,0,0);
-                break;
-            case TO_THE_GOODS_FLAG:
-                //查询待发货订单
-                orderList.clear();
-                forTheGoodsPage=0;
-                queryOrderByStatue(forTheGoodsPage,0,1);
-                break;
-            case FOR_THE_GOODS_FLAG:
-                //查询待收货订单
-                orderList.clear();
-                toTheGoodsPage=0;
-                queryOrderByStatue(toTheGoodsPage,0,2);
-                break;
-            case FINISH_FLAG:
-                //查询已完成订单
-                orderList.clear();
-                finishPage=0;
-                queryOrderByStatue(finishPage,1,3);
-                break;
-        }
 
         /**
          * 监听recyclerview的滚动而没用第三方上拉加载
@@ -308,6 +266,46 @@ public class OrderFragment extends Fragment {
                 e.printStackTrace();
             }
             return (int) (o2Date.getTime()-o1Date.getTime());
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //设置为第一次加载
+        isFirstLoad=true;
+        //初始化查询第一页，并且将当前页数设置为1，防止切换viewpager的时候该方法不断执行导致页数增加
+        switch (pageType){
+            case ALL_FLAG:
+                //查询所有订单
+                orderList.clear();
+                allPage=0;
+                queryAllOrder(0);
+                break;
+            case FOR_THE_PAY_FLAG:
+                //查询待付款订单
+                orderList.clear();
+                forThePayPage=0;
+                queryOrderByStatue(forThePayPage,0,0);
+                break;
+            case TO_THE_GOODS_FLAG:
+                //查询待发货订单
+                orderList.clear();
+                forTheGoodsPage=0;
+                queryOrderByStatue(forTheGoodsPage,0,1);
+                break;
+            case FOR_THE_GOODS_FLAG:
+                //查询待收货订单
+                orderList.clear();
+                toTheGoodsPage=0;
+                queryOrderByStatue(toTheGoodsPage,0,2);
+                break;
+            case FINISH_FLAG:
+                //查询已完成订单
+                orderList.clear();
+                finishPage=0;
+                queryOrderByStatue(finishPage,1,3);
+                break;
         }
     }
 }

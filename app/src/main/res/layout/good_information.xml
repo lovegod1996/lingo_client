@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
 
-    android:orientation="vertical">
-
-
+    <RelativeLayout
+        android:id="@+id/goods_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <com.lovegod.newbuy.view.utils.GradationScrollView
         android:id="@+id/scrollview_good"
         android:layout_width="match_parent"
@@ -488,7 +489,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -501,7 +502,8 @@
                 android:background="@color/colorPrimary"
                 android:text="加入购物车"
                 android:textColor="#ffffff" />
-        </LinearLayout>
+
+        </FrameLayout>
 
     </LinearLayout>
 
@@ -524,4 +526,12 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-</RelativeLayout>
+    </RelativeLayout>
+    <TextView
+        android:layout_gravity="bottom|right"
+        android:id="@+id/addcart_circle"
+        android:textColor="@color/black_000000"
+        android:background="@drawable/circle_solid_shape"
+        android:layout_width="25dp"
+        android:layout_height="25dp" />
+</FrameLayout>

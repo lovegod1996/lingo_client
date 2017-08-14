@@ -20,6 +20,9 @@ import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Assess;
 import com.lovegod.newbuy.bean.BaseBean;
+import com.lovegod.newbuy.bean.User;
+import com.lovegod.newbuy.utils.system.SpUtils;
+import com.lovegod.newbuy.utils.userPreferences.UserPreferencesUtil;
 import com.lovegod.newbuy.view.utils.MyRecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -51,6 +54,7 @@ public class AssessActivity extends AppCompatActivity {
     List<Assess> assessList=new ArrayList<>();
     private AssessRecyclerViewAdapter assessRecyclerViewAdapter;
     private Toolbar toolbar;
+    private User user;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -69,6 +73,12 @@ public class AssessActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         int cid=Integer.valueOf(getIntent().getStringExtra("Cid"));
+        user= (User) SpUtils.getObject(this,"userinfo");
+
+        //添加评价足迹
+        if(user!=null) {
+            UserPreferencesUtil.changeTrackInfo(this,user.getUid(),cid,1,0);
+        }
 
         /**
          * 返回按钮监听

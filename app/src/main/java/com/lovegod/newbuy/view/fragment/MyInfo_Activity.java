@@ -13,8 +13,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,14 +36,14 @@ import com.lovegod.newbuy.bean.FavouriteQuest;
 import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
-import com.lovegod.newbuy.utils.view.AdapterWrapper;
 import com.lovegod.newbuy.view.LoginActivity;
-import com.lovegod.newbuy.view.myinfo.AddAssessActivity;
-import com.lovegod.newbuy.view.myinfo.FavouriteActivity;
+import com.lovegod.newbuy.view.myinfo.assess.AddAssessActivity;
+import com.lovegod.newbuy.view.myinfo.favourite.FavouriteActivity;
 import com.lovegod.newbuy.view.myinfo.MoreInfoActivity;
-import com.lovegod.newbuy.view.myinfo.MyOrderInfoActivity;
+import com.lovegod.newbuy.view.myinfo.order.MyOrderInfoActivity;
 import com.lovegod.newbuy.view.myinfo.SettingActivity;
-import com.lovegod.newbuy.view.myinfo.Trial_Activity;
+import com.lovegod.newbuy.view.myinfo.track.Track_Activity;
+import com.lovegod.newbuy.view.myinfo.trial.Trial_Activity;
 import com.lovegod.newbuy.view.myview.ItemImageLayout;
 
 import java.util.ArrayList;
@@ -75,7 +73,7 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
     private TextView myInfoText,forThePayHint,toSendTheGoodsHint,forTheGoodsHint,forTheAssessHint;
     private CircleImageView myInfoPortrait;
     private RelativeLayout allOrder,forThePay,toSendTheGoods,forTheGoods,toTheAssess,favouriteGoods,favouriteShop;
-    private ItemImageLayout myApply;
+    private ItemImageLayout myApply,myTrack;
 
     private AskAnswerAdapter adapter;
     private List<FavouriteQuest>questList=new ArrayList<>();
@@ -91,6 +89,7 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
 
         setHasOptionsMenu(true);
         myApply=(ItemImageLayout)view.findViewById(R.id.my_apply);
+        myTrack=(ItemImageLayout)view.findViewById(R.id.my_track);
         forTheAssessHint=(TextView)view.findViewById(R.id.for_the_assess_texthint);
         forThePayHint=(TextView)view.findViewById(R.id.for_the_payment_texthint);
         toSendTheGoodsHint=(TextView)view.findViewById(R.id.to_send_the_goods_texthint);
@@ -115,6 +114,7 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
         favouriteGoods.setOnClickListener(this);
         favouriteShop.setOnClickListener(this);
         myApply.setOnClickListener(this);
+        myTrack.setOnClickListener(this);
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -206,6 +206,9 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
                 break;
             case R.id.my_apply:
                 startActivityByCheck(Trial_Activity.class);
+                break;
+            case R.id.my_track:
+                startActivityByCheck(Track_Activity.class);
                 break;
 
         }

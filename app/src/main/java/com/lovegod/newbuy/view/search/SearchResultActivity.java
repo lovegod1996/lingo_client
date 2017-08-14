@@ -146,9 +146,9 @@ public class SearchResultActivity extends AppCompatActivity {
      * @param page 具体的页数
      */
     private void searchGoodsOnPage(int page){
-        searchResultRecycler.setAdapter(goodsWrapper);
         //判断是否是第一页，是的话就需要显示加载框
         if(page==0) {
+            searchResultRecycler.setAdapter(goodsWrapper);
             NetWorks.getNameGoods(searchContent, page, new BaseObserver<List<Commodity>>(this, new ProgressDialog(this)) {
                 @Override
                 public void onHandleSuccess(List<Commodity> commodities) {
@@ -211,9 +211,9 @@ public class SearchResultActivity extends AppCompatActivity {
      * @param page 页数
      */
     private void searchShopOnPage(int page) {
-        searchResultRecycler.setAdapter(shopWrapper);
         //第一次加载加载框
         if (page == 0) {
+            searchResultRecycler.setAdapter(shopWrapper);
             NetWorks.getNameShop(searchContent, page, new BaseObserver<List<Shop>>(this,new ProgressDialog(this)) {
                 @Override
                 public void onHandleSuccess(List<Shop> list) {

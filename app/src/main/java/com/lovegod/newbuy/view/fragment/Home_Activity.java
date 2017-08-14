@@ -3,7 +3,6 @@ package com.lovegod.newbuy.view.fragment;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +18,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.telephony.cdma.CdmaCellLocation;
@@ -45,7 +46,6 @@ import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.google.common.math.DoubleMath;
 import com.google.gson.Gson;
 import com.google.zxing.activity.CaptureActivity;
 import com.lovegod.newbuy.MyApplication;
@@ -59,8 +59,10 @@ import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.utils.system.SystemUtils;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.goods.GoodActivity;
+import com.lovegod.newbuy.view.goods.MyGridView;
 import com.lovegod.newbuy.view.myview.SearchLayout;
 import com.lovegod.newbuy.view.search.SearchActivity;
+import com.lovegod.newbuy.view.utils.GradationScrollView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -87,7 +89,7 @@ import static com.lovegod.newbuy.MainActivity.REQUEST_CODE;
  * *******************************************
  */
 
-public class Home_Activity extends android.support.v4.app.Fragment implements ViewTreeObserver.OnGlobalLayoutListener{
+public class Home_Activity extends Fragment implements ViewTreeObserver.OnGlobalLayoutListener{
 
     // 按类别搜索显示图标
     final int[] images = new int[]{R.mipmap.gree01, R.mipmap.midea01,
@@ -113,14 +115,14 @@ public class Home_Activity extends android.support.v4.app.Fragment implements Vi
 
     //  Shop allshop=new Shop();
 
-    GridView gridView;
+    MyGridView gridView;
     ListView listView;
     Button scan_code_btn;
     static Button city_name;
     public SearchLayout searchLayout;
     private SliderLayout mSliderLayout;
     private PagerIndicator indicator;
-    private ScrollView scrollView;
+    private GradationScrollView scrollView;
     //轮播图高度
     private int imageHeight;
 
@@ -171,10 +173,10 @@ public class Home_Activity extends android.support.v4.app.Fragment implements Vi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.home, container, false);
         listView = (ListView) view.findViewById(R.id.suggest_shop);
-        gridView = (GridView) view.findViewById(R.id.gridView_separate);
+        gridView = (MyGridView) view.findViewById(R.id.gridView_separate);
         scan_code_btn = (Button) view.findViewById(R.id.scan_code_btn);
         city_name = (Button) view.findViewById(R.id.city_name);
-        scrollView=(ScrollView)view.findViewById(R.id.home_scroll_view);
+        scrollView=(GradationScrollView)view.findViewById(R.id.home_scroll_view);
         titleLayout=(RelativeLayout)view.findViewById(R.id.rl_first_top);
 
 
@@ -239,24 +241,28 @@ public class Home_Activity extends android.support.v4.app.Fragment implements Vi
             }
         });
 
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         /**
          * 布局滚动监听
          */
-        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+        scrollView.setScrollViewListener(new GradationScrollView.ScrollViewListener() {
             @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if(scrollY<=0){
+            public void onScrollChanged(GradationScrollView scrollView, int x, int y, int oldx, int oldy) {
+                if(y<=0){
                     titleLayout.setBackgroundColor(Color.argb(0,253,104,97));
-                }else if(scrollY>0&&scrollY<=imageHeight) {
-                    float scale = (float)scrollY/imageHeight;
+                }else if(y>0&&y<=imageHeight) {
+                    float scale = (float)y/imageHeight;
                     titleLayout.setBackgroundColor(Color.argb((int) (255*scale),253,104,97));
-                }else if(scrollY>imageHeight){
+                }else if(y>imageHeight){
                     titleLayout.setBackgroundColor(Color.argb(255,253,104,97));
                 }
             }
         });
-
-        return view;
     }
 
     /**

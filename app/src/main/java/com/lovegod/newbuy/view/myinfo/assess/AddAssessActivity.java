@@ -1,4 +1,4 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.assess;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;

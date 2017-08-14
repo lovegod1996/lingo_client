@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/track_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@color/white_FFFFFF">
+    <ImageView
+        android:src="@mipmap/default_image"
+        android:layout_margin="5dp"
+        android:id="@+id/track_item_image"
+        android:layout_width="80dp"
+        android:layout_height="85dp" />
+    <TextView
+        android:id="@+id/track_item_name"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/black_000000"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:layout_toRightOf="@id/track_item_image"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_alignTop="@id/track_item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/orange_F57C00"
+        android:layout_alignLeft="@id/track_item_name"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@id/track_item_image"
+        android:id="@+id/track_item_price"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/track_item_focus"
+        android:textColor="@color/orange_F57C00"
+        android:textSize="@dimen/text_size_min"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:background="@color/splitline_color"
+        android:layout_below="@id/track_item_image"
+        android:layout_toRightOf="@id/track_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+</RelativeLayout>

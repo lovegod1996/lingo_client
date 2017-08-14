@@ -3,19 +3,18 @@ package com.lovegod.newbuy.view.myinfo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.ActivityCollector;
 import com.lovegod.newbuy.utils.system.SpUtils;
+import com.lovegod.newbuy.view.myinfo.address.MyAddressActivity;
+import com.lovegod.newbuy.view.myinfo.changeinfo.ChangeUserNameActivity;
 import com.lovegod.newbuy.view.myview.ItemTextLayout;
 
 import de.hdodenhof.circleimageview.CircleImageView;

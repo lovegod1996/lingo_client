@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_FFFFFF"
-    tools:context="com.lovegod.newbuy.view.myinfo.ShowAreaActivity">
+    tools:context="com.lovegod.newbuy.view.myinfo.address.ShowAreaActivity">
     <android.support.v7.widget.Toolbar
         android:background="@color/splitline_color"
         android:id="@+id/choose_area_toolbar"

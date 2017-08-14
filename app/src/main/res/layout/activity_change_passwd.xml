@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/splitline_color"
-    tools:context="com.lovegod.newbuy.view.myinfo.ChangePasswdActivity">
+    tools:context="com.lovegod.newbuy.view.myinfo.changeinfo.ChangePasswdActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/change_passwd_toolbar"
         android:background="@color/white_FFFFFF"

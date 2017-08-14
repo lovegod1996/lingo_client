@@ -1,6 +1,5 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.address;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
@@ -22,6 +20,7 @@ import com.lovegod.newbuy.bean.LoginMessage;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.view.carts.ShopCartAdapter;
+import com.lovegod.newbuy.view.myinfo.changeinfo.ChangeAddressActivity;
 
 import java.util.ArrayList;
 import java.util.List;

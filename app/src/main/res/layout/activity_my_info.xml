@@ -72,11 +72,11 @@
                     app:left_text="我的体验"/>
 
                 <com.lovegod.newbuy.view.myview.ItemImageLayout
-                    android:id="@+id/my_history"
+                    android:id="@+id/my_track"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:left_image_src="@mipmap/history_icon"
-                    app:left_text="历史" />
+                    app:left_image_src="@mipmap/track_icon"
+                    app:left_text="足迹" />
 
                 <com.lovegod.newbuy.view.myview.ItemImageLayout
                     android:id="@+id/my_info_about"

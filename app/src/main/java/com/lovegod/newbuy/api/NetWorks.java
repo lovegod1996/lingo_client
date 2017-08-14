@@ -20,6 +20,7 @@ import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.ShopCartBean;
 import com.lovegod.newbuy.bean.SortFrist;
 import com.lovegod.newbuy.bean.Town;
+import com.lovegod.newbuy.bean.Track;
 import com.lovegod.newbuy.bean.Trial;
 import com.lovegod.newbuy.bean.User;
 
@@ -309,6 +310,36 @@ public class NetWorks extends RetrofitUtils {
     }
     public static void isTrial(int uid,int cid,BaseObserver<Trial>trialObserver){
         setSubscribe(goodsApi.isTrial(uid, cid),trialObserver);
+    }
+    public static void commitTrackInfo(Map<String,String>map, BaseObserver<Track>goodsObserver){
+        setSubscribe(goodsApi.commitTrackInfo(map),goodsObserver);
+    }
+    public static void getOneTrack(int uid,int cid,BaseObserver<Track>goodsObserver){
+        setSubscribe(goodsApi.getOneTrack(uid, cid),goodsObserver);
+    }
+    public static void getAllTrack(int uid,int page,BaseObserver<List<Track>>goodsObserver){
+        setSubscribe(goodsApi.getAllTrack(uid,page),goodsObserver);
+    }
+    public static void changeInfoTrack(int detail,int tid,int total,BaseObserver<Track>goodsObserver){
+        setSubscribe(goodsApi.changeInfoTrack(detail,tid,total),goodsObserver);
+    }
+    public static void changeAssessTrack(int assess,int tid,int total,BaseObserver<Track>goodsObserver){
+        setSubscribe(goodsApi.changeAssessTrack(assess, tid, total),goodsObserver);
+    }
+    public static void changeQuestionTrack(int question,int tid,int total,BaseObserver<Track>goodsObserver){
+        setSubscribe(goodsApi.changeQuestionTrack(question, tid, total),goodsObserver);
+    }
+    public static void changeAttentionTrack(int attention,int tid,int total,BaseObserver<Track>goodsObserver){
+        setSubscribe(goodsApi.changeAttentionTrack(attention, tid, total),goodsObserver);
+    }
+    public static void changeCartTrack(int cart,int tid,int total,BaseObserver<Track>goodsObserver){
+        setSubscribe(goodsApi.changeCartTrack(cart, tid, total),goodsObserver);
+    }
+    public static void changeUserAssessTrack(int userassess,int tid,int total,BaseObserver<Track>goodsObserver){
+        setSubscribe(goodsApi.changeUserAssessTrack(userassess, tid, total),goodsObserver);
+    }
+    public static void changeBuyTrack(int buy,int tid,int total,BaseObserver<Track>goodsObserver){
+        setSubscribe(goodsApi.changeBuyTrack(buy, tid, total),goodsObserver);
     }
 
     /**

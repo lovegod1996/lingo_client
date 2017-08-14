@@ -1,4 +1,4 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.favourite;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
@@ -20,7 +20,9 @@ import com.lovegod.newbuy.bean.FavouriteGoods;
 import com.lovegod.newbuy.bean.FavouriteShop;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
+import com.lovegod.newbuy.utils.userPreferences.UserPreferencesUtil;
 import com.lovegod.newbuy.utils.view.AdapterWrapper;
+import com.lovegod.newbuy.view.TimeStickyDecoration;
 import com.lovegod.newbuy.view.carts.ShopCartAdapter;
 
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class FavouriteActivity extends AppCompatActivity {
     private User user;
     private List<FavouriteGoods>goodsList=new ArrayList<>();
     private List<FavouriteShop>shopList=new ArrayList<>();
+    private List<String>timeList=new ArrayList<>();
     private FavouriteGoodsAdapter goodsAdapter;
     private FavouriteShopAdapter shopAdapter;
     private int currentPage=0;
@@ -61,6 +64,7 @@ public class FavouriteActivity extends AppCompatActivity {
         goodsWrapper=new AdapterWrapper(this,goodsAdapter,emptyLayout);
         shopWrapper=new AdapterWrapper(this,shopAdapter,emptyLayout);
         recyclerView.setLayoutManager(manager);
+        recyclerView.addItemDecoration(new TimeStickyDecoration(this,timeList,goodsWrapper));
 
         setSupportActionBar(toolbar);
 
@@ -80,6 +84,7 @@ public class FavouriteActivity extends AppCompatActivity {
                     type=GOODS_TYPE;
                     currentPage=0;
                     goodsList.clear();
+                    timeList.clear();
                     recyclerView.setAdapter(goodsWrapper);
                 }
             }
@@ -98,6 +103,7 @@ public class FavouriteActivity extends AppCompatActivity {
                     currentPage=0;
                     type=SHOP_TYPE;
                     shopList.clear();
+                    timeList.clear();
                     recyclerView.setAdapter(shopWrapper);
                 }
             }
@@ -121,7 +127,7 @@ public class FavouriteActivity extends AppCompatActivity {
         shopAdapter.setOnItemClickListener(new ShopCartAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                shopWrapper.wrapperNotifyItemRemoved(position);
+                shopWrapper.notifyDataSetChanged();
             }
         });
 
@@ -131,7 +137,8 @@ public class FavouriteActivity extends AppCompatActivity {
         goodsAdapter.setOnItemClickListener(new ShopCartAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                goodsWrapper.notifyItemRemoved(goodsWrapper.getHeaderCount()+position);
+                goodsWrapper.notifyDataSetChanged();
+                UserPreferencesUtil.changeTrackInfo(FavouriteActivity.this,user.getUid(),goodsList.get(position).getCid(),3,0);
             }
         });
 
@@ -246,6 +253,7 @@ public class FavouriteActivity extends AppCompatActivity {
         if(type==GOODS_TYPE) {
             currentPage = 0;
             goodsList.clear();
+            timeList.clear();
             //获取用户关注的商品列表
             if (user != null) {
                 getFoucusGoods();
@@ -255,6 +263,7 @@ public class FavouriteActivity extends AppCompatActivity {
         else if(type==SHOP_TYPE){
             currentPage=0;
             shopList.clear();
+            timeList.clear();
             if(user!=null){
                 getFocusShop();
             }
@@ -271,7 +280,8 @@ public class FavouriteActivity extends AppCompatActivity {
                 for(FavouriteGoods goods:list){
                     goods.setEdit(false);
                     goodsList.add(goods);
-                }
+                    timeList.add(goods.getLooktime().substring(0,10));
+            }
                 goodsWrapper.notifyDataSetChanged();
                 //查询成功页数加1，方便下一次查找
                 currentPage++;
@@ -294,6 +304,7 @@ public class FavouriteActivity extends AppCompatActivity {
                 for(FavouriteShop shop:list){
                     shop.setEdit(false);
                     shopList.add(shop);
+                    timeList.add(shop.getLooktime().substring(0,10));
                 }
                 shopWrapper.notifyDataSetChanged();
                 currentPage++;

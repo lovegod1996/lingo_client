@@ -1,4 +1,4 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.changeinfo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

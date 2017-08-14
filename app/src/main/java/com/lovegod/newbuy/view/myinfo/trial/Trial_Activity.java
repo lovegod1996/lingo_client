@@ -1,4 +1,4 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.trial;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,8 +21,6 @@ import com.lovegod.newbuy.utils.view.AdapterWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.lovegod.newbuy.R.id.t1;
 
 public class Trial_Activity extends AppCompatActivity {
     private Toolbar toolbar;

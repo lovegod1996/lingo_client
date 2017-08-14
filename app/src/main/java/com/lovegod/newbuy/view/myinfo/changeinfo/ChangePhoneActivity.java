@@ -1,11 +1,10 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.changeinfo;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.view.fragment.RegisteredFragmentAdapter;

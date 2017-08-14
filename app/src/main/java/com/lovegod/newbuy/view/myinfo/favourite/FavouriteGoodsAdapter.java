@@ -1,4 +1,4 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.favourite;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -8,12 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lovegod.newbuy.R;
@@ -59,7 +57,7 @@ public class FavouriteGoodsAdapter extends RecyclerView.Adapter<FavouriteGoodsAd
             holder.deleteButton.setVisibility(View.VISIBLE);
             holder.goodsLayout.setClickable(false);
             holder.goodsLayout.setEnabled(false);
-            animator=ObjectAnimator.ofFloat(holder.deleteButton,"translationX",120f,0).setDuration(150*(position+1));
+            animator=ObjectAnimator.ofFloat(holder.deleteButton,"translationX",120f,0).setDuration(200);
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
@@ -72,7 +70,7 @@ public class FavouriteGoodsAdapter extends RecyclerView.Adapter<FavouriteGoodsAd
             });
             animator.start();
         }else {
-            animator=ObjectAnimator.ofFloat(holder.deleteButton,"translationX",0,120f).setDuration(150*(position+1));
+            animator=ObjectAnimator.ofFloat(holder.deleteButton,"translationX",0,120f).setDuration(200);
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {

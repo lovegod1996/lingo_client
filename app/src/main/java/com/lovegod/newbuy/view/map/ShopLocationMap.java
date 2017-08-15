@@ -1,7 +1,6 @@
 package com.lovegod.newbuy.view.map;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -24,23 +22,15 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.bean.Shop;
-
-import butterknife.BindView;
-
-import static com.baidu.location.h.g.D;
-import static com.baidu.location.h.g.S;
 
 
 /**
@@ -142,7 +132,7 @@ public class ShopLocationMap extends AppCompatActivity {
 
         // 定位初始化
         mLocClient = new LocationClient(this);
-        mbaidmap.setMyLocationConfiguration(new MyLocationConfiguration(mCurrentMode, true, null)); //设置定位数据, 只有先允许定位图层后设置数据才会生效
+//        mbaidmap.setMyLocationConfiguration(new MyLocationConfiguration(mCurrentMode, true, null)); //设置定位数据, 只有先允许定位图层后设置数据才会生效
         /*MyLocationConfiguration(MyLocationConfiguration.LocationMode mode,boolean enableDirection,BitmapDescriptor customMarker,int accuracyCircleFillColor,int accuracyCircleStrokeColor)
            mode - 定位图层显示方式, 默认为 LocationMode.NORMAL 普通态
            enableDirection - 是否允许显示方向信息
@@ -243,7 +233,6 @@ public class ShopLocationMap extends AppCompatActivity {
                     .direction(mCurrentDirection).latitude(bdLocation.getLatitude())
                     .longitude(bdLocation.getLongitude()).build();
             mbaidmap.setMyLocationData(locData);
-
             if (isFirstLoc == true) {
                 isFirstLoc = false;
                 LatLng me_ll = new LatLng(bdLocation.getLatitude(),bdLocation.getLongitude());
@@ -253,10 +242,10 @@ public class ShopLocationMap extends AppCompatActivity {
             }
         }
 
-        @Override
         public void onConnectHotSpotMessage(String s, int i) {
 
         }
+
     }
 
 

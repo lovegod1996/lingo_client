@@ -17,37 +17,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
-import com.lovegod.newbuy.api.LoginApi;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.Md5Util.MD5Util;
 import com.lovegod.newbuy.utils.regex.RegexUtil;
-import com.lovegod.newbuy.utils.retrofitRxjava.RetrofitUtils;
-import com.lovegod.newbuy.utils.system.ActivityCollector;
 import com.lovegod.newbuy.view.LoginActivity;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 
-import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
@@ -222,8 +210,22 @@ public class LoginInfoRegisteredFragment extends Fragment implements View.OnClic
         }
         NetWorks.commitLoginInfo(map, new BaseObserver<User>(getActivity(),new ProgressDialog(getActivity())) {
             @Override
-            public void onHandleSuccess(User user) {
+            public void onHandleSuccess(final User user) {
                 if(user!=null) {
+
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            super.run();
+                            try {   //注册环信账号
+                                EMClient.getInstance().createAccount(user.getPhone(), user.getPassword());
+                            } catch (HyphenateException e) {
+                                e.printStackTrace();
+
+                            }
+                        }
+                    }.start();
+
                     Toast.makeText(getActivity(),"注册成功，快登陆吧",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                     getActivity().finish();

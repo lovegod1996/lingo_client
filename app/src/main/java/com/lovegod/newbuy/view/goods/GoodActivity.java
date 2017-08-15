@@ -17,7 +17,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.util.Printer;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,11 +39,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.animation.ViewPropertyAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.ywx.lib.StarRating;
 import com.example.ywx.viewlibrary.LoadingButton;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
@@ -53,21 +53,26 @@ import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.FavouriteGoods;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.ShopCartBean;
+<<<<<<< HEAD
+=======
 import com.lovegod.newbuy.bean.Track;
 import com.lovegod.newbuy.bean.Trial;
+>>>>>>> 291cb3c5f5bb7dd43f5378c3efd8e7153b40df00
 import com.lovegod.newbuy.bean.User;
+import com.lovegod.newbuy.bean.boss.Boss;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.utils.userPreferences.UserPreferencesUtil;
 import com.lovegod.newbuy.view.Shop2Activity;
-import com.lovegod.newbuy.view.ShopActivity;
 import com.lovegod.newbuy.view.carts.CartActivity;
+<<<<<<< HEAD
+import com.lovegod.newbuy.view.chat.ChactActivity;
+=======
+>>>>>>> 291cb3c5f5bb7dd43f5378c3efd8e7153b40df00
 import com.lovegod.newbuy.view.utils.GradationScrollView;
 import com.lovegod.newbuy.view.utils.MaterialIndicator;
-import com.lovegod.newbuy.view.utils.MyRecyclerViewAdapter;
 import com.lovegod.newbuy.view.utils.NoScrollListView;
 import com.lovegod.newbuy.view.utils.StatusBarUtil;
 
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
@@ -78,14 +83,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static android.os.Build.VERSION_CODES.M;
-import static android.os.Build.VERSION_CODES.N;
+import static com.hyphenate.chat.EMGCMListenerService.TAG;
 
 
 /**
@@ -171,6 +173,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     TextView user_assess;
     @BindView(R.id.assess_num)
     TextView assess_num;
+    @BindView(R.id.chat_shop)
+    Button chat_shop;
+
+
     TextView tv_good_detail_cate;//产品参数
     /*对话框*/
     Dialog parameterDialog;
@@ -244,12 +250,31 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                 store_name.setText(shop.getShopname());
                 store_location.setText(shop.getSaddress());
                 store_name.setText(shop.getShopname());
-
             }
 
             @Override
             public void onHandleError(Shop shop) {
 
+            }
+        });
+
+        chat_shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //进入聊天界面
+                NetWorks.getBossBySid(commodity.getSid(), new BaseObserver<Boss>() {
+                    @Override
+                    public void onHandleSuccess(final Boss boss) {
+                        Intent chat = new Intent(GoodActivity.this,ChactActivity.class);
+                        chat.putExtra(EaseConstant.EXTRA_USER_ID,boss.getPhone());  //对方账号
+                        chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
+                        startActivity(chat);
+                    }
+                    @Override
+                    public void onHandleError(Boss boss) {
+                        Log.e(TAG, "onHandleError: 获取店主信息错误",null);
+                    }
+                });
             }
         });
 

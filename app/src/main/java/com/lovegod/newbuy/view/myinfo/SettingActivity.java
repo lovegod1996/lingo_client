@@ -9,6 +9,8 @@ import android.view.View;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
+import com.lovegod.newbuy.view.myinfo.changeinfo.ChangePasswdActivity;
+import com.lovegod.newbuy.view.myinfo.changeinfo.ChangePhoneActivity;
 import com.lovegod.newbuy.view.myview.ItemTextLayout;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener{

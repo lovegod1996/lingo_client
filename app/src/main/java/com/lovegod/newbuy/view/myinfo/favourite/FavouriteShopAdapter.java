@@ -1,11 +1,9 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.favourite;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +20,7 @@ import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.FavouriteShop;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.view.Shop2Activity;
+import com.lovegod.newbuy.view.carts.ShopCartAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +35,7 @@ public class FavouriteShopAdapter extends RecyclerView.Adapter<FavouriteShopAdap
     private Context mContext;
     private ObjectAnimator animator;
     private FavouriteGoodsAdapter.OnAnimEndListener onAnimEndListener;
+    private ShopCartAdapter.OnItemClickListener onItemClickListener;
 
     public FavouriteShopAdapter(Context context,List<FavouriteShop>list){
         mContext=context;
@@ -56,7 +56,7 @@ public class FavouriteShopAdapter extends RecyclerView.Adapter<FavouriteShopAdap
             holder.deleteButton.setVisibility(View.VISIBLE);
             holder.layout.setClickable(false);
             holder.layout.setEnabled(false);
-            animator= ObjectAnimator.ofFloat(holder.deleteButton,"translationX",120f,0).setDuration(150*(position+1));
+            animator= ObjectAnimator.ofFloat(holder.deleteButton,"translationX",120f,0).setDuration(200);
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
@@ -69,7 +69,7 @@ public class FavouriteShopAdapter extends RecyclerView.Adapter<FavouriteShopAdap
             });
             animator.start();
         }else {
-            animator=ObjectAnimator.ofFloat(holder.deleteButton,"translationX",0,120f).setDuration(150*(position+1));
+            animator=ObjectAnimator.ofFloat(holder.deleteButton,"translationX",0,120f).setDuration(200);
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
@@ -135,12 +135,14 @@ public class FavouriteShopAdapter extends RecyclerView.Adapter<FavouriteShopAdap
              */
            deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     NetWorks.cancelShopFocus(shopList.get(getAdapterPosition()).getSaid(), new BaseObserver<FavouriteShop>(mContext) {
                         @Override
                         public void onHandleSuccess(FavouriteShop favouriteShop) {
                             shopList.remove(getAdapterPosition());
-                            notifyItemRemoved(getAdapterPosition());
+                            if(onItemClickListener!=null){
+                                onItemClickListener.onItemClick(v,getAdapterPosition());
+                            }
                         }
 
                         @Override
@@ -155,5 +157,9 @@ public class FavouriteShopAdapter extends RecyclerView.Adapter<FavouriteShopAdap
 
     public void setOnAnimEndListener(FavouriteGoodsAdapter.OnAnimEndListener onAnimEndListener) {
         this.onAnimEndListener = onAnimEndListener;
+    }
+
+    public void setOnItemClickListener(ShopCartAdapter.OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

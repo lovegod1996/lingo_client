@@ -2,11 +2,8 @@ package com.lovegod.newbuy.view.carts;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,9 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.baidu.platform.comapi.map.D;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -29,22 +24,16 @@ import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
-import com.lovegod.newbuy.utils.view.BlurImageUtils;
 import com.lovegod.newbuy.utils.view.FastBlur;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.goods.GoodActivity;
-import com.lovegod.newbuy.view.myinfo.MyOrderInfoActivity;
 
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class OrderInfoActivty extends AppCompatActivity {
 
@@ -192,7 +181,13 @@ public class OrderInfoActivty extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                           timeText.setText("剩"+hours+"小时"+minutes+"分自动关闭");
+                            //超时自动取消订单
+                            if(hours<=0||minutes<=0) {
+                                closeOrder();
+                                timeText.setText("超时未付款，订单自动取消");
+                                return;
+                            }
+                            timeText.setText("剩" + hours + "小时" + minutes + "分自动关闭");
                         }
                     });
                 } catch (Exception e) {
@@ -200,6 +195,23 @@ public class OrderInfoActivty extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    /**
+     * 关闭订单
+     */
+    private void closeOrder() {
+        NetWorks.cancelOrder(order.getOid(), new BaseObserver<Order>(this) {
+            @Override
+            public void onHandleSuccess(Order order) {
+
+            }
+
+            @Override
+            public void onHandleError(Order order) {
+
+            }
+        });
     }
 
     /**

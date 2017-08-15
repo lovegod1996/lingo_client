@@ -1,9 +1,7 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.order;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,19 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
-import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
-import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
+import com.lovegod.newbuy.utils.view.AdapterWrapper;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,10 +47,12 @@ public class OrderFragment extends Fragment {
     private static final String KEY="order_key";
     private RecyclerView recyclerView;
     private OrderPageAdapter adapter;
+    private AdapterWrapper wrapper;
     private List<Order>orderList=new ArrayList<>();
     private User user;
     private int pageType;
     private int allPage=0,forThePayPage=0,forTheGoodsPage=0,toTheGoodsPage=0,finishPage=0;
+    private boolean isFirstLoad;
 
     public static Fragment newInstance(int flag){
         OrderFragment orderFragment=new OrderFragment();
@@ -81,40 +78,9 @@ public class OrderFragment extends Fragment {
         LinearLayoutManager manager=new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
         adapter=new OrderPageAdapter(getActivity(),orderList,getActivity());
-        recyclerView.setAdapter(adapter);
-        //初始化查询第一页，并且将当前页数设置为1，防止切换viewpager的时候该方法不断执行导致页数增加
-        switch (pageType){
-            case ALL_FLAG:
-                //查询所有订单
-                orderList.clear();
-                allPage=0;
-                queryAllOrder(0);
-                break;
-            case FOR_THE_PAY_FLAG:
-                //查询待付款订单
-                orderList.clear();
-                forThePayPage=0;
-                queryOrderByStatue(forThePayPage,0,0);
-                break;
-            case TO_THE_GOODS_FLAG:
-                //查询待发货订单
-                orderList.clear();
-                forTheGoodsPage=0;
-                queryOrderByStatue(forTheGoodsPage,0,1);
-                break;
-            case FOR_THE_GOODS_FLAG:
-                //查询待收货订单
-                orderList.clear();
-                toTheGoodsPage=0;
-                queryOrderByStatue(toTheGoodsPage,0,2);
-                break;
-            case FINISH_FLAG:
-                //查询已完成订单
-                orderList.clear();
-                finishPage=0;
-                queryOrderByStatue(finishPage,1,3);
-                break;
-        }
+        RelativeLayout emptyLayout= (RelativeLayout) LayoutInflater.from(getActivity()).inflate(R.layout.no_data_layout,null);
+        wrapper=new AdapterWrapper(getActivity(),adapter,emptyLayout);
+        recyclerView.setAdapter(wrapper);
 
         /**
          * 监听recyclerview的滚动而没用第三方上拉加载
@@ -129,9 +95,33 @@ public class OrderFragment extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange()){
-                    queryByType();
+                if(!isFirstLoad) {
+                    if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange()) {
+                        queryByType();
+                    }
+                }else {
+                    isFirstLoad=false;
                 }
+            }
+        });
+
+        /**
+         * 各个按钮点击的监听没方便让包装后的adapter通知变化
+         */
+        adapter.setOnButtonClickListener(new OrderPageAdapter.OnButtonClickListener() {
+            @Override
+            public void onPayClick() {
+
+            }
+
+            @Override
+            public void onCancelClick() {
+                wrapper.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onSureClick() {
+                wrapper.notifyDataSetChanged();
             }
         });
     }
@@ -160,7 +150,7 @@ public class OrderFragment extends Fragment {
                                if(requestOrderCount[0] ==orders.size()){
                                    //排序
                                    Collections.sort(orderList,new orderComparator());
-                                   adapter.notifyDataSetChanged();
+                                   wrapper.notifyDataSetChanged();
                                }
                            }
 
@@ -218,7 +208,7 @@ public class OrderFragment extends Fragment {
                                 if(requestOrderCount[0] ==orders.size()){
                                     //排序
                                     Collections.sort(orderList,new orderComparator());
-                                    adapter.notifyDataSetChanged();
+                                    wrapper.notifyDataSetChanged();
                                 }
                             }
 
@@ -276,6 +266,46 @@ public class OrderFragment extends Fragment {
                 e.printStackTrace();
             }
             return (int) (o2Date.getTime()-o1Date.getTime());
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //设置为第一次加载
+        isFirstLoad=true;
+        //初始化查询第一页，并且将当前页数设置为1，防止切换viewpager的时候该方法不断执行导致页数增加
+        switch (pageType){
+            case ALL_FLAG:
+                //查询所有订单
+                orderList.clear();
+                allPage=0;
+                queryAllOrder(0);
+                break;
+            case FOR_THE_PAY_FLAG:
+                //查询待付款订单
+                orderList.clear();
+                forThePayPage=0;
+                queryOrderByStatue(forThePayPage,0,0);
+                break;
+            case TO_THE_GOODS_FLAG:
+                //查询待发货订单
+                orderList.clear();
+                forTheGoodsPage=0;
+                queryOrderByStatue(forTheGoodsPage,0,1);
+                break;
+            case FOR_THE_GOODS_FLAG:
+                //查询待收货订单
+                orderList.clear();
+                toTheGoodsPage=0;
+                queryOrderByStatue(toTheGoodsPage,0,2);
+                break;
+            case FINISH_FLAG:
+                //查询已完成订单
+                orderList.clear();
+                finishPage=0;
+                queryOrderByStatue(finishPage,1,3);
+                break;
         }
     }
 }

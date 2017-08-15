@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_FFFFFF"
-    tools:context="com.lovegod.newbuy.view.myinfo.FavouriteActivity">
+    tools:context="com.lovegod.newbuy.view.myinfo.favourite.FavouriteActivity">
 
     <android.support.v7.widget.Toolbar
         android:background="@color/splitline_color"

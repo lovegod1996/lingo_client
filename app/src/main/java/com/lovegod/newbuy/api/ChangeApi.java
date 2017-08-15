@@ -26,12 +26,13 @@ public interface ChangeApi {
     @FormUrlEncoded
     @PUT("user/updatePass/{id}")
     Observable<BaseBean<LoginMessage>>changePasswd(@Path("id")Integer id, @Field("id")Integer paramsId, @Field("password")String password);
+
     //修改用户名的接口
     @FormUrlEncoded
     @PUT("user/username/{id}")
     Observable<BaseBean<LoginMessage>>changeUserName(@Path("id")Integer id,@Field("username")String username);
-    //修改用户手机号的接口
 
+    //修改用户手机号的接口
     @PUT("user/updatePhone/{id}/{phone}")
     Observable<BaseBean<User>>changPhoneNumber(@Path("id")Integer id,@Path("phone")String phone);
 }

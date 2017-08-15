@@ -16,8 +16,7 @@ import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Address;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
-import com.lovegod.newbuy.view.myinfo.ChangeAddressActivity;
-import com.lovegod.newbuy.view.myinfo.MyAddressActivity;
+import com.lovegod.newbuy.view.myinfo.address.MyAddressActivity;
 
 import java.util.ArrayList;
 import java.util.List;

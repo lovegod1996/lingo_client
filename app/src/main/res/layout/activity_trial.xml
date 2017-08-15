@@ -2,20 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_FFFFFF"
-    tools:context="com.lovegod.newbuy.view.myinfo.address.ShowAreaActivity">
+    android:orientation="vertical"
+    android:background="@color/splitline_color"
+    tools:context="com.lovegod.newbuy.view.myinfo.trial.Trial_Activity">
     <android.support.v7.widget.Toolbar
-        android:background="@color/splitline_color"
-        android:id="@+id/choose_area_toolbar"
-        app:title="选择地区"
+        android:id="@+id/trial_toolbar"
+        app:title="申请体验"
         app:navigationIcon="@mipmap/ic_back_black"
+        android:background="@color/white_FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"/>
-    <ListView
-        android:id="@+id/choose_area_listview"
+    <android.support.v7.widget.RecyclerView
+        android:background="@color/white_FFFFFF"
+        android:id="@+id/trial_recycler"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

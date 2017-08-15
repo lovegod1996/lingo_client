@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splitline_color"
-    tools:context="com.lovegod.newbuy.view.myinfo.PublishAssessActivity">
+    tools:context="com.lovegod.newbuy.view.myinfo.assess.PublishAssessActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/publish_assess_toolbar"

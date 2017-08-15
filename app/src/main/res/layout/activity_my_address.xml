@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splitline_color"
-    tools:context="com.lovegod.newbuy.view.myinfo.MyAddressActivity">
+    tools:context="com.lovegod.newbuy.view.myinfo.address.MyAddressActivity">
         <android.support.v7.widget.Toolbar
             android:id="@+id/my_address_toolbar"
             app:navigationIcon="@mipmap/ic_back_black"

@@ -22,6 +22,7 @@ import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.ActivityCollector;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.view.LoginActivity;
+import com.lovegod.newbuy.view.myinfo.order.MyOrderInfoActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

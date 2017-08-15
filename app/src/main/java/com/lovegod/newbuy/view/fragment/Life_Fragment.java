@@ -78,7 +78,7 @@ public class Life_Fragment extends Fragment {
         options.setChoose(true);
         optionsList.add(options);
         options=new Options();
-        options.setText("电器");
+        options.setText("家电");
         options.setChoose(false);
         optionsList.add(options);
         optionsAdapter=new OptionsAdapter(getActivity(),optionsList);

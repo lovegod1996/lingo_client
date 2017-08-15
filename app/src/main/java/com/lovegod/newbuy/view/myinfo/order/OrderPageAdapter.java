@@ -1,8 +1,7 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.order;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,9 +20,9 @@ import com.bumptech.glide.Glide;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
-import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.Shop;
+import com.lovegod.newbuy.utils.userPreferences.UserPreferencesUtil;
 import com.lovegod.newbuy.view.carts.OrderInfoActivty;
 import com.lovegod.newbuy.view.carts.PayChooseActivity;
 
@@ -40,6 +39,7 @@ public class OrderPageAdapter extends RecyclerView.Adapter<OrderPageAdapter.View
     private Context mContext;
     private List<Order>orderList=new ArrayList<>();
     private Activity mActivity;
+    private OnButtonClickListener onButtonClickListener;
     public OrderPageAdapter(Context context, List<Order>orders,Activity activity){
         mContext=context;
         orderList=orders;
@@ -142,7 +142,9 @@ public class OrderPageAdapter extends RecyclerView.Adapter<OrderPageAdapter.View
                             public void onHandleSuccess(Order order) {
                                 //删除成功就删除掉该位置的数据并通知适配器数据改变
                                 orderList.remove(position);
-                                notifyDataSetChanged();
+                                if(onButtonClickListener!=null){
+                                    onButtonClickListener.onCancelClick();
+                                }
                             }
 
                             @Override
@@ -179,7 +181,13 @@ public class OrderPageAdapter extends RecyclerView.Adapter<OrderPageAdapter.View
                             public void onHandleSuccess(Order order) {
                                 order.setStatue(3);
                                 orderList.remove(position);
-                                notifyDataSetChanged();
+                                if(onButtonClickListener!=null){
+                                    onButtonClickListener.onSureClick();
+                                }
+                                //遍历该订单每个商品，修改每个商品的购买足迹值
+                                for(Order.OrderGoods orderGoods:order.getOrderGoodsList()){
+                                    UserPreferencesUtil.changeTrackInfo(mContext,order.getUid(),orderGoods.getCid(),6,0);
+                                }
                                 Toast.makeText(mContext,"收货成功，别忘了去评价你买到的宝贝哦",Toast.LENGTH_SHORT).show();
                             }
 
@@ -262,4 +270,14 @@ public class OrderPageAdapter extends RecyclerView.Adapter<OrderPageAdapter.View
              }
          });
      }
+
+    public interface OnButtonClickListener{
+        void onPayClick();
+        void onCancelClick();
+        void onSureClick();
+    }
+
+    public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener) {
+        this.onButtonClickListener = onButtonClickListener;
+    }
 }

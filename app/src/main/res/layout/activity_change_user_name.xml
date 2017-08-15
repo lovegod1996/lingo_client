@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splitline_color"
-    tools:context="com.lovegod.newbuy.view.myinfo.ChangeUserNameActivity">
+    tools:context="com.lovegod.newbuy.view.myinfo.changeinfo.ChangeUserNameActivity">
     <android.support.v7.widget.Toolbar
         app:navigationIcon="@mipmap/ic_back_black"
         android:id="@+id/chang_username_toolbar"

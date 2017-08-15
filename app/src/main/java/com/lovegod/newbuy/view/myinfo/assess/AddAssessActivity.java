@@ -1,4 +1,4 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.assess;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.lovegod.newbuy.R;
@@ -15,6 +17,7 @@ import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
+import com.lovegod.newbuy.utils.view.AdapterWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,8 @@ public class AddAssessActivity extends AppCompatActivity {
     private AddAssessAdapter adapter;
     private User user;
     private int currentPage;
+    private AdapterWrapper wrapper;
+    private boolean isFirstLoad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +41,14 @@ public class AddAssessActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+        isFirstLoad=true;
         adapter=new AddAssessAdapter(this,orderGoodsList);
         LinearLayoutManager manager=new LinearLayoutManager(this);
         //初始化列表
         recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+        RelativeLayout emptyLayout= (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.no_data_layout,null);
+        wrapper=new AdapterWrapper(this,adapter,emptyLayout);
+        recyclerView.setAdapter(wrapper);
 
         //上拉加载监听
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -52,8 +60,12 @@ public class AddAssessActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(recyclerView.computeVerticalScrollOffset()+recyclerView.computeVerticalScrollExtent()>=recyclerView.computeVerticalScrollRange()){
-                    requestGoods();
+                if(!isFirstLoad) {
+                    if (recyclerView.computeVerticalScrollOffset() + recyclerView.computeVerticalScrollExtent() >= recyclerView.computeVerticalScrollRange()) {
+                        requestGoods();
+                    }
+                }else {
+                    isFirstLoad=false;
                 }
             }
         });
@@ -77,7 +89,7 @@ public class AddAssessActivity extends AppCompatActivity {
                 for(Order.OrderGoods goods:orderGoodses){
                     orderGoodsList.add(goods);
                 }
-                adapter.notifyDataSetChanged();
+                wrapper.notifyDataSetChanged();
             }
 
             @Override

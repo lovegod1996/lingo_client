@@ -1,4 +1,4 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.order;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

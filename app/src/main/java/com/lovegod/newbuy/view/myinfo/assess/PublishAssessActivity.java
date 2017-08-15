@@ -1,14 +1,12 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.assess;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -27,6 +25,7 @@ import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
 
+import com.lovegod.newbuy.utils.userPreferences.UserPreferencesUtil;
 import com.lovegod.newbuy.view.registered.PicassoImageLoader;
 import com.lovegod.newbuy.view.search.ControlScrollRecyclerView;
 import com.lzy.imagepicker.ImagePicker;
@@ -277,6 +276,7 @@ public class PublishAssessActivity extends AppCompatActivity {
                                     NetWorks.changeOrderGoodsStatue(orderGoods.getOgid(), new BaseObserver<Order.OrderGoods>(PublishAssessActivity.this) {
                                         @Override
                                         public void onHandleSuccess(Order.OrderGoods orderGoods) {
+                                            UserPreferencesUtil.changeTrackInfo(PublishAssessActivity.this,user.getUid(),orderGoods.getCid(),5,starRating.getCurrentCount());
                                             //提交成功直接结束该活动不用再设置可点击
 
                                             finish();

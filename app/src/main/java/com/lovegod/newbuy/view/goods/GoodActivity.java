@@ -1,5 +1,6 @@
 package com.lovegod.newbuy.view.goods;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -39,6 +41,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.ywx.lib.StarRating;
+import com.example.ywx.viewlibrary.LoadingButton;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
@@ -50,12 +53,21 @@ import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.FavouriteGoods;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.ShopCartBean;
+<<<<<<< HEAD
+=======
+import com.lovegod.newbuy.bean.Track;
+import com.lovegod.newbuy.bean.Trial;
+>>>>>>> 291cb3c5f5bb7dd43f5378c3efd8e7153b40df00
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.bean.boss.Boss;
 import com.lovegod.newbuy.utils.system.SpUtils;
+import com.lovegod.newbuy.utils.userPreferences.UserPreferencesUtil;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.carts.CartActivity;
+<<<<<<< HEAD
 import com.lovegod.newbuy.view.chat.ChactActivity;
+=======
+>>>>>>> 291cb3c5f5bb7dd43f5378c3efd8e7153b40df00
 import com.lovegod.newbuy.view.utils.GradationScrollView;
 import com.lovegod.newbuy.view.utils.MaterialIndicator;
 import com.lovegod.newbuy.view.utils.NoScrollListView;
@@ -69,6 +81,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -89,6 +102,15 @@ import static com.hyphenate.chat.EMGCMListenerService.TAG;
  */
 
 public class GoodActivity extends Activity implements GradationScrollView.ScrollViewListener {
+    //修改用户足迹的常量
+    private static final int INFO_TRACK=0;
+    private static final int ASSESS_TRACK=1;
+    private static final int QUESTION_TRACK=2;
+    private static final int ATTENTION_TRACK=3;
+    private static final int CART_TRACK=4;
+    private static final int USERASSESS_TRACK=5;
+    private static final int BUY_TRACK=6;
+
     private FavouriteGoods foucusGoods;
     //是否收藏该商品
     private boolean isFoucus=false;
@@ -97,6 +119,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     private int imageHeight;
     private ViewPager viewPager;
     private User user;
+    private Track goodsTrack;
 
     //问答动画是否执行
     private boolean isAnmi=true;
@@ -112,6 +135,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     ListView image_details_listview;
     RelativeLayout li_title;
 
+    @BindView(R.id.addcart_circle)
+    TextView addCartCircle;
+    @BindView(R.id.goods_layout)
+    RelativeLayout goodsLayout;
     @BindView(R.id.assess_li)
     LinearLayout assessLi;
     @BindView(R.id.user_ratingbar)
@@ -136,7 +163,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     TextView store_location;
     @BindView(R.id.store_month_number)
     TextView store_month_number;
-
+    @BindView(R.id.goods_trial)
+    TextView trialText;
     @BindView(R.id.user_name)
     TextView user_name;
     @BindView(R.id.user_time)
@@ -202,8 +230,16 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
         tv_good_detail_cate = (TextView) findViewById(R.id.tv_good_detail_cate);
 
-        //查询是否已经管制
+        //查询是否已经关注
         queryWhetherFoucus();
+
+        //查询是否已经申请体验
+        queryWhetherApply();
+
+        //进行与用户足迹相关的操作
+        if(user!=null){
+            UserPreferencesUtil.changeTrackInfo(this,user.getUid(),commodity.getCid(),INFO_TRACK,0);
+        }
 
         //获取最新的评论信息以及评论个数
         getAssess();
@@ -264,6 +300,9 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             }
         });
 
+        /**
+         * 查看全部评论监听
+         */
         assess_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -297,7 +336,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
 
         parameterDialog.setCanceledOnTouchOutside(true);//点击外部使对话框消失
         parameterDialog.setContentView(root);
-        Window dialogWindow = parameterDialog.getWindow();
+        final Window dialogWindow = parameterDialog.getWindow();
         dialogWindow.setGravity(Gravity.BOTTOM);
 
         dialogWindow.setWindowAnimations(R.style.dialogstyle); // 添加动画
@@ -335,7 +374,122 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         initlistener();
         initListeners();
 
+        /**
+         * 申请体验按钮监听
+         */
+        trialText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (user != null) {
+                    final Map<String, String> map = new HashMap<>();
+                    map.put("uid",user.getUid()+"");
+                    map.put("username",user.getUsername());
+                    map.put("cid",commodity.getCid()+"");
+                    map.put("sid",commodity.getSid()+"");
+                    map.put("areatype",3+"");
+                    map.put("managestatue",0+"");
+                    map.put("applystatue",0+"");
+                    //获取商店信息
+                    NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>(GoodActivity.this) {
+                        @Override
+                        public void onHandleSuccess(Shop shop) {
+                            map.put("area",shop.getCity()+"");
+                        }
 
+                        @Override
+                        public void onHandleError(Shop shop) {
+
+                        }
+                    });
+                    //获取时间
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            URL url= null;//取得资源对象
+                            try {
+                                url = new URL("http://www.taobao.com");
+                                URLConnection uc=url.openConnection();//生成连接对象
+                                uc.connect(); //发出连接
+                                final long ld=uc.getDate(); //取得网站日期时间
+                                final Date currentDate=new Date(ld); //转换为标准时间对象
+                                final SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                //获取到了后在主线程进行操作
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        map.put("applytime",format.format(currentDate));
+                                    }
+                                });
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+                    //弹出对话框
+                    final Dialog dialog = new Dialog(GoodActivity.this, R.style.transparent_dialog);
+                    LinearLayout root = (LinearLayout) LayoutInflater.from(GoodActivity.this).inflate(R.layout.apply_trial_dialog, null);
+                    final StarRating starRating= (StarRating) root.findViewById(R.id.apply_trial_star);
+                    LoadingButton commitButton=(LoadingButton)root.findViewById(R.id.apply_trial_button);
+                    dialog.setContentView(root);
+                    Window window = dialog.getWindow();
+                    WindowManager.LayoutParams params = window.getAttributes();
+                    params.width = getResources().getDisplayMetrics().widthPixels;
+                    window.setAttributes(params);
+                    dialog.show();
+                    /**
+                     * 提交按钮监听
+                     */
+                    commitButton.setOnButtonClickListener(new LoadingButton.OnButtonClickListener() {
+                        @Override
+                        public void onButtonClick() {
+                            map.put("star",starRating.getCurrentCount()+"");
+                            NetWorks.addTrialGoods(map, new BaseObserver<Trial>(GoodActivity.this) {
+                                @Override
+                                public void onHandleSuccess(Trial trial) {
+                                    dialog.dismiss();
+                                    Toast.makeText(GoodActivity.this,"申请成功，会尽快帮您处理",Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onHandleError(Trial trial) {
+
+                                }
+                            });
+                        }
+                    });
+                }else {
+                    Toast.makeText(GoodActivity.this,"快去登录，享受体验资格~",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    /**
+     * 查询该商品是否申请体验
+     */
+    private void queryWhetherApply() {
+        if(user!=null){
+            Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+            NetWorks.isTrial(user.getUid(), commodity.getCid(), new BaseObserver<Trial>(this) {
+                @Override
+                public void onHandleSuccess(Trial trial) {
+                    if(trial!=null){
+                        trialText.setText("已申请");
+                        trialText.setEnabled(false);
+                        trialText.setClickable(false);
+                    }else {
+                        trialText.setText("申请体验");
+                        trialText.setEnabled(true);
+                        trialText.setClickable(true);
+                    }
+                }
+
+                @Override
+                public void onHandleError(Trial trial) {
+
+                }
+            });
+        }
     }
 
     /**
@@ -396,6 +550,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             @Override
             public void onClick(View v) {
                 if(user!=null) {
+                    keep.setEnabled(false);
+                    keep.setClickable(false);
                     if (!isFoucus) {
                         //提交关注请求
                         addFoucus();
@@ -408,15 +564,20 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             }
         });
 
+        /**
+         * 加入购物车监听
+         */
         addcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (user != null) {
+                    addcart.setEnabled(false);
+                    addcart.setClickable(false);
                     final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
                     NetWorks.getIDshop(commodity.getSid(), new BaseObserver<Shop>() {
                         @Override
                         public void onHandleSuccess(Shop shop) {
-                            Map<String, Object> addcartMap = new HashMap<String, Object>();
+                            final Map<String, Object> addcartMap = new HashMap<String, Object>();
                             addcartMap.put("uid", 1);
                             addcartMap.put("sid", commodity.getSid());
                             addcartMap.put("cid", commodity.getCid());
@@ -429,20 +590,24 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                             NetWorks.postAddcart(addcartMap, new BaseObserver<ShopCartBean>() {
                                 @Override
                                 public void onHandleSuccess(ShopCartBean shopCartBean) {
-                                    Toast toast = Toast.makeText(getApplicationContext(), "宝贝已添加到购物车", Toast.LENGTH_LONG);
-                                    toast.show();
+                                    //添加购物车足迹
+                                    UserPreferencesUtil.changeTrackInfo(GoodActivity.this,user.getUid(),commodity.getCid(),CART_TRACK,0);
+                                    //执行添加到购物车的动画
+                                    runAnim();
                                 }
 
                                 @Override
                                 public void onHandleError(ShopCartBean shopCartBean) {
-
+                                    addcart.setEnabled(true);
+                                    addcart.setClickable(true);
                                 }
                             });
                         }
 
                         @Override
                         public void onHandleError(Shop shop) {
-
+                            addcart.setEnabled(true);
+                            addcart.setClickable(true);
                         }
                     });
                 }else {
@@ -509,20 +674,85 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     }
 
     /**
+     * 执行添加购物车动画
+     */
+    private void runAnim() {
+        int[] locationTarget=new int[2];
+        final int[] locationRaw=new int[2];
+
+        //设置圆点原始坐标
+        locationRaw[0]= (int) addCartCircle.getX();
+        locationRaw[1]= (int) addCartCircle.getY();
+        //获取购物车图标的坐标
+        shopCartIcon.getLocationOnScreen(locationTarget);
+
+        //Y轴平移动画
+        ObjectAnimator xAnimator=ObjectAnimator.ofFloat(addCartCircle,"translationY",0f,locationTarget[1]-locationRaw[1]).setDuration(1000);
+        //X轴平移动画
+        ObjectAnimator yAnimator=ObjectAnimator.ofFloat(addCartCircle,"translationX",0f,locationTarget[0]-locationRaw[0]).setDuration(1000);
+        //X轴缩放动画
+        ObjectAnimator scaleXAnimator=ObjectAnimator.ofFloat(addCartCircle,"scaleX",1.0f, 0.2f).setDuration(1000);
+        //Y轴缩放动画
+        ObjectAnimator scaleYAnimator=ObjectAnimator.ofFloat(addCartCircle,"scaleY",1.0f, 0.2f).setDuration(1000);
+
+        AnimatorSet animatorSet=new AnimatorSet();
+        //将以上动画同时执行
+        animatorSet.playTogether(xAnimator,yAnimator,scaleXAnimator,scaleYAnimator);
+        animatorSet.start();
+        animatorSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                AnimatorSet set=new AnimatorSet();
+                set.playTogether(ObjectAnimator.ofFloat(shopCartIcon,"scaleX",0.8f,1f).setDuration(500),ObjectAnimator.ofFloat(shopCartIcon,"scaleY",0.8f,1f).setDuration(500));
+                set.start();
+                //动画执行结束后将圆点设置回起始位置
+                addCartCircle.setX(locationRaw[0]);
+                addCartCircle.setY(locationRaw[1]);
+                //添加成功的提示
+                Toast.makeText(GoodActivity.this, "宝贝已添加到购物车", Toast.LENGTH_LONG).show();
+                //按钮设置为可点击
+                addcart.setEnabled(true);
+                addcart.setClickable(true);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+    }
+
+    /**
      * 取消收藏宝贝请求
      */
     private void deleteFoucus() {
+        final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
         NetWorks.cancelFoucusGoods(foucusGoods.getGaid(), new BaseObserver<FavouriteGoods>(this) {
             @Override
             public void onHandleSuccess(FavouriteGoods favouriteGoods) {
                 keep.setImageResource(R.mipmap.keep_gray);
                 Toast.makeText(GoodActivity.this, "取消收藏成功~", Toast.LENGTH_SHORT).show();
                 isFoucus = false;
+                //取消收藏足迹
+                UserPreferencesUtil.changeTrackInfo(GoodActivity.this,user.getUid(),commodity.getCid(),ATTENTION_TRACK,0);
+                keep.setEnabled(false);
+                keep.setClickable(false);
             }
 
             @Override
             public void onHandleError(FavouriteGoods favouriteGoods) {
-
+                keep.setEnabled(false);
+                keep.setClickable(false);
             }
         });
     }
@@ -531,7 +761,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
      * 添加收藏宝贝请求
      */
     private void addFoucus() {
-        Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+        final Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
         final Map<String,String>map=new HashMap<>();
         map.put("sid",commodity.getSid()+"");
         map.put("cid",commodity.getCid()+"");
@@ -559,11 +789,16 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                                     keep.setImageResource(R.mipmap.keeped);
                                     Toast.makeText(GoodActivity.this, "成功收藏该宝贝~", Toast.LENGTH_SHORT).show();
                                     isFoucus = true;
+                                    //添加收藏足迹
+                                    UserPreferencesUtil.changeTrackInfo(GoodActivity.this,user.getUid(),commodity.getCid(),ATTENTION_TRACK,1);
+                                    keep.setEnabled(false);
+                                    keep.setClickable(false);
                                 }
 
                                 @Override
                                 public void onHandleError(FavouriteGoods favouriteGoods) {
-
+                                    keep.setEnabled(false);
+                                    keep.setClickable(false);
                                 }
                             });
                         }
@@ -770,5 +1005,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         return newname;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        user= (User) SpUtils.getObject(this,"userinfo");
+    }
 }
 

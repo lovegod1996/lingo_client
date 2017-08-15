@@ -37,6 +37,15 @@ public class Shop implements Serializable{
     private String showpic;
     private String headershow;
     private String scope;
+    private int city;
+
+    public int getCity() {
+        return city;
+    }
+
+    public void setCity(int city) {
+        this.city = city;
+    }
 
     public String getScope() {
         return scope;

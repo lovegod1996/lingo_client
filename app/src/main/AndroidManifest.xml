@@ -137,21 +137,21 @@
             android:name=".view.myinfo.MyInfoActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".view.myinfo.ChangePasswdActivity"
+            android:name=".view.myinfo.changeinfo.ChangePasswdActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name=".view.myinfo.MoreInfoActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".view.myinfo.ChangeUserNameActivity"
+            android:name=".view.myinfo.changeinfo.ChangeUserNameActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name=".view.myinfo.SettingActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".view.myinfo.ChangePhoneActivity"
+            android:name=".view.myinfo.changeinfo.ChangePhoneActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
@@ -160,33 +160,42 @@
             android:windowSoftInputMode="stateVisible" />
         <activity android:name=".view.search.SearchResultActivity" />
         <activity
-            android:name=".view.myinfo.ChangeAddressActivity"
+            android:name=".view.myinfo.changeinfo.ChangeAddressActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".view.myinfo.MyAddressActivity"
+            android:name=".view.myinfo.address.MyAddressActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".view.myinfo.ShowAreaActivity"
+            android:name=".view.myinfo.address.ShowAreaActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".view.carts.SubmitOrderActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden|adjustNothing" />
         <activity android:name=".view.carts.ChooseAddressActivity" />
-        <activity android:name=".view.myinfo.MyOrderInfoActivity" />
+        <activity android:name=".view.myinfo.order.MyOrderInfoActivity" />
         <activity android:name=".view.carts.PayChooseActivity" />
         <activity
             android:name=".view.carts.OrderInfoActivty"
             android:launchMode="singleTask" />
-        <activity android:name=".view.myinfo.AddAssessActivity" />
-        <activity android:name=".view.myinfo.PublishAssessActivity" />
+        <activity android:name=".view.myinfo.assess.AddAssessActivity" />
+        <activity android:name=".view.myinfo.assess.PublishAssessActivity" />
         <activity
             android:name=".view.goods.AskActivity"
             android:launchMode="singleTask" />
+<<<<<<< HEAD
         <activity android:name=".view.goods.ShowOneAskActivity" />
         <activity android:name=".view.myinfo.FavouriteActivity" />
         <activity android:name=".view.ShowImageActivity"></activity>
         <activity android:name=".view.chat.ChactActivity"></activity>
+=======
+        <activity android:name=".view.goods.ShowOneAskActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".view.myinfo.favourite.FavouriteActivity" />
+        <activity android:name=".view.ShowImageActivity" />
+        <activity android:name=".view.myinfo.trial.Trial_Activity" />
+        <activity android:name=".view.myinfo.track.Track_Activity"></activity>
+>>>>>>> 291cb3c5f5bb7dd43f5378c3efd8e7153b40df00
     </application>
 
 </manifest>

@@ -1,12 +1,10 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.changeinfo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,7 +12,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +20,10 @@ import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Address;
-import com.lovegod.newbuy.bean.City;
-import com.lovegod.newbuy.bean.District;
-import com.lovegod.newbuy.bean.Province;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.regex.RegexUtil;
 import com.lovegod.newbuy.utils.system.SpUtils;
+import com.lovegod.newbuy.view.myinfo.address.ShowAreaActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -27,6 +27,7 @@ import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Quest;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
+import com.lovegod.newbuy.utils.userPreferences.UserPreferencesUtil;
 import com.lovegod.newbuy.view.LoginActivity;
 import com.lovegod.newbuy.view.carts.ShopCartAdapter;
 
@@ -56,6 +57,7 @@ public class AskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask);
+        user= (User) SpUtils.getObject(this,"userinfo");
         commodity= (Commodity) getIntent().getSerializableExtra("commodity");
         toolbar=(Toolbar)findViewById(R.id.ask_toolbar);
         askLayout=(RelativeLayout)findViewById(R.id.ask_commit_ask_layout);
@@ -66,6 +68,10 @@ public class AskActivity extends AppCompatActivity {
         recycler.setAdapter(adapter);
 
         setSupportActionBar(toolbar);
+
+        if(user!=null) {
+            UserPreferencesUtil.changeTrackInfo(this, user.getUid(), commodity.getCid(), 2, 0);
+        }
 
         /**
          * 返回按钮监听

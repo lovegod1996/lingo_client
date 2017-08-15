@@ -152,6 +152,7 @@ public class ShowOneAskActivity extends AppCompatActivity {
         final Map<String,String>map=new HashMap<>();
         map.put("qid",quest.getQid()+"");
         map.put("uid",user.getUid()+"");
+        map.put("username",user.getUsername());
         map.put("up",0+"");
         map.put("content",content);
 
@@ -198,7 +199,7 @@ public class ShowOneAskActivity extends AppCompatActivity {
      */
     private void initInfo() {
         if(user==null){
-            replyEdit.setHint("只有登录用户才能回复");
+            replyEdit.setHint("您尚未登录，只有登录用户才能回复");
             replyEdit.setKeyListener(null);
         }
         goodsName.setText(mCommodity.getProductname());
@@ -219,9 +220,11 @@ public class ShowOneAskActivity extends AppCompatActivity {
                 replieList.add(reply);
                 Collections.sort(replieList,new orderComparator());
                 adapter.notifyDataSetChanged();
+                recycler.scrollToPosition(replieList.size()-1);
                 initInfo();
                 sendText.setEnabled(true);
                 sendText.setClickable(true);
+                Toast.makeText(ShowOneAskActivity.this,"回复已提交",Toast.LENGTH_SHORT).show();
             }
 
             @Override

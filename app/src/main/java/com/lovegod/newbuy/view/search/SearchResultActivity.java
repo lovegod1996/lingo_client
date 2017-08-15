@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.lovegod.newbuy.R;
@@ -16,6 +18,7 @@ import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Shop;
+import com.lovegod.newbuy.utils.view.AdapterWrapper;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.goods.GoodActivity;
 import com.lovegod.newbuy.view.myview.SearchLayout;
@@ -41,6 +44,7 @@ public class SearchResultActivity extends AppCompatActivity {
     private String searchContent="";
     private List<Commodity> commodityList=new ArrayList<>();
     private List<Shop>shopList=new ArrayList<>();
+    private AdapterWrapper goodsWrapper,shopWrapper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,13 +67,21 @@ public class SearchResultActivity extends AppCompatActivity {
         //获取查询页面传递过来的选项
         searchOption=intent.getIntExtra("searchoption",1);
 
+        RelativeLayout emptyLayout= (RelativeLayout) LayoutInflater.from(SearchResultActivity.this).inflate(R.layout.no_data_layout,null);
+        //包装商品适配器
+        goodsAdapter = new CateGoodsAdapter(this, commodityList);
+        goodsWrapper=new AdapterWrapper(this,goodsAdapter,emptyLayout);
+        //包装商店适配器
+        shopAdapter=new ShopItemAdapter(this,shopList);
+        shopWrapper=new AdapterWrapper(this,shopAdapter,emptyLayout);
+
         /*先查询当前页面，第一次是第一页，对应page=0
         先判断是要查询商品还是店铺
          */
         if(searchOption==GOODS_OPTION) {
             searchGoodsOnPage(currentPage);
         }else if(searchOption==SHOP_OPTION){
-            searchShoponPage(currentPage);
+            searchShopOnPage(currentPage);
         }
 
         /**
@@ -87,7 +99,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 if(searchOption==GOODS_OPTION) {
                     searchGoodsOnPage(currentPage + 1);
                 }else if(searchOption==SHOP_OPTION){
-                    searchShoponPage(currentPage+1);
+                    searchShopOnPage(currentPage + 1);
                 }
             }
         });
@@ -136,12 +148,14 @@ public class SearchResultActivity extends AppCompatActivity {
     private void searchGoodsOnPage(int page){
         //判断是否是第一页，是的话就需要显示加载框
         if(page==0) {
+            searchResultRecycler.setAdapter(goodsWrapper);
             NetWorks.getNameGoods(searchContent, page, new BaseObserver<List<Commodity>>(this, new ProgressDialog(this)) {
                 @Override
                 public void onHandleSuccess(List<Commodity> commodities) {
-                    commodityList = commodities;
-                    goodsAdapter = new CateGoodsAdapter(SearchResultActivity.this, commodities);
-                    searchResultRecycler.setAdapter(goodsAdapter);
+                    for(Commodity commodity:commodities){
+                        commodityList.add(commodity);
+                    }
+                    goodsWrapper.notifyDataSetChanged();
                     //绑定每一项布局点击监听
                     goodsAdapter.setItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
                         @Override
@@ -176,7 +190,7 @@ public class SearchResultActivity extends AppCompatActivity {
                     for(int i=0;i<commodities.size();i++){
                         commodityList.add(commodities.get(i));
                     }
-                    goodsAdapter.notifyDataSetChanged();
+                    goodsWrapper.notifyDataSetChanged();
 
                     //关闭上拉加载提示
                     searchResultRecycler.setPullLoadMoreCompleted();
@@ -196,16 +210,17 @@ public class SearchResultActivity extends AppCompatActivity {
      * 查询具体页数的店铺
      * @param page 页数
      */
-    private void searchShoponPage(int page) {
+    private void searchShopOnPage(int page) {
         //第一次加载加载框
         if (page == 0) {
+            searchResultRecycler.setAdapter(shopWrapper);
             NetWorks.getNameShop(searchContent, page, new BaseObserver<List<Shop>>(this,new ProgressDialog(this)) {
                 @Override
                 public void onHandleSuccess(List<Shop> list) {
-                    currentPage++;
-                    shopList=list;
-                    shopAdapter=new ShopItemAdapter(SearchResultActivity.this,shopList);
-                    searchResultRecycler.setAdapter(shopAdapter);
+                    for(Shop shop:list){
+                        shopList.add(shop);
+                    }
+                    shopWrapper.notifyDataSetChanged();
                     shopAdapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int position) {
@@ -236,7 +251,7 @@ public class SearchResultActivity extends AppCompatActivity {
                     for(int i=0;i<list.size();i++){
                         shopList.add(list.get(i));
                     }
-                    shopAdapter.notifyDataSetChanged();
+                    shopWrapper.notifyDataSetChanged();
                     //关闭上拉加载提示
                     searchResultRecycler.setPullLoadMoreCompleted();
                 }

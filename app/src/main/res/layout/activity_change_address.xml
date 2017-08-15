@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splitline_color"
-    tools:context="com.lovegod.newbuy.view.myinfo.ChangeAddressActivity">
+    tools:context="com.lovegod.newbuy.view.myinfo.changeinfo.ChangeAddressActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/change_address_toolbar"
         app:navigationIcon="@mipmap/ic_back_black"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splitline_color"
-    tools:context="com.lovegod.newbuy.view.myinfo.ChangePhoneActivity">
+    tools:context="com.lovegod.newbuy.view.myinfo.changeinfo.ChangePhoneActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/change_phone_toolbar"
         android:background="@color/white_FFFFFF"

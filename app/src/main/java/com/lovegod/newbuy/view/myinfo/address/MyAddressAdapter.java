@@ -1,4 +1,4 @@
-package com.lovegod.newbuy.view.myinfo;
+package com.lovegod.newbuy.view.myinfo.address;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -16,7 +16,6 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.bean.Address;

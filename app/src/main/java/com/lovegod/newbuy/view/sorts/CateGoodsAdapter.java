@@ -59,8 +59,6 @@ public class CateGoodsAdapter extends RecyclerView.Adapter<CateGoodsAdapter.Cate
         /**
          * 得到item的LayoutParams布局参数
          */
-        ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-        holder.itemView.setLayoutParams(params);//把params设置item布局
 
         holder.cate_good_name.setText(Dates.get(position).getProductname());//为控件绑定数据
         holder.cate_good_num.setText(Dates.get(position).getSalesvolu()+"人付款");

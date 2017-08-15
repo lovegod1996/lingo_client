@@ -6,6 +6,8 @@ android {
     dexOptions {
         javaMaxHeapSize "4g" //specify the heap size for the dex process
     }
+    useLibrary 'org.apache.http.legacy'
+
     defaultConfig {
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -32,21 +34,23 @@ android {
             path "CMakeLists.txt"
         }
     }
+    sourceSets {
+        main {
+            // 设置Jni so文件路径 如果有jniLibs目录就不需要设置，好像手动创建的 jniLibs目录无效
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
-
     compile files('libs/BRT-5.0.4.jar')
-
     //BubbleLayout对话框式布局
-    //textview的折叠、展开
-    
 
+    //textview的折叠、展开
     compile 'com.android.support:design:25.3.1'
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -82,4 +86,10 @@ dependencies {
     compile 'com.ninghaiywx.StarRating:lib:1.0'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    //Optional compile for GCM (Google Cloud Messaging).
+
+    //    compile 'com.google.android.gms:play-services-gcm:9.4.0'
+
+    //    compile 'com.hyphenate:hyphenate-sdk:3.3.0'
+    compile project(':easeui')
 }

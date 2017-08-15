@@ -1,31 +1,22 @@
 package com.lovegod.newbuy.view.goods;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
-import com.lovegod.newbuy.MainActivity;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Assess;
-import com.lovegod.newbuy.bean.BaseBean;
-import com.lovegod.newbuy.view.utils.MyRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.baidu.location.h.a.i;
 
 /**
  * *****************************************

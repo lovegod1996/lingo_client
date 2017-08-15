@@ -158,6 +158,14 @@
                             android:layout_toRightOf="@id/if_online_store"
                             android:text="实体店名字叫。。。"
                             android:textSize="16dp" />
+
+                        <Button
+                            android:id="@+id/chat_shop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:text="联系卖家"
+                            />
                     </LinearLayout>
 
                     <LinearLayout

@@ -183,19 +183,15 @@
         <activity
             android:name=".view.goods.AskActivity"
             android:launchMode="singleTask" />
-<<<<<<< HEAD
-        <activity android:name=".view.goods.ShowOneAskActivity" />
-        <activity android:name=".view.myinfo.FavouriteActivity" />
+
         <activity android:name=".view.ShowImageActivity"></activity>
         <activity android:name=".view.chat.ChactActivity"></activity>
-=======
         <activity android:name=".view.goods.ShowOneAskActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".view.myinfo.favourite.FavouriteActivity" />
-        <activity android:name=".view.ShowImageActivity" />
         <activity android:name=".view.myinfo.trial.Trial_Activity" />
         <activity android:name=".view.myinfo.track.Track_Activity"></activity>
->>>>>>> 291cb3c5f5bb7dd43f5378c3efd8e7153b40df00
+
     </application>
 
 </manifest>

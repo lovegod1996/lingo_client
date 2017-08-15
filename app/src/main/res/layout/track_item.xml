@@ -3,7 +3,7 @@
     android:id="@+id/track_item_layout"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@color/white_FFFFFF">
+    android:background="?attr/selectableItemBackground">
     <ImageView
         android:src="@mipmap/default_image"
         android:layout_margin="5dp"
@@ -46,6 +46,16 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignBottom="@id/track_item_focus"
+        android:src="@mipmap/focus_value_icon"
+        android:layout_toLeftOf="@id/track_item_focus"
+        android:layout_toStartOf="@id/track_item_focus"
+        android:layout_width="16dp"
+        android:layout_height="16dp" />
 
     <View
         android:background="@color/splitline_color"

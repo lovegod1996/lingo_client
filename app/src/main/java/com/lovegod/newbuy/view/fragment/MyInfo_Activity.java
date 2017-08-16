@@ -40,6 +40,7 @@ import com.lovegod.newbuy.view.LoginActivity;
 import com.lovegod.newbuy.view.myinfo.assess.AddAssessActivity;
 import com.lovegod.newbuy.view.myinfo.favourite.FavouriteActivity;
 import com.lovegod.newbuy.view.myinfo.MoreInfoActivity;
+import com.lovegod.newbuy.view.myinfo.notification.NotificationActivity;
 import com.lovegod.newbuy.view.myinfo.order.MyOrderInfoActivity;
 import com.lovegod.newbuy.view.myinfo.SettingActivity;
 import com.lovegod.newbuy.view.myinfo.track.Track_Activity;
@@ -341,6 +342,7 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
                 startActivityByCheck(SettingActivity.class);
                 break;
             case R.id.myinfo_notification:
+                startActivityByCheck(NotificationActivity.class);
                 break;
         }
         return true;

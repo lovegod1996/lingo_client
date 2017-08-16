@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.ui.EaseBaseActivity;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextInputEditText userNameEdit, passwdEdit;
     private Button loginButton;
 
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -51,7 +53,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     executeLoginFailed();
                     break;
                 default:
-
                     break;
             }
         }
@@ -172,35 +173,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onHandleSuccess(final User user) {
                 if (user != null) {
                     if (MD5Util.encode(passwd).equals(user.getPassword())) {
-                        new Thread() {
-                            @Override
-                            public void run() {
-                                super.run();
-                                EMClient.getInstance().login(user.getPhone(), user.getPassword(), new EMCallBack() {
-                                    @Override
-                                    public void onSuccess() {
-                                        Message message = new Message();
-                                        message.what = 1;
-                                        Bundle bundle = new Bundle();
-                                        bundle.putSerializable("user", user);
-                                        message.setData(bundle);
-                                        handler.sendMessage(message);
-                                    }
-
-                                    @Override
-                                    public void onError(int code, String error) {
-                                        handler.sendEmptyMessage(2);
-                                    }
-
-                                    @Override
-                                    public void onProgress(int progress, String status) {
-
-                                    }
-                                });
-                            }
-                        }.start();
-
-
+                        loginChat(user);
                     } else {
                         executeLoginFailed();
                     }
@@ -228,8 +201,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onHandleSuccess(User user) {
                 if (user != null) {
                     if (MD5Util.encode(passwd).equals(user.getPassword())) {
-                        SpUtils.putObject(LoginActivity.this, "userinfo", user);
-                        executeLogin();
+                        loginChat(user);
                     } else {
                         executeLoginFailed();
                     }
@@ -243,5 +215,39 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
+    }
+
+    /**
+     * 开启线程登录环信聊天账号
+     * @param user
+     */
+    private void loginChat(final User user){
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                EMClient.getInstance().login(user.getPhone(), user.getPassword(), new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+                        Message message = new Message();
+                        message.what = 1;
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", user);
+                        message.setData(bundle);
+                        handler.sendMessage(message);
+                    }
+
+                    @Override
+                    public void onError(int code, String error) {
+                        handler.sendEmptyMessage(2);
+                    }
+
+                    @Override
+                    public void onProgress(int progress, String status) {
+
+                    }
+                });
+            }
+        }.start();
     }
 }

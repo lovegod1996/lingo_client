@@ -25,10 +25,15 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.hyphenate.chat.EMConversation;
+import com.hyphenate.easeui.EaseConstant;
+import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Location;
 import com.lovegod.newbuy.service.BluetoothService;
 import com.lovegod.newbuy.view.BaseActivity;
+import com.lovegod.newbuy.view.chat.ChatActivity;
 import com.lovegod.newbuy.view.fragment.Cart_Activity;
 import com.lovegod.newbuy.view.fragment.Life_Fragment;
 import com.lovegod.newbuy.view.fragment.MyInfo_Activity;

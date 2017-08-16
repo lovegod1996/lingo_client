@@ -19,8 +19,11 @@ import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMConversation.EMConversationType;
 import com.hyphenate.chat.EMGroup;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.BaseObserver;
 import com.hyphenate.easeui.EaseUI;
+import com.hyphenate.easeui.NetWorks;
 import com.hyphenate.easeui.R;
+import com.hyphenate.easeui.User;
 import com.hyphenate.easeui.domain.EaseAvatarOptions;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.model.EaseAtMessageHelper;
@@ -102,7 +105,7 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
         // get conversation
         EMConversation conversation = getItem(position);
         // get username or group id
-        String username = conversation.conversationId();
+        final String username = conversation.conversationId();
         
         if (conversation.getType() == EMConversationType.GroupChat) {
             String groupId = conversation.conversationId();
@@ -115,14 +118,26 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             holder.avatar.setImageResource(R.drawable.ease_group_icon);
             EMGroup group = EMClient.getInstance().groupManager().getGroup(username);
             holder.name.setText(group != null ? group.getGroupName() : username);
-        } else if(conversation.getType() == EMConversationType.ChatRoom){
+        } else if(conversation.getType() == EMConversationType.ChatRoom) {
             holder.avatar.setImageResource(R.drawable.ease_group_icon);
             EMChatRoom room = EMClient.getInstance().chatroomManager().getChatRoom(username);
-            holder.name.setText(room != null && !TextUtils.isEmpty(room.getName()) ? room.getName() : username);
+            holder.name.setText(room != null && !TextUtils.isEmpty(room.getName())?room.getName():username);
             holder.motioned.setVisibility(View.GONE);
         }else {
             EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
-            EaseUserUtils.setUserNick(username, holder.name);
+            //EaseUserUtils.setUserNick(username, holder.name);
+            final ViewHolder finalHolder = holder;
+            NetWorks.getPhoneInfo(username, new BaseObserver<User>() {
+                @Override
+                public void onHandleSuccess(User user) {
+                    finalHolder.name.setText( user.getUsername());
+                }
+
+                @Override
+                public void onHandleError(User user) {
+
+                }
+            });
             holder.motioned.setVisibility(View.GONE);
         }
 

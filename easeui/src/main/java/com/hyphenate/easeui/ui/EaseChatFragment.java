@@ -1145,5 +1145,12 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
          */
         EaseCustomChatRowProvider onSetCustomChatRowProvider();
     }
-    
+
+    /**
+     * 设置标题
+     * @param title
+     */
+    public void setTitle(String title){
+        titleBar.setTitle(title);
+    }
 }

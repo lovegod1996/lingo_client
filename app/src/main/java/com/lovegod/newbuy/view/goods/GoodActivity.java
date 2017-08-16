@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -53,21 +52,15 @@ import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.FavouriteGoods;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.ShopCartBean;
-<<<<<<< HEAD
-=======
 import com.lovegod.newbuy.bean.Track;
 import com.lovegod.newbuy.bean.Trial;
->>>>>>> 291cb3c5f5bb7dd43f5378c3efd8e7153b40df00
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.bean.boss.Boss;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.utils.userPreferences.UserPreferencesUtil;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.carts.CartActivity;
-<<<<<<< HEAD
-import com.lovegod.newbuy.view.chat.ChactActivity;
-=======
->>>>>>> 291cb3c5f5bb7dd43f5378c3efd8e7153b40df00
+import com.lovegod.newbuy.view.chat.ChatActivity;
 import com.lovegod.newbuy.view.utils.GradationScrollView;
 import com.lovegod.newbuy.view.utils.MaterialIndicator;
 import com.lovegod.newbuy.view.utils.NoScrollListView;
@@ -81,7 +74,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -265,7 +257,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                 NetWorks.getBossBySid(commodity.getSid(), new BaseObserver<Boss>() {
                     @Override
                     public void onHandleSuccess(final Boss boss) {
-                        Intent chat = new Intent(GoodActivity.this,ChactActivity.class);
+                        Intent chat = new Intent(GoodActivity.this,ChatActivity.class);
+                        chat.putExtra("sid",boss.getSid());
                         chat.putExtra(EaseConstant.EXTRA_USER_ID,boss.getPhone());  //对方账号
                         chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
                         startActivity(chat);

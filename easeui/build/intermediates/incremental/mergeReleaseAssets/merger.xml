@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="D:\android\studio_workspace\lingo_client\easeui\src\main\assets"/><source path="D:\android\studio_workspace\lingo_client\easeui\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="D:\android\studio_workspace\lingo_client\easeui\src\release\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="E:\AS Project\lingo_client\easeui\src\main\assets"/><source path="E:\AS Project\lingo_client\easeui\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="E:\AS Project\lingo_client\easeui\src\release\assets"/></dataSet></merger>

@@ -5,10 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.bumptech.glide.Glide;
+import com.hyphenate.chat.EMChatManager;
+import com.hyphenate.chat.EMClient;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.ActivityCollector;
@@ -61,6 +64,7 @@ public class MoreInfoActivity extends AppCompatActivity implements View.OnClickL
             //注销按钮，直接结束当前活动
             case R.id.un_login_button:
                 SpUtils.removeKey(MoreInfoActivity.this,"userinfo");
+                Log.d("logout",EMClient.getInstance().logout(true)+"");
                 finish();
                 break;
             case R.id.more_info_username:

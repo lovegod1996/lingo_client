@@ -90,7 +90,7 @@ public class EaseChatRowVoicePlayClickListener implements View.OnClickListener {
 		AudioManager audioManager = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
 
 		mediaPlayer = new MediaPlayer();
-		if (EaseUI.getInstance().getSettingsProvider().isSpeakerOpened()) {
+		if (EaseUI.getInstance().getSettingsProviders().isSpeakerOpened()) {
 			audioManager.setMode(AudioManager.MODE_NORMAL);
 			audioManager.setSpeakerphoneOn(true);
 			mediaPlayer.setAudioStreamType(AudioManager.STREAM_RING);

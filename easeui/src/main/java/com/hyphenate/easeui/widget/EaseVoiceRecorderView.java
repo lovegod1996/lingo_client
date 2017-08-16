@@ -38,7 +38,9 @@ public class EaseVoiceRecorderView extends RelativeLayout {
         @Override
         public void handleMessage(android.os.Message msg) {
             // change image
-            micImage.setImageDrawable(micImages[msg.what]);
+            if(msg.what<micImages.length&&msg.what>=0) {
+                micImage.setImageDrawable(micImages[msg.what]);
+            }
         }
     };
 

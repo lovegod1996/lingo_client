@@ -38,7 +38,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:text="已有3个回答"
-            android:layout_below="@+id/focus_question_item_title"
+            android:layout_below="@+id/focus_question_item_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

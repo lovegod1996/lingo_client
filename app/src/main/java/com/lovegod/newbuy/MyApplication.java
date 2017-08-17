@@ -1,11 +1,14 @@
 package com.lovegod.newbuy;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
@@ -34,7 +37,6 @@ public class MyApplication extends Application {
         if (instance == null) {
             instance = this;
         }
-
         // 初始化环信SDK
         initEasemob();
     }

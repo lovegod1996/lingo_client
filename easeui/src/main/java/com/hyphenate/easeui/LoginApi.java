@@ -1,6 +1,7 @@
 package com.hyphenate.easeui;
 
 
+import java.util.Date;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -37,4 +38,7 @@ public interface LoginApi {
     @FormUrlEncoded
     @POST("user/user_Regist")
     Observable<BaseBean<User>>commitLoginInfo(@FieldMap Map<String, String> map);
+
+    @GET("boss/user/phone/{phone}")
+    Observable<BaseBean<Data>>judgeUserType(@Path("phone")String phone);
 }

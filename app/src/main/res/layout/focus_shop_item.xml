@@ -44,7 +44,7 @@
             android:layout_alignParentEnd="true"
             android:background="#FF00"
             android:text="取消收藏"
-            android:layout_width="70dp"
+            android:layout_width="100dp"
             android:layout_height="70dp" />
     </RelativeLayout>
 

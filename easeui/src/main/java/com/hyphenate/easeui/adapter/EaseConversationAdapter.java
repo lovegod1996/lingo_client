@@ -20,9 +20,11 @@ import com.hyphenate.chat.EMConversation.EMConversationType;
 import com.hyphenate.chat.EMGroup;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.BaseObserver;
+import com.hyphenate.easeui.Data;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.NetWorks;
 import com.hyphenate.easeui.R;
+import com.hyphenate.easeui.Shop;
 import com.hyphenate.easeui.User;
 import com.hyphenate.easeui.domain.EaseAvatarOptions;
 import com.hyphenate.easeui.domain.EaseUser;
@@ -127,14 +129,34 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
             //EaseUserUtils.setUserNick(username, holder.name);
             final ViewHolder finalHolder = holder;
-            NetWorks.getPhoneInfo(username, new BaseObserver<User>() {
+            NetWorks.judgeUserType(username, new BaseObserver<Data>() {
                 @Override
-                public void onHandleSuccess(User user) {
-                    finalHolder.name.setText( user.getUsername());
+                public void onHandleSuccess(Data data) {
+                    switch (data.getType()){
+                        case 0:
+                            finalHolder.name.setText(data.getUser().getUsername());
+                            break;
+                        case 1:
+                            NetWorks.getIDshop(data.getBoss().getSid(), new BaseObserver<Shop>() {
+                                @Override
+                                public void onHandleSuccess(Shop shop) {
+                                    finalHolder.name.setText(shop.getShopname());
+                                }
+
+                                @Override
+                                public void onHandleError(Shop shop) {
+
+                                }
+                            });
+                            break;
+                        case 2:
+                            finalHolder.name.setText(username);
+
+                    }
                 }
 
                 @Override
-                public void onHandleError(User user) {
+                public void onHandleError(Data data) {
 
                 }
             });

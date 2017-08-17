@@ -8,7 +8,6 @@ import java.io.Serializable;
  * Date:  2017/5/9.
  */
 public class User implements Serializable{
-
     private Integer uid;
     private String username;
     private String password;

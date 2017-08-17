@@ -1,10 +1,15 @@
 package com.hyphenate.easeui.widget;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -95,6 +100,11 @@ public class EaseVoiceRecorderView extends RelativeLayout {
      * @param event
      */
     public boolean onPressToSpeakBtnTouch(View v, MotionEvent event, EaseVoiceRecorderCallback recorderCallback) {
+        //动态申请录音权限
+        if(ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions((Activity) context,new String[]{Manifest.permission.RECORD_AUDIO},1);
+            return true;
+        }
         switch (event.getAction()) {
         case MotionEvent.ACTION_DOWN:
             try {

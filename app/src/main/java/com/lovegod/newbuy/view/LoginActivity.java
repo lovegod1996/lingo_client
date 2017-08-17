@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -235,10 +236,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         bundle.putSerializable("user", user);
                         message.setData(bundle);
                         handler.sendMessage(message);
+                        Log.d("LoginActivity","登录成功");
                     }
 
                     @Override
                     public void onError(int code, String error) {
+                        Log.d("LoginActivity","登录失败");
                         handler.sendEmptyMessage(2);
                     }
 

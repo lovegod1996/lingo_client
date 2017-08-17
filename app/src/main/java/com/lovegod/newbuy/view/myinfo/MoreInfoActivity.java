@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.bumptech.glide.Glide;
+import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
 import com.lovegod.newbuy.R;
@@ -64,7 +65,23 @@ public class MoreInfoActivity extends AppCompatActivity implements View.OnClickL
             //注销按钮，直接结束当前活动
             case R.id.un_login_button:
                 SpUtils.removeKey(MoreInfoActivity.this,"userinfo");
-                Log.d("logout",EMClient.getInstance().logout(true)+"");
+                //异步退出环信账号
+                EMClient.getInstance().logout(true, new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d("MoreInfoActivity","退出成功");
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+                        Log.d("MoreInfoActivity","退出失败");
+                    }
+
+                    @Override
+                    public void onProgress(int i, String s) {
+
+                    }
+                });
                 finish();
                 break;
             case R.id.more_info_username:

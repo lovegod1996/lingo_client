@@ -17,6 +17,8 @@ public class NetWorks extends RetrofitUtils {
 
     protected static final LoginApi loginApi = getRetrofit().create(LoginApi.class);
 
+    protected static final GoodsApi goodsApi=getRetrofit().create(GoodsApi.class);
+
 
     public static void getPhoneInfo(String number, BaseObserver<User> loginObserver) {
         setSubscribe(loginApi.getPhoneInfo(number), loginObserver);
@@ -28,6 +30,15 @@ public class NetWorks extends RetrofitUtils {
 
     public static void commitLoginInfo(Map<String, String> partMap, BaseObserver<User> commitObserver) {
         setSubscribe(loginApi.commitLoginInfo(partMap), commitObserver);
+    }
+    public static void findCommodity(Integer id, BaseObserver<Commodity> commodityBaseObserver) {
+        setSubscribe(goodsApi.findCommotity(id), commodityBaseObserver);
+    }
+    public static void judgeUserType(String phone,BaseObserver<Data>userObserver){
+        setSubscribe(loginApi.judgeUserType(phone),userObserver);
+    }
+    public static void getIDshop(int sid, BaseObserver<Shop> shopObserver) {
+        setSubscribe(goodsApi.getIDshop(sid), shopObserver);
     }
 
     /**

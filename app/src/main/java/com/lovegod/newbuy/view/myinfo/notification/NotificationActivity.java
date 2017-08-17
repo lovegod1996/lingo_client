@@ -5,17 +5,24 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.FrameLayout;
 
-import com.baidu.platform.comapi.map.N;
+import com.hyphenate.chat.EMChatRoom;
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
+import com.hyphenate.chat.EMCursorResult;
+import com.hyphenate.easeui.Data;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
+import com.hyphenate.exceptions.HyphenateException;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
-import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.view.chat.ChatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotificationActivity extends AppCompatActivity {
     private FrameLayout layout;
@@ -37,15 +44,33 @@ public class NotificationActivity extends AppCompatActivity {
                 final Intent intent=new Intent(NotificationActivity.this, ChatActivity.class);
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, conversation.conversationId());
                 //通过手机号获取用户名
-                NetWorks.getPhoneInfo(conversation.conversationId(), new BaseObserver<User>() {
+                com.hyphenate.easeui.NetWorks.judgeUserType(conversation.conversationId(), new com.hyphenate.easeui.BaseObserver<Data>() {
                     @Override
-                    public void onHandleSuccess(User user) {
-                        intent.putExtra("uid",user.getUid());
-                        startActivity(intent);
+                    public void onHandleSuccess(Data data) {
+                        switch (data.getType()){
+                            case 0:
+                                intent.putExtra("username",data.getUser().getUsername());
+                                startActivity(intent);
+                                break;
+                            case 1:
+                                NetWorks.getIDshop(data.getBoss().getSid(), new BaseObserver<com.lovegod.newbuy.bean.Shop>() {
+                                    @Override
+                                    public void onHandleSuccess(com.lovegod.newbuy.bean.Shop shop) {
+                                        intent.putExtra("username",shop.getShopname());
+                                        startActivity(intent);
+                                    }
+
+                                    @Override
+                                    public void onHandleError(com.lovegod.newbuy.bean.Shop shop) {
+
+                                    }
+                                });
+                                break;
+                        }
                     }
 
                     @Override
-                    public void onHandleError(User user) {
+                    public void onHandleError(Data data) {
 
                     }
                 });

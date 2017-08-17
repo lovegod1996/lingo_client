@@ -165,7 +165,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     TextView user_assess;
     @BindView(R.id.assess_num)
     TextView assess_num;
-    @BindView(R.id.chat_shop)
+    @BindView(R.id.service)
     Button chat_shop;
 
 
@@ -261,6 +261,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                         chat.putExtra("sid",boss.getSid());
                         chat.putExtra(EaseConstant.EXTRA_USER_ID,boss.getPhone());  //对方账号
                         chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
+                        chat.putExtra("cid",commodity.getCid());
                         startActivity(chat);
                     }
                     @Override

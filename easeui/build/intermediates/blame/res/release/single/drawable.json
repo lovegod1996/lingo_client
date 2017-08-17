@@ -4,12 +4,12 @@
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable\\abc_ic_go_search_api_material.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\abc_edit_text_material.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable\\abc_edit_text_material.xml"
-    },
-    {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\abc_tab_indicator_material.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable\\abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\abc_edit_text_material.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable\\abc_edit_text_material.xml"
     },
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\abc_ratingbar_small_material.xml",
@@ -72,12 +72,12 @@
         "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\drawable\\ease_common_tab_bg.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\ease_recording_text_hint_bg.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\drawable\\ease_recording_text_hint_bg.xml"
-    },
-    {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\ease_chatting_setmode_voice_btn.xml",
         "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\drawable\\ease_chatting_setmode_voice_btn.xml"
+    },
+    {
+        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\ease_recording_text_hint_bg.xml",
+        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\drawable\\ease_recording_text_hint_bg.xml"
     },
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable\\ease_chat_takepic_selector.xml",

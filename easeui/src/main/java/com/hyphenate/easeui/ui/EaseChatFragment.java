@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -43,6 +42,7 @@ import com.hyphenate.chat.EMMessage.ChatType;
 import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.easeui.BaseObserver;
 import com.hyphenate.easeui.Commodity;
+import com.hyphenate.easeui.Data;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.NetWorks;
@@ -159,7 +159,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
      */
     private String generateGoodsInfo(Commodity commodity){
         StringBuffer stringBuffer=new StringBuffer(commodity.getProductname());
-        stringBuffer.append("$"+commodity.getCid()+"$");
+        stringBuffer.append("$"+commodity.getCid()+"￥  →戳我查看商品详情");
         return stringBuffer.toString();
     }
 
@@ -1169,7 +1169,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
          * @param username
          */
         void onAvatarClick(String username);
-        
         /**
          * on avatar long pressed
          * @param username

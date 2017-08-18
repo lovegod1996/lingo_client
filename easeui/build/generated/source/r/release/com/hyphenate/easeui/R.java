@@ -3156,10 +3156,16 @@ containing a value of this type.
         public static int Base_Widget_AppCompat_TextView_SpinnerItem=0x7f070086;
         public static int Base_Widget_AppCompat_Toolbar=0x7f0700d8;
         public static int Base_Widget_AppCompat_Toolbar_Button_Navigation=0x7f070087;
+        /**  模糊 
+         */
         public static int HeadScale=0x7f0700d9;
         public static int MyAlertDialog=0x7f0700da;
         public static int MyDialogStyle=0x7f0700db;
+        /**  模糊 
+         */
         public static int MyDialogStyleBottom=0x7f0700dc;
+        /**  模糊 
+         */
         public static int MyDialogStyleTop=0x7f0700dd;
         public static int Platform_AppCompat=0x7f07001f;
         public static int Platform_AppCompat_Light=0x7f070020;

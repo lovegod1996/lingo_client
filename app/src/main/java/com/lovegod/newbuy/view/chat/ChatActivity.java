@@ -34,7 +34,7 @@ import com.lovegod.newbuy.bean.User;
 
 public class ChatActivity extends EaseBaseActivity {
     public static ChatActivity activityInstance;
-    private EaseChatFragment chatFragment;
+    private ChatListFragment chatFragment;
     private String username;
     private int sid;
     private String toChatUsername;
@@ -45,9 +45,10 @@ public class ChatActivity extends EaseBaseActivity {
         setContentView(R.layout.chat_activity_into);
 
         sid=getIntent().getIntExtra("sid",-1);
+        //聊天对象的名字
         username=getIntent().getStringExtra("username");
         toChatUsername=getIntent().getExtras().getString(EaseConstant.EXTRA_USER_ID);
-        chatFragment = new EaseChatFragment();  //环信聊天界面
+        chatFragment = new ChatListFragment();  //环信聊天界面
         chatFragment.setArguments(getIntent().getExtras()); //需要的参数
         getSupportFragmentManager().beginTransaction().add(R.id.layout_chat,chatFragment).commit();  //Fragment切换
         setTitleBar();

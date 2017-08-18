@@ -1,11 +1,11 @@
 [
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\slide_out_to_left.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\anim\\slide_out_to_left.xml"
-    },
-    {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\push_bottom_in.xml",
         "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\anim\\push_bottom_in.xml"
+    },
+    {
+        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\slide_out_to_left.xml",
+        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\anim\\slide_out_to_left.xml"
     },
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\anim\\voice_from_icon.xml",

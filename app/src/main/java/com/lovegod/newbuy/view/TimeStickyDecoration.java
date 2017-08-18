@@ -49,9 +49,9 @@ public class TimeStickyDecoration extends RecyclerView.ItemDecoration {
         mPaint.setColor(Color.parseColor("#80000000"));
 
         textPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setTextSize(25);
+        textPaint.setTextSize(35);
         textPaint.setColor(Color.WHITE);
-        lineHeight=35;
+        lineHeight=50;
     }
 
     @Override

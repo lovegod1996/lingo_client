@@ -253,22 +253,27 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         chat_shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //进入聊天界面
-                NetWorks.getBossBySid(commodity.getSid(), new BaseObserver<Boss>() {
-                    @Override
-                    public void onHandleSuccess(final Boss boss) {
-                        Intent chat = new Intent(GoodActivity.this,ChatActivity.class);
-                        chat.putExtra("sid",boss.getSid());
-                        chat.putExtra(EaseConstant.EXTRA_USER_ID,boss.getPhone());  //对方账号
-                        chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
-                        chat.putExtra("cid",commodity.getCid());
-                        startActivity(chat);
-                    }
-                    @Override
-                    public void onHandleError(Boss boss) {
-                        Log.e(TAG, "onHandleError: 获取店主信息错误",null);
-                    }
-                });
+                //进入聊天界面(登陆状态)
+                if(user!=null) {
+                    NetWorks.getBossBySid(commodity.getSid(), new BaseObserver<Boss>() {
+                        @Override
+                        public void onHandleSuccess(final Boss boss) {
+                            Intent chat = new Intent(GoodActivity.this, ChatActivity.class);
+                            chat.putExtra("sid", boss.getSid());
+                            chat.putExtra(EaseConstant.EXTRA_USER_ID, boss.getPhone());  //对方账号
+                            chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
+                            chat.putExtra("cid", commodity.getCid());
+                            startActivity(chat);
+                        }
+
+                        @Override
+                        public void onHandleError(Boss boss) {
+                            Log.e(TAG, "onHandleError: 获取店主信息错误", null);
+                        }
+                    });
+                }else {
+                    Toast.makeText(GoodActivity.this,"登陆后才能咨询卖家哦~",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

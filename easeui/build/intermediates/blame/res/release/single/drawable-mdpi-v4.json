@@ -4,12 +4,12 @@
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable-mdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_ic_star_half_black_48dp.png",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable-mdpi-v4\\abc_ic_star_half_black_48dp.png"
-    },
-    {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable-mdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_ic_star_half_black_48dp.png",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable-mdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\ic_launcher.png",
@@ -72,12 +72,12 @@
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable-mdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable-mdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
-    },
-    {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\button_radius_selector.xml",
         "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\drawable-mdpi\\button_radius_selector.xml"
+    },
+    {
+        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable-mdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\notification_bg_normal_pressed.9.png",

@@ -129,4 +129,8 @@ public interface GoodsApi {
     //修改购买足迹数据
     @PUT("track/update/buy/{buy}/{tid}/{total}")
     Observable<BaseBean<Track>>changeBuyTrack(@Path("buy")int buy,@Path("tid")int tid,@Path("total")int total);
+
+    //获取推荐商品
+    @GET("track/index/user/{uid}")
+    Observable<BaseBean<List<Commodity>>>getRecommendGoods(@Path("uid")int uid);
 }

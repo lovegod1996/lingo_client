@@ -5,24 +5,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.FrameLayout;
 
-import com.hyphenate.chat.EMChatRoom;
-import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
-import com.hyphenate.chat.EMCursorResult;
 import com.hyphenate.easeui.Data;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
-import com.hyphenate.exceptions.HyphenateException;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.view.chat.ChatActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class NotificationActivity extends AppCompatActivity {
     private FrameLayout layout;

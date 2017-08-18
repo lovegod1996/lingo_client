@@ -123,43 +123,43 @@ public class Life_Fragment extends Fragment {
 
         getNearByShop();
 
-        /**
-         * 接受子线程获取聊天室成功的消息，更新适配器数据
-         */
-        handler=new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what){
-                    case 1:
-                        nearbyShopAdapter.notifyDataSetChanged();
-                }
-            }
-        };
-
-        /**
-         * 获取前10个聊天室的数据
-         */
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    EMCursorResult<EMChatRoom> result = EMClient.getInstance().chatroomManager().fetchPublicChatRoomsFromServer(10, null);
-                    for(EMChatRoom room:result.getData()){
-                        roomList.add(room);
-                    }
-
-                    Log.d("room",roomList.size()+"");
-                    Log.d("room name",roomList.get(0).getName());
-                    Log.d("room detail",roomList.get(0).getMemberCount()+"/"+roomList.get(0).getMaxUsers());
-                    //线程请求到数据将消息发送回主线程进行更新
-                    Message message=new Message();
-                    message.what=1;
-                    handler.sendMessage(message);
-                } catch (HyphenateException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+//        /**
+//         * 接受子线程获取聊天室成功的消息，更新适配器数据
+//         */
+//        handler=new Handler(){
+//            @Override
+//            public void handleMessage(Message msg) {
+//                switch (msg.what){
+//                    case 1:
+//                        nearbyShopAdapter.notifyDataSetChanged();
+//                }
+//            }
+//        };
+//
+//        /**
+//         * 获取前10个聊天室的数据
+//         */
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    EMCursorResult<EMChatRoom> result = EMClient.getInstance().chatroomManager().fetchPublicChatRoomsFromServer(10, null);
+//                    for(EMChatRoom room:result.getData()){
+//                        roomList.add(room);
+//                    }
+//
+//                    Log.d("room",roomList.size()+"");
+//                    Log.d("room name",roomList.get(0).getName());
+//                    Log.d("room detail",roomList.get(0).getMemberCount()+"/"+roomList.get(0).getMaxUsers());
+//                    //线程请求到数据将消息发送回主线程进行更新
+//                    Message message=new Message();
+//                    message.what=1;
+//                    handler.sendMessage(message);
+//                } catch (HyphenateException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
 
         return view;
     }
@@ -188,5 +188,10 @@ public class Life_Fragment extends Fragment {
                 }
             });
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }

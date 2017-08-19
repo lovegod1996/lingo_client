@@ -84,12 +84,12 @@
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ease_search_bar_icon_normal.png",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_search_bar_icon_normal.png"
-    },
-    {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ease_msg_state_fail_resend.png",
         "source": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_msg_state_fail_resend.png"
+    },
+    {
+        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ease_search_bar_icon_normal.png",
+        "source": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_search_bar_icon_normal.png"
     },
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ease_mm_listitem_disable.9.png",
@@ -268,12 +268,12 @@
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable-hdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ease_record_animate_02.png",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_record_animate_02.png"
-    },
-    {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ee_14.png",
         "source": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_14.png"
+    },
+    {
+        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ease_record_animate_02.png",
+        "source": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_record_animate_02.png"
     },
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ee_33.png",

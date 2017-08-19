@@ -126,7 +126,7 @@ public class MainActivity extends BaseActivity {
             startActivityForResult(enableBtIntent, 1);
             Toast.makeText(this, "蓝牙没打开", Toast.LENGTH_SHORT).show();
         }
-        timer.schedule(timerTask, 0, 30 * 1000);
+        //timer.schedule(timerTask, 0, 30 * 1000);
 
         initView();
 
@@ -234,14 +234,14 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    private TimerTask timerTask = new TimerTask() {
+    /*private TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {
             //开启蓝牙所有推送服务
             Intent intentBlutooth = new Intent(MainActivity.this, BluetoothService.class);
             startService(intentBlutooth);
         }
-    };
+    };*/
 
     private long exitTime = 0;
 

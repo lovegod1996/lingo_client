@@ -46,6 +46,8 @@ import com.lovegod.newbuy.view.myinfo.SettingActivity;
 import com.lovegod.newbuy.view.myinfo.track.Track_Activity;
 import com.lovegod.newbuy.view.myinfo.trial.Trial_Activity;
 import com.lovegod.newbuy.view.myview.ItemImageLayout;
+import com.lovegod.newbuy.view.myview.OnRefreshListener;
+import com.lovegod.newbuy.view.myview.RefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +70,7 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
     //待评价
     private static final int TO_THE_ASSESS_FLAG=5;
 
-    private SwipeRefreshLayout refreshLayout;
+    private RefreshLayout refreshLayout;
     private User user;
     private Toolbar toolbar;
     private TextView myInfoText,forThePayHint,toSendTheGoodsHint,forTheGoodsHint,forTheAssessHint;
@@ -101,10 +103,11 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
         forTheGoods=(RelativeLayout)view.findViewById(R.id.for_the_goods_layout);
         forThePay=(RelativeLayout)view.findViewById(R.id.for_the_payment_layout);
         toTheAssess=(RelativeLayout)view.findViewById(R.id.for_the_assess_layout);
-        refreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.refresh_layout);
+        refreshLayout=(RefreshLayout)view.findViewById(R.id.refresh_layout);
         myInfoText=(TextView)view.findViewById(R.id.my_info_text);
         myInfoPortrait=(CircleImageView)view.findViewById(R.id.my_info_portrait);
         allOrder=(RelativeLayout)view.findViewById(R.id.all_order_layout);
+        refreshLayout.setBackground(getResources().getColor(R.color.colorPrimary));
         myInfoText.setOnClickListener(this);
         myInfoPortrait.setOnClickListener(this);
         allOrder.setOnClickListener(this);
@@ -117,11 +120,11 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
         myApply.setOnClickListener(this);
         myTrack.setOnClickListener(this);
 
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if(user==null){
-                    refreshLayout.setRefreshing(false);
+                    refreshLayout.refreshDone();
                 }else {
                     updateData();
                 }
@@ -237,7 +240,7 @@ public class MyInfo_Activity extends Fragment implements View.OnClickListener{
                         SpUtils.removeKey(getActivity(), "userinfo");
                         SpUtils.putObject(getActivity(), "userinfo", user);
                     }
-                    refreshLayout.setRefreshing(false);
+                    refreshLayout.refreshDone();
                     judgeWhetherLogin();
                 }
 

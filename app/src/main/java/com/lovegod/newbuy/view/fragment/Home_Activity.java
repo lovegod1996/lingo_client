@@ -105,29 +105,12 @@ public class Home_Activity extends Fragment{
     final String[] titles = new String[]{"格力", "美的", "海尔", "海信", "苏宁", "淘宝",
             "天猫", "更多"};
 
-    // 声明一个Map类型的List以及一个包含店铺图片和信息的数组
-
-    final int[] imageId = new int[]{R.mipmap.entity_shop01,
-            R.mipmap.entity_shop02, R.mipmap.entity_shop03,
-            R.mipmap.entity_shop03, R.mipmap.entity_shop04,
-            R.mipmap.entity_shop05};
-
-
-//    final String[] shop_name = new String[]{"格兰仕厨房电器专卖店 ",
-//            "格力空调专卖店中国店", "苏宁电器专卖店中国店", "美的冰箱电器专卖店", "海信电器专卖店",
-//            "格兰仕厨房电器专卖店中国店"};
-//    final String[] shop_instruction = new String[]{"地址：新郑市龙湖镇中原工学院北500米",
-//            "地址：新郑市龙湖镇中原工学院北500米", "地址：新郑市龙湖镇中原工学院北500米",
-//            "地址：新郑市龙湖镇中原工学院北500米", "地址：新郑市龙湖镇中原工学院北500米", "地址：新郑市龙湖镇中原工学院北500米"};
-
-
     MyGridView gridView;
     Button scan_code_btn;
     static Button city_name;
     public SearchLayout searchLayout;
     private SliderLayout mSliderLayout;
     private PagerIndicator indicator;
-    private GradationScrollView scrollView;
 
     private RelativeLayout titleLayout;
     private RefreshLayout refreshLayout;
@@ -138,8 +121,6 @@ public class Home_Activity extends Fragment{
 
     private HomeImageListAdapter homeImageListAdapter;
     private List<Shop> shopList = new ArrayList<>();
-    int time = 0;
-    boolean run = true;
 
     private static Geocoder geocoder;//此对象能通过经纬度来获取相应的城市等信息
 
@@ -168,9 +149,9 @@ public class Home_Activity extends Fragment{
         //gridView = (MyGridView) view.findViewById(R.id.gridView_separate);
         scan_code_btn = (Button) view.findViewById(R.id.scan_code_btn);
         city_name = (Button) view.findViewById(R.id.city_name);
-        //scrollView=(GradationScrollView)view.findViewById(R.id.home_scroll_view);
         titleLayout=(RelativeLayout)view.findViewById(R.id.rl_first_top);
         refreshLayout=(RefreshLayout)view.findViewById(R.id.home_refresh);
+        refreshLayout.setBackground(getResources().getColor(R.color.colorPrimary));
         homeRecycler=(RecyclerView)view.findViewById(R.id.home_list);
         adapter=new HomeAdapter(getActivity(),commodityList,images);
         homeRecycler.setLayoutManager(new GridLayoutManager(getActivity(),6,GridLayoutManager.VERTICAL,false));
@@ -324,34 +305,9 @@ public class Home_Activity extends Fragment{
         }.start();
     }
 
-    /*广告栏轮播*/
-    private void initSlider() {
-        List<String> imageUrls = new ArrayList<>();
-        imageUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1502106197328&di=53f4cc298f1cef374cd6315bc3ee469f&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F10%2F73%2F38%2F90b1OOOPIC9d.jpg");
-        imageUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1502106231949&di=c821f7c7371b60a71c28b58d2aee3a05&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F95%2F09%2F16bOOOPIC6b_1024.jpg");
-        imageUrls.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3922813695,1834018485&fm=26&gp=0.jpg");
-        for (int i = 0; i < imageUrls.size(); i++) {
-            //新建三个展示View，并且添加到SliderLayout
-            TextSliderView tsv = new TextSliderView(getActivity());
-            tsv.image(imageUrls.get(i));
-            final int finalI = i;
-            tsv.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-                @Override
-                public void onSliderClick(BaseSliderView slider) {
-                    Toast.makeText(getActivity(), "图", Toast.LENGTH_SHORT).show();
-                }
-            });
-            mSliderLayout.addSlider(tsv);
-        }
-        //对SliderLayout进行一些自定义的配置
-        // mSliderLayout.setCustomAnimation(new DescriptionAnimation());
-        mSliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-        mSliderLayout.setDuration(3000);
-//     sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mSliderLayout.setCustomIndicator(indicator);
-    }
-
-
+    /**
+     * 活动恢复交互重新请求数据
+     */
     @Override
     public void onResume() {
         super.onResume();

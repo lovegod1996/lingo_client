@@ -4,7 +4,7 @@
     <string name="attention">提示</string>
     <string name="ok">好的~</string>
 
-    <string name="tips_net_error">你的网络信号被外星人劫持了</string>
+    <string name="tips_net_error">你的网络信号被外星人劫持了\n点击重试</string>
     <string name="tips_content_empty">空空如野</string>
     <string name="loading_busy">努力加载中...</string>
 

@@ -75,8 +75,9 @@
             android:name=".MainActivity"
             android:launchMode="singleTask" />
         <activity android:name=".view.ShopActivity" />
-        <activity android:name=".view.goods.GoodActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".view.goods.GoodActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".view.goods.CompareActivity" />
         <activity android:name=".view.welcome.WelcomeGuideActivity" />
         <activity android:name=".view.Shop2Activity" />
@@ -197,7 +198,12 @@
         <activity android:name=".view.myinfo.trial.Trial_Activity" />
         <activity android:name=".view.myinfo.track.Track_Activity" />
         <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity" />
-        <activity android:name=".view.myinfo.notification.NotificationActivity"/>
+        <activity android:name=".view.myinfo.notification.NotificationActivity" />
+
+        <service
+            android:name=".service.NetWorkService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

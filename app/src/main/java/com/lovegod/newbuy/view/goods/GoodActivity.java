@@ -167,7 +167,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     TextView assess_num;
     @BindView(R.id.service)
     Button chat_shop;
-
+    @BindView(R.id.store_logo)
+    ImageView shopLogo;
 
     TextView tv_good_detail_cate;//产品参数
     /*对话框*/
@@ -241,7 +242,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             public void onHandleSuccess(Shop shop) {
                 store_name.setText(shop.getShopname());
                 store_location.setText(shop.getSaddress());
-                store_name.setText(shop.getShopname());
+                if_online_store.setText(shop.getType());
+                Glide.with(GoodActivity.this).load(shop.getLogo()).into(shopLogo);
             }
 
             @Override

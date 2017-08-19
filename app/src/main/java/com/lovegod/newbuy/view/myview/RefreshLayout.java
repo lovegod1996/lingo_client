@@ -2,6 +2,10 @@ package com.lovegod.newbuy.view.myview;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -10,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -29,6 +34,7 @@ public class RefreshLayout extends LinearLayout {
     private ValueAnimator valueAnimator;
     private int effectiveOffset;
     private TextView headerText;
+    private ImageView headerPic;
     private OnRefreshListener onRefreshListener;
     public RefreshLayout(Context context) {
         this(context,null);
@@ -42,6 +48,7 @@ public class RefreshLayout extends LinearLayout {
         super(context, attrs, defStyleAttr);
         mHeader= LayoutInflater.from(context).inflate(R.layout.header,null);
         headerText= (TextView) mHeader.findViewById(R.id.header_text);
+        headerPic=(ImageView)mHeader.findViewById(R.id.header_pic);
         setOrientation(VERTICAL);
     }
 
@@ -92,11 +99,10 @@ public class RefreshLayout extends LinearLayout {
                 //下拉操作
                 if(moveY>0) {
                     if(Math.abs(getScrollY())<mHeader.getMeasuredHeight()/3*2) {
-                        headerText.setText("下拉刷新");
                         scrollBy(0, -moveY);
                         //下拉超过一定范围，进行刷新操作
                         if (Math.abs(getScrollY()) >= effectiveOffset) {
-                            headerText.setText("释放刷新");
+                            headerText.setText("释放立即刷新");
                         }
                     }
                 }
@@ -105,13 +111,20 @@ public class RefreshLayout extends LinearLayout {
                     if(getScrollY()<-10){
                         scrollBy(0, -moveY);
                     }
+                    if (Math.abs(getScrollY()) < effectiveOffset) {
+                        headerText.setText("下拉可以刷新");
+                    }
                 }
                 lastY= (int) event.getY();
                 break;
             case MotionEvent.ACTION_UP:
                 if (Math.abs(getScrollY())>=effectiveOffset&&getScrollY()<0) {
                     startScroll(getScrollY(),-effectiveOffset);
-                    headerText.setText("刷新中...");
+                    headerText.setText("努力的刷新中");
+                    Drawable drawable=headerPic.getDrawable();
+                    if(drawable instanceof Animatable){
+                        ((Animatable) drawable).start();
+                    }
                     if (onRefreshListener != null) {
                         onRefreshListener.onRefresh();
                     }
@@ -139,16 +152,41 @@ public class RefreshLayout extends LinearLayout {
                 if(moveY>0){
                     View child=getChildAt(0);
                     if(child instanceof RecyclerView) {
-                        RecyclerView adapterChild = (RecyclerView) child;
-                            if(adapterChild.getChildAt(0)!=null&&adapterChild.getChildAt(0).getTop()==0) {
-                                intercept = true;
-                        }
+                       intercept=pullRecyclerView(child);
+                    }else if(child instanceof ScrollView){
+                        intercept=pullScrollView(child);
                     }
                 }
                 lastY= (int) ev.getY();
                 break;
         }
         return intercept;
+    }
+
+    /**
+     * 如果子view是recyclerview
+     * @param child
+     * @return
+     */
+    private boolean pullRecyclerView(View child){
+        RecyclerView adapterChild = (RecyclerView) child;
+        if(adapterChild.getChildAt(0)!=null&&adapterChild.getChildAt(0).getTop()==0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 如果子是scrollview
+     * @param child
+     * @return
+     */
+    private boolean pullScrollView(View child){
+        ScrollView adapterChild= (ScrollView) child;
+        if(adapterChild.getScrollY()==0) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -169,11 +207,28 @@ public class RefreshLayout extends LinearLayout {
     }
 
     public void refreshDone(){
-        startScroll(getScrollY(),0);
-        headerText.setText("下拉刷新");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startScroll(getScrollY(),0);
+                headerText.setText("下拉可以刷新");
+                Drawable drawable=headerPic.getDrawable();
+                if(drawable instanceof Animatable){
+                    ((Animatable) drawable).stop();
+                }
+            }
+        },1000);
     }
 
     public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
         this.onRefreshListener = onRefreshListener;
+    }
+
+    public void setBackground(String color){
+        mHeader.setBackgroundColor(Color.parseColor("color"));
+    }
+
+    public void setBackground(int color){
+        mHeader.setBackgroundColor(color);
     }
 }

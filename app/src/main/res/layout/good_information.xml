@@ -144,72 +144,91 @@
                 android:padding="12dp">
 
                 <RelativeLayout
+                    android:id="@+id/about_shop"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/store1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/if_online_store"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="2dp"
-                            android:drawableLeft="@mipmap/da_ren_services_tick"
-                            android:drawablePadding="6dp"
-                            android:text="实体店"
-                            android:textSize="16dp" />
+                            android:layout_marginLeft="5dp"
+                            android:textSize="12dp" />
+
+                        <ImageView
+                            android:src="@mipmap/default_image"
+                            android:id="@+id/store_logo"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@id/if_online_store"
+                            android:layout_margin="5dp"
+                            android:scaleType="fitCenter" />
 
                         <TextView
                             android:id="@+id/store_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_toRightOf="@id/if_online_store"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@id/store_logo"
                             android:textSize="16dp" />
-                    </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:gravity="right">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:text="暂无数据"
+                                    android:id="@+id/store_month_number"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:textSize="12dp" />
+
+                                <TextView
+                                    android:id="@+id/store_month_number_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toLeftOf="@id/store_month_number"
+                                    android:text="月销售量:"
+                                    android:textSize="12dp" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <LinearLayout
+                        android:id="@+id/store2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/store1"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp">
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/store_location"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@mipmap/small_location3"
+                            android:layout_marginLeft="5dp"
+                            android:drawableLeft="@drawable/good_location_red"
                             android:drawablePadding="5dp"
-                            android:text="龙湖正的地方很近"
-                            android:textSize="16dp" />
+                            android:textSize="12dp" />
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:id="@+id/store_month_number"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:text="店铺："
-                                android:textSize="12dp" />
-
-                            <TextView
-                                android:id="@+id/store_month_number_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_toLeftOf="@id/store_month_number"
-                                android:text="店铺月销售量："
-                                android:textSize="12dp" />
-                        </RelativeLayout>
                     </LinearLayout>
                 </RelativeLayout>
+
 
             </LinearLayout>
 

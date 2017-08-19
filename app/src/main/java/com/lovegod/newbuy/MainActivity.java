@@ -34,6 +34,7 @@ import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Location;
 import com.lovegod.newbuy.service.BluetoothService;
+import com.lovegod.newbuy.service.NetWorkService;
 import com.lovegod.newbuy.view.BaseActivity;
 import com.lovegod.newbuy.view.chat.ChatActivity;
 import com.lovegod.newbuy.view.fragment.Cart_Activity;
@@ -77,6 +78,11 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        //开启网络监听服务
+        Intent networkService=new Intent(this, NetWorkService.class);
+        startService(networkService);
+
         MyApplication.getInstance().addActivity(this);
         ButterKnife.bind(this);
         // 检查当前手机是否支持ble 蓝牙,如果不支持退出程序
@@ -270,5 +276,15 @@ public class MainActivity extends BaseActivity {
         transaction.replace(R.id.content,fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    /**
+     * 主活动销毁，注销网络监听服务
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent networkService=new Intent(this, NetWorkService.class);
+        stopService(networkService);
     }
 }

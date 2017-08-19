@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -31,7 +30,6 @@ import com.lovegod.newbuy.utils.userPreferences.UserPreferencesUtil;
 import com.lovegod.newbuy.view.LoginActivity;
 import com.lovegod.newbuy.view.carts.ShopCartAdapter;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
@@ -44,7 +42,7 @@ import java.util.Map;
 /**
  * 问答模块的主活动
  */
-public class AskActivity extends AppCompatActivity {
+public class AskActivity extends AppCompatActivity{
     private Toolbar toolbar;
     private RecyclerView recycler;
     private RelativeLayout askLayout;

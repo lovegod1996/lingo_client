@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/load_icon">
+    <target
+    android:animation="@animator/load_text1_anim"
+    android:name="first_text"/>
+    <target
+        android:animation="@animator/load_text2_anim"
+        android:name="second_text"/>
+    <target
+        android:animation="@animator/load_text3_anim"
+        android:name="third_text"/>
+    <target
+        android:animation="@animator/load_text4_anim"
+        android:name="fourth_text"/>
+    <target
+        android:animation="@animator/load_text5_anim"
+        android:name="fifth_text"/>
+    <target
+        android:animation="@animator/load_text6_anim"
+        android:name="sixth_text"/>
+</animated-vector>

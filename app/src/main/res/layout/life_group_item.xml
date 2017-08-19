@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<com.lovegod.newbuy.view.myview.ItemImageLayout
+    android:id="@+id/more_group"
+    app:left_image_src="@mipmap/life_group_icon"
+    app:left_text="圈子"
+    app:right_text="一起来讨论买什么吧"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/life_group_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/splitline_color"/>
+</LinearLayout>

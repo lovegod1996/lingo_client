@@ -54,6 +54,14 @@
             android:background="@color/white_FFFFFF"
             android:id="@+id/life_shop_recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_weight="1"
+            android:layout_height="0dp"/>
+
+        <FrameLayout
+            android:visibility="gone"
+            android:background="@color/holo_red_light"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

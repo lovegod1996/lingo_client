@@ -15,8 +15,8 @@ public class EasePreferenceManager {
     
     @SuppressLint("CommitPrefEdits")
     private EasePreferenceManager(){
-        mSharedPreferences = EaseUI.getInstance().getContext().getSharedPreferences("EM_SP_AT_MESSAGE", Context.MODE_PRIVATE);
-        editor = mSharedPreferences.edit();
+        //mSharedPreferences = EaseUI.getInstance().getContext().getSharedPreferences("EM_SP_AT_MESSAGE", Context.MODE_PRIVATE);
+        //editor = mSharedPreferences.edit();
     }
     private static EasePreferenceManager instance;
     
@@ -30,13 +30,14 @@ public class EasePreferenceManager {
     
     
     public void setAtMeGroups(Set<String> groups) {
-        editor.remove(KEY_AT_GROUPS);
-        editor.putStringSet(KEY_AT_GROUPS, groups);
-        editor.apply();
+//        editor.remove(KEY_AT_GROUPS);
+//        editor.putStringSet(KEY_AT_GROUPS, groups);
+//        editor.apply();
     }
     
     public Set<String> getAtMeGroups(){
-        return mSharedPreferences.getStringSet(KEY_AT_GROUPS, null);
+        //return mSharedPreferences.getStringSet(KEY_AT_GROUPS, null);
+        return null;
     }
     
 }

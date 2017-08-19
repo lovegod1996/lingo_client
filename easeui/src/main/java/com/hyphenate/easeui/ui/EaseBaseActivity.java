@@ -51,7 +51,9 @@ public class EaseBaseActivity extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         // cancel the notification
-        EaseUI.getInstance().getNotifier().reset();
+        if(EaseUI.getInstance().getNotifier()!=null) {
+            EaseUI.getInstance().getNotifier().reset();
+        }
     }
     
     protected void hideSoftKeyboard() {

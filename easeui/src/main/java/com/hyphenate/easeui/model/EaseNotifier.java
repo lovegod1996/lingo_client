@@ -121,7 +121,7 @@ public class EaseNotifier {
         if(EaseCommonUtils.isSilentMessage(message)){
             return;
         }
-        EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProvider();
+        EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProviders();
         if(!settingsProvider.isMsgNotifyAllowed(message)){
             return;
         }
@@ -142,7 +142,7 @@ public class EaseNotifier {
         if(EaseCommonUtils.isSilentMessage(messages.get(messages.size()-1))){
             return;
         }
-        EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProvider();
+        EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProviders();
         if(!settingsProvider.isMsgNotifyAllowed(null)){
             return;
         }
@@ -304,7 +304,7 @@ public class EaseNotifier {
                 EMLog.e(TAG, "in slient mode now");
                 return;
             }
-            EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProvider();
+            EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProviders();
             if(settingsProvider.isMsgVibrateAllowed(message)){
                 long[] pattern = new long[] { 0, 180, 80, 120 };
                 vibrator.vibrate(pattern, -1);

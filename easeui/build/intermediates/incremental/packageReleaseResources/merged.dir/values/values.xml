@@ -41,6 +41,7 @@
     <color name="list_itease_primary_color">#000</color>
     <color name="list_itease_secondary_color">#888888</color>
     <color name="orange">#FFA500</color>
+    <color name="press_gray">#EFEEEC</color>
     <color name="recall_black">#61212121</color>
     <color name="recall_black_38">#89ffffff</color>
     <color name="recall_white_54">#89ffffff</color>

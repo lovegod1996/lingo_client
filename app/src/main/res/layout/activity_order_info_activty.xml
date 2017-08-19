@@ -183,6 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
+                    android:id="@+id/order_info_contact"
                     android:drawableLeft="@mipmap/contact_icon"
                     android:background="@drawable/search_activity_shape"
                     android:text="联系卖家"

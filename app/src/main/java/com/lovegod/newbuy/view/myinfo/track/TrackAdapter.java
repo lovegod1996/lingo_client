@@ -51,7 +51,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
         Glide.with(mContext).load(track.getLogo()).into(holder.logo);
         holder.name.setText(track.getGoodsname());
         holder.price.setText("¥"+track.getPrice());
-        animator=ValueAnimator.ofInt(0,track.getTotal()).setDuration(1400);
+        animator=ValueAnimator.ofInt(0,track.getTotal()).setDuration(1500);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {

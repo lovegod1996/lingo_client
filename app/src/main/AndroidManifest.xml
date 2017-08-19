@@ -56,7 +56,6 @@
     <!-- Required -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -76,7 +75,9 @@
             android:name=".MainActivity"
             android:launchMode="singleTask" />
         <activity android:name=".view.ShopActivity" />
-        <activity android:name=".view.goods.GoodActivity" />
+        <activity
+            android:name=".view.goods.GoodActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".view.goods.CompareActivity" />
         <activity android:name=".view.welcome.WelcomeGuideActivity" />
         <activity android:name=".view.Shop2Activity" />
@@ -104,22 +105,27 @@
             android:process=":remote" />
 
         <!-- 设置环信应用的AppKey -->
-        <meta-data android:name="EASEMOB_APPKEY"  android:value="1122170806115789#lingo" />
-        <!-- 声明SDK所需的service SDK核心功能-->
-        <service android:name="com.hyphenate.chat.EMChatService" android:exported="true"/>
-        <service android:name="com.hyphenate.chat.EMJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="1122170806115789#lingo" />
+        <!-- 声明SDK所需的service SDK核心功能 -->
+        <service
+            android:name="com.hyphenate.chat.EMChatService"
+            android:exported="true" />
+        <service
+            android:name="com.hyphenate.chat.EMJobService"
             android:exported="true"
-            />
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <!-- 声明SDK所需的receiver -->
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-                <data android:scheme="package"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
             </intent-filter>
             <!-- 可选filter -->
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
@@ -184,14 +190,20 @@
             android:name=".view.goods.AskActivity"
             android:launchMode="singleTask" />
 
-        <activity android:name=".view.ShowImageActivity"></activity>
-        <activity android:name=".view.chat.ChactActivity"></activity>
-        <activity android:name=".view.goods.ShowOneAskActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".view.ShowImageActivity" />
+        <activity android:name=".view.chat.ChatActivity" />
+        <activity
+            android:name=".view.goods.ShowOneAskActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".view.myinfo.favourite.FavouriteActivity" />
         <activity android:name=".view.myinfo.trial.Trial_Activity" />
-        <activity android:name=".view.myinfo.track.Track_Activity"></activity>
-
+        <activity android:name=".view.myinfo.track.Track_Activity" />
+        <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity" />
+        <activity android:name=".view.myinfo.notification.NotificationActivity" />
+        <service
+            android:name=".service.NetWorkService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

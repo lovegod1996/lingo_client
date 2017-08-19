@@ -123,7 +123,7 @@
                         android:id="@+id/goodsalvo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="160dp"
+                        android:layout_marginLeft="120dp"
                         android:text="321人付款" />
 
 
@@ -144,81 +144,91 @@
                 android:padding="12dp">
 
                 <RelativeLayout
+                    android:id="@+id/about_shop"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/store1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/if_online_store"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="2dp"
-                            android:drawableLeft="@mipmap/da_ren_services_tick"
-                            android:drawablePadding="6dp"
-                            android:text="实体店"
-                            android:textSize="16dp" />
+                            android:layout_marginLeft="5dp"
+                            android:textSize="12dp" />
+
+                        <ImageView
+                            android:src="@mipmap/default_image"
+                            android:id="@+id/store_logo"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@id/if_online_store"
+                            android:layout_margin="5dp"
+                            android:scaleType="fitCenter" />
 
                         <TextView
                             android:id="@+id/store_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_toRightOf="@id/if_online_store"
-                            android:text="实体店名字叫。。。"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@id/store_logo"
                             android:textSize="16dp" />
 
-                        <Button
-                            android:id="@+id/chat_shop"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:text="联系卖家"
-                            />
-                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:gravity="right">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:text="暂无数据"
+                                    android:id="@+id/store_month_number"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:textSize="12dp" />
+
+                                <TextView
+                                    android:id="@+id/store_month_number_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toLeftOf="@id/store_month_number"
+                                    android:text="月销售量:"
+                                    android:textSize="12dp" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <LinearLayout
+                        android:id="@+id/store2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/store1"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp">
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/store_location"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@mipmap/small_location3"
+                            android:layout_marginLeft="5dp"
+                            android:drawableLeft="@drawable/good_location_red"
                             android:drawablePadding="5dp"
-                            android:text="龙湖正的地方很近"
-                            android:textSize="16dp" />
+                            android:textSize="12dp" />
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:id="@+id/store_month_number"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:text="店铺："
-                                android:textSize="12dp" />
-
-                            <TextView
-                                android:id="@+id/store_month_number_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_toLeftOf="@id/store_month_number"
-                                android:text="店铺月销售量："
-                                android:textSize="12dp" />
-                        </RelativeLayout>
                     </LinearLayout>
                 </RelativeLayout>
+
 
             </LinearLayout>
 
@@ -453,6 +463,7 @@
         android:background="#ffffff"
         android:orientation="horizontal">
 
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -466,12 +477,14 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/compare"
+                    android:textSize="@dimen/text_size_min"
+                    android:padding="5dp"
+                    android:drawableTop="@mipmap/small_service_icon"
+                    android:id="@+id/service"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#ffffff"
-                    android:text="比较"
-                    android:textColor="@color/colorPrimary" />
+                    android:text="客服" />
 
             </LinearLayout>
 
@@ -487,6 +500,33 @@
                 android:gravity="center">
 
                 <Button
+                    android:textSize="@dimen/text_size_min"
+                    android:padding="5dp"
+                    android:drawableTop="@mipmap/compare_icon"
+                    android:id="@+id/compare"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:text="比较"
+                    android:textColor="@color/black_000000" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/bg_Gray2" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <Button
+                    android:textSize="@dimen/text_size_min"
+                    android:padding="5dp"
+                    android:drawableTop="@mipmap/small_shop_icon"
                     android:id="@+id/shop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

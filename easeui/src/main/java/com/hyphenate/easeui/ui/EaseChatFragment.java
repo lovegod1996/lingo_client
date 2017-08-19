@@ -22,9 +22,14 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMChatRoom;
@@ -35,8 +40,12 @@ import com.hyphenate.chat.EMImageMessageBody;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessage.ChatType;
 import com.hyphenate.chat.EMTextMessageBody;
+import com.hyphenate.easeui.BaseObserver;
+import com.hyphenate.easeui.Commodity;
+import com.hyphenate.easeui.Data;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.EaseUI;
+import com.hyphenate.easeui.NetWorks;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.domain.EaseEmojicon;
 import com.hyphenate.easeui.domain.EaseUser;
@@ -106,14 +115,18 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     static final int ITEM_PICTURE = 2;
     static final int ITEM_LOCATION = 3;
     
-    protected int[] itemStrings = { R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location };
-    protected int[] itemdrawables = { R.drawable.ease_chat_takepic_selector, R.drawable.ease_chat_image_selector,
-            R.drawable.ease_chat_location_selector };
+    protected int[] itemStrings = { R.string.attach_take_pic, R.string.attach_picture};
+    protected int[] itemdrawables = { R.drawable.ease_chat_takepic_selector, R.drawable.ease_chat_image_selector};
     protected int[] itemIds = { ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION };
     private boolean isMessageListInited;
     protected MyItemClickListener extendMenuItemClickListener;
     protected boolean isRoaming = false;
     private ExecutorService fetchQueue;
+    private ImageView sendGoodsImage;
+    private TextView sendGoodsName;
+    private Button sendGoods;
+    private RelativeLayout sendGoodsLayout;
+    private int cid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -133,19 +146,61 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         chatType = fragmentArgs.getInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         // userId you are chat with or group id
         toChatUsername = fragmentArgs.getString(EaseConstant.EXTRA_USER_ID);
+        //检查是否发过来商品信息
+        cid=fragmentArgs.getInt("cid",-1);
 
         super.onActivityCreated(savedInstanceState);
+    }
+
+    /**
+     * 打包商品信息发送给商家
+     * @param commodity
+     * @return
+     */
+    private String generateGoodsInfo(Commodity commodity){
+        StringBuffer stringBuffer=new StringBuffer(commodity.getProductname());
+        stringBuffer.append("$"+commodity.getCid()+"￥  →戳我查看商品详情");
+        return stringBuffer.toString();
     }
 
     /**
      * init view
      */
     protected void initView() {
+        sendGoodsImage= (ImageView) getView().findViewById(R.id.good_info_image);
+        sendGoodsName=(TextView)getView().findViewById(R.id.good_info_name);
+        sendGoods=(Button) getView().findViewById(R.id.good_info_send);
+        sendGoodsLayout=(RelativeLayout)getView().findViewById(R.id.good_info_head);
+        if(cid!=-1){
+            NetWorks.findCommodity(cid, new BaseObserver<Commodity>() {
+                @Override
+                public void onHandleSuccess(final Commodity commodity) {
+                    sendGoodsLayout.setVisibility(View.VISIBLE);
+                    Glide.with(getActivity()).load(commodity.getLogo()).into(sendGoodsImage);
+                    sendGoodsName.setText(commodity.getProductname());
+                    sendGoods.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            EMMessage message=EMMessage.createTxtSendMessage(generateGoodsInfo(commodity),toChatUsername);
+                            sendMessage(message);
+                        }
+                    });
+                }
+
+                @Override
+                public void onHandleError(Commodity commodity) {
+
+                }
+            });
+        }else {
+            sendGoodsLayout.setVisibility(View.GONE);
+        }
         // hold to record voice
         //noinspection ConstantConditions
         voiceRecorderView = (EaseVoiceRecorderView) getView().findViewById(R.id.voice_recorder);
 
         // message list layout
+
         messageList = (EaseChatMessageList) getView().findViewById(R.id.message_list);
         if(chatType != EaseConstant.CHATTYPE_SINGLE)
             messageList.setShowUserNick(true);
@@ -1114,7 +1169,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
          * @param username
          */
         void onAvatarClick(String username);
-        
         /**
          * on avatar long pressed
          * @param username
@@ -1145,5 +1199,12 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
          */
         EaseCustomChatRowProvider onSetCustomChatRowProvider();
     }
-    
+
+    /**
+     * 设置标题
+     * @param title
+     */
+    public void setTitle(String title){
+        titleBar.setTitle(title);
+    }
 }

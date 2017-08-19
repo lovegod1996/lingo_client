@@ -9,7 +9,7 @@
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbarHeight" />
-    <android.support.v4.widget.SwipeRefreshLayout
+    <com.lovegod.newbuy.view.myview.RefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -93,5 +93,5 @@
                     app:left_text="@string/service" />
             </LinearLayout>
         </ScrollView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </com.lovegod.newbuy.view.myview.RefreshLayout>
 </LinearLayout>

@@ -153,7 +153,7 @@
             android:background="@color/white_FFFFFF"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="7">
+            android:layout_weight="5">
             <EditText
                 android:id="@+id/show_one_ask_reply_edit"
                 android:textSize="@dimen/text_size_mid"

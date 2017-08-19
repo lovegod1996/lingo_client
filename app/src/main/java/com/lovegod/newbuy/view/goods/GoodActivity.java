@@ -60,7 +60,7 @@ import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.utils.userPreferences.UserPreferencesUtil;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.carts.CartActivity;
-import com.lovegod.newbuy.view.chat.ChactActivity;
+import com.lovegod.newbuy.view.chat.ChatActivity;
 import com.lovegod.newbuy.view.utils.GradationScrollView;
 import com.lovegod.newbuy.view.utils.MaterialIndicator;
 import com.lovegod.newbuy.view.utils.NoScrollListView;
@@ -165,9 +165,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
     TextView user_assess;
     @BindView(R.id.assess_num)
     TextView assess_num;
-    @BindView(R.id.chat_shop)
+    @BindView(R.id.service)
     Button chat_shop;
-
+    @BindView(R.id.store_logo)
+    ImageView shopLogo;
 
     TextView tv_good_detail_cate;//产品参数
     /*对话框*/
@@ -241,7 +242,8 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
             public void onHandleSuccess(Shop shop) {
                 store_name.setText(shop.getShopname());
                 store_location.setText(shop.getSaddress());
-                store_name.setText(shop.getShopname());
+                if_online_store.setText(shop.getType());
+                Glide.with(GoodActivity.this).load(shop.getLogo()).into(shopLogo);
             }
 
             @Override
@@ -253,20 +255,27 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         chat_shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //进入聊天界面
-                NetWorks.getBossBySid(commodity.getSid(), new BaseObserver<Boss>() {
-                    @Override
-                    public void onHandleSuccess(final Boss boss) {
-                        Intent chat = new Intent(GoodActivity.this,ChactActivity.class);
-                        chat.putExtra(EaseConstant.EXTRA_USER_ID,boss.getPhone());  //对方账号
-                        chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
-                        startActivity(chat);
-                    }
-                    @Override
-                    public void onHandleError(Boss boss) {
-                        Log.e(TAG, "onHandleError: 获取店主信息错误",null);
-                    }
-                });
+                //进入聊天界面(登陆状态)
+                if(user!=null) {
+                    NetWorks.getBossBySid(commodity.getSid(), new BaseObserver<Boss>() {
+                        @Override
+                        public void onHandleSuccess(final Boss boss) {
+                            Intent chat = new Intent(GoodActivity.this, ChatActivity.class);
+                            chat.putExtra("sid", boss.getSid());
+                            chat.putExtra(EaseConstant.EXTRA_USER_ID, boss.getPhone());  //对方账号
+                            chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
+                            chat.putExtra("cid", commodity.getCid());
+                            startActivity(chat);
+                        }
+
+                        @Override
+                        public void onHandleError(Boss boss) {
+                            Log.e(TAG, "onHandleError: 获取店主信息错误", null);
+                        }
+                    });
+                }else {
+                    Toast.makeText(GoodActivity.this,"登陆后才能咨询卖家哦~",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

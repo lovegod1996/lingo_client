@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
 import com.lovegod.newbuy.R;
@@ -221,7 +222,6 @@ public class LoginInfoRegisteredFragment extends Fragment implements View.OnClic
                                 EMClient.getInstance().createAccount(user.getPhone(), user.getPassword());
                             } catch (HyphenateException e) {
                                 e.printStackTrace();
-
                             }
                         }
                     }.start();

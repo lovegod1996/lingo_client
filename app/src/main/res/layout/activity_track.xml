@@ -8,6 +8,8 @@
     tools:context="com.lovegod.newbuy.view.myinfo.track.Track_Activity">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/track_toolbar"
+        android:background="@color/splitline_color"
         app:navigationIcon="@mipmap/ic_back_black"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
@@ -25,6 +27,7 @@
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
+        android:background="@color/white_FFFFFF"
         android:id="@+id/track_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

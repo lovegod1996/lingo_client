@@ -14,6 +14,7 @@ import android.media.MediaRecorder;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.text.format.Time;
+import android.util.Log;
 
 public class EaseVoiceRecorder {
     MediaRecorder recorder;
@@ -58,12 +59,14 @@ public class EaseVoiceRecorder {
             // User.getVoicePath());
             voiceFileName = getVoiceFileName(EMClient.getInstance().getCurrentUser());
             voiceFilePath = PathUtil.getInstance().getVoicePath() + "/" + voiceFileName;
+            Log.d("path",voiceFilePath);
             file = new File(voiceFilePath);
             recorder.setOutputFile(file.getAbsolutePath());
             recorder.prepare();
             isRecording = true;
             recorder.start();
         } catch (IOException e) {
+            e.printStackTrace();
             EMLog.e("voice", "prepare() failed");
         }
         new Thread(new Runnable() {

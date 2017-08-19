@@ -14,8 +14,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.telephony.cdma.CdmaCellLocation;
 import android.telephony.gsm.GsmCellLocation;
@@ -25,10 +27,16 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.hyphenate.chat.EMConversation;
+import com.hyphenate.easeui.EaseConstant;
+import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Location;
 import com.lovegod.newbuy.service.BluetoothService;
+import com.lovegod.newbuy.service.NetWorkService;
 import com.lovegod.newbuy.view.BaseActivity;
+import com.lovegod.newbuy.view.chat.ChatActivity;
 import com.lovegod.newbuy.view.fragment.Cart_Activity;
 import com.lovegod.newbuy.view.fragment.Life_Fragment;
 import com.lovegod.newbuy.view.fragment.MyInfo_Activity;
@@ -70,12 +78,21 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        //开启网络监听服务
+        Intent networkService=new Intent(this, NetWorkService.class);
+        startService(networkService);
+
         MyApplication.getInstance().addActivity(this);
         ButterKnife.bind(this);
         // 检查当前手机是否支持ble 蓝牙,如果不支持退出程序
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, "不支持蓝牙", Toast.LENGTH_SHORT).show();
             finish();
+        }
+
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},2);
         }
 
         /**
@@ -259,5 +276,15 @@ public class MainActivity extends BaseActivity {
         transaction.replace(R.id.content,fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    /**
+     * 主活动销毁，注销网络监听服务
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent networkService=new Intent(this, NetWorkService.class);
+        stopService(networkService);
     }
 }

@@ -21,6 +21,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
 import android.telephony.cdma.CdmaCellLocation;
 import android.telephony.gsm.GsmCellLocation;
@@ -55,16 +58,20 @@ import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Location;
 import com.lovegod.newbuy.bean.Shop;
+import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.utils.system.SystemUtils;
 import com.lovegod.newbuy.view.Shop2Activity;
 import com.lovegod.newbuy.view.goods.GoodActivity;
 import com.lovegod.newbuy.view.goods.MyGridView;
+import com.lovegod.newbuy.view.myview.OnRefreshListener;
+import com.lovegod.newbuy.view.myview.RefreshLayout;
 import com.lovegod.newbuy.view.myview.SearchLayout;
 import com.lovegod.newbuy.view.search.SearchActivity;
 import com.lovegod.newbuy.view.utils.GradationScrollView;
 
 import java.io.IOException;
+import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -89,7 +96,7 @@ import static com.lovegod.newbuy.MainActivity.REQUEST_CODE;
  * *******************************************
  */
 
-public class Home_Activity extends Fragment implements ViewTreeObserver.OnGlobalLayoutListener{
+public class Home_Activity extends Fragment{
 
     // 按类别搜索显示图标
     final int[] images = new int[]{R.mipmap.gree01, R.mipmap.midea01,
@@ -98,40 +105,22 @@ public class Home_Activity extends Fragment implements ViewTreeObserver.OnGlobal
     final String[] titles = new String[]{"格力", "美的", "海尔", "海信", "苏宁", "淘宝",
             "天猫", "更多"};
 
-    // 声明一个Map类型的List以及一个包含店铺图片和信息的数组
-
-    final int[] imageId = new int[]{R.mipmap.entity_shop01,
-            R.mipmap.entity_shop02, R.mipmap.entity_shop03,
-            R.mipmap.entity_shop03, R.mipmap.entity_shop04,
-            R.mipmap.entity_shop05};
-
-
-//    final String[] shop_name = new String[]{"格兰仕厨房电器专卖店 ",
-//            "格力空调专卖店中国店", "苏宁电器专卖店中国店", "美的冰箱电器专卖店", "海信电器专卖店",
-//            "格兰仕厨房电器专卖店中国店"};
-//    final String[] shop_instruction = new String[]{"地址：新郑市龙湖镇中原工学院北500米",
-//            "地址：新郑市龙湖镇中原工学院北500米", "地址：新郑市龙湖镇中原工学院北500米",
-//            "地址：新郑市龙湖镇中原工学院北500米", "地址：新郑市龙湖镇中原工学院北500米", "地址：新郑市龙湖镇中原工学院北500米"};
-
-    //  Shop allshop=new Shop();
-
     MyGridView gridView;
-    ListView listView;
     Button scan_code_btn;
     static Button city_name;
     public SearchLayout searchLayout;
     private SliderLayout mSliderLayout;
     private PagerIndicator indicator;
-    private GradationScrollView scrollView;
-    //轮播图高度
-    private int imageHeight;
 
     private RelativeLayout titleLayout;
+    private RefreshLayout refreshLayout;
+    private RecyclerView homeRecycler;
+    private HomeAdapter adapter;
+    private List<Commodity>commodityList=new ArrayList<>();
+    private User user;
 
     private HomeImageListAdapter homeImageListAdapter;
     private List<Shop> shopList = new ArrayList<>();
-    int time = 0;
-    boolean run = true;
 
     private static Geocoder geocoder;//此对象能通过经纬度来获取相应的城市等信息
 
@@ -144,24 +133,7 @@ public class Home_Activity extends Fragment implements ViewTreeObserver.OnGlobal
             switch (msg.what) {
                 case 1:
                     Location location = (Location) msg.getData().getSerializable("location");
-                    if(location!=null) {
-                        NetWorks.getNearbyShop(Double.parseDouble(location.getLon()), Double.parseDouble(location.getLat()),5000,new BaseObserver<List<Shop>>() {
-                            @Override
-                            public void onHandleSuccess(List<Shop> shops) {
-                                shopList = shops;
-                                homeImageListAdapter.bindData(MyApplication.getInstance().getApplicationContext(), shops);
-                                listView.setAdapter(homeImageListAdapter);
-                                homeImageListAdapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onHandleError(List<Shop> shops) {
-
-                            }
-                        });
-                    }
                     city_name.setText(location.getAddress().substring(3, 6));
-                    homeImageListAdapter.notifyDataSetChanged();
                     break;
                 default:
                     break;
@@ -172,25 +144,29 @@ public class Home_Activity extends Fragment implements ViewTreeObserver.OnGlobal
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.home, container, false);
-        listView = (ListView) view.findViewById(R.id.suggest_shop);
-        gridView = (MyGridView) view.findViewById(R.id.gridView_separate);
+        user= (User) SpUtils.getObject(getActivity(),"userinfo");
+        //listView = (ListView) view.findViewById(R.id.suggest_shop);
+        //gridView = (MyGridView) view.findViewById(R.id.gridView_separate);
         scan_code_btn = (Button) view.findViewById(R.id.scan_code_btn);
         city_name = (Button) view.findViewById(R.id.city_name);
-        scrollView=(GradationScrollView)view.findViewById(R.id.home_scroll_view);
         titleLayout=(RelativeLayout)view.findViewById(R.id.rl_first_top);
+        refreshLayout=(RefreshLayout)view.findViewById(R.id.home_refresh);
+        refreshLayout.setBackground(getResources().getColor(R.color.colorPrimary));
+        homeRecycler=(RecyclerView)view.findViewById(R.id.home_list);
+        adapter=new HomeAdapter(getActivity(),commodityList,images);
+        homeRecycler.setLayoutManager(new GridLayoutManager(getActivity(),6,GridLayoutManager.VERTICAL,false));
+        homeRecycler.setAdapter(adapter);
+        homeRecycler.addItemDecoration(new HomeDecoration());
 
 
         searchLayout = (SearchLayout) view.findViewById(R.id.main_search_layout);
         //容器
-        mSliderLayout = (SliderLayout) view.findViewById(R.id.slider);
+        //mSliderLayout = (SliderLayout) view.findViewById(R.id.slider);
         //指示器，那些小点
-        indicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
+        //indicator = (PagerIndicator) view.findViewById(R.id.custom_indicator);
 
-        initSlider();
-//        thread = new Thread(new MyThread());
-//        thread.start();
+        //initSlider();
         homeImageListAdapter = new HomeImageListAdapter();
-        Log.e("网络访问时长", time + "");
         String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION};
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || SystemUtils.checkPermissionGranted(getActivity(), permissions)) {
             try{
@@ -203,37 +179,9 @@ public class Home_Activity extends Fragment implements ViewTreeObserver.OnGlobal
         }
 
 
-//        MyAsyncTask myAsyncTask = new MyAsyncTask();
-//        myAsyncTask.execute(time);
-
-        AdapterView.OnItemClickListener listclickListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                NetWorks.getIDshop(shopList.get(position).getSid(), new BaseObserver<Shop>() {
-                    @Override
-                    public void onHandleSuccess(Shop shops) {
-                        if (shops != null) {
-                            Intent intent = new Intent(getActivity(), Shop2Activity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("shop", shops);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                        }
-                    }
-
-                    @Override
-                    public void onHandleError(Shop shop) {
-
-                    }
-
-                });
-
-
-            }
-        };
-        listView.setOnItemClickListener(listclickListener);
-        initGridView();
+        /**
+         * 搜索框点击事件
+         */
         searchLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -241,29 +189,59 @@ public class Home_Activity extends Fragment implements ViewTreeObserver.OnGlobal
             }
         });
 
+        /**
+         * 刷新中的回调
+         */
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getRecommendGoods();
+            }
+        });
+
         return view;
+    }
+
+    /**
+     * 获取推荐商品
+     */
+    private void getRecommendGoods() {
+        if(user!=null) {
+            commodityList.clear();
+            NetWorks.getRecommendGoods(user.getUid(), new BaseObserver<List<Commodity>>() {
+                @Override
+                public void onHandleSuccess(List<Commodity> commodities) {
+                    for(Commodity commodity:commodities){
+                        commodityList.add(commodity);
+                    }
+                    adapter.notifyDataSetChanged();
+                    refreshLayout.refreshDone();
+                }
+
+                @Override
+                public void onHandleError(List<Commodity> commodities) {
+                    refreshLayout.refreshDone();
+                    Toast.makeText(getActivity(),"刷新失败",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        /**
-         * 布局滚动监听
-         */
-        scrollView.setScrollViewListener(new GradationScrollView.ScrollViewListener() {
+        homeRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollChanged(GradationScrollView scrollView, int x, int y, int oldx, int oldy) {
-                if(y<=0){
-                    titleLayout.setBackgroundColor(Color.argb(0,253,104,97));
-                }else if(y>0&&y<=imageHeight) {
-                    float scale = (float)y/imageHeight;
-                    titleLayout.setBackgroundColor(Color.argb((int) (255*scale),253,104,97));
-                }else if(y>imageHeight){
-                    titleLayout.setBackgroundColor(Color.argb(255,253,104,97));
-                }
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
             }
         });
-    }
+}
 
     /**
      * 添加基站定位
@@ -327,81 +305,14 @@ public class Home_Activity extends Fragment implements ViewTreeObserver.OnGlobal
         }.start();
     }
 
-    @Override
-    public void onGlobalLayout() {
-        imageHeight=mSliderLayout.getMeasuredHeight();
-        mSliderLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-    }
-
-    class MyThread implements Runnable {
-
-        @Override
-        public void run() {
-            while (run) {
-                while (!Thread.currentThread().isInterrupted()) {
-                    try {
-                        Thread.sleep(1);
-                        time++;
-                        if (time % 10 == 0)
-                            Log.v("计时器：", time + "");
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                        Thread.currentThread().interrupt();
-                    }
-                }
-            }
-        }
-    }
-
-    /*广告栏轮播*/
-    private void initSlider() {
-        mSliderLayout.getViewTreeObserver().addOnGlobalLayoutListener(this);
-        List<String> imageUrls = new ArrayList<>();
-        imageUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1502106197328&di=53f4cc298f1cef374cd6315bc3ee469f&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F10%2F73%2F38%2F90b1OOOPIC9d.jpg");
-        imageUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1502106231949&di=c821f7c7371b60a71c28b58d2aee3a05&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F95%2F09%2F16bOOOPIC6b_1024.jpg");
-        imageUrls.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3922813695,1834018485&fm=26&gp=0.jpg");
-        for (int i = 0; i < imageUrls.size(); i++) {
-            //新建三个展示View，并且添加到SliderLayout
-            TextSliderView tsv = new TextSliderView(getActivity());
-            tsv.image(imageUrls.get(i));
-            final int finalI = i;
-            tsv.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-                @Override
-                public void onSliderClick(BaseSliderView slider) {
-                    Toast.makeText(getActivity(), "图", Toast.LENGTH_SHORT).show();
-                }
-            });
-            mSliderLayout.addSlider(tsv);
-        }
-        //对SliderLayout进行一些自定义的配置
-        // mSliderLayout.setCustomAnimation(new DescriptionAnimation());
-        mSliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-        mSliderLayout.setDuration(3000);
-//     sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mSliderLayout.setCustomIndicator(indicator);
-    }
-
-    private Bitmap getBitmap(String url) {
-        final Bitmap[] bitmap = new Bitmap[1];
-        Glide.with(Home_Activity.this)
-                .load(url)
-                .asBitmap()
-                .error(R.mipmap.ic_launcher)
-                .fitCenter()
-                .centerCrop()
-                .placeholder(R.mipmap.ic_launcher)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        bitmap[0] = resource;
-                    }
-                });
-        return bitmap[0];
-    }
-
+    /**
+     * 活动恢复交互重新请求数据
+     */
     @Override
     public void onResume() {
         super.onResume();
+        //获取推荐商品
+        getRecommendGoods();
     }
 
 
@@ -571,73 +482,4 @@ public class Home_Activity extends Fragment implements ViewTreeObserver.OnGlobal
         }
 
     };
-
-    //实现ViewBinder接口
-    class MyViewBinder implements SimpleAdapter.ViewBinder {
-        /**
-         * view：要板顶数据的视图
-         * data：要绑定到视图的数据
-         * textRepresentation：一个表示所支持数据的安全的字符串，结果是data.toString()或空字符串，但不能是Null
-         * 返回值：如果数据绑定到视图返回真，否则返回假
-         */
-        @Override
-        public boolean setViewValue(View view, Object data,
-                                    String textRepresentation) {
-            if ((view instanceof ImageView) & (data instanceof Bitmap)) {
-                ImageView iv = (ImageView) view;
-                Bitmap bmp = (Bitmap) data;
-                iv.setImageBitmap(bmp);
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-
-    class MyAsyncTask extends AsyncTask<Integer, Void, List<Shop>> {
-
-        @Override
-        protected List<Shop> doInBackground(Integer... integers) {
-
-            NetWorks.getAllshop(new BaseObserver<List<Shop>>() {
-                @Override
-                public void onHandleSuccess(List<Shop> shops) {
-                    shopList = shops;
-                }
-
-                @Override
-                public void onHandleError(List<Shop> shops) {
-
-                }
-            });
-            while (shopList == null || shopList.size() == 0) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            return shopList;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(List<Shop> shops) {
-            super.onPostExecute(shops);
-            homeImageListAdapter.bindData(MyApplication.getInstance().getApplicationContext(), shops);
-            listView.setAdapter(homeImageListAdapter);
-            homeImageListAdapter.notifyDataSetChanged();
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-    }
-
-
 }

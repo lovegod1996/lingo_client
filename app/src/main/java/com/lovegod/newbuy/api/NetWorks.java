@@ -389,6 +389,9 @@ public class NetWorks extends RetrofitUtils {
     public static void changeBuyTrack(int buy,int tid,int total,BaseObserver<Track>goodsObserver){
         setSubscribe(goodsApi.changeBuyTrack(buy, tid, total),goodsObserver);
     }
+    public static void getRecommendGoods(int uid,BaseObserver<List<Commodity>>goodsObserver){
+        setSubscribe(goodsApi.getRecommendGoods(uid),goodsObserver);
+    }
 
     /**
      * 插入观察者

@@ -73,7 +73,15 @@ public class EaseTitleBar extends RelativeLayout{
             ta.recycle();
         }
     }
-    
+
+    public TextView getTitleView() {
+        return titleView;
+    }
+
+    public void setTitleView(TextView titleView) {
+        this.titleView = titleView;
+    }
+
     public void setLeftImageResource(int resId) {
         leftImage.setImageResource(resId);
     }

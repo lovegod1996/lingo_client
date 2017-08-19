@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
@@ -23,9 +27,11 @@ import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.bean.Order;
 import com.lovegod.newbuy.bean.Shop;
 import com.lovegod.newbuy.bean.User;
+import com.lovegod.newbuy.bean.boss.Boss;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.utils.view.FastBlur;
 import com.lovegod.newbuy.view.Shop2Activity;
+import com.lovegod.newbuy.view.chat.ChatActivity;
 import com.lovegod.newbuy.view.goods.GoodActivity;
 
 import java.net.URL;
@@ -35,6 +41,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static com.hyphenate.chat.EMGCMListenerService.TAG;
+
 public class OrderInfoActivty extends AppCompatActivity {
 
     private Order order;
@@ -43,6 +51,7 @@ public class OrderInfoActivty extends AppCompatActivity {
     private TextView timeText,statueText,addressName,addressPhone,addressDetail,shopName,priceText,orderNum,payNum,createTime,payTime,deliverTime;
     private LinearLayout goodsLayout;
     private Toolbar toolbar;
+    private Button contactButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +69,7 @@ public class OrderInfoActivty extends AppCompatActivity {
         headImage=(ImageView)findViewById(R.id.order_info_image);
         timeText=(TextView)findViewById(R.id.order_info_time_text);
         statueText=(TextView)findViewById(R.id.order_info_statue_text);
+        contactButton=(Button)findViewById(R.id.order_info_contact);
         setSupportActionBar(toolbar);
         user= (User) SpUtils.getObject(this,"userinfo");
         order= (Order) getIntent().getSerializableExtra("order_info");
@@ -101,6 +111,29 @@ public class OrderInfoActivty extends AppCompatActivity {
 
         //将订单信息设置到对应控件里
         initOrderInfo();
+
+        /**
+         * 联系卖家按钮监听
+         */
+        contactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NetWorks.getBossBySid(order.getSid(), new BaseObserver<Boss>() {
+                    @Override
+                    public void onHandleSuccess(final Boss boss) {
+                        Intent chat = new Intent(OrderInfoActivty.this,ChatActivity.class);
+                        chat.putExtra("sid",boss.getSid());
+                        chat.putExtra(EaseConstant.EXTRA_USER_ID,boss.getPhone());  //对方账号
+                        chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
+                        startActivity(chat);
+                    }
+                    @Override
+                    public void onHandleError(Boss boss) {
+                        Log.e(TAG, "onHandleError: 获取店主信息错误",null);
+                    }
+                });
+            }
+        });
     }
 
     private void initOrderInfo() {

@@ -13,14 +13,9 @@ import com.lovegod.newbuy.R;
 import com.lovegod.newbuy.api.BaseObserver;
 import com.lovegod.newbuy.api.NetWorks;
 import com.lovegod.newbuy.bean.Assess;
-<<<<<<< HEAD
-=======
-import com.lovegod.newbuy.bean.BaseBean;
 import com.lovegod.newbuy.bean.User;
 import com.lovegod.newbuy.utils.system.SpUtils;
 import com.lovegod.newbuy.utils.userPreferences.UserPreferencesUtil;
-import com.lovegod.newbuy.view.utils.MyRecyclerViewAdapter;
->>>>>>> 291cb3c5f5bb7dd43f5378c3efd8e7153b40df00
 
 import java.util.ArrayList;
 import java.util.List;

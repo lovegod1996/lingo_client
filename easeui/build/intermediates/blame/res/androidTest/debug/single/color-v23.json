@@ -1,42 +1,82 @@
 [
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_default.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_default.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/color-v23/abc_btn_colored_borderless_text_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/color-v23/abc_btn_colored_borderless_text_material.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_switch_thumb.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_switch_thumb.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_default.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_default.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_btn_checkable.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_btn_checkable.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_edittext.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/color-v23/abc_tint_edittext.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_color_highlight_material.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_color_highlight_material.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_switch_thumb.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_switch_thumb.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_edittext.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_edittext.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_btn_checkable.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_btn_checkable.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_btn_colored_borderless_text_material.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_btn_colored_borderless_text_material.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_color_highlight_material.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_seek_thumb.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_seek_thumb.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_edittext.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_edittext.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_switch_track.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_switch_track.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_btn_checkable.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/color-v23/abc_tint_btn_checkable.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_btn_colored_text_material.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_btn_colored_text_material.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_seek_thumb.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/color-v23/abc_tint_seek_thumb.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_spinner.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_spinner.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/color-v23/abc_btn_colored_text_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/color-v23/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_spinner.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/color-v23/abc_tint_spinner.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_btn_colored_borderless_text_material.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_seek_thumb.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_switch_thumb.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/color-v23/abc_tint_switch_thumb.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/color-v23/abc_color_highlight_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/color-v23/abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_switch_track.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_btn_colored_text_material.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_default.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/color-v23/abc_tint_default.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_spinner.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\color-v23\\abc_tint_spinner.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_switch_track.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/color-v23/abc_tint_switch_track.xml"
     }
 ]

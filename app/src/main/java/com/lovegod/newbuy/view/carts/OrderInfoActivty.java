@@ -122,7 +122,7 @@ public class OrderInfoActivty extends AppCompatActivity {
                     @Override
                     public void onHandleSuccess(final Boss boss) {
                         Intent chat = new Intent(OrderInfoActivty.this,ChatActivity.class);
-                        chat.putExtra("sid",boss.getSid());
+                        chat.putExtra("sid",order.getSid());
                         chat.putExtra(EaseConstant.EXTRA_USER_ID,boss.getPhone());  //对方账号
                         chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
                         startActivity(chat);

@@ -261,7 +261,7 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
                         @Override
                         public void onHandleSuccess(final Boss boss) {
                             Intent chat = new Intent(GoodActivity.this, ChatActivity.class);
-                            chat.putExtra("sid", boss.getSid());
+                            chat.putExtra("sid", commodity.getSid());
                             chat.putExtra(EaseConstant.EXTRA_USER_ID, boss.getPhone());  //对方账号
                             chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
                             chat.putExtra("cid", commodity.getCid());
@@ -620,8 +620,10 @@ public class GoodActivity extends Activity implements GradationScrollView.Scroll
         compare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(GoodActivity.this, CompareActivity.class);
-                startActivity(intent2);
+                Intent intent = new Intent(GoodActivity.this, CompareActivity.class);
+                Commodity commodity = (Commodity) getIntent().getSerializableExtra("commodity");
+                intent.putExtra("commodity",commodity);
+                startActivity(intent);
             }
         });
 

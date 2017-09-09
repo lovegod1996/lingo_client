@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,7 +20,7 @@
                     android:id="@+id/compare"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-android:layout_marginTop="5dp"
+                    android:layout_marginTop="5dp"
                     android:layout_centerInParent="true"
                     android:scaleType="fitCenter"
                     android:src="@mipmap/tv2"/>
@@ -40,26 +40,41 @@ android:layout_marginTop="5dp"
             android:id="@+id/re_2">
 
             <TextView
+                android:textColor="@color/black"
+                android:maxLines="3"
                 android:id="@+id/compare_goodname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:padding="5dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:text="索尼55英寸 4K网络LED液晶电视"
-                android:textSize="14dp" />
+                android:textSize="@dimen/text_size_mid" />
         </RelativeLayout>
         <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
             android:layout_below="@id/re_2"
-        android:background="@color/bg_Gray0"/>
+            android:background="@color/bg_Gray0"/>
     </RelativeLayout>
-   <ListView
-       android:id="@+id/compare_listview"
+
+    <TextView
+        android:textSize="@dimen/text_size_small"
+        android:background="@color/splitline_color"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="--该商品在其它店铺的价格--"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/compare_list"
        android:layout_below="@id/compare_title"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:scrollbars="none"
-       android:background="#ffffff"></ListView>
+       android:layout_height="match_parent"
+       android:background="#ffffff"/>
 
-</RelativeLayout>
+</LinearLayout>

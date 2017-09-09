@@ -12,7 +12,7 @@ import com.lovegod.newbuy.bean.Commodity;
 import com.lovegod.newbuy.view.goods.GoodActivity;
 
 /**
- * Created by Administrator on 2017/8/17.
+ * Created by ywx on 2017/8/17.
  */
 
 public class ChatListFragment extends EaseChatFragment {
@@ -58,7 +58,7 @@ public class ChatListFragment extends EaseChatFragment {
                     });
                 }
             }
-            return true;
+            return false;
         }
 
         @Override

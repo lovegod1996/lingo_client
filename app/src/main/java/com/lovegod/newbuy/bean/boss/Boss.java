@@ -11,7 +11,6 @@ public class Boss {
 
     /**
      * bid : 2
-     * sid : 2
      * name : 刘玲玲
      * password : 6816f344d7599edd4b90dde33377db89
      * pic : https://img20.360buyimg.com/popshop/jfs/t2365/311/2902780631/4872/72b8e3d8/56fe1ec7N0c3302e2.jpg
@@ -21,7 +20,6 @@ public class Boss {
      */
 
     private int bid;
-    private int sid;
     private String name;
     private String password;
     private String pic;
@@ -35,14 +33,6 @@ public class Boss {
 
     public void setBid(int bid) {
         this.bid = bid;
-    }
-
-    public int getSid() {
-        return sid;
-    }
-
-    public void setSid(int sid) {
-        this.sid = sid;
     }
 
     public String getName() {

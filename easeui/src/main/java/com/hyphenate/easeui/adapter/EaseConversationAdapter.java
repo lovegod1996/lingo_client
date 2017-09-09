@@ -137,17 +137,7 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
                             finalHolder.name.setText(data.getUser().getUsername());
                             break;
                         case 1:
-                            NetWorks.getIDshop(data.getBoss().getSid(), new BaseObserver<Shop>() {
-                                @Override
-                                public void onHandleSuccess(Shop shop) {
-                                    finalHolder.name.setText(shop.getShopname());
-                                }
-
-                                @Override
-                                public void onHandleError(Shop shop) {
-
-                                }
-                            });
+                            finalHolder.name.setText(data.getBoss().getNickname());
                             break;
                         case 2:
                             finalHolder.name.setText(username);

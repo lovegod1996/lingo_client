@@ -19,7 +19,7 @@ public class HomeDecoration extends RecyclerView.ItemDecoration {
     public HomeDecoration(){
         textPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(Color.parseColor("#FE5203"));
-        textPaint.setTextSize(50);
+        textPaint.setTextSize(35);
 
         bgPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
         bgPaint.setColor(Color.parseColor("#EFEEEC"));

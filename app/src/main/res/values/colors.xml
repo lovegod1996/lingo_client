@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FD6861</color>
-    <color name="colorPrimaryDark">#d4d3d3</color>
-    <color name="colorAccent">#e9735e</color>#e9735e
+    <color name="colorPrimaryDark">#e9735e</color>
+    <color name="colorAccent">#e9735e</color>
     <!-- 灰色 -->
     <color name="bg_Gray">#CCCCCC</color>
     <color name="bg_Gray2">#e2e2e2</color>

@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.VIBRATE" /> <!-- 震动权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera" /> <!-- 使用照相机权限 -->
+    <uses-feature android:name="android.hardware.camera2" /> <!-- 使用照相机权限 -->
     <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 自动聚焦权限 -->
 
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
@@ -64,7 +64,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.SplashActivity">
+        <activity android:name=".view.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -73,19 +74,29 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask" />
-        <activity android:name=".view.ShopActivity" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.ShopActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.goods.GoodActivity"
-            android:launchMode="singleTask" />
-        <activity android:name=".view.goods.CompareActivity" />
-        <activity android:name=".view.welcome.WelcomeGuideActivity" />
-        <activity android:name=".view.Shop2Activity" />
-        <activity android:name=".view.carts.CartActivity" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.goods.CompareActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.welcome.WelcomeGuideActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.Shop2Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.carts.CartActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".view.sorts.SortActivity" />
-        <activity android:name=".view.sorts.CategoryGoodsActivity" />
-        <activity android:name=".view.map.ShopLocationMap" />
-        <activity android:name=".view.goods.AssessActivity" />
+        <activity android:name=".view.sorts.CategoryGoodsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.map.ShopLocationMap"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.goods.AssessActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.google.zxing.activity.CaptureActivity"
             android:theme="@style/MyAppTheme" />
@@ -132,78 +143,106 @@
 
         <activity
             android:name=".view.LoginActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.registered.RegisteredActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
-            android:theme="@style/ImagePickerThemeFullScreen" />
+            android:theme="@style/ImagePickerThemeFullScreen"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.myinfo.MyInfoActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".view.myinfo.changeinfo.ChangePasswdActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateVisible|adjustPan" />
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.myinfo.MoreInfoActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.myinfo.changeinfo.ChangeUserNameActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateVisible|adjustPan" />
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.myinfo.SettingActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.myinfo.changeinfo.ChangePhoneActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateVisible|adjustPan" />
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.search.SearchActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" />
         <activity android:name=".view.search.SearchResultActivity" />
         <activity
             android:name=".view.myinfo.changeinfo.ChangeAddressActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.myinfo.address.MyAddressActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.myinfo.address.ShowAreaActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.carts.SubmitOrderActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustNothing" />
-        <activity android:name=".view.carts.ChooseAddressActivity" />
-        <activity android:name=".view.myinfo.order.MyOrderInfoActivity" />
-        <activity android:name=".view.carts.PayChooseActivity" />
+        <activity android:name=".view.carts.ChooseAddressActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.myinfo.order.MyOrderInfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.carts.PayChooseActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.carts.OrderInfoActivty"
-            android:launchMode="singleTask" />
-        <activity android:name=".view.myinfo.assess.AddAssessActivity" />
-        <activity android:name=".view.myinfo.assess.PublishAssessActivity" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.myinfo.assess.AddAssessActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.myinfo.assess.PublishAssessActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.goods.AskActivity"
-            android:launchMode="singleTask" />
-        <activity android:name=".view.ShowImageActivity" />
-        <activity android:name=".view.chat.ChatActivity" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.ShowImageActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.chat.ChatActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.goods.ShowOneAskActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".view.myinfo.favourite.FavouriteActivity" />
-        <activity android:name=".view.myinfo.trial.Trial_Activity" />
-        <activity android:name=".view.myinfo.track.Track_Activity" />
-        <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity" />
-        <activity android:name=".view.myinfo.notification.NotificationActivity" />
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.myinfo.favourite.FavouriteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.myinfo.trial.Trial_Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.myinfo.track.Track_Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.myinfo.notification.NotificationActivity"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".service.NetWorkService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"/>
     </application>
 
 </manifest>

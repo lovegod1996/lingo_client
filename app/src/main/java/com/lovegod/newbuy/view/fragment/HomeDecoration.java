@@ -1,11 +1,15 @@
 package com.lovegod.newbuy.view.fragment;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+
+import com.hyphenate.util.DensityUtil;
 
 /**
  * Created by ywx on 2017/8/18.
@@ -15,11 +19,13 @@ public class HomeDecoration extends RecyclerView.ItemDecoration {
     private int lineHeight=150;
     private Paint textPaint;
     private Paint bgPaint;
+    private Context mContext;
 
-    public HomeDecoration(){
+    public HomeDecoration(Context context){
+        mContext=context;
         textPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(Color.parseColor("#FE5203"));
-        textPaint.setTextSize(35);
+        textPaint.setTextSize(DensityUtil.px2dip(mContext,160));
 
         bgPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
         bgPaint.setColor(Color.parseColor("#EFEEEC"));

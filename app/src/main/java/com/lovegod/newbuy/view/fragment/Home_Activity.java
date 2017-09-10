@@ -19,6 +19,7 @@ import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
@@ -156,7 +157,7 @@ public class Home_Activity extends Fragment{
         adapter=new HomeAdapter(getActivity(),commodityList,images);
         homeRecycler.setLayoutManager(new GridLayoutManager(getActivity(),6,GridLayoutManager.VERTICAL,false));
         homeRecycler.setAdapter(adapter);
-        homeRecycler.addItemDecoration(new HomeDecoration());
+        homeRecycler.addItemDecoration(new HomeDecoration(getActivity()));
 
 
         searchLayout = (SearchLayout) view.findViewById(R.id.main_search_layout);
@@ -198,6 +199,8 @@ public class Home_Activity extends Fragment{
                 getRecommendGoods();
             }
         });
+
+        initView();
 
         return view;
     }
@@ -316,36 +319,32 @@ public class Home_Activity extends Fragment{
     }
 
 
-    public void initGridView() {
-        List<Map<String, Object>> listItem = new ArrayList<Map<String, Object>>();
-        for (int i = 0; i < images.length; i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("image", images[i]);
-            map.put("title", titles[i]);
-            listItem.add(map);
-        }
-        SimpleAdapter adapter = new SimpleAdapter(getActivity(), listItem,
-                R.layout.items, new String[]{"title", "image"}, new int[]{
-                R.id.text_separate, R.id.imageView_separate});
-        gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(clickListener);
+    /**
+     * 初始化扫描
+     */
+    public void initView() {
+//        List<Map<String, Object>> listItem = new ArrayList<Map<String, Object>>();
+//        for (int i = 0; i < images.length; i++) {
+//            Map<String, Object> map = new HashMap<String, Object>();
+//            map.put("image", images[i]);
+//            map.put("title", titles[i]);
+//            listItem.add(map);
+//        }
+//        SimpleAdapter adapter = new SimpleAdapter(getActivity(), listItem,
+//                R.layout.items, new String[]{"title", "image"}, new int[]{
+//                R.id.text_separate, R.id.imageView_separate});
+//        gridView.setAdapter(adapter);
+//        gridView.setOnItemClickListener(clickListener);
 
 
         scan_code_btn.setOnClickListener(new View.OnClickListener() {
-            @TargetApi(Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                String[] permission = new String[]{Manifest.permission.CAMERA};
-                Integer v = Build.VERSION.SDK_INT;
-                if (Build.VERSION.SDK_INT < 23) {
-                    startCaptureActivityForResult();
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    //申请CAMERA权限
+                    ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.CAMERA},0);
                 } else {
-                    if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                        //申请CAMERA权限
-                        requestPermissions(new String[]{Manifest.permission.CAMERA}, 0);
-                    } else {
-                        startCaptureActivityForResult();
-                    }
+                    startCaptureActivityForResult();
                 }
             }
         });

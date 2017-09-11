@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v11\\notification_template_big_media_narrow_custom.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout-v11\\notification_template_big_media_narrow_custom.xml"
     },
@@ -34,17 +35,38 @@
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v11\\notification_media_cancel_action.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout-v11\\notification_media_cancel_action.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/layout-v11/notification_template_big_media.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout-v11/notification_template_big_media.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v11\\notification_media_action.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout-v11\\notification_media_action.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/layout-v11/notification_template_big_media_custom.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout-v11/notification_template_big_media_custom.xml"
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/layout-v11/notification_media_action.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout-v11/notification_media_action.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/layout-v11/notification_template_big_media_narrow.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout-v11/notification_template_big_media_narrow.xml"
+>>>>>>> ninghaiywx-master
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/layout-v11/notification_template_big_media_narrow_custom.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout-v11/notification_template_big_media_narrow_custom.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v11\\notification_template_big_media_narrow.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout-v11\\notification_template_big_media_narrow.xml"
     },
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v11\\notification_template_big_media_custom.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout-v11\\notification_template_big_media_custom.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/layout-v11/notification_media_cancel_action.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout-v11/notification_media_cancel_action.xml"
+>>>>>>> ninghaiywx-master
     }
 ]

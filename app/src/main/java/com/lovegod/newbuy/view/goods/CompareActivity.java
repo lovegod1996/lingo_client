@@ -2,22 +2,20 @@ package com.lovegod.newbuy.view.goods;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lovegod.newbuy.R;
-import com.lovegod.newbuy.view.utils.MySimpleAdapter;
+import com.lovegod.newbuy.bean.Commodity;
+import com.lovegod.newbuy.bean.Compare;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-
 
 
 /**
@@ -35,13 +33,16 @@ public class CompareActivity extends Activity {
     ImageView compare;
     ImageView compare_back;
     TextView compare_goodname;
-    ListView compare_listview;
+    RecyclerView compare_list;
     RatingBar ratingbar;
+    CompareAdapter adapter;
+    List<Compare>compares=new ArrayList<>();
+    Commodity commodity;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.good_compare);
-       init();
-        initlistener();
+        init();
     }
 
 
@@ -50,7 +51,7 @@ public class CompareActivity extends Activity {
         compare=(ImageView)findViewById(R.id.compare);
         compare_back=(ImageView)findViewById(R.id.compare_back);
         compare_goodname=(TextView)findViewById(R.id.compare_goodname);
-        compare_listview=(ListView)findViewById(R.id.compare_listview);
+        compare_list=(RecyclerView)findViewById(R.id.compare_list);
         ratingbar=(RatingBar)findViewById(R.id.ratingbar);
         compare_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,35 +60,58 @@ public class CompareActivity extends Activity {
             }
         });
 
+        getCommodity();
+
+        setCommodityInfo();
+
+        initListInfo();
+
+        initRecyclerView();
+    }
+
+    /**
+     * 初始化列表信息
+     */
+    private void initListInfo() {
         int[] shop_images = {R.mipmap.tu1, R.mipmap.tu2, R.mipmap.tu3, R.mipmap.tu4, R.mipmap.tu5, R.mipmap.tu6};
+        int[] shop_sale = {4132,3345,1234,9991,8898,7878};
         String[] shop_name={"百业家电专营店","思迪电器专营店","中佳电器专营店","华强官方旗舰店","粤城电器","杭越电器专营店"};
         Double[] ratingbars={5.0,4.5,5.0,4.5,4.5,4.5};
         Double[] moneys={3900.0,3990.0,4099.0,4199.0,4199.00,4399.0};
 
-        List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < shop_images.length; i++) {
-            Map<String, Object> listItem = new HashMap<String, Object>();
-            listItem.put("ShopImage",shop_images[i]);
-            listItem.put("ShopName",shop_name[i]);
-         listItem.put("Ratingbar",ratingbars[i]);//////////////
-            listItem.put("Moneys",moneys[i]);
-            listItems.add(listItem);
+            Compare compare=new Compare();
+            compare.setShopName(shop_name[i]);
+            compare.setRate(ratingbars[i]);
+            compare.setPrice(moneys[i]);
+            compare.setPic(shop_images[i]);
+            compare.setSale(shop_sale[i]);
+            compares.add(compare);
         }
-        MySimpleAdapter simpleAdapter = new MySimpleAdapter(this, listItems, R.layout.compare_listview_item,
-                new String[]{"ShopImage", "ShopName","RatingBars", "Moneys"},
-                new int[]{R.id.compare_shop_image, R.id.compare_shopname,R.id.ratingbar, R.id.compare_money,});
-
-        compare_listview.setAdapter(simpleAdapter);
-
-    }
-    private void initlistener() {
-compare_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-});
-
     }
 
+    /**
+     * 设置商品信息
+     */
+    private void setCommodityInfo() {
+        Glide.with(this).load(commodity.getLogo()).into(compare);
+        compare_goodname.setText(commodity.getProductname());
+    }
+
+    /**
+     * 获得商品实例
+     */
+    private void getCommodity() {
+        commodity= (Commodity) getIntent().getSerializableExtra("commodity");
+    }
+
+    /**
+     * 初始化RecyclerView
+     */
+    private void initRecyclerView() {
+        adapter=new CompareAdapter(this,compares);
+        RecyclerView.LayoutManager manager=new LinearLayoutManager(this);
+        compare_list.setAdapter(adapter);
+        compare_list.setLayoutManager(manager);
+    }
 }

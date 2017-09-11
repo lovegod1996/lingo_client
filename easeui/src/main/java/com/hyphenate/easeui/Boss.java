@@ -8,24 +8,14 @@ import java.io.Serializable;
 
 public class Boss implements Serializable{
     private int bid;
-    private int sid;
-    private String boss_name;
-    private String boss_pass;
-    private String boss_pic;
-    private String boss_nick;
-    private String boss_phone;
-    private String boss_id;
-
-    public String getBoss_id() {
-        return boss_id;
-    }
-
-    public void setBoss_id(String boss_id) {
-        this.boss_id = boss_id;
-    }
+    private String name;
+    private String password;
+    private String pic;
+    private String nickname;
+    private String phone;
+    private String id;
 
     public int getBid() {
-
         return bid;
     }
 
@@ -33,51 +23,51 @@ public class Boss implements Serializable{
         this.bid = bid;
     }
 
-    public int getSid() {
-        return sid;
+    public String getName() {
+        return name;
     }
 
-    public void setSid(int sid) {
-        this.sid = sid;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getBoss_name() {
-        return boss_name;
+    public String getPassword() {
+        return password;
     }
 
-    public void setBoss_name(String boss_name) {
-        this.boss_name = boss_name;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getBoss_pass() {
-        return boss_pass;
+    public String getPic() {
+        return pic;
     }
 
-    public void setBoss_pass(String boss_pass) {
-        this.boss_pass = boss_pass;
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 
-    public String getBoss_pic() {
-        return boss_pic;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setBoss_pic(String boss_pic) {
-        this.boss_pic = boss_pic;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public String getBoss_nick() {
-        return boss_nick;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setBoss_nick(String boss_nick) {
-        this.boss_nick = boss_nick;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getBoss_phone() {
-        return boss_phone;
+    public String getId() {
+        return id;
     }
 
-    public void setBoss_phone(String boss_phone) {
-        this.boss_phone = boss_phone;
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
         "map": [
             {
@@ -25,6 +26,9 @@
     },
     {
         "outputFile": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
+=======
+        "outputFile": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+>>>>>>> ninghaiywx-master
         "map": [
             {
                 "to": {
@@ -35,7 +39,7 @@
                     "endOffset": 117
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-h720dp-v13/values-h720dp-v13.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

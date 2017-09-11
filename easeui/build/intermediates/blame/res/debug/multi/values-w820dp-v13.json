@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
+        "outputFile": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w820dp-v13/values-w820dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,13 +11,13 @@
                     "endOffset": 108
                 },
                 "from": {
-                    "file": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\values-w820dp\\ease_dimens.xml",
+                    "file": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/values-w820dp/ease_dimens.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 312,
+                        "startOffset": 305,
                         "endColumn": 57,
-                        "endOffset": 365
+                        "endOffset": 358
                     }
                 }
             }

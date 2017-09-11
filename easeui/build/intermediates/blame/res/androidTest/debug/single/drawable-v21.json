@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_action_bar_item_background_material.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
     },
@@ -26,9 +27,21 @@
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\notification_action_background.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable-v21\\notification_action_background.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/drawable-v21/notification_action_background.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/drawable-v21/notification_action_background.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_btn_colored_material.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\drawable-v21\\abc_btn_colored_material.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/drawable-v21/abc_btn_colored_material.xml"
+>>>>>>> ninghaiywx-master
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/androidTest/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/drawable-v21/abc_action_bar_item_background_material.xml"
     }
 ]

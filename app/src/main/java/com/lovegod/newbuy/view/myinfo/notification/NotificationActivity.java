@@ -45,18 +45,8 @@ public class NotificationActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 break;
                             case 1:
-                                NetWorks.getIDshop(data.getBoss().getSid(), new BaseObserver<com.lovegod.newbuy.bean.Shop>() {
-                                    @Override
-                                    public void onHandleSuccess(com.lovegod.newbuy.bean.Shop shop) {
-                                        intent.putExtra("username",shop.getShopname());
-                                        startActivity(intent);
-                                    }
-
-                                    @Override
-                                    public void onHandleError(com.lovegod.newbuy.bean.Shop shop) {
-
-                                    }
-                                });
+                                intent.putExtra("username",data.getBoss().getNickname());
+                                startActivity(intent);
                                 break;
                         }
                     }

@@ -1,17 +1,23 @@
 [
     {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_singlechoice_material.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\select_dialog_singlechoice_material.xml"
     },
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\support_simple_spinner_dropdown_item.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_activity_show_big_image.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_activity_show_big_image.xml"
+>>>>>>> ninghaiywx-master
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_header_item_layout.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_received_message.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_received_message.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_multichoice_material.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\select_dialog_multichoice_material.xml"
     },
@@ -22,44 +28,76 @@
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_conversation_item.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_conversation_item.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/select_dialog_multichoice_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/select_dialog_multichoice_material.xml"
+>>>>>>> ninghaiywx-master
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_title_material.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_alert_dialog_title_material.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_action_bar_up_container.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_action_bar_up_container.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_voice.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_sent_voice.xml"
     },
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_commom_back_btn.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_commom_back_btn.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_showvideo_activity.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_showvideo_activity.xml"
+>>>>>>> ninghaiywx-master
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_showvideo_activity.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_showvideo_activity.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_fragment_contact_list.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_fragment_contact_list.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_widget_emojicon.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_widget_emojicon.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_dropdown_item_icons_2line.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/notification_action.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/notification_action.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_expanded_menu_layout.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_expanded_menu_layout.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_action_mode_close_item_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_action_mode_close_item_material.xml"
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_layout_chat_primary_menu.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_layout_chat_primary_menu.xml"
+>>>>>>> ninghaiywx-master
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_received_bigexpression.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_received_bigexpression.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_dialog_title_material.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_dialog_title_material.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_alert_dialog_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_alert_dialog_material.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_received_picture.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_received_picture.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/notification_action_tombstone.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/notification_action_tombstone.xml"
+>>>>>>> ninghaiywx-master
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_screen_toolbar.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_screen_toolbar.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_expression_gridview.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_expression_gridview.xml"
     },
@@ -70,36 +108,50 @@
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_bigexpression.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_sent_bigexpression.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_list_menu_item_layout.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_list_menu_item_layout.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_widget_title_bar.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_widget_title_bar.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_list_menu_item_icon.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_list_menu_item_icon.xml"
+>>>>>>> ninghaiywx-master
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_picture.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_sent_picture.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_activity_chooser_view_list_item.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_fragment_chat.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_fragment_chat.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_expanded_menu_layout.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_expanded_menu_layout.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_widget_switch_button.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_widget_switch_button.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_search_view.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_search_view.xml"
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_big_expression.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_big_expression.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_picture.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_sent_picture.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_select_dialog_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_select_dialog_material.xml"
+>>>>>>> ninghaiywx-master
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_singlechoice_material.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\select_dialog_singlechoice_material.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_list_menu_item_checkbox.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_select_dialog_material.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\abc_select_dialog_material.xml"
     },
@@ -418,12 +470,25 @@
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_expanded_menu_layout.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\abc_expanded_menu_layout.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_received_location.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_received_location.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_action_menu_layout.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/select_dialog_item_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/select_dialog_item_material.xml"
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_received_file.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_received_file.xml"
+>>>>>>> ninghaiywx-master
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_list_menu_item_radio.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_activity_show_big_image.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_activity_show_big_image.xml"
     },
@@ -434,12 +499,21 @@
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_lines_media.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\notification_template_lines_media.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_chat_message_list.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_chat_message_list.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_layout_emojicon_menu.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_layout_emojicon_menu.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_alert_dialog.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_alert_dialog.xml"
+>>>>>>> ninghaiywx-master
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_action_bar_title_item.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_location.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_sent_location.xml"
     },
@@ -462,60 +536,112 @@
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_layout_emojicon_menu.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_layout_emojicon_menu.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/notification_template_custom_big.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/notification_template_custom_big.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_fragment_contact_list.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_fragment_contact_list.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_commom_back_btn.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_commom_back_btn.xml"
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/notification_template_lines_media.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/notification_template_lines_media.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_widget_title_bar.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_widget_title_bar.xml"
+>>>>>>> ninghaiywx-master
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_sent_picture.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_sent_picture.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_title_item.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\abc_action_bar_title_item.xml"
     },
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_received_voice.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_received_voice.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_activity_baidumap.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_activity_baidumap.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_alert_dialog.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_alert_dialog.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/notification_template_media.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/notification_template_media.xml"
+>>>>>>> ninghaiywx-master
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_video_call.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_sent_video_call.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_fragment_conversation_list.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_fragment_conversation_list.xml"
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_widget_emojicon_tab_bar.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_widget_emojicon_tab_bar.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_received_message.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_received_message.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_received_video.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_received_video.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_view.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_search_view.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_alert_dialog_button_bar_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_alert_dialog_button_bar_material.xml"
+>>>>>>> ninghaiywx-master
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_item_layout.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_popup_menu_item_layout.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_search_bar_with_padding.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_search_bar_with_padding.xml"
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/select_dialog_singlechoice_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/select_dialog_singlechoice_material.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_widget_chat_primary_menu.xml",
         "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_widget_chat_primary_menu.xml"
     },
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_fragment_chat.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_fragment_chat.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_checkbox.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_list_menu_item_checkbox.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_screen_simple_overlay_action_mode.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_activity_show_file.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_activity_show_file.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_action_menu_layout.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_action_menu_layout.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_content_include.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_screen_content_include.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_action_bar_view_list_nav_layout.xml"
+>>>>>>> ninghaiywx-master
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_sent_file.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_sent_file.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_scroll_tab_item.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_scroll_tab_item.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_expression_gridview.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_expression_gridview.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_lines_media.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\notification_template_lines_media.xml"
     },
@@ -530,20 +656,58 @@
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_widget_contact_list.xml",
         "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_widget_contact_list.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_search_dropdown_item_icons_2line.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_multichoice_material.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\select_dialog_multichoice_material.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_layout_emojicon_menu.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_layout_emojicon_menu.xml"
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/notification_template_icon_group.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_received_video_call.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_received_video_call.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/notification_template_media_custom.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/notification_template_media_custom.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_activity_show_file.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_activity_show_file.xml"
+>>>>>>> ninghaiywx-master
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_screen_simple.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_screen_simple.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_dropdown_item_icons_2line.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_alert_dialog_title_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_alert_dialog_title_material.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_commom_back_btn.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_commom_back_btn.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_widget_contact_list.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_widget_contact_list.xml"
+>>>>>>> ninghaiywx-master
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_search_bar.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_search_bar.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_bar.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\abc_action_mode_bar.xml"
     },
@@ -562,12 +726,21 @@
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_media_custom.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\notification_template_media_custom.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_sent_voice.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_sent_voice.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_received_location.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_received_location.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_action_mode_bar.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_action_mode_bar.xml"
+>>>>>>> ninghaiywx-master
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_screen_content_include.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_screen_content_include.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_fragment_chat.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_fragment_chat.xml"
     },
@@ -586,48 +759,76 @@
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_close_item_material.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_chat_menu_item.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_chat_menu_item.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_scroll_tab_item.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_scroll_tab_item.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/notification_template_part_time.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/notification_template_part_time.xml"
+>>>>>>> ninghaiywx-master
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_popup_menu_header_item_layout.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_popup_menu_header_item_layout.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_custom_big.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\notification_template_custom_big.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_received_voice.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_received_voice.xml"
+>>>>>>> ninghaiywx-master
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_widget_voice_recorder.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_widget_voice_recorder.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_sent_location.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_sent_location.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_widget_emojicon_tab_bar.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_widget_emojicon_tab_bar.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_widget_switch_button.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_widget_switch_button.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_select_dialog_material.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_select_dialog_material.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_popup_menu_item_layout.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_search_bar.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_search_bar.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_activity_chooser_view.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_activity_chooser_view.xml"
+>>>>>>> ninghaiywx-master
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_received_voice_call.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_received_voice_call.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_sent_video_call.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_sent_video_call.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_widget_emojicon_tab_bar.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_widget_emojicon_tab_bar.xml"
     },
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\abc_activity_chooser_view.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_sent_video.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_sent_video.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\support_simple_spinner_dropdown_item.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_conversation_item.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_conversation_item.xml"
+>>>>>>> ninghaiywx-master
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_widget_chat_input_menu.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_widget_chat_input_menu.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_item_layout.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
@@ -642,20 +843,34 @@
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_widget_voice_recorder.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_widget_voice_recorder.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_sent_voice_call.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_sent_voice_call.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_part_chronometer.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\notification_template_part_chronometer.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_contact.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_contact.xml"
+>>>>>>> ninghaiywx-master
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_widget_voice_recorder.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_widget_voice_recorder.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\notification_action.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\notification_action.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_action_menu_item_layout.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_action_menu_item_layout.xml"
+>>>>>>> ninghaiywx-master
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_custom_big.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\notification_template_custom_big.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_sent_bigexpression.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_sent_bigexpression.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_received_video.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_received_video.xml"
     },
@@ -678,12 +893,25 @@
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_big_expression.xml",
         "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_big_expression.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_sent_message.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_sent_message.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_bigexpression.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_sent_bigexpression.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_widget_chat_primary_menu.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_widget_chat_primary_menu.xml"
     },
     {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_chat_history.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_chat_history.xml"
+>>>>>>> ninghaiywx-master
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_big_expression.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_big_expression.xml"
     },
@@ -694,21 +922,34 @@
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_voice_call.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_sent_voice_call.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_received_picture.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_received_picture.xml"
+>>>>>>> ninghaiywx-master
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_received_video.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_row_received_video.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_expression.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_expression.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_activity_baidumap.xml",
         "source": "D:\\android\\studio_workspace\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_activity_baidumap.xml"
     },
     {
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_layout.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout\\abc_list_menu_item_layout.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_emojicon.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_emojicon.xml"
     },
     {
-        "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout\\ease_layout_chat_primary_menu.xml",
-        "source": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\layout\\ease_layout_chat_primary_menu.xml"
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/ease_row_received_voice_call.xml",
+        "source": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/layout/ease_row_received_voice_call.xml"
+>>>>>>> ninghaiywx-master
+    },
+    {
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout/abc_dialog_title_material.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout/abc_dialog_title_material.xml"
     }
 ]

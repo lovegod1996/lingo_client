@@ -1,10 +1,15 @@
 [
     {
+<<<<<<< HEAD
         "merged": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout-v16\\notification_template_custom_big.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\layout-v16\\notification_template_custom_big.xml"
     },
     {
         "merged": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\res\\merged\\release\\layout-v16\\notification_template_custom_big.xml",
         "source": "E:\\.android\\build-cache\\42ab3c3bdb22aee6c61375d52525647c42c6711a\\output\\res\\layout-v16\\notification_template_custom_big.xml"
+=======
+        "merged": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/res/merged/release/layout-v16/notification_template_custom_big.xml",
+        "source": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/layout-v16/notification_template_custom_big.xml"
+>>>>>>> ninghaiywx-master
     }
 ]

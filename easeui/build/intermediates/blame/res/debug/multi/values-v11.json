@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "D:\\android\\studio_workspace\\lingo_client\\easeui\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
         "map": [
             {
@@ -559,6 +560,9 @@
     },
     {
         "outputFile": "E:\\AS Project\\lingo_client\\easeui\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
+=======
+        "outputFile": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v11/values-v11.xml",
+>>>>>>> ninghaiywx-master
         "map": [
             {
                 "to": {
@@ -570,14 +574,14 @@
                     "endOffset": 219
                 },
                 "from": {
-                    "file": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\values-v11\\ease_styles.xml",
+                    "file": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/values-v11/ease_styles.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
-                        "startOffset": 59,
+                        "startOffset": 56,
                         "endLine": 5,
                         "endColumn": 12,
-                        "endOffset": 225
+                        "endOffset": 220
                     }
                 }
             },
@@ -591,7 +595,7 @@
                     "endOffset": 638
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -612,7 +616,7 @@
                     "endOffset": 1063
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -633,7 +637,7 @@
                     "endOffset": 1491
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
@@ -654,7 +658,7 @@
                     "endOffset": 1917
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
@@ -675,7 +679,7 @@
                     "endOffset": 2344
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 26,
                         "startColumn": 4,
@@ -696,7 +700,7 @@
                     "endOffset": 2769
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 32,
                         "startColumn": 4,
@@ -716,7 +720,7 @@
                     "endOffset": 2858
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 38,
                         "startColumn": 4,
@@ -736,7 +740,7 @@
                     "endOffset": 3104
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 39,
                         "startColumn": 4,
@@ -757,7 +761,7 @@
                     "endOffset": 3353
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 43,
                         "startColumn": 4,
@@ -777,7 +781,7 @@
                     "endOffset": 3454
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 47,
                         "startColumn": 4,
@@ -797,7 +801,7 @@
                     "endOffset": 3706
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 48,
                         "startColumn": 4,
@@ -818,7 +822,7 @@
                     "endOffset": 3961
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 52,
                         "startColumn": 4,
@@ -838,7 +842,7 @@
                     "endOffset": 4064
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 56,
                         "startColumn": 4,
@@ -858,7 +862,7 @@
                     "endOffset": 4317
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 57,
                         "startColumn": 4,
@@ -879,7 +883,7 @@
                     "endOffset": 4725
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 61,
                         "startColumn": 4,
@@ -900,7 +904,7 @@
                     "endOffset": 5145
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 66,
                         "startColumn": 4,
@@ -921,7 +925,7 @@
                     "endOffset": 5567
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 71,
                         "startColumn": 4,
@@ -942,7 +946,7 @@
                     "endOffset": 5674
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 76,
                         "startColumn": 4,
@@ -963,7 +967,7 @@
                     "endOffset": 5803
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 78,
                         "startColumn": 4,
@@ -983,7 +987,7 @@
                     "endOffset": 5874
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 80,
                         "startColumn": 4,
@@ -1002,7 +1006,7 @@
                     "endOffset": 5957
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 81,
                         "startColumn": 4,
@@ -1022,7 +1026,7 @@
                     "endOffset": 9982
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 82,
                         "startColumn": 4,
@@ -1043,7 +1047,7 @@
                     "endOffset": 14150
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 136,
                         "startColumn": 4,
@@ -1063,7 +1067,7 @@
                     "endOffset": 14241
                 },
                 "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\80a6003625df6f0211ab00bdec103e16cb275955\\output\\res\\values-v11\\values-v11.xml",
+                    "file": "/Users/ywx/.android/build-cache/fe7bedd5e012c5c7a409b67f8eecb8294d62e34f/output/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 191,
                         "startColumn": 4,
@@ -1083,14 +1087,14 @@
                     "endOffset": 14416
                 },
                 "from": {
-                    "file": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\values-v11\\ease_styles.xml",
+                    "file": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/values-v11/ease_styles.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 233,
+                        "startOffset": 226,
                         "endLine": 9,
                         "endColumn": 12,
-                        "endOffset": 405
+                        "endOffset": 396
                     }
                 }
             },
@@ -1103,13 +1107,13 @@
                     "endOffset": 14501
                 },
                 "from": {
-                    "file": "E:\\AS Project\\lingo_client\\easeui\\src\\main\\res\\values-v11\\ease_styles.xml",
+                    "file": "/Users/ywx/AndroidStudioProjects/lingo_client/easeui/src/main/res/values-v11/ease_styles.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
-                        "startOffset": 413,
+                        "startOffset": 402,
                         "endColumn": 91,
-                        "endOffset": 500
+                        "endOffset": 489
                     }
                 }
             }
